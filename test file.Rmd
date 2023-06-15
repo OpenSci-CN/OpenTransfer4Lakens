@@ -1,0 +1,55 @@
+```{r, include = FALSE}
+source("include/globals.R")
+
+# needed to make the chapter (not visible)
+library(kableExtra)
+library(ggplot2)
+
+```
+
+```{r, include = FALSE}
+# Add Type 1 error rate function
+add_type1_error <- function(N, 
+                            side = "right", 
+                            col = rgb(1, 0, 0, 0.5)) {
+  mult <- ifelse(side == "right", 1, -1)
+  crit_d <- mult * abs(qt(0.05 / 2, (N * 2) - 2)) / sqrt(N / 2)
+  
+  if (side == "right") {
+    y <- seq(crit_d, 10, length = 10000)
+  } else {
+    y <- seq(-10, crit_d, length = 10000)
+  }
+  
+  # determine upperbounds polygon
+  suppressWarnings({
+    z <- (dt(y * sqrt(N / 2), df = (N * 2) - 2) * sqrt(N / 2))
+  })
+  
+  if (side == "right") {
+    polygon(c(crit_d, y, 10), c(0, z, 0), col = col)
+  } else {
+    polygon(c(y, crit_d, crit_d), c(z, 0, 0), col = col)
+  }
+}
+
+# calculate distribution of d based on t-distribution
+calc_d_dist <- function(x, N, ncp = 0) {
+  suppressWarnings({
+    # generates a lot of warnings sometimes
+    dt(x * sqrt(N / 2), df = (N * 2) - 2, ncp = ncp) * sqrt(N / 2) 
+  })
+}
+```
+
+# test example 
+
+## Enlish version
+
+The interpretation of a *p*-value depends on the statistical philosophy one subscribes to. [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher) published 'Statistical Methods for Research Workers' in 1925 which popularized the use of *p*-values. In a Fisherian framework a *p*-value is interpreted as a descriptive continuous measure of compatibility between the observed data and the null hypothesis [@greenland_statistical_2016]. 
+
+## Chinese version
+
+通常，我们对*p*值的理解取决于个人所认同的统计理念。[Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher)在1925年出版了《Statistical Methods for Research Workers》一书，该书向大众普及了*p*值的应用。在Fisher的理念中，*p*值被定义为所得数据和零假设之间的描述性连续测量(Greenland, 2016)。
+
+
