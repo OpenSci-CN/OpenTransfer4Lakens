@@ -1,4 +1,0 @@
-1、group_files是收集的各组进展文件
-2、record_table中有两个表，
-3、summary中，我会将收集的各组文件进行汇总后存入
-4、question中记录了大家反馈的问题，需要一起讨论解决
