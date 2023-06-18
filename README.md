@@ -80,7 +80,7 @@ tips\
 
 | chapter                                               | member                                    | progress                                                                                |
 |----------------------|----------------------|----------------------------|
-| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组剩习题部分为完成，其余部分已整合                                                              |
+| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组剩习题部分未完成，其余部分已整合                                                              |
 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成                                                       |
 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，但还没把另外两个组员翻译的内容写到markdown，他们是word翻译的                  |
 | chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，整合完成                                                                      |
