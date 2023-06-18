@@ -46,7 +46,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 | Data(ddl)  | chapter    | member       |
 |------------|------------|--------------|
-| 6.15\~6.30 | chapter 1  | Lan Zhou     |
+| 6.15\~6.30 | chapter 1  | Lan Zhou，Qinhao |
 | 6.15\~6.30 | chapter 9  |              |
 | 6.15\~6.30 | chapter 10 | Mengmeng LYU |
 | 6.15\~6.30 | chapter 12 |              |
@@ -75,12 +75,12 @@ tips\
 | Xinyu Wang    | [wxyszbdxs\@163.com](mailto:wxyszbdxs@163.com){.email}                 |
 | Xinquan Lu    | [white.water.861\@gmail.com](mailto:white.water.861@gmail.com){.email} |
 | Bowen Wu      | [1305288320\@qq.com](mailto:1305288320@qq.com){.email}                 |
-
+| Qin hao       | [crtmarvel666\@gmail.com](mailto:crtmarvel666@gmail.com){.email}       |
 ## Group_present_progress
 
 | chapter                                               | member                                    | progress                                                                                |
 |----------------------|----------------------|----------------------------|
-| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组还有一部分没有翻译完                                                              |
+| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组剩习题部分未完成，其余部分已整合                                                              |
 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成                                                       |
 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，但还没把另外两个组员翻译的内容写到markdown，他们是word翻译的                  |
 | chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，整合完成                                                                      |
