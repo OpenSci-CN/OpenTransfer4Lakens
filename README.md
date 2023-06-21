@@ -34,6 +34,8 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 ## Doc_Description(Improving Your Statistical Inferences)
 
 1、1_Group_translation是收集的各组进展文件\
+1）chapter_rmd中是收集的各组整合后的rmd文件；  
+2）chapter_html中是尝试将各组rmd转成的html文件；
 2、2_Group_proofread是各组校对后的文件\
 3、3_Group_html是校对后转成的html文件
 
@@ -90,6 +92,7 @@ tips\
 |-------------------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------|
 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组剩习题部分未完成，其余部分已整合                                                  |
 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成                                                       |
-| chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，但还没把另外两个组员翻译的内容写到markdown，他们是word翻译的                  |
+| chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成                  |
 | chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，整合完成                                                                      |
-| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 现在进度为零，我还需要三天时间来把文档翻译完，然后我不会把文档转成rmd文件，需要学习一下 |
+| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 翻译完成，rmd整合完成
+|
