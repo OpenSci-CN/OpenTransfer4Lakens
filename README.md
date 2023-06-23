@@ -12,7 +12,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) \[《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展\]
+## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) $$《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展$$
 
 ## Translators & Proofreaders (译者 & 校对)
 
@@ -27,15 +27,15 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) \[《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展\]
+## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) $$《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展$$
 
 <br>
 
 ## Doc_Description(Improving Your Statistical Inferences)
 
 1、1_Group_translation是收集的各组进展文件\
-1）chapter_rmd中是收集的各组整合后的rmd文件；  
-2）chapter_html中是尝试将各组rmd转成的html文件；
+1）chapter_rmd中是收集的各组整合后的rmd文件；\
+2）chapter_html中是尝试将各组rmd转成的html文件；\
 2、2_Group_proofread是各组校对后的文件\
 3、3_Group_html是校对后转成的html文件
 
@@ -44,7 +44,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 ## Improving Your Statistical Inferences（Translation Time Planing）
 
 | Data(ddl)  | chapter                                               | member                                    |
-|------------|-------------------------------------------------------|-------------------------------------------|
+|------------------|------------------------------|------------------------|
 | 4.20\~4.30 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） |
 | 4.20\~4.30 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             |
 | 4.30\~5.15 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      |
@@ -72,7 +72,7 @@ tips\
 ## Emails of translators
 
 | name          | email                                                                  |
-|---------------|------------------------------------------------------------------------|
+|--------------------|----------------------------------------------------|
 | Zhang yiwen   | [zhang_yiwen1\@outlook.com](mailto:zhang_yiwen1@outlook.com){.email}   |
 | Zheng yuanrui | [aaronzheng87\@gmail.com](mailto:aaronzheng87@gmail.com){.email}       |
 | Mengmeng LYU  | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
@@ -85,14 +85,15 @@ tips\
 | Xinquan Lu    | [white.water.861\@gmail.com](mailto:white.water.861@gmail.com){.email} |
 | Bowen Wu      | [1305288320\@qq.com](mailto:1305288320@qq.com){.email}                 |
 | Qin hao       | [crtmarvel666\@gmail.com](mailto:crtmarvel666@gmail.com){.email}       |
+| Bolin Cao     | [caob\@tcd.ie](mailto:caob@tcd.ie){.email}                             |
+| Yuhang Zhu    | [zhuyuhang369\@163.com](mailto:zhuyuhang369@163.com){.email}           |
 
 ## Group_present_progress
 
-| chapter                                               | member                                    | progress                                                                                |
-|-------------------------------------------------------|-------------------------------------------|-----------------------------------------------------------------------------------------|
-| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 第一组剩习题部分未完成，其余部分已整合                                                  |
-| chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成                                                       |
+| chapter                                               | member                                    | progress                               |
+|---------------------|------------------|---------------------------------|
+| chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 翻译完成，rmd整合完成 |
+| chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成      |
 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成                  |
-| chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，整合完成                                                                      |
-| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 翻译完成，rmd整合完成
-|
+| chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，rmd整合完成                     |
+| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 翻译完成，rmd整合完成                  |
