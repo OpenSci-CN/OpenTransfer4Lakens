@@ -895,30 +895,40 @@ It is impossible to calculate the probability that an effect will replicate, bas
 What we can generally take away from this last misunderstanding is the fact that the probability of replication depends on the presence versus the absence of a true effect. In other words, as stated above, if a true effect exists then the level of statistical power informs us about how frequently we should observe a significant result (e.g., 80% power means we should observe significant result 80% of the time). On the other hand, if the null hypothesis is true (e.g., the effect is 0) then significant results will be observed only with a frequency approaching the chosen alpha level in the long run (i.e. a 5% Type 1 error rate if an an alpha of 0.05 is chosen). Therefore, if the original study correctly observed an effect, the probability of a significant result in a replication study is determined by the statistical power, and if the original study correctly observed no significant effect, the probability of a significant effect in a replication study is determined by the alpha level. 
 
 ## Test Yourself
+## 自我测试
 
 ### Questions about which *p*-values you can expect
+###你能想到的有关p值的问题
 
 Copy the code below to R and run the code. You can click the 'clipboard' icon on the top right of the code section to copy all the code to your clipboard, so you can easily paste it into R. 
+将下面的代码复制到 R 并运行代码。您可以单击代码部分右上角的“剪贴板”图标，将所有代码复制到剪贴板，这样您就可以轻松地将其粘贴到 R 中。
+
 
 ```{r, q1, echo = TRUE}
 
 nsims <- 100000 # number of simulations
+# 模拟的次数
 
 m <- 106 # mean sample
+# 样本均值
 n <- 26 # set sample size
+# 设置样本量大小
 sd <- 15 # SD of the simulated data
+#模拟数据的标准差
 
 p <- numeric(nsims) # set up empty vector
+# 设置一个空向量
 bars <- 20
 
 for (i in 1:nsims) { # for each simulated experiment
+  # 对于每次模拟实验的循环
   x <- rnorm(n = n, mean = m, sd = sd)
-  z <- t.test(x, mu = 100) # perform the t-test
-  p[i] <- z$p.value # get the p-value
+  z <- t.test(x, mu = 100) # perform the t-test  # 进行T检验
+  p[i] <- z$p.value # get the p-value  #得到p值
 }
-power <- round((sum(p < 0.05) / nsims), 2) # power
+power <- round((sum(p < 0.05) / nsims), 2) # power # 统计功效
 
-# Plot figure
+# Plot figure # 画图
 hist(p,
   breaks = bars, xlab = "P-values", ylab = "number of p-values\n", 
   axes = FALSE, main = paste("P-value Distribution with", 
@@ -932,6 +942,9 @@ abline(h = nsims / bars, col = "red", lty = 3)
 ```
 
 On the x-axis we see *p*-values from 0 to 1 in 20 bars, and on the y-axis we see how frequently these *p*-values were observed. There is a horizontal red dotted line that indicates an alpha of 5% (located at a frequency of 100.000\*0.05 = 5000) – but you can ignore this line for now. In the title of the graph, the statistical power that is achieved in the simulated studies is given (assuming an alpha of 0.05): The studies have 50% power (with minor variations for each simulation).
+我们可以从条形图的x轴上看到从 0 到 1 的 p 值，在 y 轴上，我们能看到这些 p 值的频率。其中水平红色虚线表示 alpha 为 5%（位于频率 100.000*0.05 = 5000）——但您现在可以忽略这条线。在标题中，给出了在模拟研究中达到的统计功效（假设 alpha 为 0.05）：研究具有 50% 的功效（每次模拟都有细微的差异）。
+
+
 
 **Q1**: Since the statistical power is the probability of observing a statistically significant result, if there is a true effect, we can also see the power in the figure itself. Where?
 
@@ -940,12 +953,25 @@ B) We can calculate the number of *p*-values in the first bar (which contains al
 C) We can calculate the difference between *p*-values above 0.5 minus the *p*-values below 0.5, and divide this number by the total number of simulations.
 D) We can calculate the difference between *p*-values above 0.5 minus the *p*-values below 0.05, and divide this number by the number of simulations.
 
+**问题1**：由于统计功效是观察到一个具有统计显着性结果的概率，如果效应为真，我们从该图上哪里以看到统计功效本身？
+A. 我们可以计算出大于 0.5 的 p 值的数量，并将它们除以模拟次数。
+B. 我们可以计算第一个条形中的 p 值数量（其中包含从 0.00 到 0.05 的所有“显着”p 值），并将该条形中的 p 值除以模拟总数。
+C. 我们可以计算高于 0.5 的 p 值减去低于 0.5 的 p 值之间的差值，并将该数字除以模拟总数。
+D. 我们可以计算高于 0.5 的 p 值减去低于 0.05 的 p 值之间的差值，并将该数字除以模拟次数。
+
+
 **Q2**: Change the sample size from n \<- 26 to n \<- 51. Run the simulation by selecting all lines and pressing CTRL+Enter. What is the power in the simulation now that we have increased the sample size from 26 people to 51 people?
 
 A) 55% 
 B) 60% 
 C) 80%
 D) 95%
+
+**问题2**：将代码中第 4 行的样本大小从 n = 26 更改为 n = 51。通过选择所有行并按 CTRL+Enter 来运行模拟。现在我们已将样本量从 26 人增加到 51人，模拟的功效如何？请记住，模拟有时会产生略有不同的答案，因此请选择最接近模拟结果的答案选项。
+A. 55%
+B. 60%
+C. 80%
+D. 95%
 
 **Q3**: If you look at the distribution of *p*-values, what do you notice?
 
@@ -954,7 +980,15 @@ B) The *p*-value distribution is much steeper than with 50% power
 C) The *p*-value distribution is much flatter than with 50% power
 D) The *p*-value distribution is much more normally distributed than with 50% power
 
+**问题3**：如果你观察p值的分布，你会发现什么？
+A. p值分布与 50% 功效完全相同
+B. p值分布比 50% 功效陡峭得多
+C. p值分布比 50% 功效平坦得多
+D. p值分布比 50% 功效更符合正态分布
+
 Feel free to increase and decrease the sample size and see what happens if you run the simulation. When you are done exploring, make sure that n \<- 51 again.
+请随意增加和减少样本量，看看运行后会发生什么。完成这些探索后，请确保第4行代码中的样本量仍然为 n = 51。
+
 
 **Q4**: What would happen when there is no true difference between our simulated samples and the average IQ score? In this situation, we have no probability to observe an effect, so you might say we have ‘0 power’. Formally, power is not defined when there is no true effect. However, we can casually refer to this as 0 power. Change the mean in the sample to 100 (set m \<- 106 to m \<- 100) There is now no difference between the mean in our sample, and the population value we are testing against in the one-sample *t*-test. Run the script again. What do you notice?
 
@@ -963,7 +997,15 @@ B) The *p*-value distribution is much steeper than with 50% power
 C) The *p*-value distribution is basically completely flat (ignoring some minor variation due to random noise in the simulation)
 D) The *p*-value distribution is normally distributed
 
+**问题4**：当我们的模拟样本与平均 IQ 分数之间没有真正差异时会发生什么？在这种情况下，我们没有观察到任何效应，因此您可能会说功效为“0”。事实上，当没有真正的效应不存在时，统计功效的确无法被定义。但是，我们可以因此将其称为“零功效”。将样本中的均值更改为 100（将 m = 106 设置为 m = 100）， 现在样本中的均值与我们在单样本 t 检验中测试的总体值之间没有差异。请再次运行脚本，您发现了什么？
+
+A. p 值分布与 50% 功效完全相同
+B. p 值分布比 50% 功效陡峭得多
+C. p 值分布基本上是完全平坦的（忽略了由于模拟中的随机噪声引起的一些微小变化）
+D. p 值分布呈正态（即钟形）分布
+
 The question below builds on the simulation above where there was no true difference between the groups.
+下面的问题建立在上面的数据模拟之上，其中各组之间没有真正的区别。
 
 **Q5**: Look at the leftmost bar in the plot produced for Q4, and look at the frequency of *p*-values in this bar. What is the formal name for this bar?
 
@@ -972,9 +1014,19 @@ B) The true negatives
 C) The Type 1 error (or false positives)
 D) The Type 2 error (or false negatives)
 
+**问题5**：查看为Q4生成的图中最左边的条柱，并查看该条中p值的频率。这个条柱的正式名称应该是什么？
+A. 功效（或真阳性）
+B. 真阴性
+C. I类错误（或假阳性）
+D. II类错误（或假阴性）
+
 Let’s take a look at just the *p*-values below 0.05. Bear with me for the next few steps – it will be worth it. Find the variable that determines how many bars there are, in the statement bars \<- 20. Change it to bars \<- 100. We will now get 1 bar for *p*-values between 0 and 0.01, one bar for *p*-values between 0.01 and 0.02, and 100 bars in total. The red dotted line will now indicate the frequency of *p*-values when the null hypothesis is true, where every bar contains 1% of the total number of *p*-values. We only want to look at *p*-values below 0.05, and we will cut off the plot at 0.05. Change xlim = c(0, 1) to xlim = c(0, 0.05). Instead of seeing all *p*-values between 0 and 1, we will only see *p*-values between 0 and 0.05. Re-run the simulation (still with m \<- 100). We see the same uniform distribution, but now every bar contains 1% of the *p*-values, so the *p*-value distribution is very flat and almost impossible to see (we will zoom in on the y-axis later this assignment). The red line now clearly gives the frequency for each bar, assuming the null hypothesis is true.
+让我们只看一下低于 0.05 的 p 值，请耐心进行接下来的几个步骤。在第 8 行的语句 bars = 20 中找到决定有多少条柱的变量。将其更改为 bars = 100。我们现在将获得 0 到 0.01 之间的 p 值的 1 个柱，p值在 0.01 和 0.02 之间的1个柱，总共 100 个柱。红色虚线现在将指示原假设为真时 p 值的频率，其中每个条柱包含 p 值总数的 1%。我们只想查看低于 0.05 的 p 值，我们将在 0.05 处截断该图。将 xlim = c(0, 1) 更改为 xlim = c(0, 0.05)。我们不会看到 0 到 1 之间的所有 p 值，而只会看到 0 到 0.05 之间的 p 值。重新运行模拟（仍然是 m <- 100）。我们将看到相同的均匀分布，但现在每个条柱都包含 1% 的 p 值，因此 p 值分布非常平坦，几乎看不到（稍后我们将在 y 轴上放大此分布）。假设零假设为真，红线现在清楚地给出了每个条柱的频率。
+
 
 Change the mean in the simulation in line 9 to m \<- 107 (remember n is still 51). Re-run the simulation. It’s clear we have very high power. Most *p*-values are in the left-most bar, which contains all *p*-values between 0.00 and 0.01.
+将第9行模拟中的平均值更改为 m <- 107（记住 n 仍然是 51）。重新运行模拟。很明显，我们拥有非常大的功效。大多数p值位于最左侧的条柱中，其中包含 0.00 和 0.01 之间的所有 p 值。
+
 
 **Q6**: The plot from the last simulation tells you we have 90.5% power. This is the power if we use an alpha of 5%. But we can also use an alpha of 1%. What is the statistical power we have in the simulated studies when we would use an alpha of 1%, looking at the graph? Pick the answer closest to the answer from your simulations.
 
@@ -983,13 +1035,27 @@ B) \~75%
 C) \~50%
 D) \~5%
 
+**第六题**：上次模拟的图告诉我们有大约 90.5% 的功效（注意：由于随机变化，您模拟中的数字可能会略有不同），这就是我们使用 5% 的alpha时的功效。但我们也可以使用 1% 的 alpha。看看图表，当我们使用 1% 的 alpha 时，我们在模拟研究中的统计功效是多少？从您的模拟中选择最接近答案的答案。请注意，您还可以通过将第 15 行中的 p < 0.05 更改为 p < 0.01 来计算alpha为0.01的统计功效，只需确保在继续下一步探索之前将其设置回 0.05。
+A. 90%
+B. 75%
+C. 50%
+D. 5%
+
 To be able to look at the *p*-values around 0.03 and 0.04, we will zoom in on the y-axis as well. In the part of the code where the plot is draw, change ylim = c(0, nSims) to ylim = c(0, 10000). Re-run the script. 
 
+为了能够查看 0.03 和 0.04 附近的 p 值，我们还将放大 y 轴。在绘制绘图的代码部分，将 ylim = c(0, nSims) 更改为 ylim = c(0, 10000)。重新运行脚本。
+
+
 Change the mean in the sample to 108 in m \<- 108), and leave the sample size at 51. Run the simulation. Look at how the distribution has changed compared to the graph above.
+将样本中的平均值更改为 108，m <- 108)，并将样本大小保留为 51。运行模拟。与上图相比，看看分布发生了怎样的变化？
 
 Look at the fifth bar from the left. This bar now contains all the *p*-values between 0.04 and 0.05. You will notice something peculiar. Remember that the red dotted line indicates the frequency in each bar, assuming the null hypothesis is true. See how the bar with *p*-values between 0.04 and 0.05 is lower than the red line. We have simulated studies with 96% power. When power is very high, *p*-values between 0.04 and 0.05 are very rare – they occur less than 1% of the time (most *p*-values are smaller than 0.01). When the null hypothesis is true, *p*-values between 0.04 and 0.05 occur exactly 1% of the time (because *p*-values are uniformly distributed). Now ask yourself: When you have very high power, and you observe a *p*-value between 0.04 and 0.05, is it more likely that the null hypothesis is true, or that the alternative hypothesis is true? Given that you are more likely to observe *p*-values between 0.04 and 0.05 when the null hypothesis is true, than when the alternative hypothesis is true, you should interpret a *p*-value significant with an alpha of 0.05 as more likely when the null hypothesis is true, than when the alternative hypothesis is true.
+查看从左边数第五个条柱。此条柱现在包含 0.04 到 0.05 之间的所有 p 值。你可能会发现一些奇怪的现象。请记住，假设零假设为真，红色虚线表示每个条中的频率。查看 p 值介于 0.04 和 0.05 之间的条形如何低于红线。我们有 96% 功效的模拟研究。当功效非常高时，p 值介于 0.04 和 0.05 之间的情况非常罕见——它们出现的概率不到 1%（大多数 p 值小于 0.01）。当原假设为真时，0.04 和 0.05 之间的 p 值恰好出现 1% 的几率（因为 p 值是均匀分布的）。现在问问自己：当您的统计功效非常高并且观察到 p 值介于 0.04 和 0.05 之间时，零假设更可能为真，还是备择假设更可能为真？鉴于当原假设为真时您更有可能观察到 0.04 和 0.05 之间的 p 值，而不是当备择假设为真时，您应该将 alpha 为 0.05 的 p 值解释为更有可能当原假设为真时为真，而不是备择假设为真。
+
 
 In our simulations, we know there is a true effect or not, but in the real world, you don’t know. When you have very high power, use an alpha level of 0.05, and find a *p*-value of *p* = .045, the data is surprising, assuming the null hypothesis is true, but it is even *more* surprising, assuming the alternative hypothesis is true. This shows how a significant *p*-value is not always evidence for the alternative hypothesis.
+在我们的模拟中，我们知道是否存在真实的效应，但在现实世界中，我们往往不知道。当您具有非常高的统计功效时，使用 0.05 的 alpha 水平，并找到 p = .045 的 p 值，数据令人吃惊。假设原假设为真，但更令人惊讶的是，假设备择假设是真的。这表明显着的 p 值并不总是备择假设的证据。
+
 
 **Q7**: When you know you have very high (e.g., 98%) power for the smallest effect size you care about, and you observe a *p*-value of 0.045, what is the correct conclusion?
 
@@ -997,6 +1063,13 @@ A) The effect is significant, and provides strong support for the alternative hy
 B) The effect is significant, but it is without any doubt a Type 1 error.
 C) With high power, you should use an alpha level that is smaller than 0.05, and therefore, this effect cannot be considered significant. 
 D) The effect is significant, but the data are more likely under the null hypothesis than under the alternative hypothesis.
+
+***问题7**：当您知道您对您关心的最小效应量具有非常高（例如 98%）的功效，并且您观察到 p 值为 0.045 时，正确的结论是什么？
+A. 效应显着，为备择假设提供了强有力的支持。
+B. 效应显着，但毫无疑问属于第一类错误。
+C. 对于高统计功效，应该使用小于 0.05 的 alpha 水平，因此，该效应不能被认为是显着的。
+D. 效应显着，但数据在原假设下比在备择假设下更有可能。
+
 
 **Q8**: Play around with the sample size (n) and the mean (m) by changing the numerical values or both (and thus, vary the statistical power in the simulated studies). Look at the simulation result for the bar that contains *p*-values between 0.04 and 0.05. The red line indicates how many *p*-values would be found in this bar if the null hypothesis was true (and is always at 1%). At the very best, how much more likely is a *p*-value between 0.04 and 0.05 to come from a *p*-value distribution representing a true effect, than it is to come from a *p*-value distribution when there is no effect? You can answer this question by seeing how much higher the bar of *p*-values between 0.04 and 0.05 can become. If at best the bar in the simulation is five times as high at the red line (so the bar shows 5% of *p*-values end up between 0.04 and 0.05, while the red line remains at 1%), then at best *p*-values between 0.04 and 0.05 are five times as likely when there is a true effect than when there is no true effect. 
 
@@ -1007,13 +1080,22 @@ likely under the alternative hypothesis, than under the null hypothesis.
 C) At best, *p*-values between 0.04 and 0.05 are \~10 times more likely under the alternative hypothesis, than under the null hypothesis.
 D) At best, *p*-values between 0.04 and 0.05 are \~30 times more likely under the alternative hypothesis, than under the null hypothesis.
 
+**问题8**：通过改变样本量 (n) 和平均值 (m)，从而改变模拟研究中的统计功效。查看包含介于 0.04 和 0.05 之间的 p 值的条形的模拟结果。红线表示如果零假设为真（并且始终为 1%），将在此条柱中找到多少 p 值。在最好的情况下，0.04 和 0.05 之间的 p 值来自表示真实效果的 p 值分布的可能性比来自没有效果的 p 值分布的可能性大多少？您可以通过查看 0.04 和 0.05 之间的 p 值条可以变得多高来回答这个问题。如果模拟中的条形图最多是红线处的五倍高（因此条形图显示 5% 的 p 值最终介于 0.04 和 0.05 之间，而红线保持在 1%），那么最好的 p-值在 0.04 和 0.05 之间时，有真实效应的可能性是没有真实效应时的五倍。
+A. 0.04 和 0.05 之间的 p 值在备择假设和零假设下的可能性相同。
+B. 在替代假设下，p 值介于 0.04 和 0.05 之间的可能性大约是零假设下的 4 倍。
+C. 在替代假设下，p 值介于 0.04 和 0.05 之间的可能性是零假设下的 10 倍左右。
+D. 在备择假设下，p 值介于 0.04 和 0.05 之间的可能性最多是零假设下的 30 倍。
+
+
 For this reason, statisticians warn that *p*-values just below 0.05 (e.g.,
 between 0.04 and 0.05) are at the very best weak support for the alternative
 hypothesis. If you find *p*-values in this range, consider replicating the
 study, or if that’s not possible, interpret the result at least a bit
 cautiously.
+出于这个原因，统计学家会发出警告：略低于 0.05 的 p 值（例如，0.04 和 0.05 之间）是对备择假设的最弱支持。如果您发现 p 值在此范围内，请考虑重复该研究，或者如果这不可能，至少要谨慎地解释结果。当然，您可以在 Neyman-Pearson 方法中提出最多 5% Type 1 错误率的声明。因此，林德利悖论很好地说明了统计推断的不同哲学方法之间的差异。
 
 ### Questions about *p*-value misconceptions
+### 针对p值概念的误解
 
 **Q1**: When the sample size in each group of an independent *t*-test is 50
 observations (see Figure \@ref(fig:fig131)), which statement is correct?
@@ -1022,6 +1104,12 @@ A) The mean of the differences you will observe between the two groups is always
 B) The mean of the differences you will observe between the two groups is always different from 0.
 C) Observing a mean difference of +0.5 or -0.5 is considered surprising, assuming the null hypothesis is true.
 D) Observing a mean difference of +0.1 or -0.1 is considered surprising, assuming the null hypothesis is true.
+**问题1**：当独立t检验中每组的样本量为50个观察值时（见图1.6），下面哪种说法是正确的？
+A. 两组之间观察到平均差异总是0。
+B. 两组之间的平均差异一般不可能为0。
+C. 假设零假设为真，能观察到+0.5或-0.5的平均差异几乎不太可能
+D. 假设零假设为真，能观察到+0.1或-0.1的平均差异几乎不太可能
+
 
 **Q2:** In what sense are the null models in the figures (Figure \@ref(fig:fig131) and \@ref(fig:fig132)) similar, and in what sense are they different?
 
@@ -1030,55 +1118,92 @@ A) In both cases, the distributions are centered on zero, and the critical
 B) In both cases, a *t*-value of 0 is the most likely outcome, but the critical *t*-value is around 0.4 for n = 50, and around 0.05 for n = 5000.
 C) In both cases, means will vary in exactly the same way around 0, but the Type 1 error rate is much smaller when n = 5000 than when n = 50.
 D) Because the standard error is much larger for n = 50 than for n = 5000, it is much more likely that the null hypothesis is true for n = 50.
+**问题2**：图1.6和图1.7中的零模型在什么方面上是相似的，在什么方面又是不同的？
+A. 在这两种情况下，分布都以零为中心，临界t值在1.96和2之间（对于双侧检验来说，取决于样本量）。但是，样本量越大，被认为 "令人惊讶 "的平均差异就越接近于0。
+B. 在这两种情况下，t值为0是最有可能的结果，但临界t值对于n=50来说大约是0.4，对于n=5000来说大约是0.05。
+C. 在这两种情况下，平均值在0附近的变化方式完全相同，但是n=5000时的犯第一类错误的概率比n=50时小得多。
+D. 因为n=50的标准误差比n=5000的标准误差大得多，所以n=50的零假设更可能是真的。
 
 **Q3:** You can play around with the alternative and null models in this online app: <http://shiny.ieis.tue.nl/d_p_power/>. The app allows you to specify the sample size in each group of an independent *t*-test (from 2 to infinity), the mean difference (from 0 to 2), and the alpha level. In the plot, the red areas visualize Type 1 errors. The blue area visualizes the Type 2 error rate. The app also tells you the critical value: There is a vertical line (with n = 50 this line falls at a mean difference of 0.4) and a verbal label that says: “Effects larger than 0.4 will be statistically significant”. Note that the same is true for effects smaller than -0.4, even though there is no second label there, but the app shows the situation for a two-sided independent *t*-test.
+**问题3**：您可以在这个在线app中玩玩替代模型和空模型：http://shiny.ieis.tue.nl/d_p_power/。 该应用程序允许你指定独立t检验中每组的样本量（从2到无穷大），平均差异（从0到2），以及α水平。在该图中，红色区域显示了第一类错误。蓝色区域直观地显示了第二类错误率。该app还会告诉你临界值： 有一条垂直线（在n=50的情况下，这条线落在0.4的平均差上）和一个标签，说："大于0.4的效应将具有统计学意义"。请注意，对于小于-0.4的效应也是如此，尽管那里没有第二个标签，但该app显示了双侧独立t检验的情况。
 
 You can see that on the left of the vertical line that indicates the critical mean difference there is a blue area that is part of the alternative model. This is the Type 2 error rate (or 1 - the power of the study). If a study has 80% power, 80% of the mean differences we will observe should fall on the right of the critical value indicated by the line. If the alternative model is true, but we observe an effect smaller than the critical value, the observed *p*-value will be larger than 0.05, even when there is a true effect. You can check in the app that the larger the effect size, the further to the right the entire alternative distribution falls, and thus the higher the power. You can also see that the larger the sample size, the narrower the distribution, and the less of the distribution will fall below the critical value (as long as the true population mean is larger than the critical value). Finally, the larger the alpha level, the further to the left the critical mean difference moves, and the smaller the area of the alternative distribution that falls below the critical value.
 
+您可以看到，在表示临界均值差的垂直线左侧，有一个蓝色区域是备择假设模型的一部分。这是 犯II类错误的几率（或表示1 减去该研究的统计功效）。如果一项研究具有 80% 的功效，那么我们将观察到的 80% 的平均误差应该落在该线指示的临界值的右侧。如果备择假设的模型为真，但我们观察到的效应小于临界值，即使存在真实效应，那么我们观察到的p值也将大于 0.05，您可以在 app 中查看，效应越大，整个备择假设所代表的模型分布越靠右，因此统计功效越高。您还可以看到，样本量越大，分布越窄，低于临界值的分布将越少（只要真正的总体均值大于临界值）。最后，alpha 水平越大，临界均值差向左移动得越远，低于临界值的备择假设所代表的分布区域就越小。
+
 The app also plots 3 graphs that illustrate the power curves as a function of different alpha levels, sample sizes, or true mean differences. Play around in the app by changing the values. Get a feel for how each variable impacts the null and alternative models, the mean difference that will be statistically significant, and the Type 1 and Type 2 error rates.
 
-Open the app, and make sure it is set to the default settings of a sample size of 50 and an alpha level of 0.05. Look at the distribution of the null model. Set the sample size to 2. Set the sample size to 5000. The app will not allow you to plot data for a ‘group’ size of 1, but with n = 2 you will get a pretty good idea of the range of values you can expect when the true effect is 0, and when you collect single observations (n = 1). Given your experiences with the app as you change different parameters, which statement is true? 
+该app还绘制了3张图表，说明作为不同α水平、样本量或真实平均差的函数的统计功效曲线。通过改变数值，在app中进行探索。感受一下每个变量是如何影响零模型和备择模型的，以及如何影响具有统计学意义的平均差、I类和II类错误率的。
 
+Open the app, and make sure it is set to the default settings of a sample size of 50 and an alpha level of 0.05. Look at the distribution of the null model. Set the sample size to 2. Set the sample size to 5000. The app will not allow you to plot data for a ‘group’ size of 1, but with n = 2 you will get a pretty good idea of the range of values you can expect when the true effect is 0, and when you collect single observations (n = 1). Given your experiences with the app as you change different parameters, which statement is true? 
+打开app，并确保它为默认设置，即保持样本量为50，α水平为0.05。看一下零模型的分布。然后将样本大小设为2，再将样本大小设为5000并观察分布。在该app中，你无法绘制"组"样本量大小为1的数据。但在n = 2的情况下，你将得到真实效应为0时单个观察值（n = 1）的期望值范围。鉴于你在改变不同参数时对app的体验，下面哪句话是真的？
 A) When the null hypothesis is true and the standard deviation is 1, if you randomly take 1 observation from each group and calculate the difference score, the differences will fall between -0.4 and 0.4 for 95% of the pairs of observations you will draw.
 B) When the null hypothesis is true and the standard deviation is 1, with n = 50 per group, 95% of studies where data is collected will observe in the long run a mean difference between -0.4 and 0.4.
 C) In any study with n = 50 per group, even when the SD is unknown and it is not known if the null hypothesis is true, you should rarely observe a mean difference more extreme than -0.4 or 0.4.
 D) As the sample size increases, the expected distribution of means become narrower for the null model, but not for the alternative model.
+A. 当零假设为真且标准差为1时，如果你从每组中随机抽取1个观察值并计算差异得分，那么在你将抽取的95%的观察对中，差异将落在-0.4和0.4之间。
+B. 当零假设为真，标准差为1时，每组样本量n=50，95%的研究数据在长期内将被观察到均值差落在-0.4和0.4之间。
+C. 在任意每组样本量为n=50的研究中，即使标准差未知，并且也不知道零假设是否为真，你应该很少观察到比-0.4或0.4更极端的均值差异。
+D. 随着样本量的增加，对于零模型来说，均值的期望分布会变窄，但对于备择模型来说则不会。
 
 **Q4:** Open the app once more with the default settings. Set the slider for the alpha level to 0.01 (while keeping the mean difference at 0.5 and the sample size at 50). Compared to the critical value when alpha = 0.05, which statement is true?
+使用默认设置再次打开应用程序。将 alpha 水平设置为 0.01（同时将平均差保持在 0.5，样本大小保持在50）。与 alpha = 0.05 时的临界值相比，以下哪个说法是正确的？
 
 A) Compared to an alpha of 0.05, only *less* extreme values are considered surprising when an alpha of 0.01 is used, and only differences larger than 0.53 scale points (or smaller than -0.53) will now be statistically significant.
 B) Compared to an alpha of 0.05, only *less* extreme values are considered surprising when an alpha of 0.01 is used, and only differences larger than 0.33 scale points (or smaller than -0.33) will now be statistically significant.
 C) Compared to an alpha of 0.05, only *more* extreme values are considered surprising when an alpha of 0.01 is used, and only differences larger than 0.53 scale points (or smaller than -0.53) will be statistically significant.
 D) Compared to an alpha of 0.05, only *more* extreme values are considered surprising when an alpha of 0.01 is used, and only differences larger than 0.33 scale points (or smaller than -0.33) will now be statistically significant.
+A. 与0.05的α值相比，当使用0.01的α值时，只有不太极端的数值才会被认为是令人难以置信的，而且现在只有大于0.53（或小于-0.53）的差异才会具备统计学意义。
+B. 与0.05的α值相比，当使用0.01的α值时，只有较少的极端值被认为是令人难以置信的，而且现在只有大于0.33（或小于-0.33）的差异才会具备统计学意义。
+C. 与0.05的α值相比，当使用0.01的α值时，只有更多的极端值被认为是令人难以置信的，而且只有大于0.53（或小于-0.53）的差异才具备统计学意义。
+D. 与0.05的α值相比，当使用0.01的α值时，只有更多的极端值被认为是令人难以置信的，而且现在只有大于0.33（或小于-0.33）的差异才会具备统计学意义。
 
 **Q5:** Why can’t you conclude that the null hypothesis is true, when you observe a statistically non-significant *p*-value (*p* \> alpha)?
+当您观察到统计上不显著的 p 值 (p > α) 时，为什么不能得出零假设一定为真的结论？
 
 A) When calculating *p*-values you always need to take the prior probability into account.
 B) You need to acknowledge the probability that you have observed a Type 1 error.
 C) The null hypothesis is never true.
 D) You need to acknowledge the probability that you have observed a Type 2 error.
+A. 在计算p值时，你总是需要考虑到先验概率。
+B. 你需要意识到你观察到I类错误的概率。
+C. 零假设永远不会是真的。
+D. 你需要意识到你观察到II类错误的概率。
 
 **Q6:** Why can’t you conclude that the alternative hypothesis is true, when you observe a statistically significant *p*-value (*p* \< alpha)?
+当你观察到一个具有统计学意义的p值（p < α）时，为什么不能得出备择假设一定为真的结论？
 
 A) When calculating *p*-values you always need to take the prior probability into account.
 B) You need to acknowledge the probability that you have observed a Type 1 error.
 C) The alternative hypothesis is never true.
 D) You need to acknowledge the probability that you have observed a Type 2 error.
+A. 在计算p值时，你总是需要考虑到先验概率。
+B. 你需要意识到你观察到的I类错误的概率。
+C. 备择假设从不为真。
+D. 你需要意识到你观察到II类错误的概率。
 
 **Q7:** A common concern when interpreting *p*-values is that ‘significant’ in normal language implies ‘important’, and thus a ‘significant’ effect is interpreted as an ‘important’ effect. However, **the question whether an effect is important is completely orthogonal to the question whether it is different from zero, or even how large the effect is**. Not all effects have practical impact. The smaller the effect, the less likely such effects will be noticed by individuals, but such effects might still have a large impact on a societal level. Therefore, the general take home message is that **statistical significance does not answer the question whether an effect matters in practice, or is ‘practically important’**. To answer the question whether an effect matters, you need to present a **cost-benefit analysis**.
+在解释p值时，一个常见的问题是，"显著 "在正常语言中意味着 "重要"，因此，"显著 "效应被解释为 "重要 "效应。然而，一个效应是否重要的问题与它是否不等于零，甚至效应有多大的问题是完全独立的。一方面来说，不是所有的效应在实际生活中都能产生影响。另外一方面来说，效应越小，越不可能被人注意到，但这种效应仍然可能在社会层面上产生很大的影响。因此，一般来说，统计学意义并不能回答一个效应在实践中是否重要，或是否 "实际重要"的问题。要回答一个效应是否重要的问题，你需要做成本效益分析。
 
 Go to the app: <http://shiny.ieis.tue.nl/d_p_power/>. Set the sample size to 50000, the mean difference to 0.5, and the alpha level to 0.05. Which effects will, when observed, be statistically different from 0?
+转到app：http://shiny.ieis.tue.nl/d_p_power/。设置样本量为50000，平均差异为0.5，α水平为0.05,并观察以下哪种效应会与0存在统计学差异？
 
 A) Effects more extreme than -0.01 and 0.01
 B) Effects more extreme than -0.04 and 0.04
 C) Effects more extreme than -0.05 and 0.05
 D) Effects more extreme than -0.12 and 0.12
+A. 比-0.01和0.01更极端的效应
+B. 比-0.04和0.04更极端的效应
+C. 比-0.05和0.05更极端的效应
+D. 比-0.12和0.12更极端的效应
 
 If we plot the null model for a very large sample size (e.g., n = 10000 per group) we see that even very small mean differences (differences more extreme than a mean difference of 0.04) will be considered ‘surprising’. This still means that if there really is no difference in the population, you will observe differences larger than 0.04 less than 5% of the time, in the long run, and 95% of the observed differences will be smaller than a mean difference of 0.04. But it becomes more difficult to argue for the practical significance of such effects. Imagine that a specific intervention is successful in changing people’s spending behavior, and when implementing some intervention people save 12 cents per year. It is difficult to argue how this effect will make any individual happier. However, if this money is combined, it will yield over 2 million, which could be used to treat diseases in developing countries, where it would have a real impact. The cost of the intervention might be considered too high if the goal is to make individuals happier, but it might be consider worthwhile if the goal is to raise 2 million for charity.
+如果我们为一个非常大的样本量（例如，每组n=10000）绘制零模型，我们会发现，即使是非常小的平均差异（比0.04的平均差异更极端的差异）也会被认为是"令人惊喜的"。这仍然意味着，如果在整个人群中真的没有差异，你将有5%的几率观察到大于0.04的平均差异，而剩下95%的几率则观察到小于0.04的平均差异。但要论证这种效应的实际意义就变得更加困难。想象一下，一项具体的干预措施在改变人们的消费行为方面是成功的，当实施某种干预措施时，人们每年可以节省12美分。很难论证这种效应如何使人更加幸福。然而，如果这些钱加在一起，将产生200多万，这些钱可以用于治疗发展中国家的疾病，在那里会产生真正的影响。而如果干预的目标是使个人更快乐，干预的成本可能被认为太高，但如果目标是为慈善事业筹集200万，可能会被认为是值得的。
 
 Not all effects in psychology are additive (we cannot combine or transfer an increase in happiness of 0.04 scale points), so it is often more difficult to argue for the importance of small effects in subjective feelings. A cost-benefit analysis might show small effects matter a lot, but whether or not this is the case cannot be inferred from a *p*-value. Instead, you need to report and interpret the [effect size](#effectsize),
-
+在心理学中，并不是所有的效应都是相加的（我们不能将幸福感增加0.04个尺度点的效应合并或转换），所以要论证主观感受中的小效应的重要性往往比较困难。成本效益分析可能显示小效应很重要，但是否真的如此，我们不能从p值中推断出来。相反，您需要报告并解释效应量。
 **Q8:** Let’s assume that the random number generator in R works, and we use rnorm(n = 50, mean = 0, sd = 1) to generate 50 observations, and the mean of these observations is 0.5, which in a one-sample *t*-test against an effect of 0 yields a *p*-value of 0.03, which is smaller than the alpha level (which we have set to 0.05). What is the probability that we have observed a significant difference (*p* \< alpha) just by chance?
+我们使用R语言中的随机数生成器，输入rnorm(n = 50, mean = 0, sd = 1)生成50个观察值，这些观察值的平均值是0.5，在对效应为0的单样本t检验中得到的p值是0.03，小于α水平（我们设定为0.05）。我们观察到显著差异（p<α）只是偶然的概率有多少？
 
 A) 3%
 B) 5%
@@ -1086,14 +1211,19 @@ C) 95%
 D) 100%
 
 **Q9:** Which statement is true?
+以下哪一个说法是正确的？
 
 A) The probability that a replication study will yield a significant result is 1-*p*.
 B) The probability that a replication study will yield a significant result is 1-*p* multiplied by the probability that the null hypothesis is true.
 C) The probability that a replication study will yield a significant result is equal to the statistical power of the replication study (if there is a true effect), or the alpha level (if there is no true effect).
 D) The probability that a replication study will yield a significant result is equal to the statistical power of the replication study + the alpha level.
+A. 重复研究产生显著结果的概率为1-p。
+B. 重复研究产生显著结果的概率是1-p乘以零假设为真的概率。
+C. 重复研究产生显著结果的概率等于重复研究的统计功效（如果存在真实效应的话）或α水平（如果不存在真实效应）。
+D. 重复研究产生显著结果的概率等于重复研究的统计功效加上α水平。
 
 This question is conceptually very similar to that asked by Tversky and Kahneman [-@tversky_belief_1971] in article 'Belief in the law of small numbers': 
-
+这个问题在概念上与Tversky和Kahneman（1971）在 "相信小数法则"一文中提出的问题非常相似：
 
 
 (ref:smallnumberslab) Screenshot of first paragraph in Tversky and Kahneman, 1971.
@@ -1102,64 +1232,96 @@ This question is conceptually very similar to that asked by Tversky and Kahneman
 knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/belieflawsmallnumers.png")
 ```
 
-> Suppose you have run an experiment on 20 subjects, and have obtained a significant result which confirms your theory (*z* = 2.23, *p* < .05, two-tailed). You now have cause to run an additional group of 10 subjects. What do you think the probability is that the results will be significant, by a one-tailed test, separately for this group?
+> Suppose you have run an experiment on 20 subjects, and have obtained a significant result which confirms your theory (*z* = 2.23, *p* < .05, two-tailed). You now have cause to run an additional group of 10 subjects. What do you think the probability is that the results will be significant, by a one-tailed test, separately for this group?假设你对20名被试进行了实验，并得到了一个能证实你理论的重要结果（z=2.23，p<0.05，双尾）。你现在再做一组10人的实验，你认为这一组的结果通过单尾检验并具有统计学意义的概率是多少？
 
 Tversky and Kahneman argue a reasonable answer is 48%, but the only correct response is the same as the correct response to question 9, and the exact probability cannot be known [@miller_what_2009]. 
+Tversky和Kahneman认为合理的答案是48%，但唯一的正确答案与问题9的正确答案相同，确切的概率无法得知[@miller_what_2009]。
 
 **Q10:** Does a non-significant *p*-value (i.e., *p* = 0.65) mean that the null hypothesis is true?
+一个不显著的p值（例如p = 0.65）是否意味着零假设为真？
 
 A) No - the result could be a Type 2 error, or a false negative.
 B) Yes, because it is a true negative.
 C) Yes, if the *p*-value is larger than the alpha level the null hypothesis is true.
 D) No, because you need at least two non-significant *p*-values to conclude the null hypothesis is true.
+A. 不是，该结果可能是II类错误，或假阴性。
+B. 是的，因为该结果是一个真阴性。
+C. 是的，如果p值大于α水平，则零假设为真。
+D. 不是，因为你需要至少两个不显著的p值才能得出零假设是真的结论。
 
 **Q11:** What is a correct way to present a non-significant *p*-value (e.g., *p* = 0.34 assuming an alpha level of 0.05 is used in an independent *t*-test)?
-
+以下哪一个是采用了正确的方式来表达p值不显著（例如在独立t检验中使用0.05的α水平，p = 0.34）？
 A) The null hypothesis was confirmed, *p* \> 0.05
 B) There was no difference between the two conditions, *p* \> 0.05
 C) The observed difference was not statistically different from 0.
 D) The null hypothesis is true.
-
+A. 零假设被证实，p > 0.05
+B. 两个条件之间没有差异，p > 0.05
+c. 观察到的差异在统计学上与0没有差异。
+D. 零假设为真。
 **Q12:** Does observing a significant *p*-value (*p* \< .05) mean that the null hypothesis is false?
-
+观察到一个显著的p值（p < 0.05）是否意味着零假设是假的？
 A) No, because *p* \< .05 only means that the alternative is true, not that the null hypothesis is wrong.
 B) No, because *p*-values are never a statement about the probability of a hypothesis or theory.
 C) Yes, because an exceptionally rare event has occurred.
 D) Yes, because the difference is statistically significant.
+A. 不，因为p<0.05只意味着备择假设是真的，而不是说零假设是错的。
+B. 不是，因为p值从来不是关于假设或理论的概率的声明。
+C. 是的，因为一个异常罕见的事件已经发生。
+D. 是的，因为差异在统计学上是显著的。
 
 **Q13:** Is a statistically significant effect always a practically important effect?
+在统计学上有意义的效应是否总是意味着该效应在实践中也很重要？
 
 A) No, because in extremely large samples, extremely small effects can be statistically significant, and small effects are never practically important.
 B) No, because the alpha level could in theory be set to 0.20, and in that case a significant effect is not practically important.
 C) No, because how important an effect is depends on a cost-benefit analysis, not on how surprising the data is under the null hypothesis.
 D) All of the above are true.
+A. 不是，因为在超大样本中，极小的效应也可以有统计学意义，而小的效应在实际生活中从来就没有重要性。
+B. 不，因为理论上阿尔法水平可以设定为0.20，在这种情况下，显著的效应在实际生活中并不重要。
+C. 不是，因为一个效应有多重要取决于成本效益分析，而不是取决于在零假设下数据有多令人惊讶。
+D. 以上都是对的。
 
 **Q14:** What is the correct definition of a *p*-value?
+以下关于p值定义哪一个是正确的？
 
 A) A *p*-value is the probability that the null hypothesis is true, given data that is as extreme or more extreme than the data you have observed.
 B) A *p*-value is the probability that the alternative hypothesis is true, given data that is as extreme or more extreme than the data you have observed.
 C) A *p*-value is the probability of observing data that is as extreme or more extreme than the data you have observed, assuming the alternative hypothesis is true.
 D) A *p*-value is the probability of observing data that is as extreme or more extreme than the data you have observed, assuming the null hypothesis is true.
 
+A. p值是指零假设为真的概率，意味着给定的数据与您观察到的数据一样极端或更极端。
+B. p值是备择假设为真的概率，意味着给定的数据与您观察到的数据一样极端或更极端。
+C. 假设备择假设为真，p值是指观察到的数据与您观察到的数据一样极端或更极端的概率。
+D. 假设零假设为真，p值是指观察到的数据与您观察到的数据一样极端或更极端的概率。
+
 ### Open Questions
 
-1. What determines the shape of the *p*-value distribution?
+### 开放性问题
 
+1. What determines the shape of the *p*-value distribution?
+1. 什么决定了 p 值分布的形状？
 2. How does the shape of the *p*-value distribution change when there is a true effect and the sample size increases? 
+2. 当存在真实效应并且样本量增加时，p 值分布的形状如何变化？
 
 3. What is Lindley’s paradox? 
+3. 什么是林德利悖论？
 
 4. How are *p*-values distributed when there is no true effect? 
+4. 当真实效应不存在时，p 值如何分布？
 
 5. What is the correct definition of a *p*-value?
-
+5. p 值的正确定义是什么？
 6. Why is it incorrect to think that a non-significant *p*-value means that the null hypothesis is true?
+6. 为什么不显著的 p 值意味着零假设为真是不正确的？
 
 7. Why is it incorrect to think that a significant *p*-value means that the null hypothesis is false?
+7. 为什么显著的 p 值意味着零假设为假是不正确的？
 
 8. Why is it incorrect to think that a significant *p*-value means that a practically important effect has been discovered?
-
+8. 为什么显著的 p 值意味着发现了在实际生活中重要的效应是不正确的？
 9. Why is it incorrect to think that if you have observed a significant finding, the probability that you have made a Type 1 error (a false positive) is 5%?
+9. 如果您观察到重要发现，您犯第 1 类错误（假阳性）的概率是 5%，为什么这种观点是不正确的？
 
 10. Why is it incorrect to think that 1 – *p* (e.g., 1 – 0.05 = 0.95) is the probability that the effect will replicate when repeated?
-
+10. 为什么1 - p（例如 1 – 0.05 = 0.95）并不是指在重复研究时效应也能被重复的概率？

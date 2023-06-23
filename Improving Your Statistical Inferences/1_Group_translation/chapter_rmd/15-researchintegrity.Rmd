@@ -40,6 +40,58 @@ library("reshape2")
 
  图 15.1:在研究人员的各种样本中至少从14项调查中至少一次参与可疑研究实践的自我承认。 
  
+```{r, qrp, echo = FALSE, fig.height = 12, fig.cap="(ref:qrp)"}
+
+john <- c(45.8, 63.4, 27.7, NA, 55.9, 38.2, NA, NA, 27, 22, 3, 0.6)
+fiedler <- c(42, 34, 24, NA, 33, 40, NA, NA, 47, 22, 3, 3) #retrieved using getdata graph digitizer as data are not shared beyond the graph
+agnoli <- c(40.1, 47.9, 16.4, NA, 53.2, 39.7, NA, NA, 37.4, 22.2, 3.1, 2.3)
+motyl <- c(48, 78, 45, NA, 66, 58, NA, NA, 58, 33, 16, 2)
+rabelo <- c(54.7, 22.4, 34.5, NA, 22.4, 19.8, NA, NA, 9.1, 17.7, 4.3, 0.86)
+fraser_eco <- c(0, 64.1, NA, NA, 36.9, 24, NA, NA, 48.5, 27.3, NA, 4.5)
+fraser_evo <- c(0, 63.7, NA, NA, 50.7, 23.9, NA, NA, 54.2, 17.5, NA, 2.0)
+makel <- c(61.69, NA, NA, 67.28, 28.61, 25.48, 41.64, 49.57, 45.80, 28.66, NA, 9.69)
+bakker <- c(60, NA, NA, 64, 23.4, 34, 46, 45, 46, 24, NA, 9)
+chin <- c(43, NA, NA, 53, 14, 24, 32, 39, 29, 27, NA, 7)
+moran <- c(38.8, 34.4, 11.5, NA, 14.4, NA, NA, NA, 29.6, 11.3, NA, NA)
+swift <- c(34.8, 11.6, 3.0, NA, 11.0, 11.8, NA, NA, 14.0, 12.8, 1.2, 0) # faculty
+latan <- c(49.15, 57.63, 43.43, NA, 59.32, 42.80, NA, NA, 37.29, 22.67, 20.3, 44.70)
+garciagarzon <- c(24.6, 53.8, 27.7, NA, 20.0, 27.7, NA, NA, 43.1, 13.8, 13.8, 0) #Involved
+brachem <- c(15.2, 36.4, 17, 25.5, 11.4, 22.4, NA, NA, 12.3, 3.4, NA, 0)
+
+labels <- c("Selectively reporting\n what 'worked'", "Selectively reporting\n outcomes", "Failing to report\n all conditions", "Selectively reporting\n performed analyses", "Optional stopping", "Exclude data depending\n on impact on results", "Selectively\n including covariates", "Switch analysis\n selectively", "HARKing", "Opportunistically\n rounding p-values", "Hiding demographic\n moderators", "Falsifying data")
+
+df <- data.frame(labels, john, agnoli, motyl, rabelo, fraser_eco, fraser_evo, makel, bakker, chin, fiedler, moran, swift, latan, garciagarzon, brachem)
+
+long <- reshape2::melt(df, id.vars = c("labels"))
+long$labels <- as.factor(long$labels)
+long = subset(long, !is.na(value))
+
+
+# ggplot(long, aes(x = labels, y = value, fill = variable)) +
+#   geom_bar(stat = "identity", colour = "black", width = 0.8, position = position_dodge2(.8, preserve = "total")) +
+#   coord_flip() +
+#   theme(plot.margin = margin(0, 0, 3, 0, "cm"), plot.background = element_rect(fill = backgroundcolor), panel.background = element_rect(fill = backgroundcolor), legend.background = element_rect(fill= backgroundcolor), legend.position = c(0.3,-0.10),  legend.direction = "horizontal", legend.margin = margin(0), axis.text.y = element_text(size = 13), panel.grid.major.x = element_line( size=.1, color="black" ), axis.ticks.x = element_blank()) +
+#   ggtitle("Self-admittance rates of engaging in QRP's at least once") +
+#   scale_fill_manual(values = c("#000000", "#004949", "#009292", "#ff6db6", "#ffb6db", "#490092", "#006edb", "#b66dff", "#6db6ff", "#b6dbff", "#920000", "#924900", "#db6d00", "#24ff24", "#ffff6d", "#ffffff"),
+#                     labels = c("John 2012", "Agnoli 2017", "Motyl  2017", "Rabelo 2020", "Fraser 2018 (eco)", "Fraser 2018 (evo)", "Makel 2021", "Bakker 2021", "Chin 2021", "Fiedler 2016", "Moran 2022", "Swift 2022 (faculty)", "Latan 2021", "Garcia-Garzon 2022", "Brachem 2022"), name = "Study") +
+#   ylab("Percentage") + xlab("QRP's") +
+#   scale_y_continuous(limits = c(0, 65), breaks = seq(0, 65, 5))
+
+
+ggplot(long, aes(x = variable, y = value, fill = variable)) +
+  coord_flip() +
+  geom_bar(stat = "identity", colour = "black", width = 0.8, position = position_dodge(.8, preserve = "single")) +
+ theme(plot.margin = margin(0, 0, 0, 0, "cm"), plot.background = element_rect(fill = backgroundcolor), panel.background = element_rect(fill = backgroundcolor), legend.background = element_rect(fill= backgroundcolor), legend.direction = "horizontal", legend.position = "bottom", axis.title = element_text(size = 13), axis.text.x = element_text(size = 10), axis.text.y = element_text(size = 20), panel.grid.major.x = element_line(size = .1, color = "black"), axis.ticks.x = element_blank()) +
+  ggtitle("Self-admittance rates of engaging in QRP's at least once") +
+  scale_fill_manual(values = c("#000000", "#88CCEE", "#CC6677", "#DDCC77", "#117733", "#332288", "#AA4499", "#E69F00", "#44AA99", "#999933", "#882255", "#661100", "#6699CC", "#888888", "#ffffff"),
+                    labels = c("John 2012", "Agnoli 2017",  "Motyl  2017", "Rabelo 2020", "Fraser 2018 (eco)", "Fraser 2018 (evo)", "Makel 2021", "Bakker 2021", "Chin 2021", "Fiedler 2016", "Moran 2022", "Swift 2022 (faculty)", "Latan 2021", "Garcia-Garzon 2022", "Brachem 2022"), name = "Study") +
+  ylab("Percentage") + xlab("QRP's") +
+  scale_y_continuous(limits = c(0, 70), breaks = seq(0, 70, 10)) + 
+  facet_wrap(~labels, scales = "free_x", switch = "y", nrow = 4) +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), strip.background = element_blank(), strip.text.y = element_text(size = 12))
+
+
+```
 
 ##15.2 捏造、伪造和抄袭
 
