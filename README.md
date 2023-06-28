@@ -12,7 +12,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) $$《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展$$
+## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) **《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展**
 
 ## Translators (译者)
 
@@ -33,7 +33,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) $$《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展$$
+## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) **《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展**
 
 <br>
 
