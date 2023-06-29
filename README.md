@@ -12,9 +12,9 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) $$《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展$$
+## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) **《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展**
 
-## Translators & Proofreaders (译者 & 校对)
+## Translators (译者)
 
 | Group | member                              |
 |-------|-------------------------------------|
@@ -23,11 +23,17 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 | 3     | Yangping LYU Xiaoyun Chen Ruijia Fu |
 | 4     | Bowen Wu Yiwen Zhang                |
 
+## Proofreaders (校对)
+
+| Group | member                  |
+|-------|-------------------------|
+| 1     | Yiwen Zhang，Xinyu Wang |
+
 ## Translation has been completed & Proofreading is in progress
 
 <br>
 
-## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) $$《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展$$
+## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) **《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展**
 
 <br>
 
@@ -43,23 +49,13 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 ## Improving Your Statistical Inferences（Translation Time Planing）
 
-| Data(ddl)  | chapter                                               | member                                    |
-|------------------|------------------------------|------------------------|
-| 4.20\~4.30 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） |
-| 4.20\~4.30 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             |
-| 4.30\~5.15 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      |
-| 4.30\~5.15 | chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          |
-| 4.30\~5.15 | chapter 15 Research Integrity                         | Jing An, Bolin Cao                        |
-
-## Improving Your Statistical Inferences（Proofread Time Planing）
-
-| Data(ddl)  | chapter    | member           |
-|------------|------------|------------------|
-| 6.15\~6.30 | chapter 1  | Lan Zhou，Qinhao |
-| 6.15\~6.30 | chapter 9  |                  |
-| 6.15\~6.30 | chapter 10 | Mengmeng LYU     |
-| 6.15\~6.30 | chapter 12 |                  |
-| 6.15\~6.30 | chapter 15 | Xinquan Lu       |
+| Data(ddl)  | chapter                                               | member                            |
+|------------|-------------------------------------------------------|-----------------------------------|
+| 4.20\~4.30 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou |
+| 4.20\~4.30 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu     |
+| 4.30\~5.15 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU      |
+| 4.30\~5.15 | chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu  |
+| 4.30\~5.15 | chapter 15 Research Integrity                         | Jing An, Bolin Cao                |
 
 tips\
 1 小伙伴们可以自由选择想要翻译以及校对的章节，但是校对环节需要等翻译的小伙伴翻译完成后再进行。翻译完成后需要初步自行校对通读一遍\
@@ -72,7 +68,7 @@ tips\
 ## Emails of translators
 
 | name          | email                                                                  |
-|--------------------|----------------------------------------------------|
+|---------------|------------------------------------------------------------------------|
 | Zhang yiwen   | [zhang_yiwen1\@outlook.com](mailto:zhang_yiwen1@outlook.com){.email}   |
 | Zheng yuanrui | [aaronzheng87\@gmail.com](mailto:aaronzheng87@gmail.com){.email}       |
 | Mengmeng LYU  | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
@@ -90,10 +86,40 @@ tips\
 
 ## Group_present_progress
 
-| chapter                                               | member                                    | progress                               |
-|---------------------|------------------|---------------------------------|
+| chapter                                               | member                                    | progress              |
+|-------------------------------------------------------|-------------------------------------------|-----------------------|
 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 翻译完成，rmd整合完成 |
-| chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 第十章翻译和核对完成，rmd整合完成      |
-| chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成                  |
-| chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，rmd整合完成                     |
-| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 翻译完成，rmd整合完成                  |
+| chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 翻译完成，rmd整合完成 |
+| chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成 |
+| chapter 12 Bias detection                             | Jing Lin, Xinyu Wang, Xinquan Lu          | 翻译完成，rmd整合完成 |
+| chapter 15 Research Integrity                         | Jing An, Bolin Cao                        | 翻译完成，rmd整合完成 |
+
+## Improving Your Statistical Inferences（Proofread Time Planing）
+
+| Data(ddl)  | chapter    | member                    |
+|------------|------------|---------------------------|
+| 6.25\~7.15 | chapter 1  | YeLin，Qinhao             |
+| 6.25\~7.15 | chapter 9  | YeLin, Dongyu Liu         |
+| 6.25\~7.15 | chapter 10 | Mengmeng LYU, Qiushan Liu |
+| 6.25\~7.15 | chapter 12 | Hang Yu, Weijing Yang     |
+| 6.25\~7.15 | chapter 15 | Xinquan Lu, Chi Zhang     |
+
+## Emails of Proofreaders
+
+| name         | email                                                                  |
+|--------------|------------------------------------------------------------------------|
+| Mengmeng LYU | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
+| Xinquan Lu   | [white.water.861\@gmail.com](mailto:white.water.861@gmail.com){.email} |
+| Qin hao      | [crtmarvel666\@gmail.com](mailto:crtmarvel666@gmail.com){.email}       |
+| Chi Zhang    | [carinezc\@126.com](mailto:carinezc@126.com){.email}                   |
+| Ye Lin       | [yealintt\@163.com](mailto:yealintt@163.com){.email}                   |
+| Hang Yu      | [yh.hippocampus\@qq.com](mailto:yh.hippocampus@qq.com){.email}         |
+| Weijing Yang | [YangWeijing\@hotmail.com](mailto:YangWeijing@hotmail.com){.email}     |
+| Dongyu Liu   | [nickliudongyu\@outlook.com](mailto:nickliudongyu@outlook.com){.email} |
+| Qiushan Liu  | [qiushan.liu\@outlook.com](mailto:qiushan.liu@outlook.com){.email}     |
+
+tips\
+1 小伙伴们可以自由选择想要校对的章节\
+2 每个章节可以有1～2个小伙伴一起校对，自行组队商量分工细节\
+4 目前的校对是需要在Rmd中进行的，需要对文字以及图表中注释的翻译都进行校对，如有不确定的地方可以在群内讨论\
+5 不明确的翻译名词或语句在群里的"专有名词翻译"的在线文档中汇总
