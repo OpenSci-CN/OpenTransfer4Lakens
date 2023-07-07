@@ -12,7 +12,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) $$《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展$$
+## Status of the translation of [*Sample Size Justification*](https://doi.org/10.1525/collabra.33267) **《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》的翻译进展**
 
 ## Translators (译者)
 
@@ -33,7 +33,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 
 <br>
 
-## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) $$《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展$$
+## Status of the translation of [*Improving Your Statistical Inferences*](https://lakens.github.io/statistical_inferences/) **《[Improving Your Statistical Inferences](https://lakens.github.io/statistical_inferences/)》的翻译进展**
 
 <br>
 
@@ -50,7 +50,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 ## Improving Your Statistical Inferences（Translation Time Planing）
 
 | Data(ddl)  | chapter                                               | member                            |
-|------------|-------------------------------------------------------|-----------------------------------|
+|------------------|----------------------------------|---------------------|
 | 4.20\~4.30 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou |
 | 4.20\~4.30 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu     |
 | 4.30\~5.15 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU      |
@@ -68,7 +68,7 @@ tips\
 ## Emails of translators
 
 | name          | email                                                                  |
-|---------------|------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | Zhang yiwen   | [zhang_yiwen1\@outlook.com](mailto:zhang_yiwen1@outlook.com){.email}   |
 | Zheng yuanrui | [aaronzheng87\@gmail.com](mailto:aaronzheng87@gmail.com){.email}       |
 | Mengmeng LYU  | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
@@ -87,7 +87,7 @@ tips\
 ## Group_present_progress
 
 | chapter                                               | member                                    | progress              |
-|-------------------------------------------------------|-------------------------------------------|-----------------------|
+|------------------------------|------------------------|------------------|
 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 翻译完成，rmd整合完成 |
 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 翻译完成，rmd整合完成 |
 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成 |
@@ -107,7 +107,7 @@ tips\
 ## Emails of Proofreaders
 
 | name         | email                                                                  |
-|--------------|------------------------------------------------------------------------|
+|------------------|------------------------------------------------------|
 | Mengmeng LYU | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
 | Xinquan Lu   | [white.water.861\@gmail.com](mailto:white.water.861@gmail.com){.email} |
 | Qin hao      | [crtmarvel666\@gmail.com](mailto:crtmarvel666@gmail.com){.email}       |
@@ -123,3 +123,13 @@ tips\
 2 每个章节可以有1～2个小伙伴一起校对，自行组队商量分工细节\
 4 目前的校对是需要在Rmd中进行的，需要对文字以及图表中注释的翻译都进行校对，如有不确定的地方可以在群内讨论\
 5 不明确的翻译名词或语句在群里的"专有名词翻译"的在线文档中汇总
+
+## Group_present_progress (Proofread)
+
+| chapter    | member                    | progress    |
+|------------|---------------------------|-------------|
+| chapter 1  | YeLin，Qinhao             | 校对进度50% |
+| chapter 9  | YeLin, Dongyu Liu         | 校对进度50% |
+| chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成    |
+| chapter 12 | Hang Yu, Weijing Yang     | unknown     |
+| chapter 15 | Xinquan Lu, Chi Zhang     | unknown      |
