@@ -50,7 +50,7 @@ This repo is for translating Daniel Laken's 2022 paper [*Sample Size Justificati
 ## Improving Your Statistical Inferences（Translation Time Planing）
 
 | Data(ddl)  | chapter                                               | member                            |
-|------------------|----------------------------------|---------------------|
+|------------|-------------------------------------------------------|-----------------------------------|
 | 4.20\~4.30 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou |
 | 4.20\~4.30 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu     |
 | 4.30\~5.15 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU      |
@@ -68,7 +68,7 @@ tips\
 ## Emails of translators
 
 | name          | email                                                                  |
-|------------------|------------------------------------------------------|
+|---------------|------------------------------------------------------------------------|
 | Zhang yiwen   | [zhang_yiwen1\@outlook.com](mailto:zhang_yiwen1@outlook.com){.email}   |
 | Zheng yuanrui | [aaronzheng87\@gmail.com](mailto:aaronzheng87@gmail.com){.email}       |
 | Mengmeng LYU  | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
@@ -87,7 +87,7 @@ tips\
 ## Group_present_progress
 
 | chapter                                               | member                                    | progress              |
-|------------------------------|------------------------|------------------|
+|-------------------------------------------------------|-------------------------------------------|-----------------------|
 | chapter 1 Using p-values to test a hypothesis         | Yiwen Zhang，Chuxian Xu, Lan Zhou（满员） | 翻译完成，rmd整合完成 |
 | chapter 10 Sequential Analysis                        | Yuanrui Zheng， Mengmeng LYU（满员）      | 翻译完成，rmd整合完成 |
 | chapter 9 Equivalence Testing and Interval Hypotheses | Yang Xu, Yuhang Zhu，Bowen Wu             | 翻译完成，rmd整合完成 |
@@ -107,7 +107,7 @@ tips\
 ## Emails of Proofreaders
 
 | name         | email                                                                  |
-|------------------|------------------------------------------------------|
+|--------------|------------------------------------------------------------------------|
 | Mengmeng LYU | [e0529482\@u.nus.edu](mailto:e0529482@u.nus.edu){.email}               |
 | Xinquan Lu   | [white.water.861\@gmail.com](mailto:white.water.861@gmail.com){.email} |
 | Qin hao      | [crtmarvel666\@gmail.com](mailto:crtmarvel666@gmail.com){.email}       |
@@ -126,10 +126,10 @@ tips\
 
 ## Group_present_progress (Proofread)
 
-| chapter    | member                    | progress    |
-|------------|---------------------------|-------------|
-| chapter 1  | YeLin，Qinhao             | 校对进度50% |
-| chapter 9  | YeLin, Dongyu Liu         | 校对进度50% |
-| chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成    |
-| chapter 12 | Hang Yu, Weijing Yang     | unknown     |
-| chapter 15 | Xinquan Lu, Chi Zhang     | unknown      |
+| chapter    | member                    | progress                 |
+|------------|---------------------------|--------------------------|
+| chapter 1  | YeLin，Qinhao             | 校对进度50%              |
+| chapter 9  | YeLin, Dongyu Liu         | 校对完成，rmd整合完成    |
+| chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成，rmd整合完成    |
+| chapter 12 | Hang Yu, Weijing Yang     | 校对完成，rmd整合完成    |
+| chapter 15 | Xinquan Lu, Chi Zhang     | 校对进度50%（需延后3天） |
