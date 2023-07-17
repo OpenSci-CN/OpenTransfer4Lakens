@@ -126,10 +126,10 @@ tips\
 
 ## Group_present_progress (Proofread)
 
-| chapter    | member                    | progress                 |
-|------------|---------------------------|--------------------------|
-| chapter 1  | YeLin，Qinhao             | 校对完成，rmd整合完成    |
-| chapter 9  | YeLin, Dongyu Liu         | 校对完成，rmd整合完成    |
-| chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成，rmd整合完成    |
-| chapter 12 | Hang Yu, Weijing Yang     | 校对完成，rmd整合完成    |
-| chapter 15 | Xinquan Lu, Chi Zhang     | 校对进度50%（需延后3天） |
+| chapter    | member                    | progress              |
+|------------|---------------------------|-----------------------|
+| chapter 1  | YeLin，Qinhao             | 校对完成，rmd整合完成 |
+| chapter 9  | YeLin, Dongyu Liu         | 校对完成，rmd整合完成 |
+| chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成，rmd整合完成 |
+| chapter 12 | Hang Yu, Weijing Yang     | 校对完成，rmd整合完成 |
+| chapter 15 | Xinquan Lu, Chi Zhang     | 校对完成，rmd整合完成 |
