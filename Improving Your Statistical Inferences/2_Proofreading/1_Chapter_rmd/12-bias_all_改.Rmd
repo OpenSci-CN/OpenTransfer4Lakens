@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 ```{r, include = FALSE}
 source("D:/New_translate/statistical_inferences-master/statistical_inferences-master/include/globals.R")
 
