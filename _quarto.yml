@@ -35,7 +35,7 @@ book:
   chapters:
   - index.qmd
   - 01-pvalue.qmd
-#  - 09-equivalencetest.qmd
+  - 09-equivalencetest.qmd
 #  - 10-sequential.qmd
 #  - 12-bias.qmd
 #  - 15-researchintegrity.qmd
