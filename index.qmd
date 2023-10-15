@@ -1,10 +1,14 @@
-# Overview {.unnumbered}
+# 概述 {.unnumbered}
 
-You can cite this resource as:
+翻译人员和校对: Yiwen Zhang，Chuxian Xu, Lan Zhou, Yuanrui Zheng， Mengmeng Lyu, Yang Xu, Yuhang Zhu，Bowen Wu, Jing Lin, Xinyu Wang, Xinquan Lu, Jing An, Bolin Cao, Chi Zhang, Weijing Yang, Hang Yu, Qiushan Liu, Dongyu Liu, Ye Lin, Qin Hao.
+
+您可以将此资源引用为:
 
 Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from https://lakens.github.io/statistical_inferences/. https://doi.org/10.5281/zenodo.6409077
 
-![](images/me.png){fig-alt="Picture of the author Daniel Lakens" fig-align="left" width=150}
+The full English version is available at: https://lakens.github.io/statistical_inferences/ 
+
+![](images/me.png){fig-alt="作者肖像 Daniel Lakens" fig-align="left" width=150}
 
 Daniël Lakens
 
