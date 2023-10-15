@@ -1,4 +1,4 @@
-# Equivalence Testing and Interval Hypotheses {#sec-equivalencetest}
+# 等效性检验和区间假设检验 {#sec-equivalencetest}
 
 ```{r, include = FALSE}
 

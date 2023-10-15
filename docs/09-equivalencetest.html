@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.3.310">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="description" content="This open educational resource contains information to improve statistical inferences, design better experiments, and report scientific research more transparently.">
-<title>Improving Your Statistical Inferences - 2&nbsp; Equivalence Testing and Interval Hypotheses</title>
+<title>Improving Your Statistical Inferences - 3&nbsp; 等效性检验和区间假设检验</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,8 +80,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
-<link href="./01-pvalue.html" rel="prev">
+<link href="./10-sequential.html" rel="next">
+<link href="./08-samplesizejustification.html" rel="prev">
 <link href="./images/logos/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -128,7 +128,7 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-equivalencetest.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Equivalence Testing and Interval Hypotheses</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-equivalencetest.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -185,8 +185,32 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-samplesizejustification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-equivalencetest.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Equivalence Testing and Interval Hypotheses</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-sequential.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-bias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">偏倚检测</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-researchintegrity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">研究诚信</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -203,31 +227,31 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#%E7%AD%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-等效性检验" class="nav-link active" data-scroll-target="#%E7%AD%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">2.1</span> 等效性检验</a></li>
-  <li><a href="#reporting-equivalence-tests" id="toc-reporting-equivalence-tests" class="nav-link" data-scroll-target="#reporting-equivalence-tests"><span class="header-section-number">2.2</span> Reporting Equivalence Tests</a></li>
-  <li><a href="#sec-MET" id="toc-sec-MET" class="nav-link" data-scroll-target="#sec-MET"><span class="header-section-number">2.3</span> 最小等效检验</a></li>
-  <li><a href="#%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8A%9B%E5%88%86%E6%9E%90" id="toc-区间假设检验的检验力分析" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8A%9B%E5%88%86%E6%9E%90"><span class="header-section-number">2.4</span> 区间假设检验的检验力分析</a></li>
-  <li><a href="#sec-ROPE" id="toc-sec-ROPE" class="nav-link" data-scroll-target="#sec-ROPE"><span class="header-section-number">2.5</span> 贝叶斯ROPE程序</a></li>
-  <li><a href="#sec-whichinterval" id="toc-sec-whichinterval" class="nav-link" data-scroll-target="#sec-whichinterval"><span class="header-section-number">2.6</span> 应该使用哪个区间宽度？</a></li>
-  <li><a href="#sec-sesoi" id="toc-sec-sesoi" class="nav-link" data-scroll-target="#sec-sesoi"><span class="header-section-number">2.7</span> 设置感兴趣的最小效应量</a></li>
-  <li><a href="#%E6%A0%B9%E6%8D%AE%E7%90%86%E8%AE%BA%E6%9D%A5%E6%8C%87%E5%AE%9Asesoi" id="toc-根据理论来指定sesoi" class="nav-link" data-scroll-target="#%E6%A0%B9%E6%8D%AE%E7%90%86%E8%AE%BA%E6%9D%A5%E6%8C%87%E5%AE%9Asesoi"><span class="header-section-number">2.8</span> 根据理论来指定SESOI</a></li>
-  <li><a href="#%E9%94%9A%E5%AE%9A%E6%B3%95%E8%AE%BE%E7%BD%AE-sesoi" id="toc-锚定法设置-sesoi" class="nav-link" data-scroll-target="#%E9%94%9A%E5%AE%9A%E6%B3%95%E8%AE%BE%E7%BD%AE-sesoi"><span class="header-section-number">2.9</span> 锚定法设置 SESOI</a></li>
-  <li><a href="#%E6%A0%B9%E6%8D%AE%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%E5%88%86%E6%9E%90%E7%A1%AE%E5%AE%9Asesoi" id="toc-根据成本效益分析确定sesoi" class="nav-link" data-scroll-target="#%E6%A0%B9%E6%8D%AE%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%E5%88%86%E6%9E%90%E7%A1%AE%E5%AE%9Asesoi"><span class="header-section-number">2.10</span> 根据成本效益分析确定SESOI</a></li>
-  <li><a href="#%E4%BD%BF%E7%94%A8%E5%B0%8F%E5%9E%8B%E6%9C%9B%E8%BF%9C%E9%95%9C%E6%B3%95%E7%A1%AE%E5%AE%9A-sesoi" id="toc-使用小型望远镜法确定-sesoi" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8%E5%B0%8F%E5%9E%8B%E6%9C%9B%E8%BF%9C%E9%95%9C%E6%B3%95%E7%A1%AE%E5%AE%9A-sesoi"><span class="header-section-number">2.11</span> 使用小型望远镜法确定 SESOI</a></li>
-  <li><a href="#setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" id="toc-setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" class="nav-link" data-scroll-target="#setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect"><span class="header-section-number">2.12</span> Setting the Smallest Effect Size of Interest to the Minimal Statistically Detectable Effect</a></li>
+<li><a href="#%E7%AD%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-等效性检验" class="nav-link active" data-scroll-target="#%E7%AD%89%E6%95%88%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">3.1</span> 等效性检验</a></li>
+  <li><a href="#reporting-equivalence-tests" id="toc-reporting-equivalence-tests" class="nav-link" data-scroll-target="#reporting-equivalence-tests"><span class="header-section-number">3.2</span> Reporting Equivalence Tests</a></li>
+  <li><a href="#sec-MET" id="toc-sec-MET" class="nav-link" data-scroll-target="#sec-MET"><span class="header-section-number">3.3</span> 最小等效检验</a></li>
+  <li><a href="#%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8A%9B%E5%88%86%E6%9E%90" id="toc-区间假设检验的检验力分析" class="nav-link" data-scroll-target="#%E5%8C%BA%E9%97%B4%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C%E7%9A%84%E6%A3%80%E9%AA%8C%E5%8A%9B%E5%88%86%E6%9E%90"><span class="header-section-number">3.4</span> 区间假设检验的检验力分析</a></li>
+  <li><a href="#sec-ROPE" id="toc-sec-ROPE" class="nav-link" data-scroll-target="#sec-ROPE"><span class="header-section-number">3.5</span> 贝叶斯ROPE程序</a></li>
+  <li><a href="#sec-whichinterval" id="toc-sec-whichinterval" class="nav-link" data-scroll-target="#sec-whichinterval"><span class="header-section-number">3.6</span> 应该使用哪个区间宽度？</a></li>
+  <li><a href="#sec-sesoi" id="toc-sec-sesoi" class="nav-link" data-scroll-target="#sec-sesoi"><span class="header-section-number">3.7</span> 设置感兴趣的最小效应量</a></li>
+  <li><a href="#%E6%A0%B9%E6%8D%AE%E7%90%86%E8%AE%BA%E6%9D%A5%E6%8C%87%E5%AE%9Asesoi" id="toc-根据理论来指定sesoi" class="nav-link" data-scroll-target="#%E6%A0%B9%E6%8D%AE%E7%90%86%E8%AE%BA%E6%9D%A5%E6%8C%87%E5%AE%9Asesoi"><span class="header-section-number">3.8</span> 根据理论来指定SESOI</a></li>
+  <li><a href="#%E9%94%9A%E5%AE%9A%E6%B3%95%E8%AE%BE%E7%BD%AE-sesoi" id="toc-锚定法设置-sesoi" class="nav-link" data-scroll-target="#%E9%94%9A%E5%AE%9A%E6%B3%95%E8%AE%BE%E7%BD%AE-sesoi"><span class="header-section-number">3.9</span> 锚定法设置 SESOI</a></li>
+  <li><a href="#%E6%A0%B9%E6%8D%AE%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%E5%88%86%E6%9E%90%E7%A1%AE%E5%AE%9Asesoi" id="toc-根据成本效益分析确定sesoi" class="nav-link" data-scroll-target="#%E6%A0%B9%E6%8D%AE%E6%88%90%E6%9C%AC%E6%95%88%E7%9B%8A%E5%88%86%E6%9E%90%E7%A1%AE%E5%AE%9Asesoi"><span class="header-section-number">3.10</span> 根据成本效益分析确定SESOI</a></li>
+  <li><a href="#%E4%BD%BF%E7%94%A8%E5%B0%8F%E5%9E%8B%E6%9C%9B%E8%BF%9C%E9%95%9C%E6%B3%95%E7%A1%AE%E5%AE%9A-sesoi" id="toc-使用小型望远镜法确定-sesoi" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8%E5%B0%8F%E5%9E%8B%E6%9C%9B%E8%BF%9C%E9%95%9C%E6%B3%95%E7%A1%AE%E5%AE%9A-sesoi"><span class="header-section-number">3.11</span> 使用小型望远镜法确定 SESOI</a></li>
+  <li><a href="#setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" id="toc-setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" class="nav-link" data-scroll-target="#setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect"><span class="header-section-number">3.12</span> Setting the Smallest Effect Size of Interest to the Minimal Statistically Detectable Effect</a></li>
   <li>
-<a href="#%E8%87%AA%E6%88%91%E6%B5%8B%E9%AA%8C" id="toc-自我测验" class="nav-link" data-scroll-target="#%E8%87%AA%E6%88%91%E6%B5%8B%E9%AA%8C"><span class="header-section-number">2.13</span> 自我测验</a>
+<a href="#%E8%87%AA%E6%88%91%E6%B5%8B%E9%AA%8C" id="toc-自我测验" class="nav-link" data-scroll-target="#%E8%87%AA%E6%88%91%E6%B5%8B%E9%AA%8C"><span class="header-section-number">3.13</span> 自我测验</a>
   <ul class="collapse">
-<li><a href="#%E5%85%B3%E4%BA%8E%E7%AD%89%E6%95%88%E6%A3%80%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98" id="toc-关于等效检验的问题" class="nav-link" data-scroll-target="#%E5%85%B3%E4%BA%8E%E7%AD%89%E6%95%88%E6%A3%80%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98"><span class="header-section-number">2.13.1</span> 关于等效检验的问题</a></li>
-  <li><a href="#questions-about-the-small-telescopes-approach" id="toc-questions-about-the-small-telescopes-approach" class="nav-link" data-scroll-target="#questions-about-the-small-telescopes-approach"><span class="header-section-number">2.13.2</span> Questions about the small telescopes approach</a></li>
-  <li><a href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98" id="toc-开放性问题" class="nav-link" data-scroll-target="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="header-section-number">2.13.3</span> 开放性问题</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E7%AD%89%E6%95%88%E6%A3%80%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98" id="toc-关于等效检验的问题" class="nav-link" data-scroll-target="#%E5%85%B3%E4%BA%8E%E7%AD%89%E6%95%88%E6%A3%80%E9%AA%8C%E7%9A%84%E9%97%AE%E9%A2%98"><span class="header-section-number">3.13.1</span> 关于等效检验的问题</a></li>
+  <li><a href="#questions-about-the-small-telescopes-approach" id="toc-questions-about-the-small-telescopes-approach" class="nav-link" data-scroll-target="#questions-about-the-small-telescopes-approach"><span class="header-section-number">3.13.2</span> Questions about the small telescopes approach</a></li>
+  <li><a href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98" id="toc-开放性问题" class="nav-link" data-scroll-target="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="header-section-number">3.13.3</span> 开放性问题</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lakens/statistical_inferences_chinese/edit/master/09-equivalencetest.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/blob/master/09-equivalencetest.qmd" class="toc-action">View source</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-equivalencetest" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Equivalence Testing and Interval Hypotheses</span></span></h1>
+<h1 class="title"><span id="sec-equivalencetest" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span></h1>
 </div>
 
 
@@ -254,7 +278,7 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div id="fig-intervaltest" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="09-equivalencetest_files/figure-html/fig-intervaltest-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.1: Two-sided null hypothesis test (A), interval hypothesis test (B), equivalence test (C) and minimum effect test (D).</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.1: Two-sided null hypothesis test (A), interval hypothesis test (B), equivalence test (C) and minimum effect test (D).</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -262,8 +286,8 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
 <p>当等效性检验被逆转时，研究人员设计了一项研究，以拒绝比关注的最小效应量更不极端的效应（见图@ref(fig:intervaltest)中的面板D），这被称为<strong>最小效应检验</strong><span class="citation" data-cites="murphy_testing_1999">(<a href="references.html#ref-murphy_testing_1999" role="doc-biblioref">Murphy &amp; Myors, 1999</a>)</span>。研究人员可能不仅对拒绝一个效应为0的假设（如零假设显著性检验）关注，而且对拒绝太小而没有意义的效应范围关注。在其他条件相同的情况下，一项旨在为最小效应提供高检验力的研究比目标是拒绝效应为0的假设时需要更多的观测。由于置信区间需要拒绝更接近观测到的效应量的值（例如，0.1而不是0），因此它需要更加收缩，这需要更多的观测。</p>
 <p>与零假设检验相比，最小效应检验的一个好处是在统计显著性和实际显著性之间没有区别。由于检验值被选择来表示关注的最小效应，无论何时被拒绝，这种影响在统计上和实际上都是显著的<span class="citation" data-cites="murphy_statistical_2014">(<a href="references.html#ref-murphy_statistical_2014" role="doc-biblioref">Murphy et al., 2014</a>)</span>。最小效应检验的另一个好处是，特别是在社会科学的相关性研究中，变量往往通过因果结构联系在一起，导致变量之间真实但理论上不关注的非零相关性，这被称为“粗糙因素”<span class="citation" data-cites="meehl_appraising_1990 orben_crud_2020">(<a href="references.html#ref-meehl_appraising_1990" role="doc-biblioref">Meehl, 1990</a>; <a href="references.html#ref-orben_crud_2020" role="doc-biblioref">Orben &amp; Lakens, 2020</a>)</span>。由于0效应在大型相关数据集中不太可能成立，因此拒绝0零假设并不是一个严格的检验。即使假设不正确，0效应的假设也可能因“粗糙”而被拒绝。出于这个原因，一些研究人员建议针对<em>r</em> = 0.1的最小效应进行检验，因为由于变量之间理论上不相关的相关性，低于该阈值的相关性非常常见<span class="citation" data-cites="ferguson_providing_2021">(<a href="references.html#ref-ferguson_providing_2021" role="doc-biblioref">Ferguson &amp; Heene, 2021</a>)</span>。</p>
 <p>图@ref(fig:intervaltest)说明了双侧检验，但做单侧检验通常更直观、更合乎逻辑。在这种情况下，例如，最小效应检验的目标是拒绝小于0.1的效应，而等效性检验的目标是拒绝大于例如0.1的效应。与其指定范围的上限和下限，不如为单侧检验指定一个值。单侧非0零假设检验的最后一种变体被称为<strong>非劣效性检验</strong>，它检查效应是否大于等效范围的下限。例如，当一种新的干预措施不应该明显比现有的干预措施差，但可能会差一点点时，就会进行这样的测试。例如，如果新的干预措施和现有的干预措施之间的差异不小于-0.1，并且小于-0.1的效应可以被拒绝，则可以得出结论，效果是非劣效的<span class="citation" data-cites="schumi_through_2011 mazzolari_myths_2022">(<a href="references.html#ref-mazzolari_myths_2022" role="doc-biblioref">Mazzolari et al., 2022</a>; <a href="references.html#ref-schumi_through_2011" role="doc-biblioref">Schumi &amp; Wittes, 2011</a>)</span>。我们发现，将0零假设检验扩展到非0零假设可以让研究人员提出可能更有趣的问题。</p>
-<section id="等效性检验" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="等效性检验">
-<span class="header-section-number">2.1</span> 等效性检验</h2>
+<section id="等效性检验" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="等效性检验">
+<span class="header-section-number">3.1</span> 等效性检验</h2>
 <p>等效性检验最早是在药物科学中发展起来的<span class="citation" data-cites="hauck_new_1984 westlake_use_1972">(<a href="references.html#ref-hauck_new_1984" role="doc-biblioref">Hauck &amp; Anderson, 1984</a>; <a href="references.html#ref-westlake_use_1972" role="doc-biblioref">Westlake, 1972</a>)</span>，后来正式成为等效性检验的<strong>两个单侧检验(TOST)</strong>方法<span class="citation" data-cites="schuirmann_comparison_1987 seaman_equivalence_1998 wellek_testing_2010">(<a href="references.html#ref-schuirmann_comparison_1987" role="doc-biblioref">Schuirmann, 1987</a>; <a href="references.html#ref-seaman_equivalence_1998" role="doc-biblioref">Seaman &amp; Serlin, 1998</a>; <a href="references.html#ref-wellek_testing_2010" role="doc-biblioref">Wellek, 2010</a>)</span>。TOST程序需要进行两次单侧检验，以检验观察到的数据是否出乎意料地大于等效下限(<span class="math inline">\(\Delta_{L}\)</span>), 或者出乎意料地小于等效上限(<span class="math inline">\(\Delta_{U}\)</span>)：</p>
 <p><span class="math display">\[
 t_{L} = \frac{{\overline{M}}_{1} - {\overline{M}}_{2} - \Delta_{L}}{\sigma\sqrt{\frac{1}{n_{1}} + \frac{1}{n_{2}}}}
@@ -284,7 +308,7 @@ t_{U} = \frac{{\overline{M}}_{1} - {\overline{M}}_{2}{- \Delta}_{U}}{\sigma\sqrt
 <div class="cell-output-display">
 <div id="fig-tdistequivalence" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="09-equivalencetest_files/figure-html/fig-tdistequivalence-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.2: The mean difference and its confidence interval plotted below the <em>t</em>-distributions used to perform the two-one-sided tests against -0.5 and 0.5.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.2: The mean difference and its confidence interval plotted below the <em>t</em>-distributions used to perform the two-one-sided tests against -0.5 and 0.5.</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -350,7 +374,7 @@ Note: SMD confidence intervals are an approximation. See vignette("SMD_calcs").<
 <div class="cell-output-display">
 <div id="fig-ciequivalence1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="09-equivalencetest_files/figure-html/fig-ciequivalence1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.3: 等效范围为-0.5和0.5的等效性检验的平均差及其置信区间</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.3: 等效范围为-0.5和0.5的等效性检验的平均差及其置信区间</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -360,19 +384,19 @@ Note: SMD confidence intervals are an approximation. See vignette("SMD_calcs").<
 <div class="cell-output-display">
 <div id="fig-ciequivalence2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="09-equivalencetest_files/figure-html/fig-ciequivalence2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.4: 等效范围为-0.5和0.5的等效性检验的平均差及其置信区间</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.4: 等效范围为-0.5和0.5的等效性检验的平均差及其置信区间</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>换句话说，零假设检验和等效性检验都产生了显著的结果。这意味着我们可以声称，观察到的效应在统计上与0不同，并且在统计上，当我们指定-0.5到0.5的等效范围时，该效应小于我们认为足够大的效应。这说明了将等效性检验和0零假设检验相结合可以防止我们误将具有统计学意义的效应当成实际上显著的效应。在这种情况下，有200名被试，我们可以拒绝一个为0的效应，但这个效应（如果有的话）没有大到是有意义的。</p>
-</section><section id="reporting-equivalence-tests" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="reporting-equivalence-tests">
-<span class="header-section-number">2.2</span> Reporting Equivalence Tests</h2>
+</section><section id="reporting-equivalence-tests" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="reporting-equivalence-tests">
+<span class="header-section-number">3.2</span> Reporting Equivalence Tests</h2>
 <p>在报告等效性检验时，通常只报告两个单侧检验中产生较高<em>p</em>值的检验。因为两个单侧检验都需要具有统计学意义，才能在等效性检验中拒绝零假设（即存在足够大的效应），所以当两个假设检验中较大的一个拒绝等效边界时，另一个检验也是如此。与零假设显著性检验不同，报告等效性检验的标准化效应量并不常见，但在某些情况下，研究人员可能想讨论在原始尺度上，效应与等效边界的差距有多大。防止错误的解释，声称‘没有效应’、效应‘不存在’、真实效应量为‘0’，或模糊的口头描述，例如两组得出的数据“相似”或“可比”。显著的等效性检验拒绝比等效边界更极端的效应。较小的真实效应没有被拒绝，因此仍然有可能存在真实效应。因为TOST程序是一种基于<em>p</em>值的频率检验，所以也应该防止所有其他<a href="#misconceptions">对<em>p</em>值的误解</a>。</p>
 <p>在总结等效性检验的主要结果时，例如在摘要中，始终报告数据所检验的等效范围。与边界为<em>d</em> = -0.2至<em>d</em>= 0.2时相比，如果等效边界为<em>d</em> = -0.9至0.9，阅读‘基于等效性检验，我们得出结论，有意义的效应不存在’意味着某些方面非常不同。反之，写下‘基于等效范围为<em>d</em>=-0.2至0.2的等效性检验，我们得出结论，我们认为有意义的效应不存在’。当然，同行们是否同意你正确地得出了有意义效应不存在的结论，取决于他们是否同意你对关注的最小效应的证明！一个更中性的结论是这样一种说法：“基于等效性检验，我们拒绝了比-0.2到0.2更极端效应的存在，所以我们可以采取行动（错误率为α），就好像这种效应（如果有的话）没有我们的等效范围那么极端一样”。在这里，你不使用诸如‘有意义’之类的充满价值的术语。如果零假设检验和等效性检验都是不显著的，那么这一发现最好被描述为‘不确定的’：没有足够的数据来拒绝零假设，或者关注的最小效应量。如果零假设检验和等效性检验都具有统计学意义，你可以声称效应存在，但同时声称效应太小，不值得关注（考虑到你对等效范围的证明）。</p>
 <p>等效边界可以在原始效果量中指定，也可以在标准化平均差中指定。最好根据原始效果量来指定等效边界。根据Cohen’s <em>d</em>设置它们会导致统计检验中的偏差，因为必须使用观察到的标准差将指定的Cohen‘s <em>d</em>转换为等效性检验的原始效应量（当你在标准化平均差中设置等效边界时，TOSTER将警告：“警告：将边界类型设置为SMD会产生偏差结果！”）。在实践中，偏差在任何单一的等效性检验中都不会有太大的问题，并且能够在标准化平均差中指定等效边界，这降低了当他们不知道其度量的标准差时进行等效性检验的阈值。但是，随着等效性检验变得越来越流行，并且领域建立了关注的最小效应量，他们应该在原始效应量差异中这样做，而不是在标准化效应量差异这样做。</p>
-</section><section id="sec-MET" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="sec-MET">
-<span class="header-section-number">2.3</span> 最小等效检验</h2>
+</section><section id="sec-MET" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="sec-MET">
+<span class="header-section-number">3.3</span> 最小等效检验</h2>
 <p>如果研究人员指定了关注的最小效应量，并且有兴趣检验群体中的效应是否大于关注的该最小效应，则可以进行最小效应检验。与任何假设检验一样，只要观察到的效应周围的置信区间与其不重叠，我们就可以拒绝关注的最小效应。然而，在最小效应检验的情况下，置信区间应该完全超过关注的最小效应量。例如，让我们假设一名研究人员对平均差异为0.5的最小效应量进行最小效应检验，每个条件有200个观察结果。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output cell-output-stdout">
@@ -399,15 +423,15 @@ Note: SMD confidence intervals are an approximation. See vignette("SMD_calcs").<
 <div class="cell-output-display">
 <div id="fig-tmet" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="09-equivalencetest_files/figure-html/fig-tmet-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.5: 在进行最小效应检验时，用于对-0.5和0.5进行两次单侧检验的<em>t</em>分布下方绘制的平均差及其置信区间</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.5: 在进行最小效应检验时，用于对-0.5和0.5进行两次单侧检验的<em>t</em>分布下方绘制的平均差及其置信区间</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>在这两条曲线下面，我们再次看到一条线，它代表的置信区间从0.68至1.04，以及表示观察到的0.86的平均差的线上的点。整个置信区间远高于0.5的最小效应，因此我们不仅可以拒绝0零假设，而且可以拒绝小于关注的最小效应的效应。因此，我们可以声称这种效应足够大，不仅在统计上具有显著性，而且在实践中也具有显著性（只要我们很好地证明了我们关注的最小效应量）。因为我们进行了双侧最小效应检验，如果置信区间完全在-0.5的相反侧，最小效应检验也会很显著。</p>
 <p>早些时候，我们讨论了如何将传统的NHST和等效性检验相结合，从而获得信息更加丰富的结果。也可以将最小效应检验和等效性检验相结合。甚至可以说，无论何时可以指定关注的最小效应大小，这种组合都是对预测的信息更加丰富的检验。原则上，这是真的。只要我们能够收集到足够的数据，当我们将最小效应检验与等效性检验相结合时，我们总是会得到一个信息丰富、直截了当的答案：要么我们可以拒绝所有太小而不关注的效应，要么我们可以拒绝所有足够大而关注的效应。正如我们将在下面关于区间假设的统计检验力分析一节中看到的那样，每当真实效应量接近关注的最小效应量时，都需要收集大量的观测结果。如果真实效应量恰好与关注的最小效应量相同，则最小效应检验和等效性检验都不能被正确拒绝（任何显著的检验都将是Ⅰ型错误）。如果研究人员能够收集有效的数据（从而使检验具有很高的统计检验力），并且相对确信真实效应量将大于或小于关注的最小效应，那么最小效应检验和等效性检验的组合可能很有吸引力，因为这样的假设检验可能会为研究问题提供信息丰富的答案。</p>
-</section><section id="区间假设检验的检验力分析" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="区间假设检验的检验力分析">
-<span class="header-section-number">2.4</span> 区间假设检验的检验力分析</h2>
+</section><section id="区间假设检验的检验力分析" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="区间假设检验的检验力分析">
+<span class="header-section-number">3.4</span> 区间假设检验的检验力分析</h2>
 <p>在设计研究时，一种明智的策略是始终计划考虑效应的存在与否。一些科学期刊要求注册报告提供样本量的合理性证明，对于这些注册报告，其拒绝零假设的统计检验力很高，但研究也能够证明其不存在影响效应。正如我们在误差控制和似然性的章节中看到的那样，零结果是意料之中的，如果您只在收集数据时考虑观察到零效应的可能性，通常为时已晚。</p>
 <p>区间假设的统计检验力取决于alpha水平、样本量、您决定检验的最小感兴趣效应以及真实效应大小。对于等效性检验，通常假定真实效应大小为0来执行检验力分析，但这可能并不总是现实的。预期效应量越接近感兴趣的最小效应量，需要达到所需检验力的样本量就越大。如果您有充分的理由预期一个小但非零的真实效应量，请不要试图假定真实效应量为0。检验力分析表明您需要收集的样本量可能较小，但实际上您也更有可能得到不确定的结果。早期版本的 TOSTER 仅允许研究人员在假设真实效应大小为 0 的情况下对等效性检验执行检验力分析，但 Aaron Caldwell 的新检验力函数允许用户指定 <code>delta</code>，即预期的效应量。</p>
 <p>假设研究人员希望等效性检验达到 90% 的检验力，等效性范围为 -0.5 到 0.5，alpha 水平为 0.05，并假设总体效应量为 0。可以进行等效性检验的检验力分析，从而确定所需的样本量。</p>
@@ -473,8 +497,8 @@ NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
 <p>统计软件为某些统计检验提供了检验力分析选项，但并非对所有检验都具备此功能。正如在0零假设检验中进行检验力分析一样，有必要使用基于模拟的方法进行检验力分析。</p>
-</section><section id="sec-ROPE" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="sec-ROPE">
-<span class="header-section-number">2.5</span> 贝叶斯ROPE程序</h2>
+</section><section id="sec-ROPE" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="sec-ROPE">
+<span class="header-section-number">3.5</span> 贝叶斯ROPE程序</h2>
 <p>在贝叶斯估计中，一种论证缺乏有意义效应的方法是使用<strong>实用等效区间</strong>（ROPE）程序<span class="citation" data-cites="kruschke_bayesian_2013">(<a href="references.html#ref-kruschke_bayesian_2013" role="doc-biblioref">Kruschke, 2013</a>)</span>，它“有点类似于频率学派的等效性检验”<span class="citation" data-cites="kruschke_bayesian_2017">(<a href="references.html#ref-kruschke_bayesian_2017" role="doc-biblioref">Kruschke &amp; Liddell, 2017</a>)</span>。在ROPE程序中，指定等效性范围，就像在等效性检验中一样，但是基于后验分布的贝叶斯最高密度区间（如在<a href="#%E8%B4%9D%E5%8F%B6%E6%96%AF">贝叶斯统计</a>) 的章节中所解释的）被用来代替置信区间。</p>
 <p>如果Kruschke使用的先验分布完全均匀，并且ROPE程序和等效性检验使用相同的置信区间（例如90％），那么两个检验将产生相同的结果。在如何解释数字方面只会存在哲学上的差异。在R中可以使用<code>BEST</code> 软件包执行ROPE程序，该软件包默认使用“广泛”的先验分布，因此ROPE程序和等效性检验的结果并不完全相同，但它们非常接近。有人甚至可能会争辩说这两个检验“实际上是等价的”。在下面的R代码中，生成了两个条件下的随机正态分布数据（均值为0，标准差为1），并执行了ROPE程序和TOST等效性检验。</p>
 <div class="cell" data-layout-align="center" data-hash="09-equivalencetest_cache/html/unnamed-chunk-6_60211224b241bec164a2f54ce9190673">
@@ -495,31 +519,31 @@ NOTE: n is number in *each* group</code></pre>
 </div>
 </div>
 <p>90% HDI范围为-0.06到0.39，基于先验和数据估计的平均值为0.164。HDI完全落在等效范围的上限和下限之间，因此超过-0.5或0.5的值被认为不可信的。95% CI范围为-0.07到0.15，观察到的平均差为0.15。我们看到这些数字不是完全相同的，因为在贝叶斯估计中，观察到的值与先验结合，平均估计值不仅仅基于数据。但结果非常相似，并且在大多数情况下会导致相似的推论。BEST R软件包还使研究人员能够执行基于模拟的检验力分析，这需要很长时间，但是使用广泛的先验时，结果与等效性检验的检验力分析的样本量基本相同。ROPE相对于TOST的最大优势在于它允许您纳入先验信息。如果您具有可靠的先验信息，ROPE可以使用此信息，这在您没有大量数据时尤其有用。如果您使用了知情先验，建议进行敏感性分析，检查后验在先验合理变化下的稳健性。</p>
-</section><section id="sec-whichinterval" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="sec-whichinterval">
-<span class="header-section-number">2.6</span> 应该使用哪个区间宽度？</h2>
+</section><section id="sec-whichinterval" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="sec-whichinterval">
+<span class="header-section-number">3.6</span> 应该使用哪个区间宽度？</h2>
 <p>因为 TOST 程序基于两个单侧检验，所以当在 5% 的 alpha 水平下执行单侧检验时，将使用 90% 的置信区间。因为针对上限的检验和针对下限的检验都需要具有统计显著性才能声明等效性（正如在误差控制一章中所解释的那样，等效性是对多重检验的交集-并集方法），所以不必为进行了两次检验而校正。如果针对多重比较调整了 alpha 水平，或者如果 alpha 水平是合理的而不是依赖于默认的 5% 水平（或两者），则应使用相应的置信区间，其中CI = 100 - (2 * <span class="math inline">\(\alpha\)</span>)。因此，置信区间的宽度与alpha水平的选择直接相关，因为我们基于置信区间是否排除所检验的效应来决定是否拒绝感兴趣的最小效应量。</p>
 <p>当从贝叶斯角度使用最高密度区间时，比如ROPE程序，置信区间宽度的选择在逻辑上不符合所需的错误率或任何其他原则。Kruschke<span class="citation" data-cites="kruschke_doing_2014">(<a href="references.html#ref-kruschke_doing_2014" role="doc-biblioref">2014</a>)</span>写道：“我们应该如何定义‘合理可信’？一种方法是说，任何在95% HDI内的点都是合理可信的。”McElreath <span class="citation" data-cites="mcelreath_statistical_2016">(<a href="references.html#ref-mcelreath_statistical_2016" role="doc-biblioref">2016</a>)</span>推荐使用67%、89%和97%，因为“没有理由。它们是质数，因此很容易记住。” 这两种建议都缺乏坚实的依据。正如Gosset（或学生）观察到的<span class="citation" data-cites="gosset_application_1904">(<a href="references.html#ref-gosset_application_1904" role="doc-biblioref">1904</a>)</span>：</p>
 <blockquote class="blockquote">
 <p>结果仅在它们可能与真相相差的程度足够小以至于在实验目的上可以忽略不计时才有价值。选定的机率应取决于以下两点： 1.实验允许的精度程度， 2.相关问题的重要性。</p>
 </blockquote>
 <p>有两种原则性的解决方案。首先，如果使用最高密度区间宽度来做出声明，这些声明将具有一定的错误率，且研究人员应该通过计算频率主义的错误率来量化错误声明的风险。这将使ROPE程序成为贝叶斯/频率主义的折中程序，其中后验分布的计算允许贝叶斯解释哪些参数值被认为是最有可能的，而基于 HDI 是否落在等价范围内的决策具有 一个规范控制的错误率。请注意，当使用信息先验时，HDI与CI不匹配，并且使用HDI时的错误率只能通过模拟来推导。第二种解决方案是不做任何声明，呈现完整的后验分布，并让读者自己得出结论。</p>
-</section><section id="sec-sesoi" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="sec-sesoi">
-<span class="header-section-number">2.7</span> 设置感兴趣的最小效应量</h2>
+</section><section id="sec-sesoi" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="sec-sesoi">
+<span class="header-section-number">3.7</span> 设置感兴趣的最小效应量</h2>
 <p>能够使用等效性检验来验证我们的预测是否正确，就需要明确规定哪些观察值太小而无法用我们的理论预测。我们永远无法说效应完全为零，但我们可以检查观察到的效应是否太小而不具备理论或实际上的重要性。这需要我们指定<strong>感兴趣的最小效应量</strong>（SESOI）。同样的概念有许多名称，比如最小重要差异或临床显著差异<span class="citation" data-cites="king_point_2011">(<a href="references.html#ref-king_point_2011" role="doc-biblioref">King, 2011</a>)</span>。花些时间思考一下，对于您正在设计的下一项研究，最小效应量是多少才会认为是理论或实际上有意义的？确定您感兴趣的最小效应量可能很困难，并且感兴趣的最小效应量是多少，这个问题可能是您一开始从未真正想过的。然而，确定您感兴趣的最小效应量对于实践有重要的好处。首先，如果某个领域的研究人员能够确定哪些效应太小而不重要，那么就可以非常直接地为有意义的效应开展研究。其次，指定感兴趣的最小效应量的好处是可以使您的研究具有可证伪性。您的预测被别人证伪对您个人来说可能感觉不太好，但对整个科学来说却非常有用（Popper，2002）。毕竟，如果没有任何方法可以证明预测是错误的，谁会在意预测是否正确呢？</p>
 <p>开始思考哪些效应量是重要的，可以问自己预测方向的任何效应是否实际上支持备择假设？例如，Cohen’s <em>d</em> 为 10 的效应量是否支持您的假设？在心理学中，理论很少预构造如此巨大的效应量，如果您观察到 d = 10，您可能会检查一下计算错误或研究中的混淆变量。另一方面，<em>d</em> = 0.001 的效应量是否符合理论提出的机制？这样的效应量非常小，远低于个人能注意到的水平，因为它会低于感知和认知限制的<em>最小可觉差</em>。因此，在大多数情况下，<em>d</em> = 0.001 会导致研究人员得出结论：“嗯，这实在是太小了，根本不是我的理论所预测的，这么小的效果，几乎等同于没有效果。”然而，当我们做出方向性预测时，我们说这些类型的效应都是我们备择假设的一部分。尽管许多研究人员会同意这种微小的影响太小而不重要，但如果我们有一个0零假设的定向预测，它们仍然是支持我们备择假设的证据。此外，研究人员很少有资源从统计上拒绝如此小的效应的存在，因此声称这种效应仍然支持理论预测使得该理论实际上不可证伪：研究人员可以简单地回应任何显示出非显著小效应的重复性研究（例如 <em>d</em> = 0.05）：“这并没有证伪我的预测，我想效应只是比 <em>d</em> = 0.05 稍微小一些”，而无需承认预测已被证伪。这是有问题的，因为如果我们没有重复性和证伪的过程，科学学科就有滑向不可证伪的风险<span class="citation" data-cites="ferguson_vast_2012">(<a href="references.html#ref-ferguson_vast_2012" role="doc-biblioref">Ferguson &amp; Heene, 2012</a>)</span>。因此，只要有可能，当您设计实验或有理论和理论预测时，请仔细考虑并清楚地说明，感兴趣的最小效应量是多少。</p>
-</section><section id="根据理论来指定sesoi" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="根据理论来指定sesoi">
-<span class="header-section-number">2.8</span> 根据理论来指定SESOI</h2>
+</section><section id="根据理论来指定sesoi" class="level2" data-number="3.8"><h2 data-number="3.8" class="anchored" data-anchor-id="根据理论来指定sesoi">
+<span class="header-section-number">3.8</span> 根据理论来指定SESOI</h2>
 <p>一个理论预测的感兴趣的最小效应量的例子可以在Burriss等人<span class="citation" data-cites="burriss_changes_2015">(<a href="references.html#ref-burriss_changes_2015" role="doc-biblioref">2015</a>)</span>的研究中找到，他们研究了女性在排卵周期的育龄期间面部是否出现增加的红晕。他们的假设是，略微红润的皮肤可以传递更高的吸引力和身体健康性的信号，并且将这种信号发送给男性会产生进化优势。这个假设的前提是男性可以用肉眼检测出红晕的增加。Burriss等人从22名女性收集了数据，结果表明她们面部的红晕确实在育龄期间增加了。然而，这种增加对男性来说不足以用肉眼检测出来，因此假设被证伪。因为可以测量皮肤发红的细微差别，所以有可能建立一个理论上推动的 SESOI。理论上推动的感兴趣的最小效应量可以从最小可觉差中推导出来，它提供了能够影响个体的效应量的下限，或者基于计算模型，它可以提供模型中参数的下限，该参数仍然能够解释实证文献中观察到的发现。</p>
-</section><section id="锚定法设置-sesoi" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="锚定法设置-sesoi">
-<span class="header-section-number">2.9</span> 锚定法设置 SESOI</h2>
+</section><section id="锚定法设置-sesoi" class="level2" data-number="3.9"><h2 data-number="3.9" class="anchored" data-anchor-id="锚定法设置-sesoi">
+<span class="header-section-number">3.9</span> 锚定法设置 SESOI</h2>
 <p>基于最小可觉差的想法，心理学家通常对大到足以被单个个体注意到的效应感兴趣。锚定法是估计个体层面上何为有意义变化的一种程序<span class="citation" data-cites="jaeschke_measurement_1989 norman_truly_2004 king_point_2011">(<a href="references.html#ref-jaeschke_measurement_1989" role="doc-biblioref">Jaeschke et al., 1989</a>; <a href="references.html#ref-king_point_2011" role="doc-biblioref">King, 2011</a>; <a href="references.html#ref-norman_truly_2004" role="doc-biblioref">Norman et al., 2004</a>)</span>。该方法需要在两个时间点收集测量数据（例如，治疗前后的生活质量测量）。在第二个时间点，使用独立测量（锚点）来确定与时间点 1 相比个体是否有变化，或者他们是否有所改善或恶化。通常，患者会被直接问及锚定问题，并指出与时间点 1 相比，他们在时间点 2 的主观感觉是否相同、更好或更差。<span class="citation" data-cites="button_minimal_2015">Button et al. (<a href="references.html#ref-button_minimal_2015" role="doc-biblioref">2015</a>)</span> 等人使用锚定法估计出贝克抑郁量表的最小临床显著差异对应于基线分数降低 17.5%。</p>
 <p>Anvari和Lakens<span class="citation" data-cites="anvari_using_2021">(<a href="references.html#ref-anvari_using_2021" role="doc-biblioref">2021</a>)</span> 应用了锚定法来研究广泛使用的积极和消极情绪量表（PANAS）测量的感兴趣的最小效应量。参与者在相隔几天的两个时间点完成了 20 个项目的 PANAS调查（使用李克特量表，从1 =“非常轻微或根本没有”到5 =“极度”）。在第二个时间点，他们还被问及他们的情绪是否发生了一点、很多或根本没有变化。当人们表示他们的情绪“有一点”变化时，积极情绪的平均变化是0.26分，消极情绪的平均变化是0.28分。因此，用于改善人们情绪状态的干预措施，应该导致个体主观上认为至少有一点改善，可以将SESOI设置为PANAS量表上的0.3个单位。</p>
-</section><section id="根据成本效益分析确定sesoi" class="level2" data-number="2.10"><h2 data-number="2.10" class="anchored" data-anchor-id="根据成本效益分析确定sesoi">
-<span class="header-section-number">2.10</span> 根据成本效益分析确定SESOI</h2>
+</section><section id="根据成本效益分析确定sesoi" class="level2" data-number="3.10"><h2 data-number="3.10" class="anchored" data-anchor-id="根据成本效益分析确定sesoi">
+<span class="header-section-number">3.10</span> 根据成本效益分析确定SESOI</h2>
 <p>证明感兴趣的最小效应量合理的另一种原则性方法是执行成本效益分析。研究表明，认知训练可能改善老年人的心智能力，从而可能使老年驾驶员受益<span class="citation" data-cites="ball_effects_2002">(<a href="references.html#ref-ball_effects_2002" role="doc-biblioref">Ball et al., 2002</a>)</span>。基于这些发现，Viamonte、Ball和Kilgore<span class="citation" data-cites="viamonte_cost-benefit_2006">(<a href="references.html#ref-viamonte_cost-benefit_2006" role="doc-biblioref">2006</a>)</span>进行了成本效益分析并得出结论：根据干预措施的成本（247.50美元），75岁以上的老年驾驶员发生事故的概率（<em>p</em> = 0.0710）和一次事故的成本（22,000美元）相比，对所有75岁及以上的驾驶员进行干预比不干预或仅在筛查检验后干预更为有效。此外，敏感性分析表明，只要碰撞风险降低了25%，对所有驾驶员进行干预仍将是有益的。因此，可以将 75 岁以上老年人发生车祸的概率降低 25% 设置为感兴趣的最小效应量。</p>
 <p>另一个例子，经济学家根据人们为降低死亡风险愿意支付的费用，计算出生命价值评估在150万到250万美元之间（2000 年，在西方国家，参见 Mrozek &amp; Taylor <span class="citation" data-cites="mrozek_what_2002">(<a href="references.html#ref-mrozek_what_2002" role="doc-biblioref">2002</a>)</span>）在这项工作的基础上，Abelson<span class="citation" data-cites="abelson_value_2003">(<a href="references.html#ref-abelson_value_2003" role="doc-biblioref">2003</a>)</span>计算出为预防眼睛刺激等急性健康问题而支付的意愿约为每天 40-50 美元。 研究人员可能正在研究一种心理干预措施，可以减少人们将脸靠近眼睛的次数，从而减少细菌引起的眼睛刺激。 如果实施干预每年花费 20 美元，那么应该将人群中眼部刺激的平均天数减少至少 0.5 天，干预才值得花费。成本效益分析也可以基于研究非常小的效应所需的资源与这种知识对科学界的价值之间的权衡。</p>
-</section><section id="使用小型望远镜法确定-sesoi" class="level2" data-number="2.11"><h2 data-number="2.11" class="anchored" data-anchor-id="使用小型望远镜法确定-sesoi">
-<span class="header-section-number">2.11</span> 使用小型望远镜法确定 SESOI</h2>
+</section><section id="使用小型望远镜法确定-sesoi" class="level2" data-number="3.11"><h2 data-number="3.11" class="anchored" data-anchor-id="使用小型望远镜法确定-sesoi">
+<span class="header-section-number">3.11</span> 使用小型望远镜法确定 SESOI</h2>
 <p>理想情况下，发表经验声明的研究人员总是会指定哪些观察结果会证伪他们的声明。 遗憾的是，这还不是普遍做法。当研究人员对早期工作进行近似重复性研究时，这尤其成问题。因为永远无法证明一个效应确切等于零，而原作者很少指定哪种效应量的范围将推翻他们的假设，所以很难解释重复性研究的结果<span class="citation" data-cites="anderson_theres_2016">(<a href="references.html#ref-anderson_theres_2016" role="doc-biblioref">Anderson &amp; Maxwell, 2016</a>)</span>。新数据何时与原始发现相矛盾？</p>
 <p>考虑一项研究，您想在其中检验群体智慧的想法。您让 20 个人估计一个罐子里的硬币数量，期望平均值非常接近真实值。 研究问题是人们是否能大体上猜对硬币数量，即 500。观察到的 20 人平均猜测为 550，标准差为 100。观察到的与真实值的差异具有统计显着性，<em>t</em> (19)=2.37，<em>p</em> = 0.0375，Cohen’s <em>d</em> 为 0.5。 群体的平均水平真的相差如此之远吗？ 没有群体的智慧吗？ 您使用的硬币有什么特别之处使群体很难猜出它们的数量吗？ 还是只是侥幸？您用近似重复性方法来重新进行这项研究。</p>
 <p>您希望您的研究不论是否存在效应都能提供有意义的信息。这意味着您需要设计一项重复性研究，都能够得出有意义的结论，无论备择假设是否正确（群体无法准确猜测硬币的真正数量）或原假设是否正确（群体会猜测500枚硬币，原始的研究是巧合）。但是，由于原始研究人员没有指定感兴趣的最小效应量，重复性研究什么时候可以让您得出原始研究与新数据相矛盾的结论？观察到恰好 500 的平均值可能会被某些人认为是非常有说服力的，但由于随机变化，您将（几乎）永远不会找到恰好 500 的平均值。一个不显著的结果不能解释为没有效应，因为您的研究可能样本量太小，无法检测到有意义的效应，且结果可能是第二类错误。那么我们应该如何前进并定义一个有意义的效应量呢？您如何设计一项能证伪先前发现的研究呢？</p>
@@ -552,7 +576,7 @@ NOTE: n is number in *each* group</code></pre>
 <div class="cell-output-display">
 <div id="fig-smalltelpower" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/0deabffd850f7b63c16e41e0af9ae0b6.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.6: G*Power中演示敏感性检验力分析的截图，用于计算原始研究能够检测到33%检验力的效应量。</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.6: G*Power中演示敏感性检验力分析的截图，用于计算原始研究能够检测到33%检验力的效应量。</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -585,21 +609,21 @@ NOTE: n is number in *each* group</code></pre>
 <div class="cell-output-display">
 <div id="fig-simonsohnexample" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/a4aa20a6e2dadfbaa82bc614d40693c7.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.7: Simonsohn (2015) 在一项原始研究和两项重复研究中使用的示例。</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.7: Simonsohn (2015) 在一项原始研究和两项重复研究中使用的示例。</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 <p>我们可以看到，Gámez及其同事进行的第一次重复研究也具有相对较小的样本量（N = 47，相对于原始研究中的N = 60），并且不是为了通过小型望远镜法产生有意义的结果而设计的。置信区间非常宽，且包括零效应（<em>d</em> = 0）和感兴趣的最小效应量（<em>d</em> = 0.401）。因此，这项研究是无法确定的。我们不能否认零值，但我们也不能否认大于或等于0.401的效应量，因为这仍然符合原始结果。第二次重复研究具有更大的样本量，并告诉我们不能否认零值，但我们可以拒绝感兴趣的最小效应量，这表明该效应小于根据小型望远镜法认为应当关注的效应。</p>
 <p>虽然<em>小望远镜法</em>的建议易于使用，但应注意不要将任何统计程序变成启发式程序。 在我们上面关于20名裁判的例子中，Cohen’s <em>d</em>为0.358将用作感兴趣的最小效应量，并且将收集50个样本量（原始20个的2.5倍），但如果有人付出努力进行重复性研究，则收集更大的样本量将相对容易。或者，如果原始研究非常大，则对于可能不太实际的效应具有很高的检验力，我们将不希望在重复研究中收集2.5倍于原始研究的观测值。事实上，正如Simonsohn所写：“我们是否需要原始样本量的2.5倍取决于我们希望回答的问题。如果我们想检验效应量是否小于d33％，那么，无论原始样本量如何，我们都需要大约2.5倍的原始样本量。但是，当样本非常大时，这可能不是我们感兴趣的问题。”始终考虑您想要问的问题，并设计研究，以便为感兴趣的问题提供信息丰富的答案。不要自动遵循2.5倍n的启发式方法，并且始终反思建议的程序在您的情况下是否合适。</p>
-</section><section id="setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" class="level2" data-number="2.12"><h2 data-number="2.12" class="anchored" data-anchor-id="setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect">
-<span class="header-section-number">2.12</span> Setting the Smallest Effect Size of Interest to the Minimal Statistically Detectable Effect</h2>
+</section><section id="setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect" class="level2" data-number="3.12"><h2 data-number="3.12" class="anchored" data-anchor-id="setting-the-smallest-effect-size-of-interest-to-the-minimal-statistically-detectable-effect">
+<span class="header-section-number">3.12</span> Setting the Smallest Effect Size of Interest to the Minimal Statistically Detectable Effect</h2>
 <p>给定样本量和 alpha 水平，每个检验都具有最小的统计可检验效应。例如，给定每组有 86 名参与者的检验，且 alpha 水平为 5%，只有 t ≥ 1.974 的 t 检验才具有统计显著性。 换句话说，t = 1.974 是临界 t 值。 给定样本量和 alpha 水平，可以将临界 t 值转换为临界 d 值。如图 @ref(fig:distpowerplot1) 所示，每组 n = 50，alpha水平为 5%，临界 d 值为 0.4。这意味着只有大于 0.4 的效应才会产生 p &lt; α。 临界 d 值受每组样本量和 alpha 水平的影响，但不取决于真实效应量。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-distpowerplot1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/dpplot50.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.8: 具有一类和二类错误的零分布和备择分布表明，在每个条件为 n = 50时，最小的效应量将具有统计显著性。</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.8: 具有一类和二类错误的零分布和备择分布表明，在每个条件为 n = 50时，最小的效应量将具有统计显著性。</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -609,7 +633,7 @@ NOTE: n is number in *each* group</code></pre>
 <div class="cell-output-display">
 <div id="fig-distpowerplot2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/dpplot502.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.9: 具有一类和二类错误的零分布和备择分布表明，，在每个条件为 n = 50时，最小效应量将具有统计显著性。</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.9: 具有一类和二类错误的零分布和备择分布表明，，在每个条件为 n = 50时，最小效应量将具有统计显著性。</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -617,10 +641,10 @@ NOTE: n is number in *each* group</code></pre>
 <p>我们可以使用最小的统计意义上可检测的效应来设置重复研究的SESOI。如果您试图重复一项研究，选择感兴趣的最小效应量（SESOI）的一个合理选项是使用在您正在重复的研究中可能具有统计显著性的最小的观察效应量。换句话说，您决定在重复研究中不考虑那些在原始研究中无法产生小于α的p值的效应是没有意义的。这里的假设是原作者希望观察到显著效应，因此对观察到的无法产生显著结果的效应量不感兴趣。原始作者可能没有考虑他们的研究具有良好的统计检验力来检测哪些效应量，或者他们对较小的效应感兴趣，但冒着在样本中观察到纯粹是由于随机变异而产生的特别大的效应的风险。即使那样，当建立在未指定 SESOI 的早期研究的基础上时，合理的起点可能是将 SESOI 设置为最小效应量，当在原始研究中观察到时，该效应量可能具有统计显著性。并非所有研究人员都会同意这一点（例如，原始作者可能会说他们实际上也关心d = 0.001的效应）。然而，当我们试图改变目前没有人指定什么会证伪他们的假设，或者他们感兴趣的最小效应量是什么的情况时，这种方法是一种开始的方式。实际上，如事后检验力部分所述，对于观察到的效应量而言, 由于在p = 0.05 和 50% 检验力之间的关系，这种对 SESOI 的合理性证明将意味着 SESOI 被设置为原始研究在独立t检验中有 50% 的检验力来探测的效应量。这种方法在某些方面类似于 Simonsohn (2015) 的小型望远镜法，只是它会导致更大的 SESOI。</p>
 <p>为重复研究设置感兴趣的最小效应量有点像网球比赛。原始作者发球并把球打过网，说“看，有些事情正在发生”。将SESOI设置为在原始研究中可能会显著的效应量的方法是回球，这样在进行设计良好、统计检验力高的重复研究后，您可以说“在您的原始研究中似乎没有足够大的效应能够显著”，这并不是比赛的终点——原始作者可以尝试以一种更具体的有关他们的理论预测的效应的说明击回球，并证明存在这样一个更小的效应量。但球回到他们这边了，如果他们想继续声称存在效应，他们将不得不通过新数据支持自己的主张。</p>
 <p>除了重复研究之外，收集的数据量限制了人们能够做出的推论。根据研究领域通常使用的样本量，也可以计算出最小的统计意义上可检测的效应。例如，假设一个研究领域中的假设几乎总是通过执行单样本 t 检验来检验，并且收集的样本大小始终小于 100个观测值。对 100 个观察值的单样本 t 检验，使用 0.05 的 alpha（双侧），具有 80% 的检验力来检测一个 d = 0.28 的效应（可以在灵敏度检验力分析中计算）。在一项新研究中，得出结论认为可以可靠地拒绝比 d = 0.28 更极端效应的存在，这表明 100 的样本量可能不足以检测此类研究系列中的效应。拒绝比 d = 0.28 更极端效应的存在并不能检验理论预测，但它通过回答资源问题对文献做出贡献。这表明该研究领域的未来研究将需要通过大幅增加样本量来改变研究设计。基于这种方法设置感兴趣的最小效应量并不能回答任何理论问题（毕竟，SESOI 不基于任何理论预测）。但是，告知同行，在考虑到在一个领域里通常收集的样本量，效应不够大因此无法进行可靠地进行研究，这是对文献的有益贡献。这并不意味着该效应本身并不有趣，并且一个领域可能会决定是时候通过协调研究路线并收集足够的数据来可靠地研究是否存在较小的效应来协同检验研究问题。</p>
-</section><section id="自我测验" class="level2" data-number="2.13"><h2 data-number="2.13" class="anchored" data-anchor-id="自我测验">
-<span class="header-section-number">2.13</span> 自我测验</h2>
-<section id="关于等效检验的问题" class="level3" data-number="2.13.1"><h3 data-number="2.13.1" class="anchored" data-anchor-id="关于等效检验的问题">
-<span class="header-section-number">2.13.1</span> 关于等效检验的问题</h3>
+</section><section id="自我测验" class="level2" data-number="3.13"><h2 data-number="3.13" class="anchored" data-anchor-id="自我测验">
+<span class="header-section-number">3.13</span> 自我测验</h2>
+<section id="关于等效检验的问题" class="level3" data-number="3.13.1"><h3 data-number="3.13.1" class="anchored" data-anchor-id="关于等效检验的问题">
+<span class="header-section-number">3.13.1</span> 关于等效检验的问题</h3>
 <p><strong>问题1</strong>：当均值差异的90%置信区间落入等效范围-0.4到0.4之间时，我们可以拒绝感兴趣的最小效应量。根据你对于置信区间的了解，当等效范围改变为变化为-0.3到0.3时，什么情况下等效检验才能显著（假定估计效应量和标准差不变) ？ A) 更大的效应量。 B) 更低的阿尔法水平。 C) 更大的样本量。 D) 更低的统计效力。</p>
 <p><strong>问题2</strong>：为什么在等效检验统计显著时，得出没有效应的结论是错误的？</p>
 <ol type="A">
@@ -832,8 +856,8 @@ NOTE: n is number in *each* group</code></pre>
 <li>我们不能<strong>拒绝</strong>效应值为零，我们可以<strong>拒绝</strong>效应值大于或大于最小效应值的存在。</li>
 <li>我们可以<strong>拒绝</strong>效应值为零，也可以<strong>不拒绝</strong>效应值大于或大于最小效应值的存在。</li>
 <li>我们不能<strong>拒绝</strong>效应值为零，也不能<strong>拒绝</strong>效应值大于或大于最小效应值的存在。</li>
-</ol></section><section id="questions-about-the-small-telescopes-approach" class="level3" data-number="2.13.2"><h3 data-number="2.13.2" class="anchored" data-anchor-id="questions-about-the-small-telescopes-approach">
-<span class="header-section-number">2.13.2</span> Questions about the small telescopes approach</h3>
+</ol></section><section id="questions-about-the-small-telescopes-approach" class="level3" data-number="3.13.2"><h3 data-number="3.13.2" class="anchored" data-anchor-id="questions-about-the-small-telescopes-approach">
+<span class="header-section-number">3.13.2</span> Questions about the small telescopes approach</h3>
 <p><strong>问题13</strong>：当原始研究在每个条件下收集20名参与者进行独立样本<strong>t</strong>检验，<strong>α=0.05时</strong>，基于小型望远镜方法的最小效应量大小是多少?请注意，答案将取决于你输入的效力是0.33还是1/3(或0.333)。你可以使用下面的代码，它依赖于 ‘pwr’ 包。</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>pwr<span class="sc">::</span><span class="fu">pwr.t.test</span>(</span>
@@ -951,7 +975,7 @@ NOTE: n is number in *each* group</code></pre>
 <div class="cell-output-display">
 <div id="fig-critf" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/7f6d17dc07bdc9e95ea8944d78b16d7c.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2.10: 两组的临界<em>F</em>值示意图，每组50个样本，α水平为0.05。</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;3.10: 两组的临界<em>F</em>值示意图，每组50个样本，α水平为0.05。</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -970,8 +994,8 @@ NOTE: n is number in *each* group</code></pre>
 <li>我们可以在统计上拒绝(使用0.05的alpha值)任何理论上有意义的效应。</li>
 <li>我们可以在统计上拒绝(使用0.05的alpha值)任何实际上有意义的效应。</li>
 <li>我们可以在统计上拒绝(使用0.05的alpha值)原始研究中有33%的效力检测到的效应。</li>
-</ol></section><section id="开放性问题" class="level3" data-number="2.13.3"><h3 data-number="2.13.3" class="anchored" data-anchor-id="开放性问题">
-<span class="header-section-number">2.13.3</span> 开放性问题</h3>
+</ol></section><section id="开放性问题" class="level3" data-number="3.13.3"><h3 data-number="3.13.3" class="anchored" data-anchor-id="开放性问题">
+<span class="header-section-number">3.13.3</span> 开放性问题</h3>
 <ol type="1">
 <li><p>“没有发现证据不等于证据不存在”这句话是什么意思?</p></li>
 <li><p>等效检验的目的是什么？</p></li>
@@ -1712,13 +1736,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./01-pvalue.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">使用 <em>p</em>值进行假设检验</span></span>
+      <a href="./08-samplesizejustification.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10-sequential.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

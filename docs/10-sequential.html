@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.310">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="This open educational resource contains information to improve statistical inferences, design better experiments, and report scientific research more transparently.">
+<title>Improving Your Statistical Inferences - 4&nbsp; 序列分析</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12-bias.html" rel="next">
+<link href="./09-equivalencetest.html" rel="prev">
+<link href="./images/logos/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0MK2WTGRM3"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
+</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-sequential.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Improving Your Statistical Inferences</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/Lakens/statistical_inferences_chinese" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Improving-Your-Statistical-Inferences.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Improving-Your-Statistical-Inferences.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+</div>
+    <a href="https://twitter.com/intent/tweet?url=%7Curl%7C" title="Twitter" class="quarto-navigation-tool px-1" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-pvalue.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">使用 <em>p</em>值进行假设检验</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-samplesizejustification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-equivalencetest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-sequential.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-bias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">偏倚检测</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-researchintegrity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">研究诚信</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#%E4%B8%BA%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E9%80%89%E6%8B%A9alpha%E6%B0%B4%E5%B9%B3" id="toc-为序列分析选择alpha水平" class="nav-link active" data-scroll-target="#%E4%B8%BA%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E9%80%89%E6%8B%A9alpha%E6%B0%B4%E5%B9%B3"><span class="header-section-number">4.1</span> 为序列分析选择alpha水平</a></li>
+  <li><a href="#pocock%E6%A0%A1%E6%AD%A3" id="toc-pocock校正" class="nav-link" data-scroll-target="#pocock%E6%A0%A1%E6%AD%A3"><span class="header-section-number">4.2</span> Pocock校正</a></li>
+  <li><a href="#%E6%AF%94%E8%BE%83%E6%94%AF%E5%87%BA%E5%87%BD%E6%95%B0" id="toc-比较支出函数" class="nav-link" data-scroll-target="#%E6%AF%94%E8%BE%83%E6%94%AF%E5%87%BA%E5%87%BD%E6%95%B0"><span class="header-section-number">4.4</span> 比较支出函数</a></li>
+  <li><a href="#alpha%E6%94%AF%E5%87%BA%E5%87%BD%E6%95%B0" id="toc-alpha支出函数" class="nav-link" data-scroll-target="#alpha%E6%94%AF%E5%87%BA%E5%87%BD%E6%95%B0"><span class="header-section-number">4.5</span> Alpha支出函数</a></li>
+  <li><a href="#%E5%9C%A8%E7%A0%94%E7%A9%B6%E6%9C%9F%E9%97%B4%E6%9B%B4%E6%96%B0%E8%BE%B9%E7%95%8C" id="toc-在研究期间更新边界" class="nav-link" data-scroll-target="#%E5%9C%A8%E7%A0%94%E7%A9%B6%E6%9C%9F%E9%97%B4%E6%9B%B4%E6%96%B0%E8%BE%B9%E7%95%8C"><span class="header-section-number">4.6</span> 在研究期间更新边界</a></li>
+  <li><a href="#%E5%BA%8F%E5%88%97%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F" id="toc-序列设计的样本量" class="nav-link" data-scroll-target="#%E5%BA%8F%E5%88%97%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%87%8F"><span class="header-section-number">4.7</span> 序列设计的样本量</a></li>
+  <li><a href="#%E6%97%A0%E6%95%88%E5%81%9C%E6%AD%A2" id="toc-无效停止" class="nav-link" data-scroll-target="#%E6%97%A0%E6%95%88%E5%81%9C%E6%AD%A2"><span class="header-section-number">4.12</span> 无效停止</a></li>
+  <li><a href="#%E6%8A%A5%E5%91%8A%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%9A%84%E7%BB%93%E6%9E%9C" id="toc-报告序列分析的结果" class="nav-link" data-scroll-target="#%E6%8A%A5%E5%91%8A%E5%BA%8F%E5%88%97%E5%88%86%E6%9E%90%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="header-section-number">4.13</span> 报告序列分析的结果</a></li>
+  <li>
+<a href="#analysis-results-means-of-2-groups-group-sequential-design" id="toc-analysis-results-means-of-2-groups-group-sequential-design" class="nav-link" data-scroll-target="#analysis-results-means-of-2-groups-group-sequential-design"><span class="header-section-number">4.14</span> Analysis results (means of 2 groups, group sequential design)</a>
+  <ul class="collapse">
+<li><a href="#design-parameters-3" id="toc-design-parameters-3" class="nav-link" data-scroll-target="#design-parameters-3"><span class="header-section-number">4.14.1</span> Design parameters</a></li>
+  <li><a href="#default-parameters-4" id="toc-default-parameters-4" class="nav-link" data-scroll-target="#default-parameters-4"><span class="header-section-number">4.14.2</span> Default parameters</a></li>
+  <li><a href="#stage-results" id="toc-stage-results" class="nav-link" data-scroll-target="#stage-results"><span class="header-section-number">4.14.3</span> Stage results</a></li>
+  <li><a href="#analysis-results" id="toc-analysis-results" class="nav-link" data-scroll-target="#analysis-results"><span class="header-section-number">4.14.4</span> Analysis results</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%E4%BD%A0%E8%87%AA%E5%B7%B1" id="toc-测试一下你自己" class="nav-link" data-scroll-target="#%E6%B5%8B%E8%AF%95%E4%B8%80%E4%B8%8B%E4%BD%A0%E8%87%AA%E5%B7%B1"><span class="header-section-number">4.15</span> 测试一下你自己</a>
+  <ul class="collapse">
+<li><a href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98" id="toc-开放性问题" class="nav-link" data-scroll-target="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="header-section-number">4.15.1</span> 10.9.1 开放性问题</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lakens/statistical_inferences_chinese/edit/master/10-sequential.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/blob/master/10-sequential.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-sequential" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>在数据收集过程中反复分析传入的数据有很多好处。当研究人员可以拒绝零假设或感兴趣的最小效应量时，即使他们需要收集更多数据，或者结果显示研究有意想不到的问题（例如，被试误解指导语或问题），研究人员也可以在中期分析（interim analysis）中停止数据收集。人们可以很容易理解，心理学研究者有道德义务重复地分析积累的数据，因为每当达到预期的置信水平，或足够清楚地表明预期的效应量不存在时，继续收集数据是对被试的时间和纳税人提供的金钱的浪费。除了这个伦理上的论点，设计利用序列分析的研究可能比只分析一次的数据更有效率，因为此时已经达到了研究者愿意收集的最大样本量。</p>
+<p>序列分析不可与 [<strong>选择性停止</strong>]（optional stopping）混淆，后者在误差控制（error control）一章中讨论过。在选择性停止中，研究人员使用未经校正的alpha水平（如，5%）来重复分析所得到的数据，这可能会大大增加一类错误率。与选择性停止不同，在<strong>序列分析</strong>中，一类错误率得到了控制。通过在每次中期分析中降低alpha水平，可以控制整体的一类错误率，就像Bonferroni校正用于防止多重比较中一类错误率的增长一样。事实上，Bonferroni校正是一个有效的(但保守的)控制序列分析的错误率的办法 <span class="citation" data-cites="wassmer_group_2016">(<a href="references.html#ref-wassmer_group_2016" role="doc-biblioref">Wassmer &amp; Brannath, 2016</a>)</span>。</p>
+<p>在序列分析中，研究者设计了一项研究，以便他们能够进行<strong>中期分析</strong>，例如在收集了25%、50%和75%的数据时。每一个中期分析都会在校正后的（corrected）alpha水平上进行检验，这样在所有计划的分析中，所需的一类错误率就会保持不变。序列分析通常用于医学试验，在医学试验中，快速发现有效的治疗方法可能是一个生死攸关的问题。如果在中期分析中，研究人员确定一种新的药物是有效的，他们很可能会想终止试验，并将有效的药物提供给对照组的患者，以改善患者的健康状况，甚至拯救他们的生命。例如，辉瑞-生物技术公司（Pfizer–BioNTech）采用了一种实验设计分析COVID-19疫苗的安全性和有效性：他们计划对数据进行5次分析，并通过降低每次中期分析的alpha水平来控制整体的一类错误率。 <a href="https://www.nejm.org/doi/suppl/10.1056/NEJMoa2034577/suppl_file/nejmoa2034577_protocol.pdf">interim analysis</a>。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="images/vaccinetrial.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Screenshot of the planned interim analyses examining the safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>尽管序列分析技术有很长的历史，但序列分析在许多科学学科中的使用最近才慢慢变得流行起来。早在1929年，Dodge和Romig就意识到按序列分析数据比一次分析更有效率 <span class="citation" data-cites="dodge_method_1929">(<a href="references.html#ref-dodge_method_1929" role="doc-biblioref">Dodge &amp; Romig, 1929</a>)</span>。 <span class="citation" data-cites="wald_sequential_1945">Wald (<a href="references.html#ref-wald_sequential_1945" role="doc-biblioref">1945</a>)</span>，于1945 年推广了假设的顺序检验思想，并在第二次世界大战期间开展了工作。正如他在历史记录中解释的那样，直到战争结束后他才被允许发表他的发现：</p>
+<blockquote class="blockquote">
+<p>由于序列概率比试验大大节省了预期的观察次数，也由于这种试验程序在实际应用中的简单性，国防研究委员会认为这些发展对战事非常有用，所以至少在一定时期内最好不要让敌人知道这些结果。因此，作者被要求在1943年9月的一份限制性报告中提交了他的报告。</p>
+</blockquote>
+<p>序列分析是行之有效的程序，并且在过去几十年中被详细开发<span class="citation" data-cites="proschan_statistical_2006 jennison_group_2000 wassmer_group_2016">(<a href="references.html#ref-jennison_group_2000" role="doc-biblioref">Jennison &amp; Turnbull, 2000</a>; <a href="references.html#ref-proschan_statistical_2006" role="doc-biblioref">Proschan et al., 2006</a>; <a href="references.html#ref-wassmer_group_2016" role="doc-biblioref">Wassmer &amp; Brannath, 2016</a>)</span>。 在这里，我们将解释如何在组序列分析中（group sequential analysis）控制错误率的基本原理，并进行先验的统计检验力分析（a-priori power analysis），比较序列设计何时会比固定设计（fixed designs）更高效或更低效。在我们讨论这些话题之前，有必要先了解一些术语的定义。 <strong>观察</strong>（look） （也称 <strong>阶段</strong>） 是指分析截止至某一特定时间点收集的所有数据；例如，你在 50、100和150次观察之后进行观察（look），并分析到该点为止所收集的所有数据。在50次和100次观察后进行<strong>中期分析</strong>，在第150次观察后进行<strong>最终分析</strong>（final analysis），并停止数据收集。在实践中，并不是所有的观察（look）都要发生。如果分析发现在一次观察（look 1）的时候就得到了统计学意义的结果，就可以终止数据收集。我们停止的原因是拒绝<span class="math inline">\(H_0\)</span>（例如，在无效假设显著性检验中），或者拒绝<span class="math inline">\(H_1\)</span>（例如，在等价性检验中）。我们可以在<strong>缩减</strong>（curtailment）或<strong>无用</strong>（futility）的情况下停止分析：最终分析不可能或非常不可能产生 p &lt; alpha的结果。序列设计中<strong>总体alpha水平</strong>（overall alpha level） 与每次观察的alpha水平不同。例如，如果我们想让一个有3次观察的双侧试验的总体一类错误率为5%，每次观察的alpha水平可以是0.0221（如果我们使用 Pocock <span class="citation" data-cites="pocock_group_1977">Pocock (<a href="references.html#ref-pocock_group_1977" role="doc-biblioref">1977</a>)</span> 提出的alpha矫正方法）。在本章中，我们将重点讨论组序列设计，即在多组中收集数据，但也存在其他的序列方法，正如在关于 <a href="#sequentialsamplesize">sample size justification</a>的章节中所解释的那样。</p>
+<section id="为序列分析选择alpha水平" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="为序列分析选择alpha水平">
+<span class="header-section-number">4.1</span> 为序列分析选择alpha水平</h2>
+<p>在不校正alpha水平的情况下对数据进行多次分析时，一类错误率就会增加<span class="citation" data-cites="armitage_repeated_1969">(<a href="references.html#ref-armitage_repeated_1969" role="doc-biblioref">Armitage et al., 1969</a>)</span>。正如Armitage和他的同事所展示的，在等间隔的观察（look）下，5次观察（look）后alpha水平会增长至0.142，100次观察（look）后增长至0.374，1000次观察（look）后增长至0.530。观测两次数据在概念上类似于决定当两个因变量中的一个显示出统计学上的显著性时，结果是否显着。然而，一个重要的区别是，在序列分析的情况下，多重检验不是独立的，而是相互依赖的。观察2的检验结合了观察1收集的旧数据和观察2的新数据。这意味着与独立测试相比，一类错误率增长的速度较慢，这使得控制错误率的解决方案更加有效和灵活。接下来我们将详细介绍。</p>
+<p>在序列分析中控制一类错误率时，需要决定如何在所有观察数据中支出的alpha水平。例如，当研究人员计划进行一项研究，对数据进行一次中期检查和一次最终检查时，需要为第一次观察（在 <em>N</em> 次观察中的 <em>n</em> 个）和第二次观察（第<em>N</em> 次观察）设定边界临界Z值。 需要选择这两个临界值<span class="math inline">\(c_1\)</span>和<span class="math inline">\(c_2\)</span>（用于第一次和第二次分析），以便拒绝零假设的总体概率（overall probability，Pr）——在第一次分析中观察到的Z分数大于第一次观察的临界值，<span class="math inline">\(Z_n\)</span> ≥ <span class="math inline">\(c_1\)</span>，并且（如果我们在第一次分析中没有拒绝假设，那么 <span class="math inline">\(Z_n\)</span> &lt; <span class="math inline">\(c_1\)</span>，我们继续数据收集）当在第二次分析观察到的Z分数大于第二次观察的临界值，<span class="math inline">\(Z_N\)</span> ≥ <span class="math inline">\(c_2\)</span> —— 当原假设为真时，等于所需的总体alpha水平。对于有方向检验（directional test）的公式</p>
+<p><span class="math display">\[
+Pr\{Z_n \geq c_1\} + Pr\{Z_n &lt; c_1, Z_N \geq c_2\} = \alpha
+\]</span></p>
+<p>如果有一个以上的中期分析，就必须按照同样的原理来确定额外的临界值。如果将数据的多个观察与多重比较结合起来，将对alpha水平进行两次校正，一次用于多重比较，另一次用于多个观察。因为alpha水平被校正了，所以在每次观察时进行何种统计检验方法并不重要，重要的是将<em>p</em>值与校正后的alpha水平进行比较。下面讨论的校正对任何数据为正态分布的设计都是有效的，而且每一组观测值都是独立于前一组。</p>
+</section><section id="pocock校正" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="pocock校正">
+<span class="header-section-number">4.2</span> Pocock校正</h2>
+<p>研究人员需要做出的第一个决定是，如何校正跨观察的一类错误率。四种常见的方法是Pocock校正，O’Brien-Fleming校正，TheHaybittle&amp;Peto校正，以及Wang和Tsiatis 方法。用户也可以自由地指定他们自己喜欢的方式来支出跨观察的alpha水平。</p>
+<p>Pocock校正是校正多次观察的alpha水平最简单的方法。从概念上讲，它与Bonferroni校正非常相似。 Pocock校正是这样被建立的：每次观察数据时的alpha水平相同，从而导致恒定的临界值（以 <em>z</em> 值表示）<span class="math inline">\(u_k = c\)</span> 以拒绝在观察<span class="math inline">\(k\)</span>时的零假设 <span class="math inline">\(H_0\)</span>。以下代码使用包 <code>rpact</code>来设计一个序列分析的研究：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(rpact)</span>
+<span id="cb1-2"><a href="#cb1-2"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="at">typeOfDesign =</span> <span class="st">"P"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">sided =</span> <span class="dv">2</span>,</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="at">beta =</span> <span class="fl">0.1</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a>design</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="design-parameters-and-output-of-group-sequential-design" class="level2 cell-output-display" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="design-parameters-and-output-of-group-sequential-design">
+<span class="header-section-number">4.3</span> Design parameters and output of group sequential design</h2>
+<section id="user-defined-parameters" class="level3" data-number="4.3.1"><h3 data-number="4.3.1" class="anchored" data-anchor-id="user-defined-parameters">
+<span class="header-section-number">4.3.1</span> User defined parameters</h3>
+<ul>
+<li>
+<em>Type of design</em>: Pocock</li>
+<li>
+<em>Maximum number of stages</em>: 2</li>
+<li>
+<em>Stages</em>: 1, 2</li>
+<li>
+<em>Significance level</em>: 0.0500</li>
+<li>
+<em>Type II error rate</em>: 0.1000</li>
+<li>
+<em>Test</em>: two-sided</li>
+</ul></section><section id="derived-from-user-defined-parameters" class="level3" data-number="4.3.2"><h3 data-number="4.3.2" class="anchored" data-anchor-id="derived-from-user-defined-parameters">
+<span class="header-section-number">4.3.2</span> Derived from user defined parameters</h3>
+<ul>
+<li>
+<em>Information rates</em>: 0.500, 1.000</li>
+</ul></section><section id="default-parameters" class="level3" data-number="4.3.3"><h3 data-number="4.3.3" class="anchored" data-anchor-id="default-parameters">
+<span class="header-section-number">4.3.3</span> Default parameters</h3>
+<ul>
+<li>
+<em>Two-sided power</em>: FALSE</li>
+<li>
+<em>Tolerance</em>: 0.00000001</li>
+</ul></section><section id="output" class="level3" data-number="4.3.4"><h3 data-number="4.3.4" class="anchored" data-anchor-id="output">
+<span class="header-section-number">4.3.4</span> Output</h3>
+<ul>
+<li>
+<em>Cumulative alpha spending</em>: 0.02939, 0.05000</li>
+<li>
+<em>Critical values</em>: 2.178, 2.178</li>
+<li>
+<em>Stage levels (one-sided)</em>: 0.01469, 0.01469</li>
+</ul></section></section>
+</div>
+<p>输出结果告诉我们，使用Pocock支出函数设计一个具有两次观测（一个中期，一个最终）的研究。最后一行返回单侧的alpha水平。<code>rpact</code> 包主要应用于验证适应性临床试验设计和分析（Confirmatory Adaptive Clinical Trial Design and Analysis）。在临床试验中，研究人员大多检验有方向的预测，因此，默认设置是进行单侧检验。在临床试验中，通常使用0.025的显著性水平进行单侧检验，但在许多其他领域，0.05是一个更常见的默认值。我们可以通过将单侧的alpha水平乘以2来得到双侧的alpha水平：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>design<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02938579 0.02938579</code></pre>
+</div>
+</div>
+<p>我们可以对照<a href="https://en.wikipedia.org/wiki/Pocock_boundary">维基百科上的 Pocock 校正页面</a> 检查输出结果，我们确实可以在网页上看到，在对数据进行两次观察（look）的情况下，每次观察的alpha水平是0.0294。Pocock校正比使用Bonferroni校正（在这种情况下，alpha水平将是0.025）略微有效，因为数据中存在依赖性（在第二次观察时，第一次观察时分析的数据又是分析的一部分）。</p>
+<p><code>rpact</code> 可以很容易地绘制出每个观察的边界（基于临界值）。观察次数被绘制成 "信息率"（Information Rate）的函数，信息率是指在一次观测中收集的总数据的百分比。 在图 @ref(fig:boundplot1)中有两次等距的观察，所以当50%的数据被收集时，信息率为0.5）；当100%的数据被收集时，信息率为1。 我们看到临界值（黑色实线）大于我们在5% 的alpha水平的固定设计中使用的1.96，即<em>Z</em> = 2.178（黑色虚线）。每当我们观察到一个测试统计量在第一或第二次观察（look）时比这些临界值更极端，我们就可以拒绝零假设。</p>
+<div class="cell" data-layout-align="center" data-fig.margin="false">
+<div class="cell-output-display">
+<div id="fig-boundplot1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-boundplot1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: 采用Pocock校正的2次观察设计的每个观察的临界线图。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>分析也可以在<code>rpact</code><a href="https://rpact.shinyapps.io/public/">shiny app</a>中进行，它也允许用户通过简单的菜单选项创建所有的图，并下载完整的分析报告（例如，用于预注册文件）。</p>
+<p>(ref:rpactshinylab) rpact Shiny app的截图。</p>
+<div class="cell" data-layout-align="center" data-fig.margin="false">
+<div class="cell-output-display">
+<div id="fig-rpactshiny" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/rpact1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.2: rpact Shiny app的截图</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="比较支出函数" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="比较支出函数">
+<span class="header-section-number">4.4</span> 比较支出函数</h2>
+<p>我们可以在同一个图中对3次观察中每一个进行不同类型的校正（两个中期和一个最终观察）（见图 <a href="#fig-fourspendingfunctions">Figure&nbsp;<span>4.3</span></a>）。下图展示了Pocock，O’Brien-Fleming，Haybittle-Peto和 Wang-Tsiatis对 <span class="math inline">\(\Delta\)</span> = 0.25矫正。我们看到研究人员可以选择不同的方法来跨观察支出alpha水平。研究人员可以选择保守地使用他们的alpha（为最后一次观察保留大部分alpha），或更自由地（在早期观察中支出更多的alpha，这增加了对于许多真实效应量提前停止的可能性）。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fourspendingfunctions" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-fourspendingfunctions-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.3: 四种不同的支出函数： O’Brien-Fleming (OF)，Pocock (P)，Haybittle-Peto (HP)， Wang-Tsiatis (WT)。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>我们可以看到，O’Brien和Fleming的校正在第一次观察时要保守得多，但在最后一次观察时却接近未校正的临界值1.96（见黑色虚线，对于双侧检验，所有的临界值都是反映在负方向）： 3.471, 2.454, 和 2.004。 Pocock 校正在每次观察时都有相同的临界值(2.289, 2.289，以及 2.289)。The Haybittle和Peto校正除了最后一次，在每次观察时都有相同的临界值(3, 3, and 1.975)。 而Wang和Tsiatis校正在每次观察（look） 时的临界值都会减少(2.741, 2.305, 和2.083)。</p>
+<p>如果你主要是想监测结果的意外发展，那么在早期观察时保持保守是明智的。当效应是否存在以及效应大小有多大这两方面都存在很大的不确定性时，Pocock校正更有用，因为如果效应很大的话，它可以使提前停止实验的概率更高。因为检验的统计检验效力取决于alpha水平，在最后一次观察降低alpha水平意味着与固定设计相比统计效力降低，为了达到理想的能力，需要增加研究的样本量以保持最后观察的统计检验效力不变。样本量的增加可以通过提前停止数据收集来补偿，在这种情况下，序列设计比固定设计更有效。因为O’Brien-Fleming或Haybittle-Peto设计在最后一次观察时的alpha与只有一次观察的固定设计的统计统计检验力非常相似，所以所需的样本量也非常相似。与固定设计相比，Pocock校正需要增加更多的最大样本量以达到所需的统计检验效力。</p>
+<p>校正后的 alpha水平可以计算到许多位数，但这很快就会达到在现实生活中毫无意义的精度水平。如果你将alpha水平设置为0.0194、0.019或0.02，那么在你一生中将进行的所有检验中观察到的一类错误率并没有明显不同（参考 '<a href="https://en.wikipedia.org/wiki/Significant_figures">significant digits</a>'的概念）。即使在序列测试中计算和使用alpha阈值达到许多位数，大多数研究的混乱使这些alpha水平具有虚假的精确度（<a href="https://en.wikipedia.org/wiki/False_precision">false precision</a>）。 在解释数据时要记住这一点。</p>
+</section><section id="alpha支出函数" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="alpha支出函数">
+<span class="header-section-number">4.5</span> Alpha支出函数</h2>
+<p>到目前为止，所讨论的指定不同观察（look）的决策边界形状（shape of decision boundaries）的方法有一个重大的局限性 （Proschan et al., 2006）。它们需要预先确定观察次数（如 4 次），而且还需要预先确定中期观察的样本量（如在 25%、50%、75% 和 100% 的观察之后）。从逻辑上讲，在计划总样本量的25%处准确地停止数据收集并不总是可行的。Lan和DeMets <span class="citation" data-cites="lan_discrete_1983">(<a href="references.html#ref-lan_discrete_1983" role="doc-biblioref">1983</a>)</span> 对序列检验相关文献做出了重要贡献，他们引入了alpha支出函数来校正alpha水平。在这种方法中，通过一个函数（<em>alpha支出函数</em>（alpha spending function））预先指定了整个观察累积的一类错误率，以控制总体显著性水平<span class="math inline">\(\alpha\)</span>。</p>
+<p>这些alpha支出函数的主要好处是可以控制中期分析的错误率，同时既不需要事先指定观察的次数也不需要指定时间。这使得alpha支出方法比早期的控制组序列设计中第一类错误的方法要灵活得多。使用alpha支出函数时，重要的是执行中期分析的决定不是基于收集的数据，因为这仍然会增加一类错误率。只要满足这个假设，就有可能在研究期间每次观察时更新alpha水平。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-comparison" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-comparison-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.4: 比较五次观察中Pocock (P) and O’Brien-Fleming correction (OF), Pocock-like (asP) and O’Brien-Fleming like (asOF) alpha指出函数。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="在研究期间更新边界" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="在研究期间更新边界">
+<span class="header-section-number">4.6</span> 在研究期间更新边界</h2>
+<p>尽管即使是在偏离预先计划的观察次数或时间的情况下，alpha支出函数控制了第一类错误率，这确实需要根据已经观察到的信息量重新计算统计检验中使用的边界。让我们假设一个研究者设计了一项研究，对数据进行三次等距的观察（两次中期观察，一次最终观察），使用Pocock类型的alpha支出函数，结果将以双侧<em>t</em>检验的方式进行分析，总体期望的一类错误率为0.05，期望的统计检验效力为0.9，Cohen’s <em>d</em> 为0.5。一个先验的统计检验效力分析（a-priori power analysis，我们将在下一节解释）表明，如果我们计划在每个条件下观测65.4、130.9和196.3个观测值，我们在序列设计中就能达到预期的统计检验效力。由于被试个数为整数且有2个独立的小组，我们应该将上述数字四舍五入后分为两组，我们将在第一轮观察时收集66个观察值（每组33个），在第二轮观察时收集132个（每组66个），在第三轮观察时收集198个（每组99个）。下面的代码将计算每一个观察（look 或阶段）的alpha水平，以进行双侧检验：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(<span class="at">kMax =</span> <span class="dv">3</span>, </span>
+<span id="cb4-2"><a href="#cb4-2"></a>                                   <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>,</span>
+<span id="cb4-3"><a href="#cb4-3"></a>                                   <span class="at">sided =</span> <span class="dv">2</span>, </span>
+<span id="cb4-4"><a href="#cb4-4"></a>                                   <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb4-5"><a href="#cb4-5"></a>                                   <span class="at">beta =</span> <span class="fl">0.1</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a>design<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02264162 0.02173822 0.02167941</code></pre>
+</div>
+</div>
+<p>现在想象一下，由于后勤问题（A logistical problem <strong>occurs when your plans didn’t account for something</strong>），我们在收集了76个观测值（每个条件38个）而不是计划的66个观测值的数据后，才设法分析数据。这样的后勤问题在实践中很常见，也是alpha支出函数为组序列设计而开发的主要原因之一。与计划不同，我们对数据的第一次观察并不是在收集总样本的33.3%的时候发生的，而是在达到76/198=38.4%个计划样本的时候发生的。我们可以根据当前的观察和未来计划的观察，重新计算每次观察数据时应该使用的alpha水平。而不是在三次观察时分别使用如上面所计算的0.0226、0.0217和0.0217的alpha水平（注意在类似Pocock的alpha支出函数中，alpha水平在每次观察时几乎相同，但不完全相同，不像Pocock校正，它们在每次观察时是相同的）。我们可以通过在下面的代码中使用<code>informationRates</code>明确指定信息率来校正它们。现在，第一次观察发生在计划样本的76/198处；第二次观察仍计划在样本的2/3处发生；最后一次观察在计划的最大样本量处。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="at">informationRates =</span> <span class="fu">c</span>(<span class="dv">76</span><span class="sc">/</span><span class="dv">198</span>, <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>, <span class="dv">1</span>), </span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="at">sided =</span> <span class="dv">2</span>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a>design<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02532710 0.02043978 0.02164755</code></pre>
+</div>
+</div>
+<p>更新后的alpha水平是：当前观察（look）为0.0253，第二次观察（look）为0.0204，最后一次观察（look）为0.0216。因此，第一次观察（look）中使用的alpha水平不是0.0226（按照最初的计划），而是稍高的0.0253。第二次观察将使用略低的alpha值0.0204，而不是0.0217。虽然差异很小，但事实上有一种正式的方法来控制alpha水平，可以灵活地查看与最初计划不同的时间，这一点非常有用。</p>
+<p>如果最后观察的数据发生了变化，例如因为你无法收集到预定的样本量，或者由于其他不可预见的情况，你收集到的数据比计划的多，也可以校正alpha水平。由于研究者预注册了他们的研究，或使用注册报告发表，这种情况越来越普遍。有时他们最终得到的数据比计划的略多，这就出现了一个问题：他们应该用计划的样本量进行分析，还是分析所有的数据。分析所有收集到的数据可以防止浪费被试的应答，并使用所有可用的信息，但它增加了数据分析的灵活性（因为研究人员现在可以选择分析计划中的样本数据，或者分析他们收集到的所有数据）。Alpha支出函数使得研究人员可以分析所有数据，同时更新用于控制整体alpha水平的alpha水平来解决这个难题。</p>
+<p>如果收集的数据比计划的多，我们就不能再使用被选择的alpha支出函数（即Pocock支出函数），而必须通过更新时间和alpha支出函数来提供一个<strong>用户定义的alpha支出函数</strong>（user-defined alpha spending function），以反映最后一次观察时实际发生的数据收集情况。假设在我们前面的例子中，第二次观察按原计划发生在计划收集的数据的2/3处，但最后一次观察发生在206个被试时，而不是198个被试时，我们可以计算出最后一次观察的最新alpha水平。考虑到目前的总样本量，我们需要重新计算早期观察的alpha水平，现在发生在76/206=0.369，132/206=0.641，最后一次观察是206/206=1。</p>
+<p>第一次和第二次观察发生在我们第一次校正后计算出的校正后的alpha水平（alpha水平为0.0253和0.0204）。我们已经在前两次观察的时候支出了我们总alpha的一部分。我们可以看一下我们上面指定的设计结果中的”累计alpha支出”（Cumulative alpha spent），看看到目前为止我们支出了多少一类错误率：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>design<span class="sc">$</span>alphaSpent</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02532710 0.03816913 0.05000000</code></pre>
+</div>
+</div>
+<p>我们看到我们在第一次观察后支出了0.0253，第二次观察后支出了0.0382。由此可知，在最后一次观察时支出我们一类错误率的剩余部分，总共是0.05。</p>
+<p>在收集了比计划中更多的数据后，我们的实际alpha支出函数不再被Pocock支出函数所获取，因此改为指定一个用户定义的支出函数。我们可以在设定<code>asUser</code>设计后，通过设定<code>userAlphaSpending</code> 信息，使用下面的代码进行这些计算：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asUser"</span>, </span>
+<span id="cb10-3"><a href="#cb10-3"></a>  <span class="at">informationRates =</span> <span class="fu">c</span>(<span class="dv">72</span><span class="sc">/</span><span class="dv">206</span>, <span class="dv">132</span><span class="sc">/</span><span class="dv">206</span>, <span class="dv">1</span>), </span>
+<span id="cb10-4"><a href="#cb10-4"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>, </span>
+<span id="cb10-5"><a href="#cb10-5"></a>  <span class="at">sided =</span> <span class="dv">2</span>, </span>
+<span id="cb10-6"><a href="#cb10-6"></a>  <span class="at">userAlphaSpending =</span> <span class="fu">c</span>(<span class="fl">0.0253</span>, <span class="fl">0.0382</span>, <span class="fl">0.05</span>)</span>
+<span id="cb10-7"><a href="#cb10-7"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8"></a>design<span class="sc">$</span>stageLevels <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02530000 0.01987072 0.02075796</code></pre>
+</div>
+</div>
+<p>之前观察的alpha水平与我们使用的alpha水平不一致，但最终的alpha水平（0.0208）给出了我们应该用于最终分析的alpha水平，基于比我们计划收集的样本量更大的样本量。如果我们收集了计划中的样本量，与我们会使用的alpha水平的差异确实较小（0.0216对0.0208），部分原因是所收集的样本量与我们计划的样本量差异较小。在实践中，这种alpha水平的小差异其实并不明显，但有一个正确的解决方案来处理收集比计划多的数据，同时控制一类错误率是非常有用的。如果使用序列设计，每当超额完成预注册中计划收集的样本量时，可以使用这些方法去校正。</p>
+</section><section id="序列设计的样本量" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="序列设计的样本量">
+<span class="header-section-number">4.7</span> 序列设计的样本量</h2>
+<p>在最终观察时，与固定设计相比，序列设计是否需要更多的被试，取决于多重比较校正导致该次观察的alpha水平降低了多少。由于可以提前停止收集数据，序列设计平均需要更少的被试。首先，让我们检查在固定设计中我们需要多少被试，我们只分析一次数据。我们的alpha水平为0.05，二类（beta）错误为0.1，换句话说，所需的统计检验效力为90%。我们将执行一项检验，假定数据服从正态分布，我们的临界Z分数将为1.96，alpha水平为5%。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb12-2"><a href="#cb12-2"></a>  <span class="at">kMax =</span> <span class="dv">1</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">"P"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>  <span class="at">sided =</span> <span class="dv">2</span>,</span>
+<span id="cb12-5"><a href="#cb12-5"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb12-6"><a href="#cb12-6"></a>  <span class="at">beta =</span> <span class="fl">0.1</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8"></a></span>
+<span id="cb12-9"><a href="#cb12-9"></a>power_res <span class="ot">&lt;-</span> <span class="fu">getSampleSizeMeans</span>(</span>
+<span id="cb12-10"><a href="#cb12-10"></a>  <span class="at">design =</span> design,</span>
+<span id="cb12-11"><a href="#cb12-11"></a>  <span class="at">groups =</span> <span class="dv">2</span>,</span>
+<span id="cb12-12"><a href="#cb12-12"></a>  <span class="at">alternative =</span> <span class="fl">0.5</span>, </span>
+<span id="cb12-13"><a href="#cb12-13"></a>  <span class="at">stDev =</span> <span class="dv">1</span>, </span>
+<span id="cb12-14"><a href="#cb12-14"></a>  <span class="at">allocationRatioPlanned =</span> <span class="dv">1</span>,</span>
+<span id="cb12-15"><a href="#cb12-15"></a>  <span class="at">normalApproximation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a>power_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="design-plan-parameters-and-output-for-means" class="level2 cell-output-display" data-number="4.8"><h2 data-number="4.8" class="anchored" data-anchor-id="design-plan-parameters-and-output-for-means">
+<span class="header-section-number">4.8</span> Design plan parameters and output for means</h2>
+<section id="design-parameters" class="level3" data-number="4.8.1"><h3 data-number="4.8.1" class="anchored" data-anchor-id="design-parameters">
+<span class="header-section-number">4.8.1</span> Design parameters</h3>
+<ul>
+<li>
+<em>Critical values</em>: 1.96</li>
+<li>
+<em>Two-sided power</em>: FALSE</li>
+<li>
+<em>Significance level</em>: 0.0500</li>
+<li>
+<em>Type II error rate</em>: 0.1000</li>
+<li>
+<em>Test</em>: two-sided</li>
+</ul></section><section id="user-defined-parameters-1" class="level3" data-number="4.8.2"><h3 data-number="4.8.2" class="anchored" data-anchor-id="user-defined-parameters-1">
+<span class="header-section-number">4.8.2</span> User defined parameters</h3>
+<ul>
+<li>
+<em>Alternatives</em>: 0.5</li>
+</ul></section><section id="default-parameters-1" class="level3" data-number="4.8.3"><h3 data-number="4.8.3" class="anchored" data-anchor-id="default-parameters-1">
+<span class="header-section-number">4.8.3</span> Default parameters</h3>
+<ul>
+<li>
+<em>Mean ratio</em>: FALSE</li>
+<li>
+<em>Theta H0</em>: 0</li>
+<li>
+<em>Normal approximation</em>: FALSE</li>
+<li>
+<em>Standard deviation</em>: 1</li>
+<li>
+<em>Treatment groups</em>: 2</li>
+<li>
+<em>Planned allocation ratio</em>: 1</li>
+</ul></section><section id="sample-size-and-output" class="level3" data-number="4.8.4"><h3 data-number="4.8.4" class="anchored" data-anchor-id="sample-size-and-output">
+<span class="header-section-number">4.8.4</span> Sample size and output</h3>
+<ul>
+<li>
+<em>Number of subjects fixed</em>: 170.1</li>
+<li>
+<em>Number of subjects fixed (1)</em>: 85</li>
+<li>
+<em>Number of subjects fixed (2)</em>: 85</li>
+<li>
+<em>Lower critical values (treatment effect scale)</em>: -0.303</li>
+<li>
+<em>Upper critical values (treatment effect scale)</em>: 0.303</li>
+<li>
+<em>Local two-sided significance levels</em>: 0.0500</li>
+</ul></section><section id="legend" class="level3" data-number="4.8.5"><h3 data-number="4.8.5" class="anchored" data-anchor-id="legend">
+<span class="header-section-number">4.8.5</span> Legend</h3>
+<ul>
+<li>
+<em>(i)</em>: values of treatment arm i</li>
+</ul></section></section>
+</div>
+<p>我们看到每组需要 85 名被试，（或 86 名，因为样本量实际上是 85.03 ，所需的观察值是四舍五入取整的，所以我们总共需要 172 名被试。其他统计检验效力分析软件，如G*Power，也会得出同样的所需样本量。我们现在可以用两次观察和一个类似Pocock的alpha支出函数来检验我们上面的设计，即一个alpha为0.05的双侧检验。我们将观察两次，预期真实效果为<em>d</em>=0.5（通过设定alternative为0.5，stDev为1）。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>seq_design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="at">sided =</span> <span class="dv">2</span>,</span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb13-6"><a href="#cb13-6"></a>  <span class="at">beta =</span> <span class="fl">0.1</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>  )</span>
+<span id="cb13-8"><a href="#cb13-8"></a></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co"># Compute the sample size we need</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>power_res_seq <span class="ot">&lt;-</span> <span class="fu">getSampleSizeMeans</span>(</span>
+<span id="cb13-11"><a href="#cb13-11"></a>  <span class="at">design =</span> seq_design,</span>
+<span id="cb13-12"><a href="#cb13-12"></a>  <span class="at">groups =</span> <span class="dv">2</span>,</span>
+<span id="cb13-13"><a href="#cb13-13"></a>  <span class="at">alternative =</span> <span class="fl">0.5</span>, </span>
+<span id="cb13-14"><a href="#cb13-14"></a>  <span class="at">stDev =</span> <span class="dv">1</span>, </span>
+<span id="cb13-15"><a href="#cb13-15"></a>  <span class="at">allocationRatioPlanned =</span> <span class="dv">1</span>,</span>
+<span id="cb13-16"><a href="#cb13-16"></a>  <span class="at">normalApproximation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-17"><a href="#cb13-17"></a></span>
+<span id="cb13-18"><a href="#cb13-18"></a>power_res_seq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="design-plan-parameters-and-output-for-means-1" class="level2 cell-output-display" data-number="4.9"><h2 data-number="4.9" class="anchored" data-anchor-id="design-plan-parameters-and-output-for-means-1">
+<span class="header-section-number">4.9</span> Design plan parameters and output for means</h2>
+<section id="design-parameters-1" class="level3" data-number="4.9.1"><h3 data-number="4.9.1" class="anchored" data-anchor-id="design-parameters-1">
+<span class="header-section-number">4.9.1</span> Design parameters</h3>
+<ul>
+<li>
+<em>Information rates</em>: 0.500, 1.000</li>
+<li>
+<em>Critical values</em>: 2.157, 2.201</li>
+<li>
+<em>Futility bounds (non-binding)</em>: -Inf</li>
+<li>
+<em>Cumulative alpha spending</em>: 0.03101, 0.05000</li>
+<li>
+<em>Local one-sided significance levels</em>: 0.01550, 0.01387</li>
+<li>
+<em>Two-sided power</em>: FALSE</li>
+<li>
+<em>Significance level</em>: 0.0500</li>
+<li>
+<em>Type II error rate</em>: 0.1000</li>
+<li>
+<em>Test</em>: two-sided</li>
+</ul></section><section id="user-defined-parameters-2" class="level3" data-number="4.9.2"><h3 data-number="4.9.2" class="anchored" data-anchor-id="user-defined-parameters-2">
+<span class="header-section-number">4.9.2</span> User defined parameters</h3>
+<ul>
+<li>
+<em>Alternatives</em>: 0.5</li>
+</ul></section><section id="default-parameters-2" class="level3" data-number="4.9.3"><h3 data-number="4.9.3" class="anchored" data-anchor-id="default-parameters-2">
+<span class="header-section-number">4.9.3</span> Default parameters</h3>
+<ul>
+<li>
+<em>Mean ratio</em>: FALSE</li>
+<li>
+<em>Theta H0</em>: 0</li>
+<li>
+<em>Normal approximation</em>: FALSE</li>
+<li>
+<em>Standard deviation</em>: 1</li>
+<li>
+<em>Treatment groups</em>: 2</li>
+<li>
+<em>Planned allocation ratio</em>: 1</li>
+</ul></section><section id="sample-size-and-output-1" class="level3" data-number="4.9.4"><h3 data-number="4.9.4" class="anchored" data-anchor-id="sample-size-and-output-1">
+<span class="header-section-number">4.9.4</span> Sample size and output</h3>
+<ul>
+<li>
+<em>Reject per stage [1]</em>: 0.6022</li>
+<li>
+<em>Reject per stage [2]</em>: 0.2978</li>
+<li>
+<em>Early stop</em>: 0.6022</li>
+<li>
+<em>Maximum number of subjects</em>: 188.9</li>
+<li>
+<em>Maximum number of subjects (1)</em>: 94.5</li>
+<li>
+<em>Maximum number of subjects (2)</em>: 94.5</li>
+<li>
+<em>Number of subjects [1]</em>: 94.5</li>
+<li>
+<em>Number of subjects [2]</em>: 188.9</li>
+<li>
+<em>Expected number of subjects under H0</em>: 186</li>
+<li>
+<em>Expected number of subjects under H0/H1</em>: 172.7</li>
+<li>
+<em>Expected number of subjects under H1</em>: 132.1</li>
+<li>
+<em>Lower critical values (treatment effect scale) [1]</em>: -0.451</li>
+<li>
+<em>Lower critical values (treatment effect scale) [2]</em>: -0.323</li>
+<li>
+<em>Upper critical values (treatment effect scale) [1]</em>: 0.451</li>
+<li>
+<em>Upper critical values (treatment effect scale) [2]</em>: 0.323</li>
+<li>
+<em>Local two-sided significance levels [1]</em>: 0.03101</li>
+<li>
+<em>Local two-sided significance levels [2]</em>: 0.02774</li>
+</ul></section><section id="legend-1" class="level3" data-number="4.9.5"><h3 data-number="4.9.5" class="anchored" data-anchor-id="legend-1">
+<span class="header-section-number">4.9.5</span> Legend</h3>
+<ul>
+<li>
+<em>(i)</em>: values of treatment arm i</li>
+<li>
+<em>[k]</em>: values at stage k</li>
+</ul></section></section>
+</div>
+<p>第一次观测每个小组的样本量是 47.24 47.24，第二次观测是 94.47 94.47，这意味着我们现在收集了 190 而不是 172 个被试。这是每次观察降低alpha水平（从0.05到 0.028）的结果。 为了补偿每次降低的alpha水平，我们需要增加研究的样本量以达到相同的统计检验效力。</p>
+<p>然而，最大的样本量并不是这种设计的预期样本量，因为我们有可能在序列设计中的较早的观察点上停止数据收集。从长远来看，如果<em>d</em>=0.5，我们使用Pocock类型的alpha支出函数，并忽略向上取整，因为我们只能收集一个完整的观测值，我们有时会收集 96 个被试，并在第一次观察后停止，其余时间继续收集 190 名被试。 正如我们在’Reject per stage’这一行中所看到的一样，第一次观察预计在研究的 0.6 停止，因为我们已经观察到一个显著的结果。 剩余的时间是 (1 - 0.6) = 0.4.</p>
+<p>这意味着假设存在 <em>d</em> = 0.5的真实效应， 平均<em>期待</em> 的平均样本量是在每次观察时停止的概率乘以我们每次观察时收集的观测值数量，即 0.6 * 96 + 0.3 * 190 = 133.39. <code>rpact</code> 包在”<span class="math inline">\(H_1\)</span> 下的预期受试者数量”下返回的数值为 132.06 - 微小的差异是由于 <code>rpact</code> 没有将观测值数量四舍五入）。 因此，假设真实效应量为 <em>d</em> = 0.5, 在任何一项研究中，我们可能需要收集比固定设计略多的数据（我们将收集 172），但平均而言，我们在序列设计中需要收集的观察数量更小。</p>
+<p>因为统计检验效力是一条曲线，而真实的效应值是未知的，所以绘制一系列可能的效应值的统计检验效力可以有所帮助，这样我们就可以探索不同的真实效应值的预期样本量。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Use getPowerMeans and set max N to 190 based on analysis above</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>sample_res <span class="ot">&lt;-</span> <span class="fu">getPowerMeans</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="at">design =</span> seq_design,</span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="at">groups =</span> <span class="dv">2</span>,</span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="at">alternative =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.01</span>), </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="at">stDev =</span> <span class="dv">1</span>, </span>
+<span id="cb14-7"><a href="#cb14-7"></a>  <span class="at">allocationRatioPlanned =</span> <span class="dv">1</span>,</span>
+<span id="cb14-8"><a href="#cb14-8"></a>  <span class="at">maxNumberOfSubjects =</span> <span class="dv">190</span>, </span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="at">normalApproximation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-10"><a href="#cb14-10"></a></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="fu">plot</span>(sample_res, <span class="at">type =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-powerseq" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-powerseq-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.5: 两次观察的序列分析统计统计检验力图。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>图 <a href="#fig-powerseq">Figure&nbsp;<span>4.5</span></a> 中的蓝线表示我们需要收集的预期观测值的数量。毫不奇怪，当真正的效应值为0时，我们几乎总是会继续收集数据到最后。只有当观察到一类错误时，我们才会停止，而第一类错误是很少见的，因此，预期的观察数非常接近于我们想要收集的最大样本量。在图的另一边，我们看到了真实效应值为<em>d</em>=1时的情况。有了这么大的效应值，我们在第一次观察时就会有很高的统计检验效力，而且我们几乎总是能够在第一次观察时就停下来。红线表示最后一次观察的统计检验效力，绿线表示提前停止的概率。</p>
+<p>Pocock 校正导致最后一次观察时的alpha水平大幅降低，这需要增加样本量来补偿。正如我们之前所看到的，O’Brien-Fleming 支出函数不需要在最后一次观察时大幅降低alpha水平。正如下面的统计检验效力分析所显示的，在两次观察的情况下，这种设计在实践中根本不需要增加样本量。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>seq_design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asOF"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="at">sided =</span> <span class="dv">2</span>,</span>
+<span id="cb15-5"><a href="#cb15-5"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb15-6"><a href="#cb15-6"></a>  <span class="at">beta =</span> <span class="fl">0.1</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>  )</span>
+<span id="cb15-8"><a href="#cb15-8"></a></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co"># Compute the sample size we need</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>power_res_seq <span class="ot">&lt;-</span> <span class="fu">getSampleSizeMeans</span>(</span>
+<span id="cb15-11"><a href="#cb15-11"></a>  <span class="at">design =</span> seq_design,</span>
+<span id="cb15-12"><a href="#cb15-12"></a>  <span class="at">groups =</span> <span class="dv">2</span>,</span>
+<span id="cb15-13"><a href="#cb15-13"></a>  <span class="at">alternative =</span> <span class="fl">0.5</span>, </span>
+<span id="cb15-14"><a href="#cb15-14"></a>  <span class="at">stDev =</span> <span class="dv">1</span>, </span>
+<span id="cb15-15"><a href="#cb15-15"></a>  <span class="at">allocationRatioPlanned =</span> <span class="dv">1</span>,</span>
+<span id="cb15-16"><a href="#cb15-16"></a>  <span class="at">normalApproximation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-17"><a href="#cb15-17"></a></span>
+<span id="cb15-18"><a href="#cb15-18"></a><span class="fu">summary</span>(power_res_seq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<section id="sample-size-calculation-for-a-continuous-endpoint" class="level2" data-number="4.10"><h2 data-number="4.10" class="anchored" data-anchor-id="sample-size-calculation-for-a-continuous-endpoint">
+<span class="header-section-number">4.10</span> Sample size calculation for a continuous endpoint</h2>
+<p>Sequential analysis with a maximum of 2 looks (group sequential design), overall significance level 5% (two-sided). The sample size was calculated for a two-sample t-test, H0: mu(1) - mu(2) = 0, H1: effect = 0.5, standard deviation = 1, power 90%.</p>
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th>Stage</th>
+<th>1</th>
+<th>2</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Information rate</td>
+<td>50%</td>
+<td>100%</td>
+</tr>
+<tr class="even">
+<td>Efficacy boundary (z-value scale)</td>
+<td>2.963</td>
+<td>1.969</td>
+</tr>
+<tr class="odd">
+<td>Overall power</td>
+<td>0.2525</td>
+<td>0.9000</td>
+</tr>
+<tr class="even">
+<td>Expected number of subjects</td>
+<td>149.1</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Number of subjects</td>
+<td>85.3</td>
+<td>170.6</td>
+</tr>
+<tr class="even">
+<td>Cumulative alpha spent</td>
+<td>0.0031</td>
+<td>0.0500</td>
+</tr>
+<tr class="odd">
+<td>Two-sided local significance level</td>
+<td>0.0031</td>
+<td>0.0490</td>
+</tr>
+<tr class="even">
+<td>Lower efficacy boundary (t)</td>
+<td>-0.661</td>
+<td>-0.304</td>
+</tr>
+<tr class="odd">
+<td>Upper efficacy boundary (t)</td>
+<td>0.661</td>
+<td>0.304</td>
+</tr>
+<tr class="even">
+<td>Exit probability for efficacy (under H0)</td>
+<td>0.0031</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exit probability for efficacy (under H1)</td>
+<td>0.2525</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Legend:</p>
+<ul>
+<li>
+<em>(t)</em>: treatment effect scale</li>
+</ul>
+<hr></section><section id="design-plan-parameters-and-output-for-means-2" class="level2" data-number="4.11"><h2 data-number="4.11" class="anchored" data-anchor-id="design-plan-parameters-and-output-for-means-2">
+<span class="header-section-number">4.11</span> Design plan parameters and output for means</h2>
+<section id="design-parameters-2" class="level3" data-number="4.11.1"><h3 data-number="4.11.1" class="anchored" data-anchor-id="design-parameters-2">
+<span class="header-section-number">4.11.1</span> Design parameters</h3>
+<ul>
+<li>
+<em>Information rates</em>: 0.500, 1.000</li>
+<li>
+<em>Critical values</em>: 2.963, 1.969</li>
+<li>
+<em>Futility bounds (non-binding)</em>: -Inf</li>
+<li>
+<em>Cumulative alpha spending</em>: 0.003051, 0.050000</li>
+<li>
+<em>Local one-sided significance levels</em>: 0.001525, 0.024500</li>
+<li>
+<em>Two-sided power</em>: FALSE</li>
+<li>
+<em>Significance level</em>: 0.0500</li>
+<li>
+<em>Type II error rate</em>: 0.1000</li>
+<li>
+<em>Test</em>: two-sided</li>
+</ul></section><section id="user-defined-parameters-3" class="level3" data-number="4.11.2"><h3 data-number="4.11.2" class="anchored" data-anchor-id="user-defined-parameters-3">
+<span class="header-section-number">4.11.2</span> User defined parameters</h3>
+<ul>
+<li>
+<em>Alternatives</em>: 0.5</li>
+</ul></section><section id="default-parameters-3" class="level3" data-number="4.11.3"><h3 data-number="4.11.3" class="anchored" data-anchor-id="default-parameters-3">
+<span class="header-section-number">4.11.3</span> Default parameters</h3>
+<ul>
+<li>
+<em>Mean ratio</em>: FALSE</li>
+<li>
+<em>Theta H0</em>: 0</li>
+<li>
+<em>Normal approximation</em>: FALSE</li>
+<li>
+<em>Standard deviation</em>: 1</li>
+<li>
+<em>Treatment groups</em>: 2</li>
+<li>
+<em>Planned allocation ratio</em>: 1</li>
+</ul></section><section id="sample-size-and-output-2" class="level3" data-number="4.11.4"><h3 data-number="4.11.4" class="anchored" data-anchor-id="sample-size-and-output-2">
+<span class="header-section-number">4.11.4</span> Sample size and output</h3>
+<ul>
+<li>
+<em>Reject per stage [1]</em>: 0.2525</li>
+<li>
+<em>Reject per stage [2]</em>: 0.6475</li>
+<li>
+<em>Early stop</em>: 0.2525</li>
+<li>
+<em>Maximum number of subjects</em>: 170.6</li>
+<li>
+<em>Maximum number of subjects (1)</em>: 85.3</li>
+<li>
+<em>Maximum number of subjects (2)</em>: 85.3</li>
+<li>
+<em>Number of subjects [1]</em>: 85.3</li>
+<li>
+<em>Number of subjects [2]</em>: 170.6</li>
+<li>
+<em>Expected number of subjects under H0</em>: 170.4</li>
+<li>
+<em>Expected number of subjects under H0/H1</em>: 167.7</li>
+<li>
+<em>Expected number of subjects under H1</em>: 149.1</li>
+<li>
+<em>Lower critical values (treatment effect scale) [1]</em>: -0.661</li>
+<li>
+<em>Lower critical values (treatment effect scale) [2]</em>: -0.304</li>
+<li>
+<em>Upper critical values (treatment effect scale) [1]</em>: 0.661</li>
+<li>
+<em>Upper critical values (treatment effect scale) [2]</em>: 0.304</li>
+<li>
+<em>Local two-sided significance levels [1]</em>: 0.003051</li>
+<li>
+<em>Local two-sided significance levels [2]</em>: 0.049000</li>
+</ul></section><section id="legend-2" class="level3" data-number="4.11.5"><h3 data-number="4.11.5" class="anchored" data-anchor-id="legend-2">
+<span class="header-section-number">4.11.5</span> Legend</h3>
+<ul>
+<li>
+<em>(i)</em>: values of treatment arm i</li>
+<li>
+<em>[k]</em>: values at stage k</li>
+</ul></section></section>
+</div>
+</div>
+<p>当我们收集到 172 名被试时这种设计就达到了预期的检验力–与我们<em>不</em>观察数据时的人数完全一致。 我们基本上可以自由获取观察数据，即预期的被试数量（假设<em>d</em>=0.5）下降到 149.1。 把观察（look）的次数增加到4次，只需要增加很小的被试数量就可以保持相同的统计检验力，但却进一步减少了预期的样本量。特别是对于保守的先验统计检验效力分析（a-priori power analysis），或对目标最小效应量进行先验统计检验效力分析时，而真正的效应值有相当大的可能性时，使用序列分析是一个非常有吸引力的选择。</p>
+</section><section id="无效停止" class="level2" data-number="4.12"><h2 data-number="4.12" class="anchored" data-anchor-id="无效停止">
+<span class="header-section-number">4.12</span> 无效停止</h2>
+<p>到目前为止，我们所讨论的序列设计只有在能够拒绝<span class="math inline">\(H_0\)</span>的情况下才会在中期分析时停止。一个设计严谨的研究也会考虑到不存在效应的可能性，正如我们在 <a href="#equivalencetest">等价性检验</a>一章中所讨论的。在序列分析文献中，为拒绝目标最小效应值的存在而停止的做法，被称为<strong>停止无效</strong> （stopping for futility）。在最极端的情况下，在中期分析之后，也许不可能在最终分析时产生统计学上的显著结果。为了在一个假设的情况下说明这一点，设想在收集了192个观察值中的182个后，观察到的两个独立组别之间的平均差值是0.1，而研究的设计理念是认为值得的最小效应是0.5的平均差值。如果主要因变量是用7分的李克特量表测量的，那么即使对照组下剩下的5个被试都回答1，而实验组下剩下的被试都回答7，192次观察后的效应量也不会产生 <em>p</em> &lt; <span class="math inline">\(\alpha\)</span>。如果你的研究目标是检测是否存在至少0.5的平均差值的影响，此时研究人员知道该目标将无法实现。由于最终结果无法产生显着影响，而在中期分析时停止研究称为<em>非随机缩减</em> （non-stochastic curtailment）。</p>
+<p>在不太极端但更普遍的情况下，研究仍有可能观察到显著效应，但概率可能非常小。考虑到已经观察到的到中期分析的数据，找到一个显著结果的概率被称为<strong>条件功效</strong>（conditional power）。对最初预期的效应值进行条件功效分析可能过于乐观，但使用观察到的效应值也是不可取的，因为它通常具有相当大的不确定性。一种建议是根据观察到的数据来更新校正预期的效应值。如果使用贝叶斯更新过程，这被称为<strong>预测能力</strong> （predictive power） <span class="citation" data-cites="spiegelhalter_monitoring_1986">(<a href="references.html#ref-spiegelhalter_monitoring_1986" role="doc-biblioref">Spiegelhalter et al., 1986</a>)</span>。可以使用<strong>自适应设计</strong>（adaptive designs），允许研究者根据中期分析结果增加最终的观察数量，而不增加一类错误率(见 <span class="citation" data-cites="wassmer_group_2016">Wassmer &amp; Brannath (<a href="references.html#ref-wassmer_group_2016" role="doc-biblioref">2016</a>)</span>)。</p>
+<p>另外，如果观察到的效应值比预期的要小，人们可能会因无用而停止。作为一个简单的无效性停止规则的说明，设想一个研究者，只要观察到的效应值为零，或者观察到的效应值与预测的方向相反，就会因无效而停止。在图 @ref(fig:futility1)中，红线表示证实效应显著的临界值。实质上，这意味着如果观察到的中期测试的<em>Z</em>分数为0或负数，数据收集将被终止。这可以通过在序列设计的设定中加入 <code>futilityBounds = c(0,0)</code> 来指定。研究者可以事先选择在满足无效标准时停止，即有约束力的无效规则，但通常建议保留继续收集数据的可能性（即无约束力的无效规则，通过设置 <code>bindingFutility = FALSE</code> 设定）。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="at">sided =</span> <span class="dv">1</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="at">beta =</span> <span class="fl">0.1</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>  <span class="at">futilityBounds =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb16-7"><a href="#cb16-7"></a>  <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>在图 <a href="#fig-futility1">Figure&nbsp;<span>4.6</span></a> 中我们看到一个顺序设计，当观察到的<em>z</em>分数大于红线指示的值时，数据收集停止以拒绝 <span class="math inline">\(H_0\)</span>，这是基于Pocock类型的alpha支出函数计算的（如图 <a href="#fig-fourspendingfunctions">Figure&nbsp;<span>4.3</span></a>）。此外，当在中期分析中观察到<em>z</em>分数低于或等于0时，数据收集将停止，如蓝线所示。最后看，红色和蓝色线相交，因为我们要么在临界值处拒绝<span class="math inline">\(H_0\)</span>，要么无法拒绝<span class="math inline">\(H_0\)</span>。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-futility1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-futility1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.6: Pocock类型用于拒绝<span class="math inline">\(H_0\)</span>的边界（红线）以及当观察到的效应处于相反方向时用于无效停止的边界（蓝线）。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>手动指定无效界线并不理想，因为我们有可能因为无法拒绝<span class="math inline">\(H_0\)</span>而停止数据收集，出现二类错误的概率很高。更好的做法是通过直接控制数据的二类错误来设置无效界限。就像我们在中期分析中分配我们的一类错误率一样，我们可以在不同的观察（look）中分配我们的二类错误率，当我们不能以期望的二类错误率拒绝目标效应值时，可以决定停止无效性。</p>
+<p>当一项研究被设计成使无效假设的显著性检验有90%的效力来检测<em>d</em>=0.5的效应时，10%的情况<span class="math inline">\(H_0\)</span>不会被拒绝，而它应该被拒绝。在这10%的情况下，我们犯了二类错误，即虽然结论是不存在0.5的效应，而实际上，存在<em>d</em>=0.5（或更大）的效应。在针对最小效应量<em>d</em>=0.5的等效性实验中，当现实中存在<em>d</em>=0.5（或更大）的效应时，得出0.5或更大的效应不存在的结论被称为一类错误。我们错误地得出了效应实际上等于零的结论。因此，当<span class="math inline">\(H_0\)</span>为d=0，<span class="math inline">\(H_1\)</span>=d=0.5时，在NHST中属于二类错误，而在<span class="math inline">\(H_0\)</span>为d=0.5，<span class="math inline">\(H_1\)</span>为d=0 的等价性检验中属于一类错误 <span class="citation" data-cites="jennison_group_2000">(<a href="references.html#ref-jennison_group_2000" role="doc-biblioref">Jennison &amp; Turnbull, 2000</a>)</span>。因此，控制序列设计中的二类错误可以被看作是控制等效检验的一类错误，以对抗研究中的效应值。如果我们设计的研究有5%的一类错误率和同样低的二类错误率（如5%，或95%的检验效力），那么该研究就是对存在或不存在目标效应的一种信息性检验。</p>
+<p>如果真实效应值为（接近）0，则因无效而停止的序列设计比不因无效而停止的设计更有效。添加基于beta支出函数的无效边界会降低检验效力，这需要通过增加样本量来补偿，但这可以通过更早地因无效而停止研究这一事实来补偿，这可以使设计更有效率。当无法指定最小的目标效应值时，研究人员可能不希望将无效停止纳入研究设计。要控制观察的二类错误率，需要选择<strong>beta 支出函数</strong>（beta-spending function），例如Pocock类型的beta支出函数、O’Brien-Fleming类型的beta支出函数或用户定义的 beta支出函数。例如，通过<em>typeBetaSpending = “bsP”</em>添加一个Pocock类型的beta支出函数。beta支出函数不需要与alpha支出函数相同。在<code>rpact</code>中，只能选择 beta支出函数进行定向（单侧）检验。毕竟，研究者可以考虑在两个方向上支持其假设的效应，而在相反方向上的效应作为拒绝备择假设的理由。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb17-3"><a href="#cb17-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>  <span class="at">sided =</span> <span class="dv">1</span>,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="at">beta =</span> <span class="fl">0.1</span>,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  <span class="at">typeBetaSpending =</span> <span class="st">"bsP"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8"></a>  <span class="at">bindingFutility =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>  )</span>
+<span id="cb17-10"><a href="#cb17-10"></a></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="fu">plot</span>(design)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-futility2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-futility2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.7: 3次观察的Pocock型边界看起来因拒绝<span class="math inline">\(H_0\)</span>（红线）时停止，或者根据Pocock型beta 支出函数因无效而停止（蓝线）。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>使用beta-spending函数，<span class="math inline">\(H_1\)</span>下的预期被试数量将会增加，因此如果备择假设为真，设计一项能够因无效而停止的研究是有代价的。但是，<span class="math inline">\(H_0\)</span>有可能为真，当它为真时，无效停止会减少预期的样本量。在图 <a href="#fig-powerseq2">Figure&nbsp;<span>4.8</span></a> 中你可以看到，当真实效应量为0时，停止的概率（绿线）现在也很高，因为我们现在将因无效而停止，如果我们这样做，则预期样本量（蓝线）会比 <a href="#fig-powerseq">Figure&nbsp;<span>4.5</span></a> 低。设计具有较高信息价值的研究，在最终分析时拒绝有意义的效应的存在是很重要的，但提前因无效而停止是否是你想在研究中建立的一个选项，这需要考虑无效假设为真的概率和样本量的增加（也许很小）。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-powerseq2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-powerseq2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.8: 具有两次观察的序列设计的功效曲线，因无效而停止。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="报告序列分析的结果" class="level2" data-number="4.13"><h2 data-number="4.13" class="anchored" data-anchor-id="报告序列分析的结果">
+<span class="header-section-number">4.13</span> 报告序列分析的结果</h2>
+<p>组顺序设计的开发是为了使用Neyman-Pearson统计推断方法有效地检验假设，其目标是决定如何行动，同时控制长期的错误率。组序列设计的目标不是量化证据的强度，或提供效果大小的准确估计 <span class="citation" data-cites="proschan_statistical_2006">(<a href="references.html#ref-proschan_statistical_2006" role="doc-biblioref">Proschan et al., 2006</a>)</span>. 尽管如此，在得出假设是否可以被拒绝的结论后，研究人员在报告 结果时往往还想解释效果量的估计值。</p>
+<p>在解释序列设计中观察到的效应值时的一个挑战是，每当研究被提前停止时，当<span class="math inline">\(H_0\)</span>被拒绝时，数据分析就有可能被停止，因为由于随机变异，在中期分析时观察到了一个大的效应值。这意味着在这些中期分析中观察到的效应量高估了真正的效应量。 正如 <span class="citation" data-cites="schonbrodt_sequential_2017">Schönbrodt et al. (<a href="references.html#ref-schonbrodt_sequential_2017" role="doc-biblioref">2017</a>)</span> 所展示的，对采用序列设计的研究进行元分析会得出准确的效应量，因为早期停止的研究样本量较小，权重较低，这被那些达到最后观察的序列研究中较小的效应值估计值所补偿，因为其样本量较大，权重较高。然而，研究人员可能希望在进行元分析之前解释单个研究的效应值，在这种情况下，报告校正后的效应值估计值可能是有所帮助的。尽管序列分析软件只允许人们计算某些统计检验的校正后（adjusted）的效应值的估计值，但我们建议在可能的情况下同时报告校正后的效应值，并始终为未来的元分析报告未经校正的效应值的估计值。</p>
+<p>在报告<em>p</em>值和置信区间时，也会出现类似的问题。当使用序列设计时，当<span class="math inline">\(H_0\)</span>为真时，不考虑研究设计序列性的 <em>p</em>值分布不再均匀。假设<span class="math inline">\(H_0\)</span>为真，<em>p</em>值是观察到的结果至少与观察到的结果一样极端的概率。确定<em>至少一样极端</em>（at least as extreme）意味着序列设计不再简单 <span class="citation" data-cites="cook_p-value_2002">(<a href="references.html#ref-cook_p-value_2002" role="doc-biblioref">Cook, 2002</a>)</span>。为确定”至少同样极端”的含义，最常用的流程是根据就停止研究的观察来排列一系列序列分析的结果，当不同的研究同时停止时，早期停止的研究比后期停止的研究更极端，<em>Z</em>值更高的研究更极端 <span class="citation" data-cites="proschan_statistical_2006">(<a href="references.html#ref-proschan_statistical_2006" role="doc-biblioref">Proschan et al., 2006</a>)</span>。这被称为<em>分阶段排序</em>（<em>stagewise ordering）</em>，即与研究后期的拒绝相比，将早期的拒绝视为反对<span class="math inline">\(H_0\)</span>的更有力证据 <span class="citation" data-cites="wassmer_group_2016">(<a href="references.html#ref-wassmer_group_2016" role="doc-biblioref">Wassmer &amp; Brannath, 2016</a>)</span>。鉴于<em>p</em>值和置信区间之间的直接关系，研究者也开发了序列设计的置信区间。</p>
+<p>然而，报告校正后的<em>p</em>值和置信区间可能会受到批评。在序列设计之后，基于Neyman-Pearson 的框架，得出以下结论是正确的解释： <span class="math inline">\(H_0\)</span>被拒绝，备择假设被拒绝，或者结果不确定。在序列设计之后报告校正后的<em>p</em>值的原因是让读者将其解释为证据的一种衡量标准。<span class="citation" data-cites="dupont_sequential_1983">Dupont (<a href="references.html#ref-dupont_sequential_1983" role="doc-biblioref">1983</a>)</span> 为质疑校正后的<em>p</em>值能否有效衡量证据强度提供了很好的论据。此外，对Neyman-Pearson统计推断方法的严格解释也为反对将<em>p</em>值解释为证据度量提供了论据 <span class="citation" data-cites="lakens_why_2022">(<a href="references.html#ref-lakens_why_2022" role="doc-biblioref">Lakens, 2022</a>)</span>。因此，如果研究人员有兴趣传达<span class="math inline">\(H_0\)</span>数据中相对于备择假设的证据，建议报告可能性或贝叶斯系数，研究者可以在数据收集完成后报告和解释这些数据。报告与α水平有关的未经调整的p值，可以传达拒绝假设的依据，尽管这对于研究人员执行基于<em>p</em>值的元分析（例如，<em>p</em>曲线或<em>z</em>曲线分析，如<a href="#bias">bias detection</a>一章中所解释的），序列的<em>p</em>值是连续可能很重要。校正后的置信区间是评估观察到的效应估计值相对于其在中期或最终观察得到的观察数据的变异性的有效工具。请注意，校正后的参数估计值只在统计软件中适用于药物试验中少数常用的设计，如组间平均差值的比较，或生存分析（survival analysis）。</p>
+<p>下面，我们看到与我们开始时一样的序列设计，有两次观察和一个Pocock类型的alpha支出函数。在完成每组95个参与者的预计样本量的研究后（我们在一次观察时收集48个参与者，在第二次观察时收集其余47个参与者），我们现在可以使用函数<code>getDataset</code>输入观察数据。输入每个阶段的平均值和标准差，所以在第二次观察时，只用每组后95名的参与者的数据来计算平均值（1.51 和 1.01）和标准差（1.03 和 0.96）。</p>
+<div class="cell" data-layout-align="center" data-hash="10-sequential_cache/html/unnamed-chunk-13_ea0a878fd7e52a12f4aaa02f207bb3da">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>design <span class="ot">&lt;-</span> <span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="at">kMax =</span> <span class="dv">2</span>,</span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">"asP"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="at">sided =</span> <span class="dv">2</span>,</span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>  <span class="at">beta =</span> <span class="fl">0.1</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8"></a></span>
+<span id="cb18-9"><a href="#cb18-9"></a>dataMeans <span class="ot">&lt;-</span> <span class="fu">getDataset</span>(</span>
+<span id="cb18-10"><a href="#cb18-10"></a>  <span class="at">n1 =</span> <span class="fu">c</span>(<span class="dv">48</span>, <span class="dv">47</span>), </span>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="at">n2 =</span> <span class="fu">c</span>(<span class="dv">48</span>, <span class="dv">47</span>), </span>
+<span id="cb18-12"><a href="#cb18-12"></a>  <span class="at">means1 =</span> <span class="fu">c</span>(<span class="fl">1.12</span>, <span class="fl">1.51</span>), <span class="co"># for directional test, means 1 &gt; means 2</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a>  <span class="at">means2 =</span> <span class="fu">c</span>(<span class="fl">1.03</span>, <span class="fl">1.01</span>),</span>
+<span id="cb18-14"><a href="#cb18-14"></a>  <span class="at">stDevs1 =</span> <span class="fu">c</span>(<span class="fl">0.98</span>, <span class="fl">1.03</span>), </span>
+<span id="cb18-15"><a href="#cb18-15"></a>  <span class="at">stDevs2 =</span> <span class="fu">c</span>(<span class="fl">1.06</span>, <span class="fl">0.96</span>)</span>
+<span id="cb18-16"><a href="#cb18-16"></a>  )</span>
+<span id="cb18-17"><a href="#cb18-17"></a></span>
+<span id="cb18-18"><a href="#cb18-18"></a>res <span class="ot">&lt;-</span> <span class="fu">getAnalysisResults</span>(</span>
+<span id="cb18-19"><a href="#cb18-19"></a>  design, </span>
+<span id="cb18-20"><a href="#cb18-20"></a>  <span class="at">equalVariances =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-21"><a href="#cb18-21"></a>  <span class="at">dataInput =</span> dataMeans</span>
+<span id="cb18-22"><a href="#cb18-22"></a>  )</span>
+<span id="cb18-23"><a href="#cb18-23"></a></span>
+<span id="cb18-24"><a href="#cb18-24"></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>[PROGRESS] Stage results calculated [0.0402 secs] 
+[PROGRESS] Conditional power calculated [0.0331 secs] 
+[PROGRESS] Conditional rejection probabilities (CRP) calculated [0.0012 secs] 
+[PROGRESS] Repeated confidence interval of stage 1 calculated [0.7073 secs] 
+[PROGRESS] Repeated confidence interval of stage 2 calculated [0.6405 secs] 
+[PROGRESS] Repeated confidence interval calculated [1.35 secs] 
+[PROGRESS] Repeated p-values of stage 1 calculated [0.2648 secs] 
+[PROGRESS] Repeated p-values of stage 2 calculated [0.2782 secs] 
+[PROGRESS] Repeated p-values calculated [0.5445 secs] 
+[PROGRESS] Final p-value calculated [0.0015 secs] 
+[PROGRESS] Final confidence interval calculated [0.0664 secs] </code></pre>
+</div>
+</div>
+</section><div class="cell" data-layout-align="center">
+<section id="analysis-results-means-of-2-groups-group-sequential-design" class="level2 cell-output-display" data-number="4.14"><h2 data-number="4.14" class="anchored" data-anchor-id="analysis-results-means-of-2-groups-group-sequential-design">
+<span class="header-section-number">4.14</span> Analysis results (means of 2 groups, group sequential design)</h2>
+<section id="design-parameters-3" class="level3" data-number="4.14.1"><h3 data-number="4.14.1" class="anchored" data-anchor-id="design-parameters-3">
+<span class="header-section-number">4.14.1</span> Design parameters</h3>
+<ul>
+<li>
+<em>Information rates</em>: 0.500, 1.000</li>
+<li>
+<em>Critical values</em>: 2.157, 2.201</li>
+<li>
+<em>Futility bounds (non-binding)</em>: -Inf</li>
+<li>
+<em>Cumulative alpha spending</em>: 0.03101, 0.05000</li>
+<li>
+<em>Local one-sided significance levels</em>: 0.01550, 0.01387</li>
+<li>
+<em>Significance level</em>: 0.0500</li>
+<li>
+<em>Test</em>: two-sided</li>
+</ul></section><section id="default-parameters-4" class="level3" data-number="4.14.2"><h3 data-number="4.14.2" class="anchored" data-anchor-id="default-parameters-4">
+<span class="header-section-number">4.14.2</span> Default parameters</h3>
+<ul>
+<li>
+<em>Normal approximation</em>: FALSE</li>
+<li>
+<em>Direction upper</em>: TRUE</li>
+<li>
+<em>Theta H0</em>: 0</li>
+<li>
+<em>Equal variances</em>: TRUE</li>
+</ul></section><section id="stage-results" class="level3" data-number="4.14.3"><h3 data-number="4.14.3" class="anchored" data-anchor-id="stage-results">
+<span class="header-section-number">4.14.3</span> Stage results</h3>
+<ul>
+<li>
+<em>Cumulative effect sizes</em>: 0.0900, 0.2928</li>
+<li>
+<em>Cumulative (pooled) standard deviations</em>: 1.021, 1.013</li>
+<li>
+<em>Stage-wise test statistics</em>: 0.432, 2.435</li>
+<li>
+<em>Stage-wise p-values</em>: 0.333390, 0.008421</li>
+<li>
+<em>Overall test statistics</em>: 0.432, 1.993</li>
+<li>
+<em>Overall p-values</em>: 0.33339, 0.02384</li>
+</ul></section><section id="analysis-results" class="level3" data-number="4.14.4"><h3 data-number="4.14.4" class="anchored" data-anchor-id="analysis-results">
+<span class="header-section-number">4.14.4</span> Analysis results</h3>
+<ul>
+<li>
+<em>Assumed standard deviation</em>: 1.013</li>
+<li>
+<em>Actions</em>: continue, accept</li>
+<li>
+<em>Conditional rejection probability</em>: 0.007317, NA</li>
+<li>
+<em>Conditional power</em>: NA, NA</li>
+<li>
+<em>Repeated confidence intervals (lower)</em>: -0.36630, -0.03306</li>
+<li>
+<em>Repeated confidence intervals (upper)</em>: 0.5463, 0.6187</li>
+<li>
+<em>Repeated p-values</em>: &gt;0.5, 0.08195</li>
+<li>
+<em>Final stage</em>: 2</li>
+<li>
+<em>Final p-value</em>: NA, 0.06662</li>
+<li>
+<em>Final CIs (lower)</em>: NA, -0.02007</li>
+<li>
+<em>Final CIs (upper)</em>: NA, 0.5734</li>
+<li>
+<em>Median unbiased estimate</em>: NA, 0.2814</li>
+</ul></section></section>
+</div>
+<p>想象一下，我们进行了一项研究，计划最多对数据进行两次等距观察。在该研究中，我们进行alpha为0.05的双侧检验了，使用Pocock类型的 alpha支出函数，并在最后观察时检验两个组之间的均值差异。基于具有两个等距观察的Pocock类型的alpha支出函数，双侧<em>t</em>检验的alpha水平是 0.003051, 和 0.0490。因此，我们可以在两次观察后拒绝<span class="math inline">\(H_0\)</span>。但我们也想报告一个效应值，并校正<em>p</em>值和置信区间。</p>
+<p>结果表明，第一次观察后的操作是继续收集数据，并且可以在第二次观察时拒绝<span class="math inline">\(H_0\)</span>。“总体效应值”（Overall effect size）行提供了未校正的平均差异，最后观察是0.293。“无偏估计中位数”（Median unbiased estimate）提供了校正后的更低的平均差异，“最终置信区间”（Final confidence interval）提供了校正后的置信区间，并给出结果0.281, 95% CI [-0.02, 0.573]。</p>
+<p>单侧检验的未校正 <em>p</em> 值在Overall <em>p</em>-value”行中报告。我们双侧检验的实际 <em>p</em> 值将是原来的两倍大，即0.6668, 0.0477。最终查看时校正后的 <em>p</em> 值在”Final <em>p</em>-value”行中提供，为0.06662。</p>
+<section id="测试一下你自己" class="level2" data-number="4.15"><h2 data-number="4.15" class="anchored" data-anchor-id="测试一下你自己">
+<span class="header-section-number">4.15</span> 测试一下你自己</h2>
+<p><strong>Q1</strong>：序列分析可以提高你执行的研究的效率。对于研究人员仅在可以拒绝<span class="math inline">\(H_0\)</span>时才停止的顺序设计（并且没有指定因无效而停止的规则），以下哪项陈述是正确的？</p>
+<ol type="A">
+<li>序列分析将减少你要进行的每项研究的样本量</li>
+<li>序列分析将平均减少你将进行的研究的样本量</li>
+<li>只要有真实的效应，序列分析将平均减少你将进行的研究的样本量（当没有规定因无效而停止的规则时）</li>
+<li>序列分析平均需要与固定设计相同的样本量，但提供更多的灵活性</li>
+</ol>
+<p><strong>Q2</strong>：序列分析和选择性停止之间的区别是什么？</p>
+<ol type="A">
+<li>唯一的区别是，顺序分析是透明的报告，而选择性停止通常不在论文中披露</li>
+<li>在序列分析中，第一类错误率是可控的，而在选择性停止中，第一类错误率是膨胀的</li>
+<li>在选择性停止中，只有当观察到一个重要的结果时才会终止数据收集，而在顺序分析中，当确定没有一个有意义的影响时，数据收集也可以停止</li>
+<li>在序列分析中，不可能设计一个在每个参与者之后就分析数据的研究，而在选择性停止中可以这样做</li>
+</ol>
+<p><strong>Q3</strong>：Pocock校正的定义特征是什么？</p>
+<ol type="A">
+<li>它对早期观察使用非常保守的alpha水平，最后观察的alpha水平接近固定设计中未调整的alpha水平</li>
+<li>它在每次观察时使用相同的 alpha 水平（或者在使用Pocock型的alpha支出函数时，在每次观察时几乎使用相同的alpha水平）</li>
+<li>它在每次中期分析时使用临界值3，并在最后一次观察时使用剩余的一类错误率</li>
+<li>它有一个可以选择的参数，以便在早期中期分析中更保守或更自由地使用一类错误率</li>
+</ol>
+<p><strong>Q4</strong>：O’Brien-Fleming校正的一个优势是最后一次观察时的alpha水平接近alpha水平。为什么？</p>
+<ol type="A">
+<li>这意味着基于先验功效分析（取决于alpha水平）的样本量接近固定设计中的样本量，同时允许额外观察数据</li>
+<li>这意味着与固定设计相比，一类错误率并没有膨胀一点点</li>
+<li>这意味着与固定设计相比，一类错误率只是稍微保守一点</li>
+<li>这意味着基于先验功效分析（取决于alpha水平）的样本量始终与固定设计中的样本量相同，同时允许额外观察数据</li>
+</ol>
+<p><strong>Q5</strong>：研究人员使用顺序设计进行研究，观察数据5次，双侧测试所需的总alpha水平为0.05，并选择<strong>Pocock校正</strong>。在继续收集数据至第三次查看后，研究人员观察到<em>p</em>值为0.011。哪个论述是对的？注意：请记住<code>rpact</code>返回单侧alpha水平。你可以通过替换0并指定 typeOfDesign 来使用以下代码：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>design <span class="ot">&lt;-</span> rpact<span class="sc">::</span><span class="fu">getDesignGroupSequential</span>(</span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="at">kMax =</span> <span class="dv">0</span>,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="at">typeOfDesign =</span> <span class="st">""</span>,</span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="at">sided =</span> <span class="dv">0</span>,</span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="at">alpha =</span> <span class="fl">0.0</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>)</span>
+<span id="cb20-7"><a href="#cb20-7"></a>design</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="A">
+<li>研究人员可以拒绝原假设并可以终止数据收集</li>
+<li>研究人员未能拒绝原假设，需要继续收集数据</li>
+</ol>
+<p><strong>Q6</strong>：研究人员使用序列设计进行研究，观察数据5次，所需的总体alpha水平为0.05，并选择<strong>O’Brien-Fleming校正</strong>。在继续收集数据至第三次观察后，研究人员观察到 <em>p</em> 值为 0.011。哪个陈述是正确的（你可以使用与 Q5 相同的代码）？</p>
+<ol type="A">
+<li>研究人员可以拒绝原假设并可以终止数据收集</li>
+<li>研究人员未能拒绝原假设，需要继续收集数据</li>
+</ol>
+<p><strong>Q7</strong>：对于Q5中的设计（使用Pocock 校正），达到80%功效所需的样本量是多少（默认值——你可以通过指定不同于 <code>beta = 0.2</code> 的值来更改默认值<code>getDesignGroupSequential</code> 函数），效应量为<em>d</em> = 0.5（等于平均差为0.5，标准差为1）。你可以使用下面的代码。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>power_res <span class="ot">&lt;-</span> rpact<span class="sc">::</span><span class="fu">getSampleSizeMeans</span>(</span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="at">design =</span> design,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>  <span class="at">groups =</span> <span class="dv">2</span>,</span>
+<span id="cb21-4"><a href="#cb21-4"></a>  <span class="at">alternative =</span> <span class="fl">0.5</span>, </span>
+<span id="cb21-5"><a href="#cb21-5"></a>  <span class="at">stDev =</span> <span class="dv">1</span>, </span>
+<span id="cb21-6"><a href="#cb21-6"></a>  <span class="at">allocationRatioPlanned =</span> <span class="dv">1</span>,</span>
+<span id="cb21-7"><a href="#cb21-7"></a>  <span class="at">normalApproximation =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-8"><a href="#cb21-8"></a></span>
+<span id="cb21-9"><a href="#cb21-9"></a>power_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="A">
+<li>64个（每个独立组 32 个）</li>
+<li>128 (每个独立组 64)</li>
+<li>154 (每个独立组 77)</li>
+<li>158 (每个独立组 79)</li>
+</ol>
+<p><strong>Q8</strong>：对于Q5中的设计，对于只有一次观察的固定设计，在 <em>d</em> = 0.5 的效应量达到80%功效所需的样本量是多少？首先更新设计（通过将 <code>kMax</code> 更改为 1），然后重新运行函数 <code>getSampleSizeMeans</code>。</p>
+<ol type="A">
+<li>64 个（每个独立组 32 个）</li>
+<li>128 (每个独立组 64)</li>
+<li>154 (每个独立组 77)</li>
+<li>158 (每个独立组 79)</li>
+</ol>
+<p>我们看到由于选择了Pocock校正和观察数量（5，这导致最终观察的alpha水平较低），样本量增加了很多。序列设计的最大样本量与固定设计的样本量之比称为 <strong>膨胀因子</strong>（inflation factor），它与效应量无关。虽然先验功效分析尚未针对所有类型的检验进行编程，但膨胀因子可用于计算相对于任何测试的固定设计所需的增加的观察次数。研究人员可以使用他们通常使用的工具对固定设计执行先验功效分析，并将观察总数乘以膨胀因子以确定序列设计所需的样本量。可以使用<code>getDesignCharacteristics</code>函数检索膨胀因子。</p>
+<p><strong>Q9</strong>: 首先，重新运行代码以创建序列设计，其中五次观察Q5中使用的数据。然后，运行下面的代码，找到膨胀因子。与固定设计相比，使用 Pocock校正的具有5个观察的序列设计的膨胀因子或所需的样本量增加是多少？请注意，在计算膨胀因子时，<code>rpact</code>不会将每组的观察次数四舍五入为整数。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>rpact<span class="sc">::</span><span class="fu">getDesignCharacteristics</span>(design)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="A">
+<li>膨胀因子是1</li>
+<li>膨胀因子是1.0284</li>
+<li>膨胀因子是1.2286</li>
+<li>膨胀因子是1.2536</li>
+</ol>
+<p><strong>Q10</strong>: 我们看到膨胀系数相当大，而且有一定的概率，我们将不得不收集比使用固定设计更多的观测值。重新运行Q7的代码（对于有5次观察的Pocock设计）。我们看到，平均而言，如果存在一个0.5的真实效应，我们将比固定设计更有效率。在<span class="math inline">\(H_1\)</span>下，由<code>rpact</code>提供的预期被试数量是多少？</p>
+<ol type="A">
+<li>101.9</li>
+<li>104.3</li>
+<li>125.3</li>
+<li>152.8</li>
+</ol>
+<p>我们看到序列设计平均来说会比固定设计更有效率，但关于所使用的具体序列设计之间的权衡，以及可能的好处是否值得收集额外数据的风险，必须根据具体情况来决定。</p>
+<p><strong>Q11</strong>: 首先，重新运行代码，创建一个顺序设计，对Q6中使用的数据进行5次观察（因此使用O’Brien-Fleming校正）。然后，运行下面的代码，找出这个设计的膨胀系数。什么膨胀系数？</p>
+<ol type="A">
+<li>膨胀系数是1</li>
+<li>膨胀系数是1.0284</li>
+<li>膨胀系数是1.2286</li>
+<li>膨胀系数是1.2536</li>
+</ol>
+<p><strong>Q12</strong>: 也可以因无用而停止（或拒绝存在感兴趣的特定效应）。研究者应该在有约束力和无约束力的beta支出函数之间做出决定，但他们不需要在有约束力和无约束力的alpha支出函数之间做出决定。如果研究者在中期分析时观察到一个有统计学意义的结果，但决定不停止数据收集，而是继续收集数据（例如，为了获得更精确的效应量估计），会有什么后果？</p>
+<ol type="A">
+<li>第一类错误率会膨胀，第二类错误率也会膨胀</li>
+<li>第一类错误率会膨胀，而第二类错误率不会膨胀</li>
+<li>第一类错误率不会膨胀，第二类错误率会膨胀</li>
+<li>第一类错误率不会膨胀，第二类错误率也不会膨胀</li>
+</ol>
+<p><strong>Q13</strong>: 在下图中，您可以看到序列设计的<em>t</em>分数边界停止拒绝<span class="math inline">\(H_0\)</span>（红线）和拒绝<span class="math inline">\(H_1\)</span>（蓝线）。在第二次临观察时，你执行了一项检验，观察到<em>t</em>值为2。您会做出哪个决定？</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-futilityq13" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="10-sequential_files/figure-html/fig-futilityq13-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.9: 3次观察O’Brien-Fleming类型边界拒绝 <span class="math inline">\(H_0\)</span>（红线）时停止或因5%的一类和二类错误而无效停止（蓝线）的例子</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ol type="A">
+<li>你可以拒绝<span class="math inline">\(H_0\)</span>并停止数据收集</li>
+<li>你可以拒绝<span class="math inline">\(H_1\)</span>并停止数据收集</li>
+<li>你拒绝<span class="math inline">\(H_0\)</span>和<span class="math inline">\(H_1\)</span>并停止数据收集</li>
+<li>你未能同时拒绝<span class="math inline">\(H_0\)</span>和<span class="math inline">\(H_1\)</span>并继续收集数据</li>
+</ol>
+<section id="开放性问题" class="level3" data-number="4.15.1"><h3 data-number="4.15.1" class="anchored" data-anchor-id="开放性问题">
+<span class="header-section-number">4.15.1</span> 10.9.1 开放性问题</h3>
+<ol type="1">
+<li><p>序列分析和选择性停止有什么区别？</p></li>
+<li><p>与固定设计相比，使用序列设计的可能好处是什么？</p></li>
+<li><p>因无效而停止数据收集是什么意思？</p></li>
+<li><p>Pocock和 O’Brien-Fleming方法在观察上指出alpha的理念有何不同？</p></li>
+<li><p>使用O’Brien-Fleming校正时最终观察的alpha水平接近未校正的alpha水平有什么优势？</p></li>
+<li><p>Pocock和O’Brien-Fleming校正与Lan和DeMets开发的相应Pocock和O’Brien-Fleming alpha支出函数有什么区别？</p></li>
+<li><p>即使序列设计的最大样本量略大于固定设计的样本量，为什么序列设计仍然可以更有效？</p></li>
+<li><p>什么时候合并无效停止规则会提高顺序设计的效率？</p></li>
+<li><p>平均而言，在序列设计中提前停止对效应量估计有何影响？报告时不校正效应量估计的理由是什么？</p></li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-armitage_repeated_1969" class="csl-entry" role="listitem">
+Armitage, P., McPherson, C. K., &amp; Rowe, B. C. (1969). Repeated significance tests on accumulating data. <em>Journal of the Royal Statistical Society: Series A (General)</em>, <em>132</em>(2), 235–244.
+</div>
+<div id="ref-cook_p-value_2002" class="csl-entry" role="listitem">
+Cook, T. D. (2002). P-<span>Value Adjustment</span> in <span>Sequential Clinical Trials</span>. <em>Biometrics</em>, <em>58</em>(4), 1005–1011.
+</div>
+<div id="ref-dodge_method_1929" class="csl-entry" role="listitem">
+Dodge, H. F., &amp; Romig, H. G. (1929). A <span>Method</span> of <span>Sampling Inspection</span>. <em>Bell System Technical Journal</em>, <em>8</em>(4), 613–631. <a href="https://doi.org/10.1002/j.1538-7305.1929.tb01240.x">https://doi.org/10.1002/j.1538-7305.1929.tb01240.x</a>
+</div>
+<div id="ref-dupont_sequential_1983" class="csl-entry" role="listitem">
+Dupont, W. D. (1983). Sequential stopping rules and sequentially adjusted <span>P</span> values: <span>Does</span> one require the other? <em>Controlled Clinical Trials</em>, <em>4</em>(1), 3–10. <a href="https://doi.org/10.1016/S0197-2456(83)80003-8">https://doi.org/10.1016/S0197-2456(83)80003-8</a>
+</div>
+<div id="ref-jennison_group_2000" class="csl-entry" role="listitem">
+Jennison, C., &amp; Turnbull, B. W. (2000). <em>Group sequential methods with applications to clinical trials</em>. <span>Chapman &amp; Hall/CRC</span>.
+</div>
+<div id="ref-lakens_why_2022" class="csl-entry" role="listitem">
+Lakens, D. (2022). Why <span>P</span> values are not measures of evidence. <em>Trends in Ecology &amp; Evolution</em>, <em>37</em>(4), 289–290. <a href="https://doi.org/10.1016/j.tree.2021.12.006">https://doi.org/10.1016/j.tree.2021.12.006</a>
+</div>
+<div id="ref-lan_discrete_1983" class="csl-entry" role="listitem">
+Lan, K. K. G., &amp; DeMets, D. L. (1983). Discrete <span>Sequential Boundaries</span> for <span>Clinical Trials</span>. <em>Biometrika</em>, <em>70</em>(3), 659. <a href="https://doi.org/10.2307/2336502">https://doi.org/10.2307/2336502</a>
+</div>
+<div id="ref-pocock_group_1977" class="csl-entry" role="listitem">
+Pocock, S. J. (1977). Group sequential methods in the design and analysis of clinical trials. <em>Biometrika</em>, <em>64</em>(2), 191–199. <a href="https://doi.org/10.1093/biomet/64.2.191">https://doi.org/10.1093/biomet/64.2.191</a>
+</div>
+<div id="ref-proschan_statistical_2006" class="csl-entry" role="listitem">
+Proschan, M. A., Lan, K. K. G., &amp; Wittes, J. T. (2006). <em>Statistical monitoring of clinical trials: A unified approach</em>. <span>Springer</span>.
+</div>
+<div id="ref-schonbrodt_sequential_2017" class="csl-entry" role="listitem">
+Schönbrodt, F. D., Wagenmakers, E.-J., Zehetleitner, M., &amp; Perugini, M. (2017). Sequential hypothesis testing with <span>Bayes</span> factors: <span>Efficiently</span> testing mean differences. <em>Psychological Methods</em>, <em>22</em>(2), 322–339. <a href="https://doi.org/10.1037/MET0000061">https://doi.org/10.1037/MET0000061</a>
+</div>
+<div id="ref-spiegelhalter_monitoring_1986" class="csl-entry" role="listitem">
+Spiegelhalter, D. J., Freedman, L. S., &amp; Blackburn, P. R. (1986). Monitoring clinical trials: Conditional or predictive power? <em>Controlled Clinical Trials</em>, <em>7</em>(1), 8–17. <a href="https://doi.org/10.1016/0197-2456(86)90003-6">https://doi.org/10.1016/0197-2456(86)90003-6</a>
+</div>
+<div id="ref-wald_sequential_1945" class="csl-entry" role="listitem">
+Wald, A. (1945). Sequential tests of statistical hypotheses. <em>The Annals of Mathematical Statistics</em>, <em>16</em>(2), 117–186. https://doi.org/<a href="https://www.jstor.org/stable/2240273">https://www.jstor.org/stable/2240273</a>
+</div>
+<div id="ref-wassmer_group_2016" class="csl-entry" role="listitem">
+Wassmer, G., &amp; Brannath, W. (2016). <em>Group <span>Sequential</span> and <span>Confirmatory Adaptive Designs</span> in <span>Clinical Trials</span></em>. <span>Springer International Publishing</span>. <a href="https://doi.org/10.1007/978-3-319-32562-0">https://doi.org/10.1007/978-3-319-32562-0</a>
+</div>
+</div>
+</section></section></main><!-- /main --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./09-equivalencetest.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./12-bias.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">偏倚检测</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from https://lakens.github.io/statistical_inferences_chinese/. https://doi.org/10.5281/zenodo.6409077</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

@@ -35,10 +35,11 @@ book:
   chapters:
   - index.qmd
   - 01-pvalue.qmd
+  - 08-samplesizejustification.qmd
   - 09-equivalencetest.qmd
-#  - 10-sequential.qmd
-#  - 12-bias.qmd
-#  - 15-researchintegrity.qmd
+  - 10-sequential.qmd
+  - 12-bias.qmd
+  - 15-researchintegrity.qmd
   - references.qmd
 
 bibliography: include/book.bib
