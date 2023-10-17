@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.310">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="description" content="这个开放的教育资源包含用于改进统计推断、设计更好的实验以及更透明地报告科学研究的信息。">
+<title>Improving Your Statistical Inferences - 1&nbsp; 使用 p值进行假设检验</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-samplesizejustification.html" rel="next">
+<link href="./index.html" rel="prev">
+<link href="./images/logos/favicon.ico" rel="icon">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-0MK2WTGRM3"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
+</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="include/booktem.css">
+<link rel="stylesheet" href="include/style.css">
+<link rel="stylesheet" href="include/webex.css">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-pvalue.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">使用 *p*值进行假设检验</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Improving Your Statistical Inferences</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/Lakens/statistical_inferences_chinese" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Download" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download"><i class="bi bi-download"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
+<li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Improving-Your-Statistical-Inferences.pdf">
+              <i class="bi bi-bi-file-pdf pe-1"></i>
+            Download PDF
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="./Improving-Your-Statistical-Inferences.epub">
+              <i class="bi bi-bi-journal pe-1"></i>
+            Download ePub
+            </a>
+          </li>
+      </ul>
+</div>
+    <a href="https://twitter.com/intent/tweet?url=%7Curl%7C" title="Twitter" class="quarto-navigation-tool px-1" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">概述</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-pvalue.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">使用 <em>p</em>值进行假设检验</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-samplesizejustification.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-equivalencetest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-sequential.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">序列分析</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-bias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">偏倚检测</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-researchintegrity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">研究诚信</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参考</span></a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#%E5%85%B3%E4%BA%8Ep%E5%80%BC%E7%9A%84%E4%B8%80%E4%BA%9B%E8%BF%B7%E6%80%9D" id="toc-关于p值的一些迷思" class="nav-link active" data-scroll-target="#%E5%85%B3%E4%BA%8Ep%E5%80%BC%E7%9A%84%E4%B8%80%E4%BA%9B%E8%BF%B7%E6%80%9D"><span class="header-section-number">1.1</span> 关于<em>p</em>值的一些迷思</a></li>
+  <li><a href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E9%9B%B6%E6%A8%A1%E5%9E%8B" id="toc-建立一个零模型" class="nav-link" data-scroll-target="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E9%9B%B6%E6%A8%A1%E5%9E%8B"><span class="header-section-number">1.2</span> 建立一个零模型</a></li>
+  <li><a href="#%E8%AE%A1%E7%AE%97p%E5%80%BC" id="toc-计算p值" class="nav-link" data-scroll-target="#%E8%AE%A1%E7%AE%97p%E5%80%BC"><span class="header-section-number">1.3</span> 计算<em>p</em>值</a></li>
+  <li><a href="#sec-whichpexpect" id="toc-sec-whichpexpect" class="nav-link" data-scroll-target="#sec-whichpexpect"><span class="header-section-number">1.4</span> 哪个是你想要的p值</a></li>
+  <li><a href="#sec-lindley" id="toc-sec-lindley" class="nav-link" data-scroll-target="#sec-lindley"><span class="header-section-number">1.5</span> 林德利悖论</a></li>
+  <li><a href="#sec-correctlyinterpreting" id="toc-sec-correctlyinterpreting" class="nav-link" data-scroll-target="#sec-correctlyinterpreting"><span class="header-section-number">1.6</span> 正确地解释和报告<em>p</em>值</a></li>
+  <li>
+<a href="#sec-misconceptions" id="toc-sec-misconceptions" class="nav-link" data-scroll-target="#sec-misconceptions"><span class="header-section-number">1.7</span> Preventing common misconceptions about <em>p</em>-values</a>
+  <ul class="collapse">
+<li><a href="#sec-misconception1" id="toc-sec-misconception1" class="nav-link" data-scroll-target="#sec-misconception1"><span class="header-section-number">1.7.1</span> 误解 1：<em>p</em>值不显著意味着零假设为真。</a></li>
+  <li><a href="#%E8%AF%AF%E8%A7%A3-2p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E9%9B%B6%E5%81%87%E8%AE%BE%E4%B8%BA%E5%81%87" id="toc-误解-2p值显著意味着零假设为假" class="nav-link" data-scroll-target="#%E8%AF%AF%E8%A7%A3-2p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E9%9B%B6%E5%81%87%E8%AE%BE%E4%B8%BA%E5%81%87"><span class="header-section-number">1.7.2</span> 误解 2：<em>p</em>值显著意味着零假设为假。</a></li>
+  <li><a href="#%E8%AF%AF%E8%A7%A3-3p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E5%8F%91%E7%8E%B0%E4%BA%86%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E9%87%8D%E8%A6%81%E7%9A%84%E6%95%88%E5%BA%94" id="toc-误解-3p值显著意味着发现了一个实际重要的效应" class="nav-link" data-scroll-target="#%E8%AF%AF%E8%A7%A3-3p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E5%8F%91%E7%8E%B0%E4%BA%86%E4%B8%80%E4%B8%AA%E5%AE%9E%E9%99%85%E9%87%8D%E8%A6%81%E7%9A%84%E6%95%88%E5%BA%94"><span class="header-section-number">1.7.3</span> 误解 3：<em>p</em>值显著意味着发现了一个实际重要的效应。</a></li>
+  <li><a href="#sec-misconception4" id="toc-sec-misconception4" class="nav-link" data-scroll-target="#sec-misconception4"><span class="header-section-number">1.7.4</span> 误解 4：如果你得到了显著结果，你犯Ⅰ型错误（假阳性）的概率是5%。</a></li>
+  <li><a href="#%E8%AF%AF%E8%A7%A3-51%E5%87%8F%E5%8E%BBp%E5%80%BC%E6%98%AF%E9%87%8D%E5%A4%8D%E5%AE%9E%E9%AA%8C%E8%83%BD%E5%BE%97%E5%88%B0%E7%9B%B8%E5%90%8C%E6%95%88%E5%BA%94%E7%9A%84%E6%A6%82%E7%8E%87" id="toc-误解-51减去p值是重复实验能得到相同效应的概率" class="nav-link" data-scroll-target="#%E8%AF%AF%E8%A7%A3-51%E5%87%8F%E5%8E%BBp%E5%80%BC%E6%98%AF%E9%87%8D%E5%A4%8D%E5%AE%9E%E9%AA%8C%E8%83%BD%E5%BE%97%E5%88%B0%E7%9B%B8%E5%90%8C%E6%95%88%E5%BA%94%E7%9A%84%E6%A6%82%E7%8E%87"><span class="header-section-number">1.7.5</span> 误解 5：1减去<em>p</em>值是重复实验能得到相同效应的概率。</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#%E8%87%AA%E6%88%91%E6%B5%8B%E8%AF%95" id="toc-自我测试" class="nav-link" data-scroll-target="#%E8%87%AA%E6%88%91%E6%B5%8B%E8%AF%95"><span class="header-section-number">1.8</span> 自我测试</a>
+  <ul class="collapse">
+<li><a href="#%E9%92%88%E5%AF%B9p%E5%80%BC%E6%A6%82%E5%BF%B5%E7%9A%84%E8%AF%AF%E8%A7%A3" id="toc-针对p值概念的误解" class="nav-link" data-scroll-target="#%E9%92%88%E5%AF%B9p%E5%80%BC%E6%A6%82%E5%BF%B5%E7%9A%84%E8%AF%AF%E8%A7%A3"><span class="header-section-number">1.8.1</span> 针对p值概念的误解</a></li>
+  <li><a href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98" id="toc-开放性问题" class="nav-link" data-scroll-target="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="header-section-number">1.8.2</span> 开放性问题</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/Lakens/statistical_inferences_chinese/edit/master/01-pvalue.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/issues/new" class="toc-action">Report an issue</a></p><p><a href="https://github.com/Lakens/statistical_inferences_chinese/blob/master/01-pvalue.qmd" class="toc-action">View source</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-pvalue" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">使用 <em>p</em>值进行假设检验</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>研究者们可以通过收集数据来回答各种研究问题。他们感兴趣的是在不同条件下所收集到的数据结果是否有所差异。对于这个问题的答案是一个 <em>方向性检验（ordinal claim）</em>, 因为研究者对数据结果进行两两比较时，其平均值可能有大有小也可能没有差异。例如，研究者可能对这样的假设感兴趣：“假设条件A为：学生在进行了充分的学习后进行测试，条件B为学生将花费全部精力用于学习而进行测试，相对条件B来说，条件A的学习成果可能会更优异。在收集数据并得出有测试的学生的平均成绩较高后，研究者可以提出一个有方向性的假设，即与条件B相比，条件A的学生成绩<em>更好</em>。方向性假设仅能说明条件之间存在一定差异，但不能量化<strong>效应大小</strong>。</p>
+<p>为了做出方向性检验，研究者通常依靠著名的<strong>假设检验</strong>的方法。 假设检验的一个部分包括计算<strong><em>p</em>值</strong>， 并检验<em>p</em>值是否存在统计学上的<strong>显著</strong>差异。“显著”意味着某些东西是值得关注的。假设检验用于区分实证数据中的信号（值得关注的）和随机噪音。我们需要区分的是<strong>统计学显著</strong>以及<strong>实际效应显著</strong>，前者仅说明观察到的效应是信号还是噪点，而后者取决于效应的大小是否足够大，以便在现实生活中做出有价值的推断。因此，研究者们采用这种方法论的程序来决定是否做出差异性说明，或者作为一种防止验证性偏差的保障。在吉尼斯啤酒厂的内部报告中曾应用过上述统计检验方法，William Gosset（或称“student”，他开发了<em>t</em>检验）在1904年写道 <span class="citation" data-cites="gosset_application_1904">(<a href="references.html#ref-gosset_application_1904" role="doc-biblioref">1904</a>)</span>：</p>
+<blockquote class="blockquote">
+<p>一般来说，人们普遍会认为将实验结果的决定权全权交由研究者是相对危险的，因为他们可能带有一定偏见。因此，有人建议采用一个标量作为评判标准，这个标量是在一定数量的数据集中出现重大误差的概率。</p>
+</blockquote>
+<p>然而根据这种期望，研究者们可能开始倾向于将数据解释为对其假设的支持，即便数据并不是这样。研究者提出差异性说明时，如果假设检验方法使用得当，是可以有效控制研究者自欺欺人的。正如Benjamini（2016） 所提出的，在区分信号和噪点时，<em>p</em>值是作为防止被随机因素诱导的第一道防线。有迹象表明，禁止使用<em>p</em>值将会使得研究者更容易做出错误结论。针对《基础与应用社会心理学》期刊施行禁止零假设（即无效应）显著之后，人们对后续发表的研究进行了定性分析，其中Fricker（2019）等人认为，相对于使用假设检验，且采用<em>p</em> &lt; 0.05来说，当研究者仅用描述性统计时，我们发现他们很可能会过度解释和/或夸大他们的结果。研究者提出差异性说明时，如果假设检验方法使用得当，是可以有效控制研究者自欺欺人的。</p>
+<section id="关于p值的一些迷思" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="关于p值的一些迷思">
+<span class="header-section-number">1.1</span> 关于<em>p</em>值的一些迷思</h2>
+<p>在我们厘清<em>p</em>值是如何计算之前，更重要是需要弄清在假设检验时，它将如何帮助我们做出合理的差异性说明。<em>p</em>值的定义是当零假设为真时，所得到的样本数据或更极端数据的概率。但是这个定义并未告诉我们该如何解释<em>p</em>值。</p>
+<p>对于p值的解释方式取决于个人的统计思想。从<a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a>1925年发表了《研究者统计方法论》一书之后，<em>p</em>值的应用开始广泛起来。在Fisherian的理论框架中，<em>p</em>值被描述为一个连续测量，这个测量用于描述所得观察数据以及与零假设之间的兼容性 <span class="citation" data-cites="greenland_statistical_2016">(<a href="references.html#ref-greenland_statistical_2016" role="doc-biblioref">Greenland et al., 2016</a>)</span>。兼容性的区间在1（完全兼容）到0（完全不兼容）之间，且每个人都可以以一种统计上的“深思熟虑”来解释<em>p</em>值。依据Fisher <span class="citation" data-cites="fisher_statistical_1956">(<a href="references.html#ref-fisher_statistical_1956" role="doc-biblioref">1956</a>)</span>所述，<em>p</em>值并不意味着真实世界的某个概率，而是以一种合理且完备的形式，来衡量拒绝他们所期望的假设的程度。Fisher试图将他的理念标化为一种”基础推论”，但这并没有得到其他流派的广泛采纳，如决策理论、似然比检验和贝叶斯推理。事实上，Zabell <span class="citation" data-cites="zabell_r_1992">(<a href="references.html#ref-zabell_r_1992" role="doc-biblioref">1992</a>)</span> 写道：”基础推论“是Fisher的一个巨大失败”，尽管其他人表示希望它在未来会发展成一个有用的方法 <span class="citation" data-cites="schweder_confidence_2016">(<a href="references.html#ref-schweder_confidence_2016" role="doc-biblioref">Schweder &amp; Hjort, 2016</a>)</span>。Fisherian的<em>p</em>值描述了数据与单一假设的不兼容性，因此又被称为<em>显著性检验</em>。显著性检验受到限制的主要原因是，研究者只指定了一个零假设（<span class="math inline">\(H_0\)</span>），而没有指定备择假设（<span class="math inline">\(H_1\)</span>）。</p>
+<p>Neyman和Pearson <span class="citation" data-cites="neyman_problem_1933">(<a href="references.html#ref-neyman_problem_1933" role="doc-biblioref">1933</a>)</span> 在William Gosset和Ronald Fisher关于P值的见解的基础上，发展了一种叫做统计假设检验的方法。与Fisher提出的显著性检验相比，其主要区别是，在统计假设检验中，既制定了一个零假设，也规定了一个备选假设。在Neyman-Pearson的理论框架中，统计检验的目标是引导研究者在这两个假设方向上的的决策。根据统计检验的结果，当不知道假设是否为真的情况下，研究者通常暂时将零假设或备则假设为真。在心理学领域，研究者经常使用Fisherian和Neyman-Pearson二者理论框架的不完美结合版，但根据Dienes <span class="citation" data-cites="dienes_understanding_2008">(<a href="references.html#ref-dienes_understanding_2008" role="doc-biblioref">2008</a>)</span> 的说法，Neyman-Pearson的理论方法是 “你在心理学学术期刊中看到的所有数据统计的基础逻辑”。</p>
+<p>当进行Neyman-Pearson假设检验时，所得<em>p</em>值只是用于对比是否小于所选的<span class="math inline">\(\alpha\)</span>水平，但它小多少并不重要。例如，如果使用0.01的<span class="math inline">\(\alpha\)</span>水平，<em>p</em>=0.006和<em>p</em>=0.000001都会使研究者迅速做出论断，仿佛世界的真理就是备择假设所描述的。这与Fisherian的p值方法不同，Fisherian的<em>p</em>值越低，研究者在心理上更加容易拒绝他们所检验的零假设。Neyman-Pearson的假设检验不认为推论的目标是量化兼容性或依据的一种连续测量。相反，正如Neyman <span class="citation" data-cites="neyman_inductive_1957">(<a href="references.html#ref-neyman_inductive_1957" role="doc-biblioref">1957</a>)</span> 所写的：</p>
+<blockquote class="blockquote">
+<p>当我们对行为做出总结归纳时，应当承认每个正经研究的目的，都是在几个可选方案中为某一个方案提供依据。The content of the</p>
+</blockquote>
+<p>简洁了当点说，人们可能会觉得在做某一行为的决策时，不应该拘泥于单一的统计测试结果，这一点经常被提出来作为对Neyman-Pearson统计推断方法的批评。然而，这种批评与Neyman所说的 “行为”的定义不径相同。诚然，实施一项新政策的决策不应基于单一的研究结果。然而，Neyman认为提出科学主张也是一种 “行为”，他曾写道（1957年，第10页），一项研究的结论阶段包括：</p>
+<blockquote class="blockquote">
+<p>一种行为意愿或对某一行动的决策，也许就是对各种假设采取特定的态度。</p>
+</blockquote>
+<p>Cox <span class="citation" data-cites="cox_problems_1958">(<a href="references.html#ref-cox_problems_1958" role="doc-biblioref">1958</a>)</span> 写道:</p>
+<blockquote class="blockquote">
+<p>可以这么说：当进行推论时，我们就是”决定”对总体进行某种类型的陈述，因此，只要不对决定一词进行过于狭义的解释，那么研究的统计决策就包含了推论的过程。其实重点是，统计推断的主要问题在于决定哪些类型的声明是有意义的，以及它们到底意味着什么。</p>
+</blockquote>
+<p>因此，在Neyman-Pearson的方法中，<em>p</em>值就是意味着需要对哪类声明进行决策的基础。在科研中，类似的声明通常是以<strong>辅助假设</strong>的形式支撑着大多数新兴实验，或者说，为了使实验按计划进行，一些基础假设的提出必须是准确的 <span class="citation" data-cites="hempel_philosophy_1966">(<a href="references.html#ref-hempel_philosophy_1966" role="doc-biblioref">Hempel, 1966</a>)</span>。例如，如果设计的实验中，被试能看到颜色是很重要的，我们的基础假设就是<a href="https://en.wikipedia.org/wiki/Ishihara_test">Ishihara test</a>（一种色盲测试）能够成功识别哪些被试是色盲，且这个假设为真。</p>
+</section><section id="建立一个零模型" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="建立一个零模型">
+<span class="header-section-number">1.2</span> 建立一个零模型</h2>
+<p>假设每组10人，一共有两组，我问他们有多喜欢《指环王》（LOTR）三部曲的加长版。这意味着我们的<strong>总样本量</strong>是20，每组的样本量为10。第一组的被试包括了我的朋友，而第二组的被试包括了我妻子的朋友。我们的朋友对问题进行了1~10的评分。因此，我的朋友们那组是8.7，我妻子朋友的那组均值是7.7。我们可以通过查阅原始数据以及绘制相关图表对两组数据进行比较。</p>
+<div class="cell" data-layout-align="center" data-tab.cap="Ratings for the Lord of the Rings extended trilogy by two groups of friends.">
+<div class="cell-output-display">
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>两组朋友对指环王加长版的评分</caption>
+<thead><tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Daniel的朋友</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Kyra的朋友</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">friend_1</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_2</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friend_3</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_4</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friend_5</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_6</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">9</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friend_7</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_8</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">friend_9</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">friend_10</td>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">7</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>我们可以看到两组人的数据是重叠的，但平均评分却相差1整分。所以，我们现在面临的问题如下： 两组之间的差异只是随机误差，还是说我的朋友比我妻子的朋友更喜欢《指环王》（LOTR）三部曲的加长版？</p>
+<p>在<strong>零假设的显著性检验</strong>中，我们试图量化所观察到的差异（这时的均值相差1）或更极端差异的概率来回答这个问题，但这个前提是我的朋友和我妻子的朋友对《指环王》加长版的喜好程度并没有真正的差异，而我们只是在察看随机差异。这个概率称为<em>p</em>值。如果这个概率足够低，那我们就可以说存在差异，如果这个概率不够低，那我们只能说不存在差异。</p>
+<p>零假设假定如果询问了无限多的朋友（我的朋友以及和我妻子的朋友两个组）他们有多喜欢指环王，这两个海量的群组之间的差异为0。然而，从任何总体中抽取某一样本，随机误差通常不为0。我们可以建立一个<strong>零模型</strong>来衡量所得观测数据的期望误差，如果只有随机误差，那就可以知道合理的期望将会是如何，即当总体之间没有实质差异时，组间的随机误差有多大。</p>
+<p>使用<strong>标准化</strong>分布来建立一个零模型是很便捷的，因为这样计算某一值的概率相对更容易，且不用考虑其余维度。有一个衡量差异的零模型是t分布，它可以用于描绘从总体抽样时的差异情况。有一个衡量差异的零模型是t分布，它可以用于描绘从总体抽样时的差异情况。这种零模型是建立在某种<strong>假设</strong>之上的。在<em>t</em>分布的情况下，这个假设的分布属于正态分布。然而事实上，依据统计方法所提出的假设从来没有得到过完美的匹配，所以，这就是为什么统计学家们在探索违反假设对方法论的影响。当违反假设对统计推断的影响足够小时，那么统计检验的方法仍然是有效且实用的。</p>
+<p>我们可以通过<em>概率密度函数</em>来衡量当总体中不存在差异时的预期<em>t</em>值分布。下面是一个<strong>自由度</strong>（df）为18的<em>t</em>分布的概率密度函数图，它与我们的例子一致，即对应我们从20个朋友那里收集的数据（df=N-2，两个独立组）。对于连续分布来说，概率是由无限多的点定义的，任何一个点的概率（例如，<em>t</em>=2.5）总是零。概率是按区间测量的。因此，计算的<em>p</em>值并不是所得观测数据（即某一点）的概率，而是所得观测数据<em>或更极端数据</em>（即一个区间）的概率。这就形成了一个可以计算面积的概率区间。</p>
+</section><section id="计算p值" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="计算p值">
+<span class="header-section-number">1.3</span> 计算<em>p</em>值</h2>
+<p><em>t</em>值可以用样本均值、总体均值、样本的标准差和样本大小来计算。然后计算所得观测数据或更极端数据的<em>t</em>值概率，我们就得到了<em>p</em>值。将上述两组朋友的电影评分进行对比，依据双侧<em>t</em>检验可得到的<em>t</em>值为2.5175，<em>p</em>值为0.02151。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">t.test</span>(df_long<span class="sc">$</span>rating <span class="sc">~</span> df_long<span class="sc">$</span><span class="st">`</span><span class="at">Friend Group</span><span class="st">`</span>, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  df_long$rating by df_long$`Friend Group`
+t = 2.5175, df = 18, p-value = 0.02151
+alternative hypothesis: true difference in means between group Daniel的朋友 and group Kyra的朋友 is not equal to 0
+95 percent confidence interval:
+ 0.1654875 1.8345125
+sample estimates:
+mean in group Daniel的朋友   mean in group Kyra的朋友 
+                       8.7                        7.7 </code></pre>
+</div>
+</div>
+<p>我们可以绘制出<em>t</em>分布图（df=18），并高亮了<em>t</em>值为2.5175和-2.5175的两个尾部区域。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-tdist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-tdist-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: A <em>t</em>-distribution with 18 degrees of freedom.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="sec-whichpexpect" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="sec-whichpexpect">
+<span class="header-section-number">1.4</span> 哪个是你想要的p值</h2>
+<p>有一个非常有教学意义的视频叫“<a href="https://www.youtube.com/watch?v=5OL1RqHrZQ8"><em>p</em>值之舞</a>”，Geoff Cumming觉得p值因实验的不同而有所差异。然而，这并不是他在视频中提到的 “不信任p值”的理由。相反，他认为重要的是要清楚地了解<em>p</em>值是如何分布的，以防止误用。因为<em>p</em>值是统计中频率学派的部分，我们需要研究的是<em>从长远来看</em>能预期得到什么。因为我们永远不会成千上万次的做一个实验，而且我们也无法将所有的时间精力投入至研究中，所以最好的办法就是通过计算模拟求得一个长远的结果。</p>
+<p>请大家花一些时间思考一下两个问题。如果效应真实存在，并且你重复这个实验成千上万次了，你可能会得到一个什么样的<em>p</em>值？同样，如果效应并不存在，你也同样重复这个实验成千上万次了，你又会得到什么样的<em>p</em>值？如果你不知道答案也没有关系，你现在就能学会。如果你不知道答案，或许应该值得反思一下，为什么并不了解<em>p</em>值的基本知识。如果你和我一样，根本没有被教过这个。但正如我们将看到的，这对巩固理解<em>p</em>值该如何解释至关重要。</p>
+<p>你能期望的<em>p</em>值完全由研究的统计功效决定，或者说，如果效应真实存在，你将得到显著效应的概率。统计功效的范围在0~1。我们可以通过模拟独立<em>t</em>检验来说明这一点。比如说，我们来模拟一群人的智商分数。我们知道智商的标准差是15。现在，我们假设某个样本组的平均智商为100，而另一个组为105。随后，我们来检验这两组人的IQ是否不一致（但是我们知道正确答案是“是”，因为我们就是这么模拟的数据）。</p>
+<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/unnamed-chunk-5_c76d311b541d744aed05cd28d1318f20">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>p <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">100000</span>) <span class="co"># store all simulated *p*-values</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100000</span>) { <span class="co"># for each simulated experiment</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">71</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="co"># Simulate data</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">71</span>, <span class="at">mean =</span> <span class="dv">105</span>, <span class="at">sd =</span> <span class="dv">15</span>) <span class="co"># Simulate data</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  p[i] <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, y)<span class="sc">$</span>p.value <span class="co"># store the *p*-value</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8"></a></span>
+<span id="cb3-9"><a href="#cb3-9"></a>(<span class="fu">sum</span>(p <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> <span class="dv">100000</span>) <span class="co"># compute power</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="fu">hist</span>(p, <span class="at">breaks =</span> <span class="dv">20</span>) <span class="co"># plot a histogram</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>在模拟时，我们生成了一个关于IQ分数的正态分布（n = 71，均值M=100或105），标准差=15）。然后我们进行独立t检验，求得p值，并生成<em>p</em>值分布图。</p>
+<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr1_53dd50e264638f8017c7fca97ba32914">
+<div class="cell-output-display">
+<div id="fig-pdistr1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdistr1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.2: Distribution of <em>p</em>-values when power = 50%.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>我们可以看到x轴是20个条形柱分别代表着从0到1的<em>p</em>值，Y轴则是这些<em>p</em>值的频率。水平的红色虚线表示5%的<span class="math inline">\(\alpha\)</span>（位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设<span class="math inline">\(\alpha\)</span>为0.05时）： 这项研究有50%的功效。</p>
+<p>模拟的结果描绘了<em>p</em>值的<em>概率密度函数</em>。概率密度函数给出了在<em>t</em>分布中，某个特定值(比如如图@ref(fig:tdist)那样)的随机变量的概率。因为<em>p</em>值是一个随机变量，我们可以用它的概率密度函数来绘制<em>p</em>值分布图<span class="citation" data-cites="hung_behavior_1997 ulrich_properties_2018">(<a href="references.html#ref-hung_behavior_1997" role="doc-biblioref">Hung et al., 1997</a>; <a href="references.html#ref-ulrich_properties_2018" role="doc-biblioref">Ulrich &amp; Miller, 2018</a>)</span>，如图@ref(fig:pdft）。在<a href="http://shiny.ieis.tue.nl/d_p_power/">线上的Shiny应用程序</a>中，你可以改变样本大小、效应量大小和<span class="math inline">\(\alpha\)</span>水平，以便观察他们对<em>p</em>值分布的影响。增加样本量或效应量大小将增加<em>p</em>值分布的陡峭程度，这意味着观察到小<em>p</em>值的概率增加。<em>p</em>值分布是检验的统计功效的函数。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-pdft" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdft-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.3: Probability density function for <em>p</em>-values from a two-sided <em>t</em>-test.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>当效应不存在时，<em>p</em>值是<strong>均匀分布</strong>的。这意味着，当零假设为真时，每一个<em>p</em>值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的<em>p</em>值和0.98的<em>p</em>值含义一样。我记得当我第一次了解到均匀的<em>p</em>值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，<em>p</em>值永远大于我们所设定的<span class="math inline">\(\alpha\)</span>水平时，那么<em>p</em>值为均匀分布似乎又是合理的。如果我们把<span class="math inline">\(\alpha\)</span>水平设为0.01，1%的概率观察到的<em>p</em>值小于0.01，如果我们把<span class="math inline">\(\alpha\)</span>水平设置为0.12，12%的概率观察到<em>p</em>值小于0.12。但是，这只有在零假设（<span class="math inline">\(H_0\)</span>）为真时，<em>p</em>值是均匀分布的情况下才会发生这种情况。</p>
+<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr2_3feb9c99185c4d5360ff9cded2617c8d">
+<div class="cell-output-display">
+<div id="fig-pdistr2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdistr2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.4: Distribution of <em>p</em>-values when the null hypothesis is true.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="sec-lindley" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="sec-lindley">
+<span class="header-section-number">1.5</span> 林德利悖论</h2>
+<p>随着统计功效的提高，一些稍微低于0.05的<em>p</em>值（如<em>p</em>=0.04），相比于<em>有</em>效应，它更可能在<em>没有</em>效应时出现。这就是著名的林德利悖论 <span class="citation" data-cites="lindley_statistical_1957">(<a href="references.html#ref-lindley_statistical_1957" role="doc-biblioref">Lindley, 1957</a>)</span>，或称杰弗里-林德利悖论 <span class="citation" data-cites="spanos_who_2013">(<a href="references.html#ref-spanos_who_2013" role="doc-biblioref">Spanos, 2013</a>)</span>。因为<em>p</em>值的分布是统计功效的函数 <span class="citation" data-cites="cumming_replication_2008">(<a href="references.html#ref-cumming_replication_2008" role="doc-biblioref">Cumming, 2008</a>)</span>，功效越高，<em>p</em>值的分布就越右偏（即越有可能观察到小的<em>p</em>值）。当不存在真实的效应时，<em>p</em>值是均匀分布的，1%的概率可以观察到<em>p</em>值在0.04和0.05之间。当统计功效极高时，不仅大多数<em>p</em>值会低于0.05，甚至会低于0.01。通过图@ref(fig:paradox)我们可以看到，在高功效下，当效应<em>真实存在</em>时，非常小的<em>p</em>值（例如0.001）就比<em>无</em>效应时更容易被观察到（例如，当P值为0.01时，代表99%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时<em>p</em>值的均匀分布）。</p>
+<p>然而令人迷惑的是，当<em>p</em>值为0.04时，则更可能是没有效应，即零假设（<span class="math inline">\(H_0\)</span>）为真时，我们任然可以有非常高的功效，例如在图@ref(fig:paradox)中所示，当<em>p</em>等于0.04时，零假设为真时的<em>p</em>值分布的密度要比99%功效时要高。所以，林德利悖论说明，0.04的<em>p</em>值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么<em>p</em>值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据<em>p</em>&lt;0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低<span class="math inline">\(\alpha\)</span>水平作一个样本量的函数来实现<span class="citation" data-cites="leamer_specification_1978">Good (<a href="references.html#ref-good_bayesnon-bayes_1992" role="doc-biblioref">1992</a>)</span>，这一点将在“<a href="#errorcontrol">误差的控制</a>”一章节进行解释。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-paradox" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-paradox-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.5: <em>P</em>-value distribution for 0 (grey horizontal line, 50 percent power (black solid curve), and 99 percent power (black dotted curve, where <em>p</em>-values just below 0.05 are more likely when <span class="math inline">\(H_0\)</span> is true than when <span class="math inline">\(H_1\)</span> is true).</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="sec-correctlyinterpreting" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="sec-correctlyinterpreting">
+<span class="header-section-number">1.6</span> 正确地解释和报告<em>p</em>值</h2>
+<p>虽然从严格的Neyman-Pearson方法的角度来看，报告<em>p</em>&lt;<span class="math inline">\(\alpha\)</span>或<em>p</em>&gt;<span class="math inline">\(\alpha\)</span>就足够了，但研究者还是应当报告确切的<em>p</em>值。这便于后续再次分析结果时使用 <span class="citation" data-cites="appelbaum_journal_2018">(<a href="references.html#ref-appelbaum_journal_2018" role="doc-biblioref">Appelbaum et al., 2018</a>)</span>，也便于并其他研究者将<em>p</em>值与他们希望使用的<span class="math inline">\(\alpha\)</span>水平进行比较 <span class="citation" data-cites="lehmann_testing_2005">(<a href="references.html#ref-lehmann_testing_2005" role="doc-biblioref">Lehmann &amp; Romano, 2005</a>)</span>。因为所发表的结论是使用已知最大误差率的方式进行的，<em>p</em>值永远不允许你肯定地陈述任何事情。即便我们把<span class="math inline">\(\alpha\)</span>水平设定为0.000001，但任何一个结论都可能是错误的，Fisher <span class="citation" data-cites="fisher_design_1935">(<a href="references.html#ref-fisher_design_1935" role="doc-biblioref">1935</a>)</span> 提醒我们，即使是”百万分之一的几率”仍旧会发生，既不低于也不高于其某个恰当的概率，但只要发生在我们身上就是0和1的概率，纵使我们会非常惊讶为什么如此小的概率仍会发生在<em>我们</em>身上”。这就是<strong>重复研究</strong>在科学领域很重要的原因。任何单一的发现都可能是一种侥幸，但如果几个重复的研究都能得到相同的结果，那么这种概率很快就会变得非常小。这种不确定性可能并没有反映在学术写作中，因为可以看到研究者会使用 “证明”、“显示”或 “已知”等字眼。在做完假设检验之后，有个稍长但更准确的说法是：</p>
+<blockquote class="blockquote">
+<p>我们宣称了一个有或没有意义的效应，但也同时承认，如果学者们使用这种方法论提出结论，从长远来看，他们最多只有在<span class="math inline">\(\alpha\)</span>%或<span class="math inline">\(\beta\)</span>%上被误导，我们认为这是可以接受的。在不久的将来，除非出现新的数据或信息证明我们是错的，否则我们将假定这一结论是正确的。</p>
+</blockquote>
+<p>请记住，在Neyman-Pearson的理论框架下，研究者提出某种说法，但是这些说法<em>不一定是真实的</em>。例如，OPERA合作组织在2011年报告说，他们所得到的观测数据似乎揭示了中微子的速度超过了光速。这一说法的第一错误率是百万分之0.2，<em>假定错误纯粹是由随机误差造成的</em>。然而，实际上并没有研究者相信这一说法是真的，因为理论上中微子的运动速度不可能超过光速。事实上，后来发现是由于设备故障所导致的数据异常：一根光纤的连接不当，还有一个时钟振荡器的走的过快。然而，在提出这一说法的同时也公开邀请学界提供新的数据或信息，来证明这一说法有误。</p>
+<p>当学者们在Neyman-Pearson统计推断方法下”接受”或”拒绝”一个假设时，他们并没有表明任何关于假设的信念或结论。相反，他们宣称自己是基于预设规则（即观察到的数据反映了世界的某种状态）的一种波普尔式<strong>基本声明</strong>。这些基本声明描绘的是已经进行的观察（例如，“我观察到了一只黑天鹅”）或已经发生的事件（例如，“接受间隔练习训练的学生，比不接受训练的学生在考试中表现得更好”）。</p>
+<p>也就是说当下的某种声明与我们已经观测到的数据相关，但与我们用于预测的理论无关。某个声明与观测数据相关，因为它是一种统计推断，但它与理论无关，因为理论需要理论推断。数据永远无法“证明“一个理论是对还是错。一个基本声明可以<strong>证实</strong>一个从理论推导出来的预测，也可能无法证实。如果从一个理论中推导出的许多预测都得到了证实，我们就会越来越相信这个理论是接近真理的。这种理论的“接近真理性”叫做<strong>逼真性</strong> <span class="citation" data-cites="niiniluoto_verisimilitude_1998 popper_logic_2002">(<a href="references.html#ref-niiniluoto_verisimilitude_1998" role="doc-biblioref">Niiniluoto, 1998</a>; <a href="references.html#ref-popper_logic_2002" role="doc-biblioref">Popper, 2002</a>)</span>。报告假设检验时会出现的一个更短的声明是“p=.xx，即我们的预测在y%的α水平下得到证实，或者“p=.xx，即我们所关注的效应量在对应的统计检验力下，预测没有被证实”。<span class="math inline">\(\alpha\)</span>水平或者统计检验力往往只在文章的实验设计部分被提及，但是在结果部分重复他们能够提醒读者注意与你的声明相关的错误率。</p>
+<p>甚至当我们做出正确的声明时，它的底层理论也可能是错误的。Popper <span class="citation" data-cites="popper_logic_2002">(<a href="references.html#ref-popper_logic_2002" role="doc-biblioref">2002</a>)</span> 提醒我们“客观科学的实证基础并不是绝对的”。他争辩科学并不建立在坚固的基石之上，而是在沼泽中打下的木桩上，并指出“所以就目前而言，当确信桩的牢固程度足以承载结构后，我们就会停下来”。如Hacking <span class="citation" data-cites="hacking_logic_1965">(<a href="references.html#ref-hacking_logic_1965" role="doc-biblioref">1965</a>)</span> 写道：“拒绝不是反驳。多数拒绝只是试探性的”。所以当拒绝零模型时，我们是试探性的，并且知道有犯错的可能性，而不是一定要相信零模型是错的，以及我们用来进行预测的理论是对的。对Neyman <span class="citation" data-cites="neyman_inductive_1957">(<a href="references.html#ref-neyman_inductive_1957" role="doc-biblioref">1957</a>)</span> 而言，推断行为是一种“遵循当前实验结果，以一种特定方式去造就未来（直到被新的实验所迭代）的意志。所有的科学知识都是暂时的。</p>
+<p>一些统计学家建议把p值解释成对证据的度量。例如，Bland <span class="citation" data-cites="bland_introduction_2015">(<a href="references.html#ref-bland_introduction_2015" role="doc-biblioref">2015</a>)</span> 提出<em>p</em>值可以被解释成一种对证据强度的“即粗略又完备”的指示，<em>p</em> &gt; 0.1表示“很少或没有证据”，0.01 &lt; <em>p</em> &lt; 0.05表示“有证据”，<em>p</em> &lt; 0.001表示“证据很强”。从前面关于林德利悖论和<em>p</em>值均匀分布的讨论中可以看出这是不正确的 <span class="citation" data-cites="johansson_hail_2011 lakens_why_2022">(<a href="references.html#ref-johansson_hail_2011" role="doc-biblioref">Johansson, 2011</a>; <a href="references.html#ref-lakens_why_2022" role="doc-biblioref">Lakens, 2022</a>)</span>。如果你想量化证据，请看关于<a href="#likelihoods">似然性</a>或<a href="#bayes">贝叶斯统计</a>的章节。</p>
+</section><section id="sec-misconceptions" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="sec-misconceptions">
+<span class="header-section-number">1.7</span> Preventing common misconceptions about <em>p</em>-values</h2>
+<p><em>p</em>值是在零假设为真的情况下，实际观测到的数据的概率或者临界值的概率。为了理解<em>p值</em>能说明什么，我们尤其要注意<em>p</em>值不能说明什么。首先，我们需要知道”零假设为真”是什么，以及当零假设为真时，数据的分布形态是怎样的。尽管零假设可以被设定为任意数值，在这里我们规定零假设就是均两组值差异为0。例如，在实验条件下和控制条件下计算两组因变量的差异。</p>
+<p>区分零假设（假设在总体中平均值差异正好为0）和零模型（当零假设为真时，我们应该观察得到的数据模型）非常重要。零假设是一个位于0的点，而零模型则是一个分布。在教科书或者统计分析软件中，它门被可视化，可能会出现下面这样的图片。你可以看到，横轴代表<em>t</em>值，并且临界值<em>t</em>在1.96-2.00之间（取决于样本量）。之所以用<em>t</em>值，是因为比较两组差异的统计检验是基于<em>t</em>分布的，当实际得到的<em>t</em>值大于临界值<em>t</em>时，我们就认为<em>p</em>值在统计上显著。</p>
+<p>我个人认为，如果绘制的零模型是均值差的而非<em>t</em>值的，解释起来会更加清楚。所以在下方，你会看见当比较样本量为50的两组数据时，均值差的零模型，假设它们的真实差异为0，两组的标准差均为1。因为它们的标准差为1，你也可以把均值差异解释为科恩<em>d</em>效应量。所以，这也是样本量为50的样本在做独立样本<em>t</em>检验，科恩<em>d</em>为0时的分布。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig131" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig131-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.6: 在每组收集50个观察值的独立样本t检验中，所得Cohen’s <em>d</em>效应量的分布。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>首先要注意到的是，我们期望的零模型的平均值是0。观察X轴，我们可以看到绘制的分布是以0为中心的。但是，即使总体的均值差是0，这也不意味着每个从总体中抽出的样本的均值差都为0。样本的值会围绕总体的值变化，是一个标准差和样本量的函数。</p>
+<p>图中Y轴是概率密度，它代表的是连续分布中得到某一特定值的可能性。我们可以看到，最有可能得到的均值差是总体的真实值0，离0越远的值得到的可能性就越小。图中有两个区域标红了，这些区域代表分布的左尾部2.5%的极端值，以及分布的右尾部2.5%的极端值。它们共同构成了当真均值差恰好为0，样本量为50时，抽样分布的5%的极端值的区域。当测量的值落在这个区域，相应的统计检验就认为两组在5%的α水平上达到显著差异。换句话说，不超过5%的均值差是离0足够远，会被认为是小概率事件的。因为零假设为真，如果测量得到这种小概率的平均值差异，即红色区域，则是犯了1型错误。</p>
+<p>让我们假设上图中的零模型是正确的，并且我们测量得到两组之间的平均值差异为0.5。这种测量得到的差异落在分布右尾的红色区域。这意味着，在真实平均差值为0的假设下，测量得到的平均差值相是小概率事件。如果真实的平均差值为0，概率密度函数表明我们不应该测量得到平均差值为0.5。如果我们计算这个观测值的p值，它将低于5%。观测到距离0远至0.5(当我们做双尾检验时，要么在均值的左边，要么在均值的右边)的平均差异的概率小于5%。</p>
+<p>我更喜欢用原始分数而不是t值来绘制零模型的另一个原因是，当样本量增加时，我们可以看到零模型是如何变化的。当我们收集5000个而不是50个观测值时，我们看到零模型仍然以0为中心——但在现在的零模型中，我们预计大多数值将非常接近0。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig132" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig132-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.7: 当d=0时，在每组收集5000个观察值的独立样本t检验中，所得Cohen’s <em>d</em>效应量的分布。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>由于均值差的分布是基于均值差的标准误，所以5000样本量的分布要窄得多。这个值是根据标准差和样本量计算的，如下所示:</p>
+<p><span class="math display">\[\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}\]</span> 这个公式表明，均值差的标准误是每个组的标准差（σ）的平方除以该组的样本量，加在一起，然后取平方根。样本量越大，除以的数字就越大，因此均值差的标准误就越小。在n =50的例子中，有标准差:</p>
+<p><span class="math display">\[\sqrt{\frac{1^{2}}{50}+\frac{1^{2}}{50}}\]</span> 因此，当n = 50时，两组均值差的标准误为0.2；当n = 5000时，均值差的标准误为0.02。假设抽样分布为正态分布，95%的观测值落在1.96 个标准误之间。因此，对于样本量为50的样本，均值差应该在-1.96 * 0.2 = -0.392和+1.96 * 0.2 = 0.392之间，我们可以看到，当n = 50时，红色区域大约从-0.392到0.392。对于样本量为5000的样本，均值差应在-1.96 * 0.02和+1.96 * 0.02之间，也就是说，应该介于-0.0392到0.0392之间。由于样本量较大（n = 5000），观测得到的均值差应该比较小样本（n=50）中观测得到的均值差更接近0.</p>
+<p>如果我们抽出n = 5000的样本，并且观测到0.5的均值差，我们要清楚，这样的概率比起收集50个观测值发现0.5的均值差的要更小。我们现在几乎已经准备好介绍关于p值的常见误解，但在此之前，我们需要引入一个当零假设不为真时的数据模型。如果我们不是从一个真实均值差为0的模型中抽样，那么得到的备择模型会是什么样呢？一些软件 （比如 G*power, 见 图 @ref(fig:gpowerscreenshot))会同时显示出零模型（红色曲线）和备择模型（蓝色曲线）:</p>
+<p>(ref:gpowerscreenshotlab) G*Power软件截图显示了零模型（红色分布）和备择模型（蓝色分布）以及区分显著和非显著结果的临界<em>t</em>值（1.66055）。</p>
+<p>(ref:gpowerscreenshotlab) Screenshot from G*Power software visualizing the null model (red distribution) and alternative model (blue distribution) and the critical <em>t</em>-value (1.66055) that is the threshold distinguishing significant and non-significant results.</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-gpowerscreenshot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/1.3.3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.8: G*Power软件截图显示了零模型（红色分布）和备择模型（蓝色分布）以及区分显著和非显著结果的临界<em>t</em>值（1.66055）。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>当我们做一项研究时，我们不知道真正的均值差是多少（如果我们已经知道了，为什么还要做这项研究?）但是，让我们假设有一个全知的存在，按照Paul Meehl的说法，我们称呼祂为”无所不知的琼斯”。在我们从总体里收集50个观测值之前，“无所不知的琼斯”就已经知道了总体的真实均值差为0.5。那么在备择模型中，均差值就应该在0.5周围变化。下图显示了零假设成立时的数据模式(用灰线表示)，和备择模型(用黑线表示)，即假设总体中存在0.5的真实均值差的模型。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig134" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig134-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.9: 在<em>d</em> = 0，每组收集50个观测值的独立样本<em>t</em>检验中，Cohen’s <em>d</em>效应量的分布。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>但是”无所不知的琼斯”也可以说真实均值差是一个更大的值。假设在另一个研究中，在我们抽样之前，祂就说真实均值差是1.5。那么此时零假设模型不变，备择假设模型会向右移动。</p>
+<p>您可以在此应用程序上在线调整备择模型和零模型：<a href="http://shiny.ieis.tue.nl/d_p_power/" class="uri">http://shiny.ieis.tue.nl/d_p_power/</a>. 该应用程序允许你设定参加t检验的两组的样本量（从2到无穷大）、均值差（从0到2）和alpha水平。在图中，红色区域表示I类错误，蓝色区域表示II类错误（具体我们将在之后讨论）。该应用程序也会显示临界值：会有一条垂直线（样本量为50时，落在均值差为0.4处）和一句提示语——大于0.4代表效应显著。虽然没有提示语，我们应该知道此时小于-0.4也显著。这个应用程序也适用于双侧的独立t检验。</p>
+<p>你可以看到，在表示临界均值差的竖线的左边有一个蓝色区域，它是备择模型的一部分。这就是犯II类错误的概率（或者代表1-统计力）。如果一个研究的统计力是80%，代表我们能观测到的80%的均值差都会落在代表临界值的那条线的右边。如果备择假设为真，但是我们又得到了小于临界值的效应，那么即使真的存在效应，此时的<em>p</em>值应该大于0.05。你可以在应用程序中验证，当样本量越大，整个备择模型就越靠右，统计力也就越大。同时你也可以看到，样本量越大，分布越窄，低于临界值的分布越少（只要真实总体均值大于临界值）。最终，α水平越大，临界值代表的均值差越向左移，低于临界值的备择分布的面积就越小。</p>
+<p>该应用程序还绘制了3个图，是不同α水平、不同样本量和不同真均值差下的功率曲线函数。用户可以在应用程序中调整这三个值，了解每个变量如何影响零模型和备择模型，看到达到统计水平上显著的均值差的大小和犯Ⅰ类以和Ⅱ类错误的概率。</p>
+<p>到目前为止，零模型的几个方面应该已经变得逐渐清晰。首先，传统零假设中，总体均值差为0，但在你抽出的任何样本中，观测的均值差都落在一个以0为中心的分布中，通常会略大于或略小于0。其次，该分布的宽度取决于样本量和标准差。研究的样本量越大，分布就越集中于0。最后，当观测到的均值差落在零模型尾端时，结果被认为是出人意料的。离0越远，这个结果就越令人惊讶。但是，当零模型为真时，这些令人惊讶的结果发生的概率为α水平（也被称为Ⅰ类错误）。请记住，当研究人员得出总体存在差异时，但实际的均值差为0时，就会发生第一类错误。</p>
+<p>我们现在终于准备好可以厘清一些关于<em>p</em>值的常见误解了。让我们来回顾一下科学文献中报告过的一系列常见误解。其中一些也许听起来只是语言表达问题。乍一看，人们很容易认为这句话传达了正确的想法，即使在书面形式上并不正确。然而，当一个陈述在形式上不正确时，它就是错误的。正是因为人们会经常误解<em>p</em>值，所以在形式上正确解释<em>p</em>值是非常重要的。</p>
+<section id="sec-misconception1" class="level3" data-number="1.7.1"><h3 data-number="1.7.1" class="anchored" data-anchor-id="sec-misconception1">
+<span class="header-section-number">1.7.1</span> 误解 1：<em>p</em>值不显著意味着零假设为真。</h3>
+<p>此误解的一个常见版本体现在句子’因为<em>p</em> &gt; 0.05， 我们可以推断效应不存在’中；这句话也可以是’差异不存在（<em>p</em> &gt; 0.05）’。</p>
+<p>在谈论细节之前，我想提醒你一个简单的事实，它会使你辨明许多关于<em>p</em>值的误解：p值是有关数据概率的解释，而非一个假设或理论的概率的解释。不论何时你看到<em>p</em>值被用于解释一个假设或理论的概率，你就知道事情有些不太对。有关假设的例子有：‘零假设为真’或’备择假设为真’，它们都是指零模型或者备择模型为真的概率是100%。更微妙的表述有’观测到的差异不是出于偶然’。当零假设为真时，观测到的差异只是’由于偶然’（而不是由于真实差异的存在），与之前一样，这句话是指零假设100%为真。</p>
+<p>当你得出’效应不存在’或者’不存在差异’的结论时，你也就是在说零假设100%为真。但是由于<em>p</em>值是有关数据概率的解释，你应该避免仅基于<em>p</em>值去解释理论存在的概率。<em>p</em>值的设计是用来帮助你识别嘈杂的数据生成（即真实情况）中意料之外的结果。它并不能量化一个假设为真的概率。</p>
+<p>让我们举一个具体的例子来说明为什么不显著的结果并不意味着零假设就是正确的。在下图中，无所不知的琼斯告诉我们，真均值差为0.5。我们可以从图中看出，当备择假设为真时，期望的均值差的可视化分布以0.5为中心。我们观测到的均值差是0.35。这个值还没有极端到足以在统计学上与0有显著差异。同样从图中可以看出，这个值没有落在零模型的红色区域（因此，<em>p</em>值并不小于我们规定的α水平）。</p>
+<p>然而，鉴于真均值差是0.5，观测均值差为0.35不光很可能发生，更可能是在备择模型而非是零模型上观测到。你可以看到这一点，因为在零模型中，均值差为0.35的概率密度曲线的高度约为0.5，在备择模型中概率密度曲线的高度则接近1.5。详情请参见<a href="#likettest">可能性</a>一章。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig136" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig136-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.10: 在<em>d</em> = 0.35时，对<em>d</em> = 0和<em>d</em> = 0.5进行每组50个观测值的独立样本t检验，所得Cohen’s <em>d</em>效应量的分布。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>如果我们假定零假设为真，所有的p值都告诉我们均值差为0.35并不是非常出人意料。这可能有很多原因。在真实世界中，并不存在无所不知的琼斯告诉我们真均值差，就像上图所示，有可能存在一个真实效应。</p>
+<p>那么我们应该怎么陈述呢？解决方案很微妙，但也很重要。让我们再看看之前做的两个错误陈述的例子。首先，“因为<em>p</em> &gt; 0.05，我们可以推断效应不存在”这个陈述是错误的，因为很有可能效应是存在的（请记住<em>p</em>值是有关数据的解释而不是有效应或无效应的概率）。 费希尔对于p值的解释是我们可以得出一个小概率事件的发生或者零假设是错误的（他的原话是：“要么是发生了及其罕见的事件，要么是随机分布的原假设不正确”）。这可能听起来像是有关理论的概率的解释，但实际只是在p值很小时，对两种可能出现的场景的陈述（你犯Ⅰ型错误或者备择假设才为真）。真阳性和假阳性都是可能的，并且我们不量化两种可能性出现的概率（例如，并不是说零假设为真的概率是95%）。从内曼-皮尔逊的角度，p &gt; .05意味着我们不能拒绝零假设，因为我们有着5%以下的预期错误率。</p>
+<p>如果你对于推断效应缺失感兴趣，零假设检验不是你需要的工具。零假设检验回答的问题是’在期望的错误率下，我可以拒绝零假设吗？’。当<em>p</em> &gt; 0.05，你不能拒绝零假设时，零假设是真还是假是不能仅仅基于<em>p</em>值得出的（就像’无’的概念：既不是真也不是假）。幸运地是，已经开发了别的统计方法来回答效应缺失的问题，例如 <a href="#equivalencetest">等效检验</a>, 贝叶斯因子和贝叶斯估计 (请参见 <span class="citation" data-cites="harms_making_2018">Harms &amp; Lakens (<a href="references.html#ref-harms_making_2018" role="doc-biblioref">2018</a>)</span>, 了解概述).</p>
+<p>第二个不正确的说法是’没有差异’。这个陈述改正起来要容易些。你可以写’没有统计学上的显著差异’。当然，两者有点重复，因为你基本上在用两种不同的方式说<em>p</em>值大于α水平，但至少这个说法在形式上是正确的。‘没有差异’和’没有统计学上的显著差异’可能听起来差不多，但前者你实际上在说’差异为0’，而后者你是在说’差异不足以使<em>p</em> &lt; .05’。虽然我从未见过有人这样做，但是更完整的说法应该是’鉴于样本量是每组50，α水平是0.05，观测差异只有大于0.4才能达到统计学上的显著，由于我们观测的差异是0.35，因此我们不能拒绝零假设’。如果这看起来不是一个令人满意的结论，请记住，零假设检验的设计不是为了得出效应缺失的有趣结论——你需要了解等效检验，来得到有关零效应更令人满意的答案。</p>
+</section><section id="误解-2p值显著意味着零假设为假" class="level3" data-number="1.7.2"><h3 data-number="1.7.2" class="anchored" data-anchor-id="误解-2p值显著意味着零假设为假">
+<span class="header-section-number">1.7.2</span> 误解 2：<em>p</em>值显著意味着零假设为假。</h3>
+<p>这是上一个误解的另一面。基于这种误解的错误陈述有’<em>p</em> &lt; .05，因此效应存在’，或’两组之间存在差异，<em>p</em> &lt; .05’。像之前一样，这些陈述都是在暗指零假设为假的概率是100%，备择假设才为真。</p>
+<p>举一个简单的例子，说明为什么这些极端的语句是不正确的。假设我们使用下面的命令在R中生成一系列数字：</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] -0.37795354  1.12144270  0.34960805  2.32402666 -1.70860649 -0.90697330
+ [7] -0.06044298 -0.58994454  1.35339390  1.01285694  0.81940993  0.58104476
+[13]  0.09872025  1.63347002 -0.56077008  0.70089778  0.14946050  1.74589880
+[19] -0.96809184  0.97421048 -1.21031160 -2.55532137 -0.83242904  1.10589580
+[25]  0.18618962  0.59659675 -1.20891290 -0.66334373  0.40584083 -0.84054960
+[31]  1.89760512  0.03497029 -1.46163906 -1.76396437 -1.28284690  1.66566188
+[37]  0.53413200  0.68446545  1.32225905  1.29786913 -0.23116646 -0.02214159
+[43]  1.07663693  1.34863351  1.35173757 -0.23187834  1.19011514 -0.30330206
+[49] -0.25187978 -1.51206914</code></pre>
+</div>
+</div>
+<p>该命令会从一个平均值为0、标准差为1的分布中随机生成50个观察值（从长远来看——生成的每个样本的平均值和标准差都会有所不同）。想象我们运行这个命令一次，得到一个平均值为0.5的分布。下面的图画出了这个分布。假设我们可以做它和0的单样本t检验，得到<em>p</em> &lt; .05，此检验告诉我们，我们观测到的数据与0有显著差异，但此时R函数中随机数生成器依然按照原来的指令运行，生成的数据的真实均值为0。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig137" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig137-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.11: 在<em>d</em>= 0，对<em>d</em> = 0.5进行每组50个观测值的独立样本<em>t</em>检验中，所得Cohen’s <em>d</em>效应量的分布</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>p值显著并不能让我们得出零假设（“随机数生成器照常运行”）为假的结论。的确，我们生成的50个样本的平均值是令人惊讶的极端值。但是较低的<em>p</em>值只是告诉我们这个观测结果是出人意料的。当零假设为真时，我们只会在很低的概率下得到这个令人惊讶的观测结果——但它仍有可能发生。因此，显著的结果并不意味着备择假设就是对的——也有可能是出于Ⅰ型错误，就如同上面的例子，只有无所不知的琼斯知道是这种情况。</p>
+<p>让我们重新审视这个错误陈述’<em>p</em> &lt; .05，因此效应存在’。正确理解显著的<em>p</em>值，要求我们承认显著结果是Ⅰ型错误的可能性。请记住，费希尔会得出的结论是”要么是发生了及其罕见的事件，要么是随机分布的原假设不正确”。对于内曼-皮尔逊统计的正确解释是：“我们可以当作零假设为假，从长远来看，我们错的时间不会超过5%”。注意我们使用了’当作’这个词，这并不是在说任何特定的假设是真还是假，仅仅是指出，如果任何时候当<em>p</em> &lt; α，我们就当作零假设为假，那我们犯错误的频率将小于α百分比的时间。</p>
+<p>这两种正式的陈述都有一点冗长。在科学文章中，我们经常读到简短点的陈述，比如：“我们可以拒绝零假设”，或者”我们可以接受备择假设”。这些陈述可能是假定读者会自己加上”长期来看，会有5%的错误概率”这句话。但是，至少在第一次陈述时，可以加上”长期看有5%的错误率”这个声明来提醒读者。</p>
+<p>在上面的例子中，我们有一个非常强的主观先验概率，即R中的随机数生成器可以运行。其他可以纳入分析这种主观先验概率的统计方法有 <a href="#bayes">贝叶斯统计</a> 或者 <a href="#ppv">假阳报告概率</a>。在频率统计雪中，你需要多次重复你的研究。你会时不时地观测到Ⅰ类错误，但不太可能连续三次都观测到。或者，你也可以在单次研究中降低α水平，来降低犯Ⅰ类错误的概率。</p>
+</section><section id="误解-3p值显著意味着发现了一个实际重要的效应" class="level3" data-number="1.7.3"><h3 data-number="1.7.3" class="anchored" data-anchor-id="误解-3p值显著意味着发现了一个实际重要的效应">
+<span class="header-section-number">1.7.3</span> 误解 3：<em>p</em>值显著意味着发现了一个实际重要的效应。</h3>
+<p>在解释p值时，存在一个普遍的问题，即在日常语言中，“显著”意味着”重要”，因此”显著”的结果常被认为是一个”重要”的效应。然而，一个效应是否重要与它是否不等于零，或者说这个效应有多大是完全不同的两个问题。并不是所有的效应都用实际的影响。 这个效应越小，被人注意到的可能性就越小，但这个效应仍然可能会社会生产水平产生很大的影响。因此，正确的理解应该是，统计上的意义并不能回答一个效应在实践中是否重要，或者是否有”实际意义”的问题。要回答效应是否重要的问题，您需要进行成本效益分析。</p>
+<p>这个实际意义的问题经常出现在样本量非常大的研究中。正如我们之前所看到的，随着样本量增加，零值周围的概率密度分布变得越来越窄，这被认为是<em>p</em>值无限接近于0。</p>
+<p>如果我们为一个非常大的样本量（例如，每组n=10000）绘制零模型，我们可以看到，即使是非常小的均值差（比0.04更极端的差异）也会被认为是”出人意料的”。这仍然意味着，如果在总体中真的没有差异，你观察到均值差大于0.04的将不到5%的时间，在长期观测中，95%的观测均值差将小于0.04。但是，要论证这种效应的实际意义就变得更加困难了。想象一下，一种特定的干预措施成功地改变了人们的消费行为，当实施这个干预措施时，人们每年可以节省12美分。很难说这种效应如何让任何一个个体感到开心。然而，如果把这笔资金加起来，它将产生超过200万美元，可用于治疗发展中国家的疾病，会产生很大的影响。如果我们的目标是让个人更快乐，干预的成本可能会被认为过高，但如果目标是为慈善机构筹集200万美元，它可能会被认为是值得的。</p>
+<p>心理学中并不是所有的影响都是可以相加的（我们并不呢转移或者结合0.04的幸福感），因此往往很难论证主观感受中小效应的重要性<span class="citation" data-cites="anvari_not_2021">(<a href="references.html#ref-anvari_not_2021" role="doc-biblioref">Anvari et al., 2021</a>)</span>.。成本效益分析可能能显示很小的效应也很重要，但情况是否如此是不能从<em>p</em>值中推断出来的。</p>
+<p>请注意，这与对p值本身的解释并没有关系：如果零假设为真，p &lt; 0.05仍然正确表明我们观测到的数据是出人意料的。然而，数据出人意料并不意味着我们就需要关心它。在这里造成困惑的主要是语言标签”显著”——“显著”应该理解为是”出乎意料的”效应，但不一定是”重要的”效应，这样想可能会减少困惑。</p>
+</section><section id="sec-misconception4" class="level3" data-number="1.7.4"><h3 data-number="1.7.4" class="anchored" data-anchor-id="sec-misconception4">
+<span class="header-section-number">1.7.4</span> 误解 4：如果你得到了显著结果，你犯Ⅰ型错误（假阳性）的概率是5%。</h3>
+<p>此误解是对<em>p</em>值是”偶然观察到显著结果的概率”这一错误说法的一种可能解释。试设想，我们收集了20个观测值，并且无所不知的琼斯告诉我们零假设为真（就像上面的例子里，我们在R中生成随机数一样）。这意味着我们正从下图的分布中进行抽样。</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-fig138" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-fig138-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.12: <em>d</em>=0，在每组20个观测值的独立样本<em>t</em>检验中，Cohen’s <em>d</em>效应量的分布。</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>如果这是真实情况，那意味着100%的时间里发现的显著结果，都是假阳性（或者犯了Ⅰ型错误）。因此，100%的显著结果都是Ⅰ型错误导致的。</p>
+<p>区分数据收集和结果分析之前和之后的概率是非常重要的。犯Ⅰ型错误的概率是指，在未来可能完成的所有零假设为真的研究中，低于5%的观测到的均值差会落到分布的红色尾部区域。但是当观测的结果落到了尾部区域，<em>p</em>&lt;α，我们又知道零假设为真时，那么这些显著结果就是Ⅰ型错误导致的。如果阅读得足够仔细，你就会发现这个误解实际是设问方式不同导致的。“如果我发现<em>p</em>&lt;.05，零假设为真的概率是多少？”和”如果零假设为真，观察到显著结果的概率是多少？“是两个完全不同的问题。<em>p</em>值只回答后一个问题。第一个问题在数据收集前没有主观判断零假设为真时是无法回答的。</p>
+</section><section id="误解-51减去p值是重复实验能得到相同效应的概率" class="level3" data-number="1.7.5"><h3 data-number="1.7.5" class="anchored" data-anchor-id="误解-51减去p值是重复实验能得到相同效应的概率">
+<span class="header-section-number">1.7.5</span> 误解 5：1减去<em>p</em>值是重复实验能得到相同效应的概率。</h3>
+<p>我们不可能计算出一种效应重复出现的概率 <span class="citation" data-cites="miller_what_2009">(<a href="references.html#ref-miller_what_2009" role="doc-biblioref">Miller, 2009</a>)</span>，因为存在太多未知的因素影响效应重复的概率，其中最主要的因素就是真均值差。如果我们是无所不知的琼斯，知道真均值差的值（例如，两组之间的差异为0.5分），我们就能知道这个检验的统计力。统计检验力是指当备择假设为真时（即，效应存在），我们能发现显著结果的概率。例如，阅读应用程序中左侧栏里的文本，我们可以发现每组的样本量为50，α水平为0.05，真均值差为0.5，发现显著结果（或称统计检验力）的概率为69.69% 。 如果我们在这种情况下观察到显著的效应（例如，<em>p</em>=0.03），并不意味着我们有97%的可能重复该次研究（样本量相同）也会得到显著的结果。重复研究得到显著结果的概率取决于统计检验力，而非之前研究的<em>p</em>值。</p>
+<p>我们可以从最后一个误解中得到的事实是，显著结果复现的概率取决于真实的效应是否存在。换句话说，像上面的例子一样，如果存在一个真实的效应，统计检验力的水平就代表着能够重复观察到显著结果的概率（例如，统计检验力为80%意味着我们有80%的时间能够观察到显著的结果）。另一方面，如果零假设为真（例如，效应为0），那么显著的结果仅仅会在接近我们选择的α水平的概率上被观察到（例如，如果α为0.05，就有5%的可能犯Ⅰ型错误）。因此，如果原始研究中正确地观测到了一个效应，在重复实验中观察到显著结果的概率取决于统计检验力；如果原始研究中正确地观测到了零效应，在重复实验中观察到显著结果的概率则取决于α水平。 在实践中，还存在很多其他因素决定效应是否能重复。判断效应能否重复的唯一方法就是去复现实验。如果你想要知道判断文献里的结果能否复现有多难，你可以<a href="https://80000hours.org/psychology-replication-quiz/">在80小时内重复此实验</a>。</p>
+</section></section><section id="自我测试" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="自我测试">
+<span class="header-section-number">1.8</span> 自我测试</h2>
+<p>###你能想到的有关p值的问题</p>
+<p>将下面的代码复制到 R 并运行代码。您可以单击代码部分右上角的“剪贴板”图标，将所有代码复制到剪贴板，这样您就可以轻松地将其粘贴到 R 中。</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>nsims <span class="ot">&lt;-</span> <span class="dv">100000</span> <span class="co"># number of simulations</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># 模拟的次数</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a>m <span class="ot">&lt;-</span> <span class="dv">106</span> <span class="co"># mean sample</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># 样本均值</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>n <span class="ot">&lt;-</span> <span class="dv">26</span> <span class="co"># set sample size</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># 设置样本量大小</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>sd <span class="ot">&lt;-</span> <span class="dv">15</span> <span class="co"># SD of the simulated data</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#模拟数据的标准差</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a>p <span class="ot">&lt;-</span> <span class="fu">numeric</span>(nsims) <span class="co"># set up empty vector</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co"># 设置一个空向量</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>bars <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsims) { <span class="co"># for each simulated experiment</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>  <span class="co"># 对于每次模拟实验的循环</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> n, <span class="at">mean =</span> m, <span class="at">sd =</span> sd)</span>
+<span id="cb6-18"><a href="#cb6-18"></a>  z <span class="ot">&lt;-</span> <span class="fu">t.test</span>(x, <span class="at">mu =</span> <span class="dv">100</span>) <span class="co"># perform the t-test  # 进行T检验</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a>  p[i] <span class="ot">&lt;-</span> z<span class="sc">$</span>p.value <span class="co"># get the p-value  #得到p值</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>}</span>
+<span id="cb6-21"><a href="#cb6-21"></a>power <span class="ot">&lt;-</span> <span class="fu">round</span>((<span class="fu">sum</span>(p <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">/</span> nsims), <span class="dv">2</span>) <span class="co"># power # 统计功效</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co"># Plot figure # 画图</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="fu">hist</span>(p,</span>
+<span id="cb6-25"><a href="#cb6-25"></a>  <span class="at">breaks =</span> bars, <span class="at">xlab =</span> <span class="st">"P-values"</span>, <span class="at">ylab =</span> <span class="st">"number of p-values</span><span class="sc">\n</span><span class="st">"</span>, </span>
+<span id="cb6-26"><a href="#cb6-26"></a>  <span class="at">axes =</span> <span class="cn">FALSE</span>, <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"P-value Distribution with"</span>, </span>
+<span id="cb6-27"><a href="#cb6-27"></a>                             <span class="fu">round</span>(power <span class="sc">*</span> <span class="dv">100</span>, <span class="at">digits =</span> <span class="dv">1</span>), <span class="st">"% Power"</span>),</span>
+<span id="cb6-28"><a href="#cb6-28"></a>  <span class="at">col =</span> <span class="st">"grey"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, nsims))</span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">1</span>, <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>), <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.1</span>))</span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="fu">axis</span>(<span class="at">side =</span> <span class="dv">2</span>, <span class="at">at =</span> <span class="fu">seq</span>(<span class="dv">0</span>, nsims, nsims <span class="sc">/</span> <span class="dv">4</span>), </span>
+<span id="cb6-31"><a href="#cb6-31"></a>     <span class="at">labels =</span> <span class="fu">seq</span>(<span class="dv">0</span>, nsims, nsims <span class="sc">/</span> <span class="dv">4</span>), <span class="at">las =</span> <span class="dv">2</span>)</span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="fu">abline</span>(<span class="at">h =</span> nsims <span class="sc">/</span> bars, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="01-pvalue_files/figure-html/q1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>我们可以从条形图的x轴上看到从 0 到 1 的 p 值，在 y 轴上，我们能看到这些 p 值的频率。其中水平红色虚线表示 alpha 为 5%（位于频率 100.000*0.05 = 5000）——但您现在可以忽略这条线。在标题中，给出了在模拟研究中达到的统计功效（假设 alpha 为 0.05）：研究具有 50% 的功效（每次模拟都有细微的差异）。</p>
+<p><strong>问题1</strong>：由于统计功效是观察到一个具有统计显着性结果的概率，如果效应为真，我们从该图上哪里以看到统计功效本身？</p>
+<ol type="A">
+<li>我们可以计算出大于 0.5 的 p 值的数量，并将它们除以模拟次数。</li>
+<li>我们可以计算第一个条形中的 p 值数量（其中包含从 0.00 到 0.05 的所有“显着”p 值），并将该条形中的 p 值除以模拟总数。</li>
+<li>我们可以计算高于 0.5 的 p 值减去低于 0.5 的 p 值之间的差值，并将该数字除以模拟总数。</li>
+<li>我们可以计算高于 0.5 的 p 值减去低于 0.05 的 p 值之间的差值，并将该数字除以模拟次数。</li>
+</ol>
+<p><strong>问题2</strong>：将代码中第 4 行的样本大小从 n = 26 更改为 n = 51。通过选择所有行并按 CTRL+Enter 来运行模拟。现在我们已将样本量从 26 人增加到 51人，模拟的功效如何？请记住，模拟有时会产生略有不同的答案，因此请选择最接近模拟结果的答案选项。</p>
+<ol type="A">
+<li>55%</li>
+<li>60%</li>
+<li>80%</li>
+<li>95%</li>
+</ol>
+<p><strong>问题3</strong>：如果你观察p值的分布，你会发现什么？</p>
+<ol type="A">
+<li>p值分布与 50% 功效完全相同</li>
+<li>p值分布比 50% 功效陡峭得多</li>
+<li>p值分布比 50% 功效平坦得多</li>
+<li>p值分布比 50% 功效更符合正态分布</li>
+</ol>
+<p>请随意增加和减少样本量，看看运行后会发生什么。完成这些探索后，请确保第4行代码中的样本量仍然为 n = 51。</p>
+<p><strong>问题4</strong>：当我们的模拟样本与平均 IQ 分数之间没有真正差异时会发生什么？在这种情况下，我们没有观察到任何效应，因此您可能会说功效为“0”。事实上，当没有真正的效应不存在时，统计功效的确无法被定义。但是，我们可以因此将其称为“零功效”。将样本中的均值更改为 100（将 m = 106 设置为 m = 100）， 现在样本中的均值与我们在单样本 t 检验中测试的总体值之间没有差异。请再次运行脚本，您发现了什么？</p>
+<ol type="A">
+<li>p 值分布与 50% 功效完全相同</li>
+<li>p 值分布比 50% 功效陡峭得多</li>
+<li>p 值分布基本上是完全平坦的（忽略了由于模拟中的随机噪声引起的一些微小变化）</li>
+<li>p 值分布呈正态（即钟形）分布</li>
+</ol>
+<p>下面的问题建立在上面的数据模拟之上，其中各组之间没有真正的区别。</p>
+<p><strong>问题5</strong>：查看为Q4生成的图中最左边的条柱，并查看该条中p值的频率。这个条柱的正式名称应该是什么？</p>
+<ol type="A">
+<li>功效（或真阳性）</li>
+<li>真阴性</li>
+<li>I类错误（或假阳性）</li>
+<li>II类错误（或假阴性）</li>
+</ol>
+<p>让我们只看一下低于 0.05 的 p 值，请耐心进行接下来的几个步骤。在第 8 行的语句 bars = 20 中找到决定有多少条柱的变量。将其更改为 bars = 100。我们现在将获得 0 到 0.01 之间的 p 值的 1 个柱，p值在 0.01 和 0.02 之间的1个柱，总共 100 个柱。红色虚线现在将指示原假设为真时 p 值的频率，其中每个条柱包含 p 值总数的 1%。我们只想查看低于 0.05 的 p 值，我们将在 0.05 处截断该图。将 xlim = c(0, 1) 更改为 xlim = c(0, 0.05)。我们不会看到 0 到 1 之间的所有 p 值，而只会看到 0 到 0.05 之间的 p 值。重新运行模拟（仍然是 m &lt;- 100）。我们将看到相同的均匀分布，但现在每个条柱都包含 1% 的 p 值，因此 p 值分布非常平坦，几乎看不到（稍后我们将在 y 轴上放大此分布）。假设零假设为真，红线现在清楚地给出了每个条柱的频率。</p>
+<p>将第9行模拟中的平均值更改为 m &lt;- 107（记住 n 仍然是 51）。重新运行模拟。很明显，我们拥有非常大的功效。大多数p值位于最左侧的条柱中，其中包含 0.00 和 0.01 之间的所有 p 值。</p>
+<p><strong>问题6</strong>：上次模拟的图告诉我们有大约 90.5% 的功效（注意：由于随机变化，您模拟中的数字可能会略有不同），这就是我们使用 5% 的alpha时的功效。但我们也可以使用 1% 的 alpha。看看图表，当我们使用 1% 的 alpha 时，我们在模拟研究中的统计功效是多少？从您的模拟中选择最接近答案的答案。请注意，您还可以通过将第 15 行中的 p &lt; 0.05 更改为 p &lt; 0.01 来计算alpha为0.01的统计功效，只需确保在继续下一步探索之前将其设置回 0.05。</p>
+<ol type="A">
+<li>~90%</li>
+<li>~75%</li>
+<li>~50%</li>
+<li>~5%</li>
+</ol>
+<p>为了能够查看 0.03 和 0.04 附近的 p 值，我们还将放大 y 轴。在绘制绘图的代码部分，将 ylim = c(0, nSims) 更改为 ylim = c(0, 10000)。重新运行脚本。</p>
+<p>将样本中的平均值更改为 108，m &lt;- 108)，并将样本大小保留为 51。运行模拟。与上图相比，看看分布发生了怎样的变化？</p>
+<p>查看从左边数第五个条柱。此条柱现在包含 0.04 到 0.05 之间的所有 p 值。你可能会发现一些奇怪的现象。请记住，假设零假设为真，红色虚线表示每个条中的频率。查看 p 值介于 0.04 和 0.05 之间的条形如何低于红线。我们有 96% 功效的模拟研究。当功效非常高时，p 值介于 0.04 和 0.05 之间的情况非常罕见——它们出现的概率不到 1%（大多数 p 值小于 0.01）。当原假设为真时，0.04 和 0.05 之间的 p 值恰好出现 1% 的几率（因为 p 值是均匀分布的）。现在问问自己：当您的统计功效非常高并且观察到 p 值介于 0.04 和 0.05 之间时，零假设更可能为真，还是备择假设更可能为真？鉴于当原假设为真时您更有可能观察到 0.04 和 0.05 之间的 p 值，而不是当备择假设为真时，您应该将 alpha 为 0.05 的 p 值解释为更有可能当原假设为真时为真，而不是备择假设为真。</p>
+<p>在我们的模拟中，我们知道是否存在真实的效应，但在现实世界中，我们往往不知道。当您具有非常高的统计功效时，使用 0.05 的 alpha 水平，并找到 p = .045 的 p 值，数据令人吃惊。假设原假设为真，但更令人惊讶的是，假设备择假设是真的。这表明显着的 p 值并不总是备择假设的证据。</p>
+<p><strong>问题7</strong>：当您知道您对您关心的最小效应量具有非常高（例如 98%）的功效，并且您观察到 p 值为 0.045 时，正确的结论是什么？</p>
+<ol type="A">
+<li>效应显着，为备择假设提供了强有力的支持。</li>
+<li>效应显着，但毫无疑问属于第一类错误。</li>
+<li>对于高统计功效，应该使用小于 0.05 的 alpha 水平，因此，该效应不能被认为是显着的。</li>
+<li>效应显着，但数据在原假设下比在备择假设下更有可能。</li>
+</ol>
+<p><strong>问题8</strong>：通过改变样本量 (n) 和平均值 (m)，从而改变模拟研究中的统计功效。查看包含介于 0.04 和 0.05 之间的 p 值的条形的模拟结果。红线表示如果零假设为真（并且始终为 1%），将在此条柱中找到多少 p 值。在最好的情况下，0.04 和 0.05 之间的 p 值来自表示真实效果的 p 值分布的可能性比来自没有效果的 p 值分布的可能性大多少？您可以通过查看 0.04 和 0.05 之间的 p 值条可以变得多高来回答这个问题。如果模拟中的条形图最多是红线处的五倍高（因此条形图显示 5% 的 p 值最终介于 0.04 和 0.05 之间，而红线保持在 1%），那么最好的 p-值在 0.04 和 0.05 之间时，有真实效应的可能性是没有真实效应时的五倍。</p>
+<ol type="A">
+<li>0.04 和 0.05 之间的 p 值在备择假设和零假设下的可能性相同。</li>
+<li>在替代假设下，p 值介于 0.04 和 0.05 之间的可能性大约是零假设下的 4 倍。</li>
+<li>在替代假设下，p 值介于 0.04 和 0.05 之间的可能性是零假设下的 10 倍左右。</li>
+<li>在备择假设下，p 值介于 0.04 和 0.05 之间的可能性最多是零假设下的 30 倍。</li>
+</ol>
+<p>出于这个原因，统计学家会发出警告：略低于 0.05 的 p 值（例如，0.04 和 0.05 之间）是对备择假设的最弱支持。如果您发现 p 值在此范围内，请考虑重复该研究，或者如果这不可能，至少要谨慎地解释结果。当然，您可以在 Neyman-Pearson 方法中提出最多 5% Type 1 错误率的声明。因此，林德利悖论很好地说明了统计推断的不同哲学方法之间的差异。</p>
+<section id="针对p值概念的误解" class="level3" data-number="1.8.1"><h3 data-number="1.8.1" class="anchored" data-anchor-id="针对p值概念的误解">
+<span class="header-section-number">1.8.1</span> 针对p值概念的误解</h3>
+<p><strong>问题1</strong>：当独立t检验中每组的样本量为50个观察值时（见图@ref(fig:fig131)），下面哪种说法是正确的？</p>
+<ol type="A">
+<li>两组之间观察到平均差异总是0。</li>
+<li>两组之间的平均差异一般不可能为0。</li>
+<li>假设零假设为真，能观察到+0.5或-0.5的平均差异几乎不太可能</li>
+<li>假设零假设为真，能观察到+0.1或-0.1的平均差异几乎不太可能</li>
+</ol>
+<p><strong>问题2</strong>：图@ref(fig:fig131)和图@ref(fig:fig132)中的零模型在什么方面上是相似的，在什么方面又是不同的？</p>
+<ol type="A">
+<li>在这两种情况下，分布都以零为中心，临界t值在1.96和2之间（对于双侧检验来说，取决于样本量）。但是，样本量越大，被认为 “令人惊讶”的平均差异就越接近于0。</li>
+<li>在这两种情况下，t值为0是最有可能的结果，但临界t值对于n=50来说大约是0.4，对于n=5000来说大约是0.05。</li>
+<li>在这两种情况下，平均值在0附近的变化方式完全相同，但是n=5000时的犯第一类错误的概率比n=50时小得多。</li>
+<li>因为n=50的标准误差比n=5000的标准误差大得多，所以n=50的零假设更可能是真的。</li>
+</ol>
+<p><strong>问题3</strong>：您可以在这个在线app中玩玩替代模型和空模型：http://shiny.ieis.tue.nl/d_p_power/。 该应用程序允许你指定独立t检验中每组的样本量（从2到无穷大），平均差异（从0到2），以及α水平。在该图中，红色区域显示了第一类错误。蓝色区域直观地显示了第二类错误率。该app还会告诉你临界值： 有一条垂直线（在n=50的情况下，这条线落在0.4的平均差上）和一个标签，说：“大于0.4的效应将具有统计学意义”。请注意，对于小于-0.4的效应也是如此，尽管那里没有第二个标签，但该app显示了双侧独立t检验的情况。</p>
+<p>您可以看到，在表示临界均值差的垂直线左侧，有一个蓝色区域是备择假设模型的一部分。这是 犯II类错误的几率（或表示1 减去该研究的统计功效）。如果一项研究具有 80% 的功效，那么我们将观察到的 80% 的平均误差应该落在该线指示的临界值的右侧。如果备择假设的模型为真，但我们观察到的效应小于临界值，即使存在真实效应，那么我们观察到的p值也将大于 0.05，您可以在 app 中查看，效应越大，整个备择假设所代表的模型分布越靠右，因此统计功效越高。您还可以看到，样本量越大，分布越窄，低于临界值的分布将越少（只要真正的总体均值大于临界值）。最后，alpha 水平越大，临界均值差向左移动得越远，低于临界值的备择假设所代表的分布区域就越小。</p>
+<p>该app还绘制了3张图表，说明作为不同α水平、样本量或真实平均差的函数的统计功效曲线。通过改变数值，在app中进行探索。感受一下每个变量是如何影响零模型和备择模型的，以及如何影响具有统计学意义的平均差、I类和II类错误率的。</p>
+<p>打开app，并确保它为默认设置，即保持样本量为50，α水平为0.05。看一下零模型的分布。然后将样本大小设为2，再将样本大小设为5000并观察分布。在该app中，你无法绘制”组”样本量大小为1的数据。但在n = 2的情况下，你将得到真实效应为0时单个观察值（n = 1）的期望值范围。鉴于你在改变不同参数时对app的体验，下面哪句话是真的？</p>
+<ol type="A">
+<li>当零假设为真且标准差为1时，如果你从每组中随机抽取1个观察值并计算差异得分，那么在你将抽取的95%的观察对中，差异将落在-0.4和0.4之间。</li>
+<li>当零假设为真，标准差为1时，每组样本量n=50，95%的研究数据在长期内将被观察到均值差落在-0.4和0.4之间。</li>
+<li>在任意每组样本量为n=50的研究中，即使标准差未知，并且也不知道零假设是否为真，你应该很少观察到比-0.4或0.4更极端的均值差异。</li>
+<li>随着样本量的增加，对于零模型来说，均值的期望分布会变窄，但对于备择模型来说则不会。</li>
+</ol>
+<p><strong>问题4</strong> 使用默认设置再次打开应用程序。将 alpha 水平设置为 0.01（同时将平均差保持在 0.5，样本大小保持在50）。与 alpha = 0.05 时的临界值相比，以下哪个说法是正确的？</p>
+<ol type="A">
+<li>与0.05的α值相比，当使用0.01的α值时，只有不太极端的数值才会被认为是令人难以置信的，而且现在只有大于0.53（或小于-0.53）的差异才会具备统计学意义。</li>
+<li>与0.05的α值相比，当使用0.01的α值时，只有较少的极端值被认为是令人难以置信的，而且现在只有大于0.33（或小于-0.33）的差异才会具备统计学意义。</li>
+<li>与0.05的α值相比，当使用0.01的α值时，只有更多的极端值被认为是令人难以置信的，而且只有大于0.53（或小于-0.53）的差异才具备统计学意义。</li>
+<li>与0.05的α值相比，当使用0.01的α值时，只有更多的极端值被认为是令人难以置信的，而且现在只有大于0.33（或小于-0.33）的差异才会具备统计学意义。</li>
+</ol>
+<p><strong>问题5</strong> 当您观察到统计上不显著的 p 值 (p &gt; α) 时，为什么不能得出零假设一定为真的结论？</p>
+<ol type="A">
+<li>在计算p值时，你总是需要考虑到先验概率。</li>
+<li>你需要意识到你观察到I类错误的概率。</li>
+<li>零假设永远不会是真的。</li>
+<li>你需要意识到你观察到II类错误的概率。</li>
+</ol>
+<p><strong>问题6:</strong> 当你观察到一个具有统计学意义的p值（p &lt; α）时，为什么不能得出备择假设一定为真的结论？</p>
+<ol type="A">
+<li>在计算p值时，你总是需要考虑到先验概率。</li>
+<li>你需要意识到你观察到的I类错误的概率。</li>
+<li>备择假设从不为真。</li>
+<li>你需要意识到你观察到II类错误的概率。</li>
+</ol>
+<p><strong>问题7:</strong> 在解释p值时，一个常见的问题是，“显著”在正常语言中意味着 “重要”，因此，“显著”效应被解释为 “重要”效应。然而，一个效应是否重要的问题与它是否不等于零，甚至效应有多大的问题是完全独立的。一方面来说，不是所有的效应在实际生活中都能产生影响。另外一方面来说，效应越小，越不可能被人注意到，但这种效应仍然可能在社会层面上产生很大的影响。因此，一般来说，统计学意义并不能回答一个效应在实践中是否重要，或是否 “实际重要”的问题。要回答一个效应是否重要的问题，你需要做成本效益分析。</p>
+<p>转到app：http://shiny.ieis.tue.nl/d_p_power/。设置样本量为50000，平均差异为0.5，α水平为0.05,并观察以下哪种效应会与0存在统计学差异？</p>
+<ol type="A">
+<li>比-0.01和0.01更极端的效应</li>
+<li>比-0.04和0.04更极端的效应</li>
+<li>比-0.05和0.05更极端的效应</li>
+<li>比-0.12和0.12更极端的效应</li>
+</ol>
+<p>如果我们为一个非常大的样本量（例如，每组n=10000）绘制零模型，我们会发现，即使是非常小的平均差异（比0.04的平均差异更极端的差异）也会被认为是”令人惊喜的”。这仍然意味着，如果在整个人群中真的没有差异，你将有5%的几率观察到大于0.04的平均差异，而剩下95%的几率则观察到小于0.04的平均差异。但要论证这种效应的实际意义就变得更加困难。想象一下，一项具体的干预措施在改变人们的消费行为方面是成功的，当实施某种干预措施时，人们每年可以节省12美分。很难论证这种效应如何使人更加幸福。然而，如果这些钱加在一起，将产生200多万，这些钱可以用于治疗发展中国家的疾病，在那里会产生真正的影响。而如果干预的目标是使个人更快乐，干预的成本可能被认为太高，但如果目标是为慈善事业筹集200万，可能会被认为是值得的。</p>
+<p>在心理学中，并不是所有的效应都是相加的（我们不能将幸福感增加0.04个尺度点的效应合并或转换），所以要论证主观感受中的小效应的重要性往往比较困难。成本效益分析可能显示小效应很重要，但是否真的如此，我们不能从p值中推断出来。相反，您需要报告并解释效应量。</p>
+<p><strong>问题8:</strong> 我们使用R语言中的随机数生成器，输入rnorm(n = 50, mean = 0, sd = 1)生成50个观察值，这些观察值的平均值是0.5，在对效应为0的单样本t检验中得到的p值是0.03，小于α水平（我们设定为0.05）。我们观察到显著差异（p&lt;α）只是偶然的概率有多少？</p>
+<ol type="A">
+<li>3%</li>
+<li>5%</li>
+<li>95%</li>
+<li>100%</li>
+</ol>
+<p><strong>问题9:</strong> 以下哪一个说法是正确的？</p>
+<ol type="A">
+<li>重复研究产生显著结果的概率为1-p。</li>
+<li>重复研究产生显著结果的概率是1-p乘以零假设为真的概率。</li>
+<li>重复研究产生显著结果的概率等于重复研究的统计功效（如果存在真实效应的话）或α水平（如果不存在真实效应）。</li>
+<li>重复研究产生显著结果的概率等于重复研究的统计功效加上α水平。</li>
+</ol>
+<p>这个问题在概念上与Tversky和<span class="citation" data-cites="tversky_belief_1971">(<a href="references.html#ref-tversky_belief_1971" role="doc-biblioref">1971</a>)</span> 在 “相信小数法则”一文中提出的问题非常相似：</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-smallnumbers" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/belieflawsmallnumers.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.13: Screenshot of first paragraph in Tversky and Kahneman, 1971.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>假设你对20名被试进行了实验，并得到了一个能证实你理论的重要结果（z=2.23，p&lt;0.05，双尾）。你现在再做一组10人的实验，你认为这一组的结果通过单尾检验并具有统计学意义的概率是多少？</p>
+</blockquote>
+<p>Tversky和Kahneman认为合理的答案是48%，但唯一的正确答案与问题9的正确答案相同，确切的概率无法得知<span class="citation" data-cites="miller_what_2009">(<a href="references.html#ref-miller_what_2009" role="doc-biblioref">Miller, 2009</a>)</span>。</p>
+<p><strong>问题10:</strong> 一个不显著的p值（例如p = 0.65）是否意味着零假设为真？</p>
+<ol type="A">
+<li>不是，该结果可能是II类错误，或假阴性。</li>
+<li>是的，因为该结果是一个真阴性。</li>
+<li>是的，如果p值大于α水平，则零假设为真。</li>
+<li>不是，因为你需要至少两个不显著的p值才能得出零假设是真的结论。</li>
+</ol>
+<p><strong>问题11:</strong> 以下哪一个是采用了正确的方式来表达p值不显著（例如在独立t检验中使用0.05的α水平，p = 0.34）？</p>
+<ol type="A">
+<li>零假设被证实，p &gt; 0.05</li>
+<li>两个条件之间没有差异，p &gt; 0.05</li>
+<li>观察到的差异在统计学上与0没有差异。</li>
+<li>零假设为真。</li>
+</ol>
+<p><strong>问题12:</strong> 观察到一个显著的p值（p &lt; 0.05）是否意味着零假设是假的？</p>
+<ol type="A">
+<li>不，因为p&lt;0.05只意味着备择假设是真的，而不是说零假设是错的。</li>
+<li>不是，因为p值从来不是关于假设或理论的概率的声明。</li>
+<li>是的，因为一个异常罕见的事件已经发生。</li>
+<li>是的，因为差异在统计学上是显著的。</li>
+</ol>
+<p><strong>问题13:</strong> 在统计学上有意义的效应是否总是意味着该效应在实践中也很重要？</p>
+<ol type="A">
+<li>不是，因为在超大样本中，极小的效应也可以有统计学意义，而小的效应在实际生活中从来就没有重要性。</li>
+<li>不，因为理论上阿尔法水平可以设定为0.20，在这种情况下，显著的效应在实际生活中并不重要。</li>
+<li>不是，因为一个效应有多重要取决于成本效益分析，而不是取决于在零假设下数据有多令人惊讶。</li>
+<li>以上都是对的。</li>
+</ol>
+<p><strong>问题14:</strong> 以下关于p值定义哪一个是正确的？</p>
+<ol type="A">
+<li>p值是指零假设为真的概率，意味着给定的数据与您观察到的数据一样极端或更极端。</li>
+<li>p值是备择假设为真的概率，意味着给定的数据与您观察到的数据一样极端或更极端。</li>
+<li>假设备择假设为真，p值是指观察到的数据与您观察到的数据一样极端或更极端的概率。</li>
+<li>假设零假设为真，p值是指观察到的数据与您观察到的数据一样极端或更极端的概率。</li>
+</ol></section><section id="开放性问题" class="level3" data-number="1.8.2"><h3 data-number="1.8.2" class="anchored" data-anchor-id="开放性问题">
+<span class="header-section-number">1.8.2</span> 开放性问题</h3>
+<ol type="1">
+<li><p>什么决定了 p 值分布的形状？</p></li>
+<li><p>当存在真实效应并且样本量增加时，p 值分布的形状如何变化？</p></li>
+<li><p>什么是林德利悖论？</p></li>
+<li><p>当真实效应不存在时，p 值如何分布？</p></li>
+<li><p>p 值的正确定义是什么？</p></li>
+<li><p>为什么不显著的 p 值意味着零假设为真是不正确的？</p></li>
+<li><p>为什么显著的 p 值意味着零假设为假是不正确的？</p></li>
+<li><p>为什么显著的 p 值意味着发现了在实际生活中重要的效应是不正确的？</p></li>
+<li><p>如果您观察到重要发现，您犯第 1 类错误（假阳性）的概率是 5%，为什么这种观点是不正确的？</p></li>
+<li><p>为什么1 - p（例如 1 – 0.05 = 0.95）并不是指在重复研究时效应也能被重复的概率？</p></li>
+</ol>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" data-line-spacing="2" role="list" style="display: none">
+<div id="ref-anvari_not_2021" class="csl-entry" role="listitem">
+Anvari, F., Kievit, R., Lakens, D., Pennington, C. R., Przybylski, A. K., Tiokhin, L., Wiernik, B. M., &amp; Orben, A. (2021). Not all effects are indispensable: <span>Psychological</span> science requires verifiable lines of reasoning for whether an effect matters. <em>Perspectives on Psychological Science</em>. <a href="https://doi.org/10.31234/osf.io/g3vtr">https://doi.org/10.31234/osf.io/g3vtr</a>
+</div>
+<div id="ref-appelbaum_journal_2018" class="csl-entry" role="listitem">
+Appelbaum, M., Cooper, H., Kline, R. B., Mayo-Wilson, E., Nezu, A. M., &amp; Rao, S. M. (2018). Journal article reporting standards for quantitative research in psychology: <span>The APA Publications</span> and <span>Communications Board</span> task force report. <em>American Psychologist</em>, <em>73</em>(1), 3. <a href="https://doi.org/10.1037/amp0000191">https://doi.org/10.1037/amp0000191</a>
+</div>
+<div id="ref-bland_introduction_2015" class="csl-entry" role="listitem">
+Bland, M. (2015). <em>An introduction to medical statistics</em> (Fourth edition). <span>Oxford University Press</span>.
+</div>
+<div id="ref-cox_problems_1958" class="csl-entry" role="listitem">
+Cox, D. R. (1958). Some <span>Problems Connected</span> with <span>Statistical Inference</span>. <em>Annals of Mathematical Statistics</em>, <em>29</em>(2), 357–372. <a href="https://doi.org/10.1214/aoms/1177706618">https://doi.org/10.1214/aoms/1177706618</a>
+</div>
+<div id="ref-cumming_replication_2008" class="csl-entry" role="listitem">
+Cumming, G. (2008). Replication and <span><em>p</em></span> <span>Intervals</span>: <span><em>p</em></span> <span>Values Predict</span> the <span>Future Only Vaguely</span>, but <span>Confidence Intervals Do Much Better</span>. <em>Perspectives on Psychological Science</em>, <em>3</em>(4), 286–300. <a href="https://doi.org/10.1111/j.1745-6924.2008.00079.x">https://doi.org/10.1111/j.1745-6924.2008.00079.x</a>
+</div>
+<div id="ref-dienes_understanding_2008" class="csl-entry" role="listitem">
+Dienes, Z. (2008). <em>Understanding psychology as a science: <span>An</span> introduction to scientific and statistical inference</em>. <span>Palgrave Macmillan</span>.
+</div>
+<div id="ref-fisher_design_1935" class="csl-entry" role="listitem">
+Fisher, Ronald Aylmer. (1935). <em>The design of experiments</em>. <span>Oliver And Boyd; Edinburgh; London</span>.
+</div>
+<div id="ref-fisher_statistical_1956" class="csl-entry" role="listitem">
+Fisher, Ronald A. (1956). <em>Statistical methods and scientific inference: Vol. viii</em>. <span>Hafner Publishing Co.</span>
+</div>
+<div id="ref-good_bayesnon-bayes_1992" class="csl-entry" role="listitem">
+Good, I. J. (1992). The <span>Bayes</span>/<span>Non-Bayes</span> compromise: <span>A</span> brief review. <em>Journal of the American Statistical Association</em>, <em>87</em>(419), 597–606. <a href="https://doi.org/10.2307/2290192">https://doi.org/10.2307/2290192</a>
+</div>
+<div id="ref-gosset_application_1904" class="csl-entry" role="listitem">
+Gosset, W. S. (1904). <em>The <span>Application</span> of the "<span>Law</span> of <span>Error</span>" to the <span>Work</span> of the <span>Brewery</span></em> (1 vol 8; pp. 3–16). <span>Arthur Guinness &amp; Son, Ltd.</span>
+</div>
+<div id="ref-greenland_statistical_2016" class="csl-entry" role="listitem">
+Greenland, S., Senn, S. J., Rothman, K. J., Carlin, J. B., Poole, C., Goodman, S. N., &amp; Altman, D. G. (2016). Statistical tests, <span>P</span> values, confidence intervals, and power: A guide to misinterpretations. <em>European Journal of Epidemiology</em>, <em>31</em>(4), 337–350. <a href="https://doi.org/10.1007/s10654-016-0149-3">https://doi.org/10.1007/s10654-016-0149-3</a>
+</div>
+<div id="ref-hacking_logic_1965" class="csl-entry" role="listitem">
+Hacking, I. (1965). <em>Logic of <span>Statistical Inference</span></em>. <span>Cambridge University Press</span>.
+</div>
+<div id="ref-harms_making_2018" class="csl-entry" role="listitem">
+Harms, C., &amp; Lakens, D. (2018). Making ’null effects’ informative: Statistical techniques and inferential frameworks. <em>Journal of Clinical and Translational Research</em>, <em>3</em>, 382–393. <a href="https://doi.org/10.18053/jctres.03.2017S2.007">https://doi.org/10.18053/jctres.03.2017S2.007</a>
+</div>
+<div id="ref-hempel_philosophy_1966" class="csl-entry" role="listitem">
+Hempel, C. G. (1966). <em>Philosophy of natural science</em> (Nachdr.). <span>Prentice-Hall</span>.
+</div>
+<div id="ref-hung_behavior_1997" class="csl-entry" role="listitem">
+Hung, H. M. J., O’Neill, R. T., Bauer, P., &amp; Kohne, K. (1997). The <span>Behavior</span> of the <span>P-Value When</span> the <span>Alternative Hypothesis</span> is <span>True</span>. <em>Biometrics</em>, <em>53</em>(1), 11–22. <a href="https://doi.org/10.2307/2533093">https://doi.org/10.2307/2533093</a>
+</div>
+<div id="ref-johansson_hail_2011" class="csl-entry" role="listitem">
+Johansson, T. (2011). Hail the impossible: P-values, evidence, and likelihood. <em>Scandinavian Journal of Psychology</em>, <em>52</em>(2), 113–125. <a href="https://doi.org/10.1111/j.1467-9450.2010.00852.x">https://doi.org/10.1111/j.1467-9450.2010.00852.x</a>
+</div>
+<div id="ref-lakens_why_2022" class="csl-entry" role="listitem">
+Lakens, D. (2022). Why <span>P</span> values are not measures of evidence. <em>Trends in Ecology &amp; Evolution</em>, <em>37</em>(4), 289–290. <a href="https://doi.org/10.1016/j.tree.2021.12.006">https://doi.org/10.1016/j.tree.2021.12.006</a>
+</div>
+<div id="ref-leamer_specification_1978" class="csl-entry" role="listitem">
+Leamer, E. E. (1978). <em>Specification <span>Searches</span>: <span>Ad Hoc Inference</span> with <span>Nonexperimental Data</span></em> (1 edition). <span>Wiley</span>.
+</div>
+<div id="ref-lehmann_testing_2005" class="csl-entry" role="listitem">
+Lehmann, E. L., &amp; Romano, J. P. (2005). <em>Testing statistical hypotheses</em> (3rd ed). <span>Springer</span>.
+</div>
+<div id="ref-lindley_statistical_1957" class="csl-entry" role="listitem">
+Lindley, D. V. (1957). A statistical paradox. <em>Biometrika</em>, <em>44</em>(1/2), 187–192.
+</div>
+<div id="ref-maier_justify_2022" class="csl-entry" role="listitem">
+Maier, M., &amp; Lakens, D. (2022). Justify your alpha: <span>A</span> primer on two practical approaches. <em>Advances in Methods and Practices in Psychological Science</em>. <a href="https://doi.org/10.31234/osf.io/ts4r6">https://doi.org/10.31234/osf.io/ts4r6</a>
+</div>
+<div id="ref-miller_what_2009" class="csl-entry" role="listitem">
+Miller, J. (2009). What is the probability of replicating a statistically significant effect? <em>Psychonomic Bulletin &amp; Review</em>, <em>16</em>(4), 617–640. <a href="https://doi.org/10.3758/PBR.16.4.617">https://doi.org/10.3758/PBR.16.4.617</a>
+</div>
+<div id="ref-neyman_inductive_1957" class="csl-entry" role="listitem">
+Neyman, J. (1957). "<span>Inductive Behavior</span>" as a <span>Basic Concept</span> of <span>Philosophy</span> of <span>Science</span>. <em>Revue de l’Institut International de Statistique / Review of the International Statistical Institute</em>, <em>25</em>(1/3), 7. <a href="https://doi.org/10.2307/1401671">https://doi.org/10.2307/1401671</a>
+</div>
+<div id="ref-neyman_problem_1933" class="csl-entry" role="listitem">
+Neyman, J., &amp; Pearson, E. S. (1933). On the problem of the most efficient tests of statistical hypotheses. <em>Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences</em>, <em>231</em>(694-706), 289–337. <a href="https://doi.org/10.1098/rsta.1933.0009">https://doi.org/10.1098/rsta.1933.0009</a>
+</div>
+<div id="ref-niiniluoto_verisimilitude_1998" class="csl-entry" role="listitem">
+Niiniluoto, I. (1998). Verisimilitude: <span>The Third Period</span>. <em>The British Journal for the Philosophy of Science</em>, <em>49</em>, 1–29.
+</div>
+<div id="ref-popper_logic_2002" class="csl-entry" role="listitem">
+Popper, K. R. (2002). <em><span>The logic of scientific discovery</span></em>. <span>Routledge</span>.
+</div>
+<div id="ref-schweder_confidence_2016" class="csl-entry" role="listitem">
+Schweder, T., &amp; Hjort, N. L. (2016). <em>Confidence, <span>Likelihood</span>, <span>Probability</span>: <span>Statistical Inference</span> with <span>Confidence Distributions</span></em>. <span>Cambridge University Press</span>. <a href="https://doi.org/10.1017/CBO9781139046671">https://doi.org/10.1017/CBO9781139046671</a>
+</div>
+<div id="ref-spanos_who_2013" class="csl-entry" role="listitem">
+Spanos, A. (2013). Who should be afraid of the <span>Jeffreys-Lindley</span> paradox? <em>Philosophy of Science</em>, <em>80</em>(1), 73–93. <a href="https://doi.org/10.1086/668875">https://doi.org/10.1086/668875</a>
+</div>
+<div id="ref-tversky_belief_1971" class="csl-entry" role="listitem">
+Tversky, A., &amp; Kahneman, D. (1971). Belief in the law of small numbers. <em>Psychological Bulletin</em>, <em>76</em>(2), 105–110. <a href="https://doi.org/10.1037/h0031322">https://doi.org/10.1037/h0031322</a>
+</div>
+<div id="ref-ulrich_properties_2018" class="csl-entry" role="listitem">
+Ulrich, R., &amp; Miller, J. (2018). Some properties of p-curves, with an application to gradual publication bias. <em>Psychological Methods</em>, <em>23</em>(3), 546–560. <a href="https://doi.org/10.1037/met0000125">https://doi.org/10.1037/met0000125</a>
+</div>
+<div id="ref-zabell_r_1992" class="csl-entry" role="listitem">
+Zabell, S. L. (1992). R. <span>A</span>. <span>Fisher</span> and <span>Fiducial Argument</span>. <em>Statistical Science</em>, <em>7</em>(3), 369–387. <a href="https://doi.org/10.1214/ss/1177011233">https://doi.org/10.1214/ss/1177011233</a>
+</div>
+</div>
+</section></section></main><!-- /main --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script><script>
+
+/* update total correct if #webex-total_correct exists */
+update_total_correct = function() {
+  console.log("webex: update total_correct");
+
+  var t = document.getElementsByClassName("webex-total_correct");
+  for (var i = 0; i < t.length; i++) {
+    p = t[i].parentElement;
+    var correct = p.getElementsByClassName("webex-correct").length;
+    var solvemes = p.getElementsByClassName("webex-solveme").length;
+    var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+    var selects = p.getElementsByClassName("webex-select").length;
+
+    t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+  }
+}
+
+/* webex-solution button toggling function */
+b_func = function() {
+  console.log("webex: toggle hide");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('open')) {
+    cl.remove("open");
+  } else {
+    cl.add("open");
+  }
+}
+
+/* check answers */
+check_func = function() {
+  console.log("webex: check answers");
+
+  var cl = this.parentElement.classList;
+  if (cl.contains('unchecked')) {
+    cl.remove("unchecked");
+    this.innerHTML = "Hide Answers";
+  } else {
+    cl.add("unchecked");
+    this.innerHTML = "Show Answers";
+  }
+}
+
+/* function for checking solveme answers */
+solveme_func = function(e) {
+  console.log("webex: check solveme");
+
+  var real_answers = JSON.parse(this.dataset.answer);
+  var my_answer = this.value;
+  var cl = this.classList;
+  if (cl.contains("ignorecase")) {
+    my_answer = my_answer.toLowerCase();
+  }
+  if (cl.contains("nospaces")) {
+    my_answer = my_answer.replace(/ /g, "")
+  }
+
+  if (my_answer == "") {
+    cl.remove("webex-correct");
+    cl.remove("webex-incorrect");
+  } else if (real_answers.includes(my_answer)) {
+    cl.add("webex-correct");
+    cl.remove("webex-incorrect");
+  } else {
+    cl.add("webex-incorrect");
+    cl.remove("webex-correct");
+  }
+
+  // match numeric answers within a specified tolerance
+  if(this.dataset.tol > 0){
+    var tol = JSON.parse(this.dataset.tol);
+    var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+    if (matches.reduce((a, b) => a + b, 0) > 0) {
+      cl.add("webex-correct");
+    } else {
+      cl.remove("webex-correct");
+    }
+  }
+
+  // added regex bit
+  if (cl.contains("regex")){
+    answer_regex = RegExp(real_answers.join("|"))
+    if (answer_regex.test(my_answer)) {
+      cl.add("webex-correct");
+    }
+  }
+
+  update_total_correct();
+}
+
+/* function for checking select answers */
+select_func = function(e) {
+  console.log("webex: check select");
+
+  var cl = this.classList
+
+  /* add style */
+  cl.remove("webex-incorrect");
+  cl.remove("webex-correct");
+  if (this.value == "answer") {
+    cl.add("webex-correct");
+  } else if (this.value != "blank") {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+/* function for checking radiogroups answers */
+radiogroups_func = function(e) {
+  console.log("webex: check radiogroups");
+
+  var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+  var cl = checked_button.parentElement.classList;
+  var labels = checked_button.parentElement.parentElement.children;
+
+  /* get rid of styles */
+  for (i = 0; i < labels.length; i++) {
+    labels[i].classList.remove("webex-incorrect");
+    labels[i].classList.remove("webex-correct");
+  }
+
+  /* add style */
+  if (checked_button.value == "answer") {
+    cl.add("webex-correct");
+  } else {
+    cl.add("webex-incorrect");
+  }
+
+  update_total_correct();
+}
+
+window.onload = function() {
+  console.log("webex onload");
+  /* set up solution buttons */
+  var buttons = document.getElementsByTagName("button");
+
+  for (var i = 0; i < buttons.length; i++) {
+    if (buttons[i].parentElement.classList.contains('webex-solution')) {
+      buttons[i].onclick = b_func;
+    }
+  }
+
+  var check_sections = document.getElementsByClassName("webex-check");
+  console.log("check:", check_sections.length);
+  for (var i = 0; i < check_sections.length; i++) {
+    check_sections[i].classList.add("unchecked");
+
+    let btn = document.createElement("button");
+    btn.innerHTML = "Show Answers";
+    btn.classList.add("webex-check-button");
+    btn.onclick = check_func;
+    check_sections[i].appendChild(btn);
+
+    let spn = document.createElement("span");
+    spn.classList.add("webex-total_correct");
+    check_sections[i].appendChild(spn);
+  }
+
+  /* set up webex-solveme inputs */
+  var solveme = document.getElementsByClassName("webex-solveme");
+
+  for (var i = 0; i < solveme.length; i++) {
+    /* make sure input boxes don't auto-anything */
+    solveme[i].setAttribute("autocomplete","off");
+    solveme[i].setAttribute("autocorrect", "off");
+    solveme[i].setAttribute("autocapitalize", "off");
+    solveme[i].setAttribute("spellcheck", "false");
+    solveme[i].value = "";
+
+    /* adjust answer for ignorecase or nospaces */
+    var cl = solveme[i].classList;
+    var real_answer = solveme[i].dataset.answer;
+    if (cl.contains("ignorecase")) {
+      real_answer = real_answer.toLowerCase();
+    }
+    if (cl.contains("nospaces")) {
+      real_answer = real_answer.replace(/ /g, "");
+    }
+    solveme[i].dataset.answer = real_answer;
+
+    /* attach checking function */
+    solveme[i].onkeyup = solveme_func;
+    solveme[i].onchange = solveme_func;
+
+    $(solveme[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  /* set up radiogroups */
+  var radiogroups = document.getElementsByClassName("webex-radiogroup");
+  for (var i = 0; i < radiogroups.length; i++) {
+    radiogroups[i].onchange = radiogroups_func;
+  }
+
+  /* set up selects */
+  var selects = document.getElementsByClassName("webex-select");
+  for (var i = 0; i < selects.length; i++) {
+    selects[i].onchange = select_func;
+    $(selects[i]).after(" <span class='webex-icon'></span>");
+  }
+
+  update_total_correct();
+}
+
+</script><script>
+// open rdrr links externally ----
+
+var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+var exlink_func = function(){
+  window.open(this.href);
+  return false;
+};
+for (var i = 0; i < exlinks.length; i++) {
+    exlinks[i].addEventListener('click', exlink_func, false);
+}
+
+// visible second sidebar in mobile ----
+
+function move_sidebar() {
+  var toc = document.getElementById("TOC");
+  var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+  var right_sidebar = document.getElementById("quarto-margin-sidebar");
+
+  if (window.innerWidth < 768) {
+    small_sidebar.append(toc);
+  } else {
+    right_sidebar.append(toc);
+  }
+}
+move_sidebar();
+window.onresize = move_sidebar;
+</script><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">概述</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-samplesizejustification.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from https://lakens.github.io/statistical_inferences_chinese/. https://doi.org/10.5281/zenodo.6409077</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+</body></html>

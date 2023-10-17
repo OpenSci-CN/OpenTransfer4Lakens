@@ -1,0 +1,73 @@
+project:
+  type: book
+  output-dir: docs
+  resources: resources
+execute:
+  freeze: false
+
+book:
+  title: "Improving Your Statistical Inferences"
+  subtitle: "Chinese Translation"
+  author: "Daniël Lakens"
+  description: "这个开放的教育资源包含用于改进统计推断、设计更好的实验以及更透明地报告科学研究的信息。"
+  cover-image: images/logos/logo.png
+  image: images/logos/logo.png
+  favicon: images/logos/favicon.ico
+  cookie-consent: false
+  google-analytics: "G-0MK2WTGRM3"
+  page-navigation: true
+  search: true
+  # comments:
+  #   hypothesis:
+  #     theme: clean
+  #     openSidebar: false
+  repo-url: https://github.com/Lakens/statistical_inferences_chinese
+  repo-branch: master
+  repo-actions: [edit, issue, source]
+  downloads: [pdf, epub]
+  sharing: [twitter]
+  # sidebar:
+  #   style: docked
+  #   background: light
+  margin-header: ""
+  page-footer:
+    left: "Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from https://lakens.github.io/statistical_inferences_chinese/. https://doi.org/10.5281/zenodo.6409077"
+  chapters:
+  - index.qmd
+  - 01-pvalue.qmd
+  - 08-samplesizejustification.qmd
+  - 09-equivalencetest.qmd
+  - 10-sequential.qmd
+  - 12-bias.qmd
+  - 15-researchintegrity.qmd
+  - references.qmd
+
+bibliography: include/book.bib
+csl: include/apa.csl
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+    prefer-html: true
+  epub:
+    toc: true
+  html:
+    theme:
+      light:
+      - flatly
+      - include/light.scss
+      dark:
+      - darkly
+      - include/dark.scss
+    css: [include/booktem.css, include/style.css, include/webex.css]
+    df-print: kable
+    code-link: true
+    code-fold: false
+    code-line-numbers: true
+    code-overflow: wrap
+    code-copy: hover
+    highlight-style: a11y
+    monofont: Fira Code
+    mainfont: Open Sans
+    include-after-body: [include/webex.js, include/script.js]
