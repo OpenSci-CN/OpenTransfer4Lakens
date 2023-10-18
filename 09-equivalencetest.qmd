@@ -8,8 +8,6 @@
 # Equivalence Testing and Interval Hypotheses {#sec-equivalencetest}
 # Figure 2.1: Two-sided null hypothesis test (A), interval hypothesis test (B), equivalence test (C) and minimum effect test (D).
 ## Reporting Equivalence Tests 
-## Setting the Smallest Effect Size of Interest to the Minimal Statistically Detectable Effect
-### Questions about the small telescopes approach
 
 # needed to make the chapter (not visible)
 library(ggplot2)
