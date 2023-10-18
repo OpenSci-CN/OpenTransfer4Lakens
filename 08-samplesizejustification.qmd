@@ -1,6 +1,6 @@
-# 论证样本量的合理性不 {#sec-power}
+# 论证样本量的合理性 {#sec-power}
 
-For an online version see: https://mp.weixin.qq.com/s/RBXptSamb3V9ZVF2vaijdQ 
+在线版本: https://mp.weixin.qq.com/s/RBXptSamb3V9ZVF2vaijdQ 
 
 ```{r, include = FALSE}
 # needed to make the chapter (not visible)
