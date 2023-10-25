@@ -128,7 +128,7 @@ t.test(df_long$rating ~ df_long$`Friend Group`, var.equal = TRUE)
 我们可以绘制出*t*分布图（df=18），并高亮了*t*值为2.5175和-2.5175的两个尾部区域。
 
 ```{r fig-tdist, echo = FALSE, out.width='100%'}
-#| fig-cap: "A *t*-distribution with 18 degrees of freedom."
+#| fig-cap: "自由度为18的*t*分布"
 
 par(bg = backgroundcolor)
 x <- seq(-5, 5, length = 100)
@@ -166,7 +166,7 @@ hist(p, breaks = 20) # plot a histogram
 在模拟时，我们生成了一个关于IQ分数的正态分布（n = 71，均值M=100或105），标准差=15）。然后我们进行独立t检验，求得p值，并生成*p*值分布图。
 
 ```{r fig-pdistr1, cache = TRUE, echo=FALSE}
-#| fig-cap: "Distribution of *p*-values when power = 50%." 
+#| fig-cap: "统计检验力为50%时的*p*分布" 
 
 #Set number of simulations
 nSims <- 100000 # number of simulated experiments
@@ -193,10 +193,10 @@ abline(h=nSims/bars, col = "red", lty=3)
 
 我们可以看到x轴是20个条形柱分别代表着从0到1的*p*值，Y轴则是这些*p*值的频率。水平的红色虚线表示5%的$\alpha$（位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设$\alpha$为0.05时）： 这项研究有50%的功效。
 
-模拟的结果描绘了*p*值的*概率密度函数*。概率密度函数给出了在*t*分布中，某个特定值(比如如图\@ref(fig:tdist)那样)的随机变量的概率。因为*p*值是一个随机变量，我们可以用它的概率密度函数来绘制*p*值分布图[@hung_behavior_1997; @ulrich_properties_2018]，如图\@ref(fig:pdft）。在[线上的Shiny应用程序](http://shiny.ieis.tue.nl/d_p_power/)中，你可以改变样本大小、效应量大小和$\alpha$水平，以便观察他们对*p*值分布的影响。增加样本量或效应量大小将增加*p*值分布的陡峭程度，这意味着观察到小*p*值的概率增加。*p*值分布是检验的统计功效的函数。
+模拟的结果描绘了*p*值的*概率密度函数*。概率密度函数给出了在*t*分布中，某个特定值(比如如图@fig-tdist那样)的随机变量的概率。因为*p*值是一个随机变量，我们可以用它的概率密度函数来绘制*p*值分布图[@hung_behavior_1997; @ulrich_properties_2018]，如图@fig-pdft。在[线上的Shiny应用程序](http://shiny.ieis.tue.nl/d_p_power/)中，你可以改变样本大小、效应量大小和$\alpha$水平，以便观察他们对*p*值分布的影响。增加样本量或效应量大小将增加*p*值分布的陡峭程度，这意味着观察到小*p*值的概率增加。*p*值分布是检验的统计功效的函数。
 
 ```{r fig-pdft, echo = FALSE}
-#| fig-cap: "Probability density function for *p*-values from a two-sided *t*-test."
+#| fig-cap: "一个双侧*t*检验对应的*p*值概率密度函数"
 
 n <- 71 # sample size per independent group
 d <- 0.33 # effect size
@@ -223,7 +223,7 @@ axis(side = 1, at = seq(0, 1, 0.05),
 当效应不存在时，*p*值是**均匀分布**的。这意味着，当零假设为真时，每一个*p*值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的*p*值和0.98的*p*值含义一样。我记得当我第一次了解到均匀的*p*值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，*p*值永远大于我们所设定的$\alpha$水平时，那么*p*值为均匀分布似乎又是合理的。如果我们把$\alpha$水平设为0.01，1%的概率观察到的*p*值小于0.01，如果我们把$\alpha$水平设置为0.12，12%的概率观察到*p*值小于0.12。但是，这只有在零假设（$H_0$）为真时，*p*值是均匀分布的情况下才会发生这种情况。
 
 ```{r fig-pdistr2, cache = TRUE, echo=FALSE}
-#| fig-cap: "Distribution of *p*-values when the null hypothesis is true."
+#| fig-cap: "零假设为真时的*p*值分布"
 
 #Set number of simulations
 nSims <- 100000 #number of simulated experiments
@@ -250,12 +250,12 @@ abline(h=nSims/bars, col = "red", lty=3)
 
 ## 林德利悖论  {#sec-lindley}
 
-随着统计功效的提高，一些稍微低于0.05的*p*值（如*p*=0.04），相比于*有*效应，它更可能在*没有*效应时出现。这就是著名的林德利悖论 [@lindley_statistical_1957]，或称杰弗里-林德利悖论 [@spanos_who_2013]。因为*p*值的分布是统计功效的函数 [@cumming_replication_2008]，功效越高，*p*值的分布就越右偏（即越有可能观察到小的*p*值）。当不存在真实的效应时，*p*值是均匀分布的，1%的概率可以观察到*p*值在0.04和0.05之间。当统计功效极高时，不仅大多数*p*值会低于0.05，甚至会低于0.01。通过图\@ref(fig:paradox)我们可以看到，在高功效下，当效应*真实存在*时，非常小的*p*值（例如0.001）就比*无*效应时更容易被观察到（例如，当P值为0.01时，代表99%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时*p*值的均匀分布）。
+随着统计功效的提高，一些稍微低于0.05的*p*值（如*p*=0.04），相比于*有*效应，它更可能在*没有*效应时出现。这就是著名的林德利悖论 [@lindley_statistical_1957]，或称杰弗里-林德利悖论 [@spanos_who_2013]。因为*p*值的分布是统计功效的函数 [@cumming_replication_2008]，功效越高，*p*值的分布就越右偏（即越有可能观察到小的*p*值）。当不存在真实的效应时，*p*值是均匀分布的，1%的概率可以观察到*p*值在0.04和0.05之间。当统计功效极高时，不仅大多数*p*值会低于0.05，甚至会低于0.01。通过图@fig-paradox我们可以看到，在高功效下，当效应*真实存在*时，非常小的*p*值（例如0.001）就比*无*效应时更容易被观察到（例如，当P值为0.01时，代表99%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时*p*值的均匀分布）。
 
-然而令人迷惑的是，当*p*值为0.04时，则更可能是没有效应，即零假设（$H_0$）为真时，我们任然可以有非常高的功效，例如在图\@ref(fig:paradox)中所示，当*p*等于0.04时，零假设为真时的*p*值分布的密度要比99%功效时要高。所以，林德利悖论说明，0.04的*p*值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么*p*值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据*p*<0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低$\alpha$水平作一个样本量的函数来实现[@leamer_specification_1978；@maier_justify_2022；@good_bayesnon-bayes_1992]，这一点将在“[误差的控制](#errorcontrol)”一章节进行解释。
+然而令人迷惑的是，当*p*值为0.04时，则更可能是没有效应，即零假设（$H_0$）为真时，我们任然可以有非常高的功效，例如在图@fig-paradox中所示，当*p*等于0.04时，零假设为真时的*p*值分布的密度要比99%功效时要高。所以，林德利悖论说明，0.04的*p*值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么*p*值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据*p*<0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低$\alpha$水平作一个样本量的函数来实现[@leamer_specification_1978；@maier_justify_2022；@good_bayesnon-bayes_1992]，这一点将在“[误差的控制](#errorcontrol)”一章节进行解释。
 
 ```{r fig-paradox, echo=FALSE}
-#| fig-cap: "*P*-value distribution for 0 (grey horizontal line, 50 percent power (black solid curve), and 99 percent power (black dotted curve, where *p*-values just below 0.05 are more likely when $H_0$ is true than when $H_1$ is true)."
+#| fig-cap: *p*值分布（灰色水平线为0，50%统计功效（黑色实线），99%统计功效（黑色虚线））相比于$H_1$为真，当$H_0$为真时更可能出现*p*略微小于0.05的值"
 # Lindley plot
 
 n <- 150
@@ -308,7 +308,7 @@ curve(pdf2_t, 0, 1, n = 1000, col = "black", lwd = 3, lty = 3, add = TRUE)
 
 一些统计学家建议把p值解释成对证据的度量。例如，Bland [-@bland_introduction_2015] 提出*p*值可以被解释成一种对证据强度的“即粗略又完备”的指示，*p* > 0.1表示“很少或没有证据”，0.01 < *p* < 0.05表示“有证据”，*p* < 0.001表示“证据很强”。从前面关于林德利悖论和*p*值均匀分布的讨论中可以看出这是不正确的 [@johansson_hail_2011; @lakens_why_2022]。如果你想量化证据，请看关于[似然性](#likelihoods)或[贝叶斯统计](#bayes)的章节。
 
-## Preventing common misconceptions about *p*-values {#sec-misconceptions}
+## 避免*p*值的常见误解 {#sec-misconceptions}
 
 *p*值是在零假设为真的情况下，实际观测到的数据的概率或者临界值的概率。为了理解*p值*能说明什么，我们尤其要注意*p*值不能说明什么。首先，我们需要知道"零假设为真"是什么，以及当零假设为真时，数据的分布形态是怎样的。尽管零假设可以被设定为任意数值，在这里我们规定零假设就是均两组值差异为0。例如，在实验条件下和控制条件下计算两组因变量的差异。
 
@@ -411,11 +411,8 @@ $$\sqrt{\frac{1^{2}}{50}+\frac{1^{2}}{50}}$$
 如果我们抽出n =
 5000的样本，并且观测到0.5的均值差，我们要清楚，这样的概率比起收集50个观测值发现0.5的均值差的要更小。我们现在几乎已经准备好介绍关于p值的常见误解，但在此之前，我们需要引入一个当零假设不为真时的数据模型。如果我们不是从一个真实均值差为0的模型中抽样，那么得到的备择模型会是什么样呢？一些软件
 （比如 G\*power, 见 图
-\@ref(fig:gpowerscreenshot))会同时显示出零模型（红色曲线）和备择模型（蓝色曲线）:
+@fig-gpowerscreenshot)会同时显示出零模型（红色曲线）和备择模型（蓝色曲线）:
 
-(ref:gpowerscreenshotlab) G\*Power软件截图显示了零模型（红色分布）和备择模型（蓝色分布）以及区分显著和非显著结果的临界*t*值（1.66055）。
-
-(ref:gpowerscreenshotlab) Screenshot from G\*Power software visualizing the null model (red distribution) and alternative model (blue distribution) and the critical *t*-value (1.66055) that is the threshold distinguishing significant and non-significant results.
 
 ```{r fig-gpowerscreenshot, echo = FALSE}
 #| fig-cap: "G\\*Power软件截图显示了零模型（红色分布）和备择模型（蓝色分布）以及区分显著和非显著结果的临界*t*值（1.66055）。"
@@ -837,7 +834,7 @@ D) 在备择假设下，p 值介于 0.04 和 0.05 之间的可能性最多是零
 
 ### 针对p值概念的误解
 
-**问题1**：当独立t检验中每组的样本量为50个观察值时（见图\@ref(fig:fig131)），下面哪种说法是正确的？
+**问题1**：当独立t检验中每组的样本量为50个观察值时（见图@fig-fig131），下面哪种说法是正确的？
 
 A) 两组之间观察到平均差异总是0。
 B) 两组之间的平均差异一般不可能为0。
@@ -845,7 +842,7 @@ C) 假设零假设为真，能观察到+0.5或-0.5的平均差异几乎不太可
 D) 假设零假设为真，能观察到+0.1或-0.1的平均差异几乎不太可能
 
 
-**问题2**：图\@ref(fig:fig131)和图\@ref(fig:fig132)中的零模型在什么方面上是相似的，在什么方面又是不同的？
+**问题2**：图@fig-fig131和图@fig-fig132中的零模型在什么方面上是相似的，在什么方面又是不同的？
 
 A) 在这两种情况下，分布都以零为中心，临界t值在1.96和2之间（对于双侧检验来说，取决于样本量）。但是，样本量越大，被认为 "令人惊讶 "的平均差异就越接近于0。
 B) 在这两种情况下，t值为0是最有可能的结果，但临界t值对于n=50来说大约是0.4，对于n=5000来说大约是0.05。
