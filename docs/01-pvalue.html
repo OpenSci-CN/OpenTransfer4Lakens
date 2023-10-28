@@ -187,13 +187,13 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-samplesizejustification.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-equivalencetest.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等效性检验和区间假设检验</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">等价检验和区间假设检验</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -235,7 +235,7 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
   <li><a href="#sec-lindley" id="toc-sec-lindley" class="nav-link" data-scroll-target="#sec-lindley"><span class="header-section-number">1.5</span> 林德利悖论</a></li>
   <li><a href="#sec-correctlyinterpreting" id="toc-sec-correctlyinterpreting" class="nav-link" data-scroll-target="#sec-correctlyinterpreting"><span class="header-section-number">1.6</span> 正确地解释和报告<em>p</em>值</a></li>
   <li>
-<a href="#sec-misconceptions" id="toc-sec-misconceptions" class="nav-link" data-scroll-target="#sec-misconceptions"><span class="header-section-number">1.7</span> Preventing common misconceptions about <em>p</em>-values</a>
+<a href="#sec-misconceptions" id="toc-sec-misconceptions" class="nav-link" data-scroll-target="#sec-misconceptions"><span class="header-section-number">1.7</span> 避免<em>p</em>值的常见误解</a>
   <ul class="collapse">
 <li><a href="#sec-misconception1" id="toc-sec-misconception1" class="nav-link" data-scroll-target="#sec-misconception1"><span class="header-section-number">1.7.1</span> 误解 1：<em>p</em>值不显著意味着零假设为真。</a></li>
   <li><a href="#%E8%AF%AF%E8%A7%A3-2p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E9%9B%B6%E5%81%87%E8%AE%BE%E4%B8%BA%E5%81%87" id="toc-误解-2p值显著意味着零假设为假" class="nav-link" data-scroll-target="#%E8%AF%AF%E8%A7%A3-2p%E5%80%BC%E6%98%BE%E8%91%97%E6%84%8F%E5%91%B3%E7%9D%80%E9%9B%B6%E5%81%87%E8%AE%BE%E4%B8%BA%E5%81%87"><span class="header-section-number">1.7.2</span> 误解 2：<em>p</em>值显著意味着零假设为假。</a></li>
@@ -279,7 +279,7 @@ gtag('config', 'G-0MK2WTGRM3', { 'anonymize_ip': true});
 <p>在我们厘清<em>p</em>值是如何计算之前，更重要是需要弄清在假设检验时，它将如何帮助我们做出合理的差异性说明。<em>p</em>值的定义是当零假设为真时，所得到的样本数据或更极端数据的概率。但是这个定义并未告诉我们该如何解释<em>p</em>值。</p>
 <p>对于p值的解释方式取决于个人的统计思想。从<a href="https://en.wikipedia.org/wiki/Ronald_Fisher">Ronald Fisher</a>1925年发表了《研究者统计方法论》一书之后，<em>p</em>值的应用开始广泛起来。在Fisherian的理论框架中，<em>p</em>值被描述为一个连续测量，这个测量用于描述所得观察数据以及与零假设之间的兼容性 <span class="citation" data-cites="greenland_statistical_2016">(<a href="references.html#ref-greenland_statistical_2016" role="doc-biblioref">Greenland et al., 2016</a>)</span>。兼容性的区间在1（完全兼容）到0（完全不兼容）之间，且每个人都可以以一种统计上的“深思熟虑”来解释<em>p</em>值。依据Fisher <span class="citation" data-cites="fisher_statistical_1956">(<a href="references.html#ref-fisher_statistical_1956" role="doc-biblioref">1956</a>)</span>所述，<em>p</em>值并不意味着真实世界的某个概率，而是以一种合理且完备的形式，来衡量拒绝他们所期望的假设的程度。Fisher试图将他的理念标化为一种”基础推论”，但这并没有得到其他流派的广泛采纳，如决策理论、似然比检验和贝叶斯推理。事实上，Zabell <span class="citation" data-cites="zabell_r_1992">(<a href="references.html#ref-zabell_r_1992" role="doc-biblioref">1992</a>)</span> 写道：”基础推论“是Fisher的一个巨大失败”，尽管其他人表示希望它在未来会发展成一个有用的方法 <span class="citation" data-cites="schweder_confidence_2016">(<a href="references.html#ref-schweder_confidence_2016" role="doc-biblioref">Schweder &amp; Hjort, 2016</a>)</span>。Fisherian的<em>p</em>值描述了数据与单一假设的不兼容性，因此又被称为<em>显著性检验</em>。显著性检验受到限制的主要原因是，研究者只指定了一个零假设（<span class="math inline">\(H_0\)</span>），而没有指定备择假设（<span class="math inline">\(H_1\)</span>）。</p>
 <p>Neyman和Pearson <span class="citation" data-cites="neyman_problem_1933">(<a href="references.html#ref-neyman_problem_1933" role="doc-biblioref">1933</a>)</span> 在William Gosset和Ronald Fisher关于P值的见解的基础上，发展了一种叫做统计假设检验的方法。与Fisher提出的显著性检验相比，其主要区别是，在统计假设检验中，既制定了一个零假设，也规定了一个备选假设。在Neyman-Pearson的理论框架中，统计检验的目标是引导研究者在这两个假设方向上的的决策。根据统计检验的结果，当不知道假设是否为真的情况下，研究者通常暂时将零假设或备则假设为真。在心理学领域，研究者经常使用Fisherian和Neyman-Pearson二者理论框架的不完美结合版，但根据Dienes <span class="citation" data-cites="dienes_understanding_2008">(<a href="references.html#ref-dienes_understanding_2008" role="doc-biblioref">2008</a>)</span> 的说法，Neyman-Pearson的理论方法是 “你在心理学学术期刊中看到的所有数据统计的基础逻辑”。</p>
-<p>当进行Neyman-Pearson假设检验时，所得<em>p</em>值只是用于对比是否小于所选的<span class="math inline">\(\alpha\)</span>水平，但它小多少并不重要。例如，如果使用0.01的<span class="math inline">\(\alpha\)</span>水平，<em>p</em>=0.006和<em>p</em>=0.000001都会使研究者迅速做出论断，仿佛世界的真理就是备择假设所描述的。这与Fisherian的p值方法不同，Fisherian的<em>p</em>值越低，研究者在心理上更加容易拒绝他们所检验的零假设。Neyman-Pearson的假设检验不认为推论的目标是量化兼容性或依据的一种连续测量。相反，正如Neyman <span class="citation" data-cites="neyman_inductive_1957">(<a href="references.html#ref-neyman_inductive_1957" role="doc-biblioref">1957</a>)</span> 所写的：</p>
+<p>当进行Neyman-Pearson假设检验时，所得<em>p</em>值只是用于对比是否小于所选的 <span class="math inline">\(\alpha\)</span> 水平，但它小多少并不重要。例如，如果使用0.01的 <span class="math inline">\(\alpha\)</span> 水平，<em>p</em>=0.006和<em>p</em>=0.000001都会使研究者迅速做出论断，仿佛世界的真理就是备择假设所描述的。这与Fisherian的p值方法不同，Fisherian的<em>p</em>值越低，研究者在心理上更加容易拒绝他们所检验的零假设。Neyman-Pearson的假设检验不认为推论的目标是量化兼容性或依据的一种连续测量。相反，正如Neyman <span class="citation" data-cites="neyman_inductive_1957">(<a href="references.html#ref-neyman_inductive_1957" role="doc-biblioref">1957</a>)</span> 所写的：</p>
 <blockquote class="blockquote">
 <p>当我们对行为做出总结归纳时，应当承认每个正经研究的目的，都是在几个可选方案中为某一个方案提供依据。The content of the</p>
 </blockquote>
@@ -396,7 +396,7 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 <div class="cell-output-display">
 <div id="fig-tdist" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-tdist-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: A <em>t</em>-distribution with 18 degrees of freedom.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.1: 自由度为18的<em>t</em>分布</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -420,62 +420,62 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 <span id="cb3-11"><a href="#cb3-11"></a><span class="fu">hist</span>(p, <span class="at">breaks =</span> <span class="dv">20</span>) <span class="co"># plot a histogram</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>在模拟时，我们生成了一个关于IQ分数的正态分布（n = 71，均值M=100或105），标准差=15）。然后我们进行独立t检验，求得p值，并生成<em>p</em>值分布图。</p>
-<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr1_53dd50e264638f8017c7fca97ba32914">
+<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr1_d9d470f7c7edf1115c4618057b1b7549">
 <div class="cell-output-display">
 <div id="fig-pdistr1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdistr1-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.2: Distribution of <em>p</em>-values when power = 50%.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.2: 统计检验力为50%时的<em>p</em>分布</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>我们可以看到x轴是20个条形柱分别代表着从0到1的<em>p</em>值，Y轴则是这些<em>p</em>值的频率。水平的红色虚线表示5%的<span class="math inline">\(\alpha\)</span>（位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设<span class="math inline">\(\alpha\)</span>为0.05时）： 这项研究有50%的功效。</p>
-<p>模拟的结果描绘了<em>p</em>值的<em>概率密度函数</em>。概率密度函数给出了在<em>t</em>分布中，某个特定值(比如如图@ref(fig:tdist)那样)的随机变量的概率。因为<em>p</em>值是一个随机变量，我们可以用它的概率密度函数来绘制<em>p</em>值分布图<span class="citation" data-cites="hung_behavior_1997 ulrich_properties_2018">(<a href="references.html#ref-hung_behavior_1997" role="doc-biblioref">Hung et al., 1997</a>; <a href="references.html#ref-ulrich_properties_2018" role="doc-biblioref">Ulrich &amp; Miller, 2018</a>)</span>，如图@ref(fig:pdft）。在<a href="http://shiny.ieis.tue.nl/d_p_power/">线上的Shiny应用程序</a>中，你可以改变样本大小、效应量大小和<span class="math inline">\(\alpha\)</span>水平，以便观察他们对<em>p</em>值分布的影响。增加样本量或效应量大小将增加<em>p</em>值分布的陡峭程度，这意味着观察到小<em>p</em>值的概率增加。<em>p</em>值分布是检验的统计功效的函数。</p>
+<p>我们可以看到x轴是20个条形柱分别代表着从0到1的<em>p</em>值，Y轴则是这些<em>p</em>值的频率。水平的红色虚线表示5%的 <span class="math inline">\(\alpha\)</span> （位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设 <span class="math inline">\(\alpha\)</span> 为0.05时）： 这项研究有50%的功效。</p>
+<p>模拟的结果描绘了<em>p</em>值的<em>概率密度函数</em>。概率密度函数给出了在<em>t</em>分布中，某个特定值(比如如图 <a href="#fig-tdist">Figure&nbsp;<span>1.1</span></a> 那样)的随机变量的概率。因为<em>p</em>值是一个随机变量，我们可以用它的概率密度函数来绘制<em>p</em>值分布图<span class="citation" data-cites="hung_behavior_1997 ulrich_properties_2018">(<a href="references.html#ref-hung_behavior_1997" role="doc-biblioref">Hung et al., 1997</a>; <a href="references.html#ref-ulrich_properties_2018" role="doc-biblioref">Ulrich &amp; Miller, 2018</a>)</span>，如图 <a href="#fig-pdft">Figure&nbsp;<span>1.3</span></a>。在<a href="http://shiny.ieis.tue.nl/d_p_power/">线上的Shiny应用程序</a>中，你可以改变样本大小、效应量大小和 <span class="math inline">\(\alpha\)</span> 水平，以便观察他们对<em>p</em>值分布的影响。增加样本量或效应量大小将增加<em>p</em>值分布的陡峭程度，这意味着观察到小<em>p</em>值的概率增加。<em>p</em>值分布是检验的统计功效的函数。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-pdft" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdft-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.3: Probability density function for <em>p</em>-values from a two-sided <em>t</em>-test.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.3: 一个双侧<em>t</em>检验对应的<em>p</em>值概率密度函数</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-<p>当效应不存在时，<em>p</em>值是<strong>均匀分布</strong>的。这意味着，当零假设为真时，每一个<em>p</em>值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的<em>p</em>值和0.98的<em>p</em>值含义一样。我记得当我第一次了解到均匀的<em>p</em>值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，<em>p</em>值永远大于我们所设定的<span class="math inline">\(\alpha\)</span>水平时，那么<em>p</em>值为均匀分布似乎又是合理的。如果我们把<span class="math inline">\(\alpha\)</span>水平设为0.01，1%的概率观察到的<em>p</em>值小于0.01，如果我们把<span class="math inline">\(\alpha\)</span>水平设置为0.12，12%的概率观察到<em>p</em>值小于0.12。但是，这只有在零假设（<span class="math inline">\(H_0\)</span>）为真时，<em>p</em>值是均匀分布的情况下才会发生这种情况。</p>
-<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr2_3feb9c99185c4d5360ff9cded2617c8d">
+<p>当效应不存在时，<em>p</em>值是<strong>均匀分布</strong>的。这意味着，当零假设为真时，每一个<em>p</em>值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的<em>p</em>值和0.98的<em>p</em>值含义一样。我记得当我第一次了解到均匀的<em>p</em>值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，<em>p</em>值永远大于我们所设定的 <span class="math inline">\(\alpha\)</span> 水平时，那么<em>p</em>值为均匀分布似乎又是合理的。如果我们把 <span class="math inline">\(\alpha\)</span> 水平设为0.01，1%的概率观察到的<em>p</em>值小于0.01，如果我们把 <span class="math inline">\(\alpha\)</span> 水平设置为0.12，12%的概率观察到<em>p</em>值小于0.12。但是，这只有在零假设（<span class="math inline">\(H_0\)</span>）为真时，<em>p</em>值是均匀分布的情况下才会发生这种情况。</p>
+<div class="cell" data-layout-align="center" data-hash="01-pvalue_cache/html/fig-pdistr2_a0a78e5f631bb5dc25616e9b246a1e13">
 <div class="cell-output-display">
 <div id="fig-pdistr2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-pdistr2-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.4: Distribution of <em>p</em>-values when the null hypothesis is true.</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.4: 零假设为真时的<em>p</em>值分布</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="sec-lindley" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="sec-lindley">
 <span class="header-section-number">1.5</span> 林德利悖论</h2>
-<p>随着统计功效的提高，一些稍微低于0.05的<em>p</em>值（如<em>p</em>=0.04），相比于<em>有</em>效应，它更可能在<em>没有</em>效应时出现。这就是著名的林德利悖论 <span class="citation" data-cites="lindley_statistical_1957">(<a href="references.html#ref-lindley_statistical_1957" role="doc-biblioref">Lindley, 1957</a>)</span>，或称杰弗里-林德利悖论 <span class="citation" data-cites="spanos_who_2013">(<a href="references.html#ref-spanos_who_2013" role="doc-biblioref">Spanos, 2013</a>)</span>。因为<em>p</em>值的分布是统计功效的函数 <span class="citation" data-cites="cumming_replication_2008">(<a href="references.html#ref-cumming_replication_2008" role="doc-biblioref">Cumming, 2008</a>)</span>，功效越高，<em>p</em>值的分布就越右偏（即越有可能观察到小的<em>p</em>值）。当不存在真实的效应时，<em>p</em>值是均匀分布的，1%的概率可以观察到<em>p</em>值在0.04和0.05之间。当统计功效极高时，不仅大多数<em>p</em>值会低于0.05，甚至会低于0.01。通过图@ref(fig:paradox)我们可以看到，在高功效下，当效应<em>真实存在</em>时，非常小的<em>p</em>值（例如0.001）就比<em>无</em>效应时更容易被观察到（例如，当P值为0.01时，代表99%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时<em>p</em>值的均匀分布）。</p>
-<p>然而令人迷惑的是，当<em>p</em>值为0.04时，则更可能是没有效应，即零假设（<span class="math inline">\(H_0\)</span>）为真时，我们任然可以有非常高的功效，例如在图@ref(fig:paradox)中所示，当<em>p</em>等于0.04时，零假设为真时的<em>p</em>值分布的密度要比99%功效时要高。所以，林德利悖论说明，0.04的<em>p</em>值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么<em>p</em>值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据<em>p</em>&lt;0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低<span class="math inline">\(\alpha\)</span>水平作一个样本量的函数来实现<span class="citation" data-cites="leamer_specification_1978">Good (<a href="references.html#ref-good_bayesnon-bayes_1992" role="doc-biblioref">1992</a>)</span>，这一点将在“<a href="#errorcontrol">误差的控制</a>”一章节进行解释。</p>
+<p>随着统计功效的提高，一些稍微低于0.05的<em>p</em>值（如<em>p</em>=0.04），相比于<em>有</em>效应，它更可能在<em>没有</em>效应时出现。这就是著名的林德利悖论 <span class="citation" data-cites="lindley_statistical_1957">(<a href="references.html#ref-lindley_statistical_1957" role="doc-biblioref">Lindley, 1957</a>)</span>，或称杰弗里-林德利悖论 <span class="citation" data-cites="spanos_who_2013">(<a href="references.html#ref-spanos_who_2013" role="doc-biblioref">Spanos, 2013</a>)</span>。因为<em>p</em>值的分布是统计功效的函数 <span class="citation" data-cites="cumming_replication_2008">(<a href="references.html#ref-cumming_replication_2008" role="doc-biblioref">Cumming, 2008</a>)</span>，功效越高，<em>p</em>值的分布就越右偏（即越有可能观察到小的<em>p</em>值）。当不存在真实的效应时，<em>p</em>值是均匀分布的，1%的概率可以观察到<em>p</em>值在0.04和0.05之间。当统计功效极高时，不仅大多数<em>p</em>值会低于0.05，甚至会低于0.01。通过图 <a href="#fig-paradox">Figure&nbsp;<span>1.5</span></a> 我们可以看到，在高功效下，当效应<em>真实存在</em>时，非常小的<em>p</em>值（例如0.001）就比<em>无</em>效应时更容易被观察到（例如，当P值为0.01时，代表99%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时<em>p</em>值的均匀分布）。</p>
+<p>然而令人迷惑的是，当<em>p</em>值为0.04时，则更可能是没有效应，即零假设（<span class="math inline">\(H_0\)</span>）为真时，我们任然可以有非常高的功效，例如在图 <a href="#fig-paradox">Figure&nbsp;<span>1.5</span></a> 中所示，当<em>p</em>等于0.04时，零假设为真时的<em>p</em>值分布的密度要比99%功效时要高。所以，林德利悖论说明，0.04的<em>p</em>值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么<em>p</em>值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据<em>p</em>&lt;0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低 <span class="math inline">\(\alpha\)</span> 水平作一个样本量的函数来实现<span class="citation" data-cites="leamer_specification_1978">Good (<a href="references.html#ref-good_bayesnon-bayes_1992" role="doc-biblioref">1992</a>)</span>，这一点将在“<a href="#errorcontrol">误差的控制</a>”一章节进行解释。</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-paradox" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="01-pvalue_files/figure-html/fig-paradox-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1.5: <em>P</em>-value distribution for 0 (grey horizontal line, 50 percent power (black solid curve), and 99 percent power (black dotted curve, where <em>p</em>-values just below 0.05 are more likely when <span class="math inline">\(H_0\)</span> is true than when <span class="math inline">\(H_1\)</span> is true).</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1.5: <em>p</em>值分布（灰色水平线为0，50%统计功效（黑色实线），99%统计功效（黑色虚线））相比于<span class="math inline">\(H_1\)</span>为真，当<span class="math inline">\(H_0\)</span>为真时更可能出现<em>p</em>略微小于0.05的值</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
 </section><section id="sec-correctlyinterpreting" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="sec-correctlyinterpreting">
 <span class="header-section-number">1.6</span> 正确地解释和报告<em>p</em>值</h2>
-<p>虽然从严格的Neyman-Pearson方法的角度来看，报告<em>p</em>&lt;<span class="math inline">\(\alpha\)</span>或<em>p</em>&gt;<span class="math inline">\(\alpha\)</span>就足够了，但研究者还是应当报告确切的<em>p</em>值。这便于后续再次分析结果时使用 <span class="citation" data-cites="appelbaum_journal_2018">(<a href="references.html#ref-appelbaum_journal_2018" role="doc-biblioref">Appelbaum et al., 2018</a>)</span>，也便于并其他研究者将<em>p</em>值与他们希望使用的<span class="math inline">\(\alpha\)</span>水平进行比较 <span class="citation" data-cites="lehmann_testing_2005">(<a href="references.html#ref-lehmann_testing_2005" role="doc-biblioref">Lehmann &amp; Romano, 2005</a>)</span>。因为所发表的结论是使用已知最大误差率的方式进行的，<em>p</em>值永远不允许你肯定地陈述任何事情。即便我们把<span class="math inline">\(\alpha\)</span>水平设定为0.000001，但任何一个结论都可能是错误的，Fisher <span class="citation" data-cites="fisher_design_1935">(<a href="references.html#ref-fisher_design_1935" role="doc-biblioref">1935</a>)</span> 提醒我们，即使是”百万分之一的几率”仍旧会发生，既不低于也不高于其某个恰当的概率，但只要发生在我们身上就是0和1的概率，纵使我们会非常惊讶为什么如此小的概率仍会发生在<em>我们</em>身上”。这就是<strong>重复研究</strong>在科学领域很重要的原因。任何单一的发现都可能是一种侥幸，但如果几个重复的研究都能得到相同的结果，那么这种概率很快就会变得非常小。这种不确定性可能并没有反映在学术写作中，因为可以看到研究者会使用 “证明”、“显示”或 “已知”等字眼。在做完假设检验之后，有个稍长但更准确的说法是：</p>
+<p>虽然从严格的Neyman-Pearson方法的角度来看，报告<em>p</em>&lt; <span class="math inline">\(\alpha\)</span> 或<em>p</em>&gt; <span class="math inline">\(\alpha\)</span> 就足够了，但研究者还是应当报告确切的<em>p</em>值。这便于后续再次分析结果时使用 <span class="citation" data-cites="appelbaum_journal_2018">(<a href="references.html#ref-appelbaum_journal_2018" role="doc-biblioref">Appelbaum et al., 2018</a>)</span>，也便于并其他研究者将<em>p</em>值与他们希望使用的 <span class="math inline">\(\alpha\)</span> 水平进行比较 <span class="citation" data-cites="lehmann_testing_2005">(<a href="references.html#ref-lehmann_testing_2005" role="doc-biblioref">Lehmann &amp; Romano, 2005</a>)</span>。因为所发表的结论是使用已知最大误差率的方式进行的，<em>p</em>值永远不允许你肯定地陈述任何事情。即便我们把 <span class="math inline">\(\alpha\)</span> 水平设定为0.000001，但任何一个结论都可能是错误的，Fisher <span class="citation" data-cites="fisher_design_1935">(<a href="references.html#ref-fisher_design_1935" role="doc-biblioref">1935</a>)</span> 提醒我们，即使是”百万分之一的几率”仍旧会发生，既不低于也不高于其某个恰当的概率，但只要发生在我们身上就是0和1的概率，纵使我们会非常惊讶为什么如此小的概率仍会发生在<em>我们</em>身上”。这就是<strong>重复研究</strong>在科学领域很重要的原因。任何单一的发现都可能是一种侥幸，但如果几个重复的研究都能得到相同的结果，那么这种概率很快就会变得非常小。这种不确定性可能并没有反映在学术写作中，因为可以看到研究者会使用 “证明”、“显示”或 “已知”等字眼。在做完假设检验之后，有个稍长但更准确的说法是：</p>
 <blockquote class="blockquote">
-<p>我们宣称了一个有或没有意义的效应，但也同时承认，如果学者们使用这种方法论提出结论，从长远来看，他们最多只有在<span class="math inline">\(\alpha\)</span>%或<span class="math inline">\(\beta\)</span>%上被误导，我们认为这是可以接受的。在不久的将来，除非出现新的数据或信息证明我们是错的，否则我们将假定这一结论是正确的。</p>
+<p>我们宣称了一个有或没有意义的效应，但也同时承认，如果学者们使用这种方法论提出结论，从长远来看，他们最多只有在 <span class="math inline">\(\alpha\)</span> %或<span class="math inline">\(\beta\)</span>%上被误导，我们认为这是可以接受的。在不久的将来，除非出现新的数据或信息证明我们是错的，否则我们将假定这一结论是正确的。</p>
 </blockquote>
 <p>请记住，在Neyman-Pearson的理论框架下，研究者提出某种说法，但是这些说法<em>不一定是真实的</em>。例如，OPERA合作组织在2011年报告说，他们所得到的观测数据似乎揭示了中微子的速度超过了光速。这一说法的第一错误率是百万分之0.2，<em>假定错误纯粹是由随机误差造成的</em>。然而，实际上并没有研究者相信这一说法是真的，因为理论上中微子的运动速度不可能超过光速。事实上，后来发现是由于设备故障所导致的数据异常：一根光纤的连接不当，还有一个时钟振荡器的走的过快。然而，在提出这一说法的同时也公开邀请学界提供新的数据或信息，来证明这一说法有误。</p>
 <p>当学者们在Neyman-Pearson统计推断方法下”接受”或”拒绝”一个假设时，他们并没有表明任何关于假设的信念或结论。相反，他们宣称自己是基于预设规则（即观察到的数据反映了世界的某种状态）的一种波普尔式<strong>基本声明</strong>。这些基本声明描绘的是已经进行的观察（例如，“我观察到了一只黑天鹅”）或已经发生的事件（例如，“接受间隔练习训练的学生，比不接受训练的学生在考试中表现得更好”）。</p>
-<p>也就是说当下的某种声明与我们已经观测到的数据相关，但与我们用于预测的理论无关。某个声明与观测数据相关，因为它是一种统计推断，但它与理论无关，因为理论需要理论推断。数据永远无法“证明“一个理论是对还是错。一个基本声明可以<strong>证实</strong>一个从理论推导出来的预测，也可能无法证实。如果从一个理论中推导出的许多预测都得到了证实，我们就会越来越相信这个理论是接近真理的。这种理论的“接近真理性”叫做<strong>逼真性</strong> <span class="citation" data-cites="niiniluoto_verisimilitude_1998 popper_logic_2002">(<a href="references.html#ref-niiniluoto_verisimilitude_1998" role="doc-biblioref">Niiniluoto, 1998</a>; <a href="references.html#ref-popper_logic_2002" role="doc-biblioref">Popper, 2002</a>)</span>。报告假设检验时会出现的一个更短的声明是“p=.xx，即我们的预测在y%的α水平下得到证实，或者“p=.xx，即我们所关注的效应量在对应的统计检验力下，预测没有被证实”。<span class="math inline">\(\alpha\)</span>水平或者统计检验力往往只在文章的实验设计部分被提及，但是在结果部分重复他们能够提醒读者注意与你的声明相关的错误率。</p>
+<p>也就是说当下的某种声明与我们已经观测到的数据相关，但与我们用于预测的理论无关。某个声明与观测数据相关，因为它是一种统计推断，但它与理论无关，因为理论需要理论推断。数据永远无法“证明“一个理论是对还是错。一个基本声明可以<strong>证实</strong>一个从理论推导出来的预测，也可能无法证实。如果从一个理论中推导出的许多预测都得到了证实，我们就会越来越相信这个理论是接近真理的。这种理论的“接近真理性”叫做<strong>逼真性</strong> <span class="citation" data-cites="niiniluoto_verisimilitude_1998 popper_logic_2002">(<a href="references.html#ref-niiniluoto_verisimilitude_1998" role="doc-biblioref">Niiniluoto, 1998</a>; <a href="references.html#ref-popper_logic_2002" role="doc-biblioref">Popper, 2002</a>)</span>。报告假设检验时会出现的一个更短的声明是“p=.xx，即我们的预测在y%的α水平下得到证实，或者“p=.xx，即我们所关注的效应量在对应的统计检验力下，预测没有被证实”。 <span class="math inline">\(\alpha\)</span> 水平或者统计检验力往往只在文章的实验设计部分被提及，但是在结果部分重复他们能够提醒读者注意与你的声明相关的错误率。</p>
 <p>甚至当我们做出正确的声明时，它的底层理论也可能是错误的。Popper <span class="citation" data-cites="popper_logic_2002">(<a href="references.html#ref-popper_logic_2002" role="doc-biblioref">2002</a>)</span> 提醒我们“客观科学的实证基础并不是绝对的”。他争辩科学并不建立在坚固的基石之上，而是在沼泽中打下的木桩上，并指出“所以就目前而言，当确信桩的牢固程度足以承载结构后，我们就会停下来”。如Hacking <span class="citation" data-cites="hacking_logic_1965">(<a href="references.html#ref-hacking_logic_1965" role="doc-biblioref">1965</a>)</span> 写道：“拒绝不是反驳。多数拒绝只是试探性的”。所以当拒绝零模型时，我们是试探性的，并且知道有犯错的可能性，而不是一定要相信零模型是错的，以及我们用来进行预测的理论是对的。对Neyman <span class="citation" data-cites="neyman_inductive_1957">(<a href="references.html#ref-neyman_inductive_1957" role="doc-biblioref">1957</a>)</span> 而言，推断行为是一种“遵循当前实验结果，以一种特定方式去造就未来（直到被新的实验所迭代）的意志。所有的科学知识都是暂时的。</p>
 <p>一些统计学家建议把p值解释成对证据的度量。例如，Bland <span class="citation" data-cites="bland_introduction_2015">(<a href="references.html#ref-bland_introduction_2015" role="doc-biblioref">2015</a>)</span> 提出<em>p</em>值可以被解释成一种对证据强度的“即粗略又完备”的指示，<em>p</em> &gt; 0.1表示“很少或没有证据”，0.01 &lt; <em>p</em> &lt; 0.05表示“有证据”，<em>p</em> &lt; 0.001表示“证据很强”。从前面关于林德利悖论和<em>p</em>值均匀分布的讨论中可以看出这是不正确的 <span class="citation" data-cites="johansson_hail_2011 lakens_why_2022">(<a href="references.html#ref-johansson_hail_2011" role="doc-biblioref">Johansson, 2011</a>; <a href="references.html#ref-lakens_why_2022" role="doc-biblioref">Lakens, 2022</a>)</span>。如果你想量化证据，请看关于<a href="#likelihoods">似然性</a>或<a href="#bayes">贝叶斯统计</a>的章节。</p>
 </section><section id="sec-misconceptions" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="sec-misconceptions">
-<span class="header-section-number">1.7</span> Preventing common misconceptions about <em>p</em>-values</h2>
+<span class="header-section-number">1.7</span> 避免<em>p</em>值的常见误解</h2>
 <p><em>p</em>值是在零假设为真的情况下，实际观测到的数据的概率或者临界值的概率。为了理解<em>p值</em>能说明什么，我们尤其要注意<em>p</em>值不能说明什么。首先，我们需要知道”零假设为真”是什么，以及当零假设为真时，数据的分布形态是怎样的。尽管零假设可以被设定为任意数值，在这里我们规定零假设就是均两组值差异为0。例如，在实验条件下和控制条件下计算两组因变量的差异。</p>
 <p>区分零假设（假设在总体中平均值差异正好为0）和零模型（当零假设为真时，我们应该观察得到的数据模型）非常重要。零假设是一个位于0的点，而零模型则是一个分布。在教科书或者统计分析软件中，它门被可视化，可能会出现下面这样的图片。你可以看到，横轴代表<em>t</em>值，并且临界值<em>t</em>在1.96-2.00之间（取决于样本量）。之所以用<em>t</em>值，是因为比较两组差异的统计检验是基于<em>t</em>分布的，当实际得到的<em>t</em>值大于临界值<em>t</em>时，我们就认为<em>p</em>值在统计上显著。</p>
 <p>我个人认为，如果绘制的零模型是均值差的而非<em>t</em>值的，解释起来会更加清楚。所以在下方，你会看见当比较样本量为50的两组数据时，均值差的零模型，假设它们的真实差异为0，两组的标准差均为1。因为它们的标准差为1，你也可以把均值差异解释为科恩<em>d</em>效应量。所以，这也是样本量为50的样本在做独立样本<em>t</em>检验，科恩<em>d</em>为0时的分布。</p>
@@ -504,9 +504,7 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 <p>由于均值差的分布是基于均值差的标准误，所以5000样本量的分布要窄得多。这个值是根据标准差和样本量计算的，如下所示:</p>
 <p><span class="math display">\[\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}\]</span> 这个公式表明，均值差的标准误是每个组的标准差（σ）的平方除以该组的样本量，加在一起，然后取平方根。样本量越大，除以的数字就越大，因此均值差的标准误就越小。在n =50的例子中，有标准差:</p>
 <p><span class="math display">\[\sqrt{\frac{1^{2}}{50}+\frac{1^{2}}{50}}\]</span> 因此，当n = 50时，两组均值差的标准误为0.2；当n = 5000时，均值差的标准误为0.02。假设抽样分布为正态分布，95%的观测值落在1.96 个标准误之间。因此，对于样本量为50的样本，均值差应该在-1.96 * 0.2 = -0.392和+1.96 * 0.2 = 0.392之间，我们可以看到，当n = 50时，红色区域大约从-0.392到0.392。对于样本量为5000的样本，均值差应在-1.96 * 0.02和+1.96 * 0.02之间，也就是说，应该介于-0.0392到0.0392之间。由于样本量较大（n = 5000），观测得到的均值差应该比较小样本（n=50）中观测得到的均值差更接近0.</p>
-<p>如果我们抽出n = 5000的样本，并且观测到0.5的均值差，我们要清楚，这样的概率比起收集50个观测值发现0.5的均值差的要更小。我们现在几乎已经准备好介绍关于p值的常见误解，但在此之前，我们需要引入一个当零假设不为真时的数据模型。如果我们不是从一个真实均值差为0的模型中抽样，那么得到的备择模型会是什么样呢？一些软件 （比如 G*power, 见 图 @ref(fig:gpowerscreenshot))会同时显示出零模型（红色曲线）和备择模型（蓝色曲线）:</p>
-<p>(ref:gpowerscreenshotlab) G*Power软件截图显示了零模型（红色分布）和备择模型（蓝色分布）以及区分显著和非显著结果的临界<em>t</em>值（1.66055）。</p>
-<p>(ref:gpowerscreenshotlab) Screenshot from G*Power software visualizing the null model (red distribution) and alternative model (blue distribution) and the critical <em>t</em>-value (1.66055) that is the threshold distinguishing significant and non-significant results.</p>
+<p>如果我们抽出n = 5000的样本，并且观测到0.5的均值差，我们要清楚，这样的概率比起收集50个观测值发现0.5的均值差的要更小。我们现在几乎已经准备好介绍关于p值的常见误解，但在此之前，我们需要引入一个当零假设不为真时的数据模型。如果我们不是从一个真实均值差为0的模型中抽样，那么得到的备择模型会是什么样呢？一些软件 （比如 G*power, 见 图 <a href="#fig-gpowerscreenshot">Figure&nbsp;<span>1.8</span></a>)会同时显示出零模型（红色曲线）和备择模型（蓝色曲线）:</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-gpowerscreenshot" class="quarto-figure quarto-figure-center anchored">
@@ -550,7 +548,7 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 </div>
 <p>如果我们假定零假设为真，所有的p值都告诉我们均值差为0.35并不是非常出人意料。这可能有很多原因。在真实世界中，并不存在无所不知的琼斯告诉我们真均值差，就像上图所示，有可能存在一个真实效应。</p>
 <p>那么我们应该怎么陈述呢？解决方案很微妙，但也很重要。让我们再看看之前做的两个错误陈述的例子。首先，“因为<em>p</em> &gt; 0.05，我们可以推断效应不存在”这个陈述是错误的，因为很有可能效应是存在的（请记住<em>p</em>值是有关数据的解释而不是有效应或无效应的概率）。 费希尔对于p值的解释是我们可以得出一个小概率事件的发生或者零假设是错误的（他的原话是：“要么是发生了及其罕见的事件，要么是随机分布的原假设不正确”）。这可能听起来像是有关理论的概率的解释，但实际只是在p值很小时，对两种可能出现的场景的陈述（你犯Ⅰ型错误或者备择假设才为真）。真阳性和假阳性都是可能的，并且我们不量化两种可能性出现的概率（例如，并不是说零假设为真的概率是95%）。从内曼-皮尔逊的角度，p &gt; .05意味着我们不能拒绝零假设，因为我们有着5%以下的预期错误率。</p>
-<p>如果你对于推断效应缺失感兴趣，零假设检验不是你需要的工具。零假设检验回答的问题是’在期望的错误率下，我可以拒绝零假设吗？’。当<em>p</em> &gt; 0.05，你不能拒绝零假设时，零假设是真还是假是不能仅仅基于<em>p</em>值得出的（就像’无’的概念：既不是真也不是假）。幸运地是，已经开发了别的统计方法来回答效应缺失的问题，例如 <a href="#equivalencetest">等效检验</a>, 贝叶斯因子和贝叶斯估计 (请参见 <span class="citation" data-cites="harms_making_2018">Harms &amp; Lakens (<a href="references.html#ref-harms_making_2018" role="doc-biblioref">2018</a>)</span>, 了解概述).</p>
+<p>如果你对于推断效应缺失感兴趣，零假设检验不是你需要的工具。零假设检验回答的问题是’在期望的错误率下，我可以拒绝零假设吗？’。当<em>p</em> &gt; 0.05，你不能拒绝零假设时，零假设是真还是假是不能仅仅基于<em>p</em>值得出的（就像’无’的概念：既不是真也不是假）。幸运地是，已经开发了别的统计方法来回答效应缺失的问题，例如 <a href="09-equivalencetest.html">等效检验</a>, 贝叶斯因子和贝叶斯估计 (请参见 <span class="citation" data-cites="harms_making_2018">Harms &amp; Lakens (<a href="references.html#ref-harms_making_2018" role="doc-biblioref">2018</a>)</span>, 了解概述).</p>
 <p>第二个不正确的说法是’没有差异’。这个陈述改正起来要容易些。你可以写’没有统计学上的显著差异’。当然，两者有点重复，因为你基本上在用两种不同的方式说<em>p</em>值大于α水平，但至少这个说法在形式上是正确的。‘没有差异’和’没有统计学上的显著差异’可能听起来差不多，但前者你实际上在说’差异为0’，而后者你是在说’差异不足以使<em>p</em> &lt; .05’。虽然我从未见过有人这样做，但是更完整的说法应该是’鉴于样本量是每组50，α水平是0.05，观测差异只有大于0.4才能达到统计学上的显著，由于我们观测的差异是0.35，因此我们不能拒绝零假设’。如果这看起来不是一个令人满意的结论，请记住，零假设检验的设计不是为了得出效应缺失的有趣结论——你需要了解等效检验，来得到有关零效应更令人满意的答案。</p>
 </section><section id="误解-2p值显著意味着零假设为假" class="level3" data-number="1.7.2"><h3 data-number="1.7.2" class="anchored" data-anchor-id="误解-2p值显著意味着零假设为假">
 <span class="header-section-number">1.7.2</span> 误解 2：<em>p</em>值显著意味着零假设为假。</h3>
@@ -559,15 +557,15 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.37795354  1.12144270  0.34960805  2.32402666 -1.70860649 -0.90697330
- [7] -0.06044298 -0.58994454  1.35339390  1.01285694  0.81940993  0.58104476
-[13]  0.09872025  1.63347002 -0.56077008  0.70089778  0.14946050  1.74589880
-[19] -0.96809184  0.97421048 -1.21031160 -2.55532137 -0.83242904  1.10589580
-[25]  0.18618962  0.59659675 -1.20891290 -0.66334373  0.40584083 -0.84054960
-[31]  1.89760512  0.03497029 -1.46163906 -1.76396437 -1.28284690  1.66566188
-[37]  0.53413200  0.68446545  1.32225905  1.29786913 -0.23116646 -0.02214159
-[43]  1.07663693  1.34863351  1.35173757 -0.23187834  1.19011514 -0.30330206
-[49] -0.25187978 -1.51206914</code></pre>
+<pre><code> [1] -0.49583703  1.22688417 -0.70441825  1.86372563 -0.60548040 -0.46352706
+ [7]  0.43590303 -0.46346629 -0.07368624  1.84806812  1.14203261  0.21727180
+[13]  2.44614218  1.08825594  0.61916507  1.00263613 -0.61468964 -0.56820501
+[19]  0.07783270 -0.63218418  0.37382954  0.51147710 -0.07768900  0.10721868
+[25] -0.59325432  0.93489187  0.08242260  0.11267781 -0.10594944 -0.73495237
+[31]  1.56670307 -2.00496332  1.47440873 -0.35951925 -1.75494681 -1.43177779
+[37] -0.17951753 -0.63985698  1.00616579 -0.43632815  1.71631617  1.16485759
+[43]  0.25415717  1.18004356 -0.90220254 -1.30430712  0.99051752 -0.05753663
+[49] -0.89670222 -0.14184483</code></pre>
 </div>
 </div>
 <p>该命令会从一个平均值为0、标准差为1的分布中随机生成50个观察值（从长远来看——生成的每个样本的平均值和标准差都会有所不同）。想象我们运行这个命令一次，得到一个平均值为0.5的分布。下面的图画出了这个分布。假设我们可以做它和0的单样本t检验，得到<em>p</em> &lt; .05，此检验告诉我们，我们观测到的数据与0有显著差异，但此时R函数中随机数生成器依然按照原来的指令运行，生成的数据的真实均值为0。</p>
@@ -721,14 +719,14 @@ mean in group Daniel的朋友   mean in group Kyra的朋友
 <p>出于这个原因，统计学家会发出警告：略低于 0.05 的 p 值（例如，0.04 和 0.05 之间）是对备择假设的最弱支持。如果您发现 p 值在此范围内，请考虑重复该研究，或者如果这不可能，至少要谨慎地解释结果。当然，您可以在 Neyman-Pearson 方法中提出最多 5% Type 1 错误率的声明。因此，林德利悖论很好地说明了统计推断的不同哲学方法之间的差异。</p>
 <section id="针对p值概念的误解" class="level3" data-number="1.8.1"><h3 data-number="1.8.1" class="anchored" data-anchor-id="针对p值概念的误解">
 <span class="header-section-number">1.8.1</span> 针对p值概念的误解</h3>
-<p><strong>问题1</strong>：当独立t检验中每组的样本量为50个观察值时（见图@ref(fig:fig131)），下面哪种说法是正确的？</p>
+<p><strong>问题1</strong>：当独立t检验中每组的样本量为50个观察值时（见图 <a href="#fig-fig131">Figure&nbsp;<span>1.6</span></a>），下面哪种说法是正确的？</p>
 <ol type="A">
 <li>两组之间观察到平均差异总是0。</li>
 <li>两组之间的平均差异一般不可能为0。</li>
 <li>假设零假设为真，能观察到+0.5或-0.5的平均差异几乎不太可能</li>
 <li>假设零假设为真，能观察到+0.1或-0.1的平均差异几乎不太可能</li>
 </ol>
-<p><strong>问题2</strong>：图@ref(fig:fig131)和图@ref(fig:fig132)中的零模型在什么方面上是相似的，在什么方面又是不同的？</p>
+<p><strong>问题2</strong>：图 <a href="#fig-fig131">Figure&nbsp;<span>1.6</span></a> 和图 <a href="#fig-fig132">Figure&nbsp;<span>1.7</span></a> 中的零模型在什么方面上是相似的，在什么方面又是不同的？</p>
 <ol type="A">
 <li>在这两种情况下，分布都以零为中心，临界t值在1.96和2之间（对于双侧检验来说，取决于样本量）。但是，样本量越大，被认为 “令人惊讶”的平均差异就越接近于0。</li>
 <li>在这两种情况下，t值为0是最有可能的结果，但临界t值对于n=50来说大约是0.4，对于n=5000来说大约是0.05。</li>
@@ -1535,7 +1533,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./08-samplesizejustification.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性不</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">论证样本量的合理性</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

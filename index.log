@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.13)  15 OCT 2023 18:16
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.28)  28 OCT 2023 15:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
 LaTeX2e <2023-06-01> patch level 1
-L3 programming layer <2023-10-10>
+L3 programming layer <2023-10-23>
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
 Document Class: scrreprt 2023/07/07 v3.41 KOMA-Script document class (report)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -39,7 +39,7 @@ File: scrsize11pt.clo 2023/07/07 v3.41 KOMA-Script font size class option (11pt)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/typearea.sty
 Package: typearea 2023/07/07 v3.41 KOMA-Script package (type area)
 \ta@bcor=\skip49
-\ta@div=\count181
+\ta@div=\count182
 Package typearea Info: You've used standard option `letterpaper'.
 (typearea)             This is correct!
 (typearea)             Internally I'm using `paper=letter'.
@@ -68,13 +68,13 @@ Package typearea Info: These are the values describing the layout:
 (typearea)              \baselineskip   = 13.6pt
 (typearea)              on input line 1799.
 )
-\c@part=\count182
-\c@chapter=\count183
-\c@section=\count184
-\c@subsection=\count185
-\c@subsubsection=\count186
-\c@paragraph=\count187
-\c@subparagraph=\count188
+\c@part=\count183
+\c@chapter=\count184
+\c@section=\count185
+\c@subsection=\count186
+\c@subsubsection=\count187
+\c@paragraph=\count188
+\c@subparagraph=\count189
 \scr@dte@chapter@maxnumwidth=\skip54
 Class scrreprt Info: using compatibility default `afterindent=bysign'
 (scrreprt)           for `\chapter on input line 5994.
@@ -113,12 +113,12 @@ Package tocbasic Info: omitting babel extension for `lof'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `lof' on input line 7240.
 \scr@dte@figure@maxnumwidth=\skip63
-\c@figure=\count189
+\c@figure=\count190
 Package tocbasic Info: omitting babel extension for `lot'
 (tocbasic)             because of feature `nobabel' available
 (tocbasic)             for `lot' on input line 7257.
 \scr@dte@table@maxnumwidth=\skip64
-\c@table=\count190
+\c@table=\count191
 Class scrreprt Info: Redefining `\numberline' on input line 7428.
 \bibindent=\dimen140
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
@@ -137,14 +137,14 @@ Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
-\inf@bad=\count191
+\inf@bad=\count192
 LaTeX Info: Redefining \frac on input line 234.
-\uproot@=\count192
-\leftroot@=\count193
+\uproot@=\count193
+\leftroot@=\count194
 LaTeX Info: Redefining \overline on input line 399.
 LaTeX Info: Redefining \colon on input line 410.
-\classnum@=\count194
-\DOTSCASE@=\count195
+\classnum@=\count195
+\DOTSCASE@=\count196
 LaTeX Info: Redefining \ldots on input line 496.
 LaTeX Info: Redefining \dots on input line 499.
 LaTeX Info: Redefining \cdots on input line 620.
@@ -157,20 +157,20 @@ LaTeX Info: Redefining \Bigg on input line 725.
 \big@size=\dimen143
 LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
-\macc@depth=\count196
+\macc@depth=\count197
 LaTeX Info: Redefining \bmod on input line 905.
 LaTeX Info: Redefining \pmod on input line 910.
 LaTeX Info: Redefining \smash on input line 940.
 LaTeX Info: Redefining \relbar on input line 970.
 LaTeX Info: Redefining \Relbar on input line 971.
-\c@MaxMatrixCols=\count197
+\c@MaxMatrixCols=\count198
 \dotsspace@=\muskip16
-\c@parentequation=\count198
-\dspbrk@lvl=\count199
+\c@parentequation=\count199
+\dspbrk@lvl=\count266
 \tag@help=\toks19
-\row@=\count266
-\column@=\count267
-\maxfields@=\count268
+\row@=\count267
+\column@=\count268
+\maxfields@=\count269
 \andhelp@=\toks20
 \eqnshift@=\dimen144
 \alignsep@=\dimen145
@@ -196,14 +196,14 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-10-10 L3 programming layer (loader) 
+Package: expl3 2023-10-23 L3 programming layer (loader) 
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2023-10-10 L3 backend support: XeTeX
-\g__graphics_track_int=\count269
+File: l3backend-xetex.def 2023-10-23 L3 backend support: XeTeX
+\g__graphics_track_int=\count270
 \l__pdf_internal_box=\box55
-\g__pdf_backend_object_int=\count270
-\g__pdf_backend_annotation_int=\count271
-\g__pdf_backend_link_int=\count272
+\g__pdf_backend_object_int=\count271
+\g__pdf_backend_annotation_int=\count272
+\g__pdf_backend_link_int=\count273
 ))
 Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
@@ -216,17 +216,17 @@ Package: l3keys2e 2023-10-10 LaTeX2e option processing using LaTeX3 keys
 Package: fontspec 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
 Package: fontspec-xetex 2022/01/15 v2.8a Font selection for XeLaTeX and LuaLaTeX
-\l__fontspec_script_int=\count273
-\l__fontspec_language_int=\count274
-\l__fontspec_strnum_int=\count275
-\l__fontspec_tmp_int=\count276
-\l__fontspec_tmpa_int=\count277
-\l__fontspec_tmpb_int=\count278
-\l__fontspec_tmpc_int=\count279
-\l__fontspec_em_int=\count280
-\l__fontspec_emdef_int=\count281
-\l__fontspec_strong_int=\count282
-\l__fontspec_strongdef_int=\count283
+\l__fontspec_script_int=\count274
+\l__fontspec_language_int=\count275
+\l__fontspec_strnum_int=\count276
+\l__fontspec_tmp_int=\count277
+\l__fontspec_tmpa_int=\count278
+\l__fontspec_tmpb_int=\count279
+\l__fontspec_tmpc_int=\count280
+\l__fontspec_em_int=\count281
+\l__fontspec_emdef_int=\count282
+\l__fontspec_strong_int=\count283
+\l__fontspec_strongdef_int=\count284
 \l__fontspec_tmpa_dim=\dimen150
 \l__fontspec_tmpb_dim=\dimen151
 \l__fontspec_tmpc_dim=\dimen152
@@ -238,9 +238,9 @@ Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
 ))
-\g__um_fam_int=\count284
-\g__um_fonts_used_int=\count285
-\l__um_primecount_int=\count286
+\g__um_fam_int=\count285
+\g__um_fonts_used_int=\count286
+\l__um_primecount_int=\count287
 \g__um_primekern_muskip=\muskip17
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
@@ -301,11 +301,11 @@ File: svgnam.def 2022/06/12 v2.14 Predefined colors according to SVG 1.1 (UK)
 File: x11nam.def 2022/06/12 v2.14 Predefined colors according to Unix/X11 (UK)
 )) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2023/01/19 4.5a verbatim text (tvz,hv)
-\FV@CodeLineNo=\count287
+\FV@CodeLineNo=\count288
 \FV@InFile=\read2
 \FV@TabBox=\box56
-\c@FancyVerbLine=\count288
-\FV@StepNumber=\count289
+\c@FancyVerbLine=\count289
+\FV@StepNumber=\count290
 \FV@OutFile=\write3
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/framed/framed.sty
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
@@ -320,17 +320,17 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTright=\skip70
 \LTpre=\skip71
 \LTpost=\skip72
-\LTchunksize=\count290
+\LTchunksize=\count291
 \LTcapwidth=\dimen157
 \LT@head=\box57
 \LT@firsthead=\box58
 \LT@foot=\box59
 \LT@lastfoot=\box60
 \LT@gbox=\box61
-\LT@cols=\count291
-\LT@rows=\count292
-\c@LT@tables=\count293
-\c@LT@chunks=\count294
+\LT@cols=\count292
+\LT@rows=\count293
+\c@LT@tables=\count294
+\c@LT@chunks=\count295
 \LT@p@ftn=\toks23
 )
 Class scrreprt Info: longtable captions redefined on input line 98.
@@ -346,12 +346,12 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \cmidrulesep=\dimen165
 \cmidrulekern=\dimen166
 \defaultaddspace=\dimen167
-\@cmidla=\count295
-\@cmidlb=\count296
+\@cmidla=\count296
+\@cmidlb=\count297
 \@aboverulesep=\dimen168
 \@belowrulesep=\dimen169
-\@thisruleclass=\count297
-\@lastruleclass=\count298
+\@thisruleclass=\count298
+\@lastruleclass=\count299
 \@thisrulewidth=\dimen170
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
@@ -364,19 +364,19 @@ Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
 \ar@cellbox=\box63
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count299
-\calc@Bcount=\count300
+\calc@Acount=\count300
+\calc@Bcount=\count301
 \calc@Adimen=\dimen173
 \calc@Bdimen=\dimen174
 \calc@Askip=\skip75
 \calc@Bskip=\skip76
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count301
+\calc@Ccount=\count302
 \calc@Cskip=\skip77
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count302
+\etb@tempcnta=\count303
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/mdwtools/footnote.sty
 Package: footnote 1997/01/28 1.13 Save footnotes around boxes
 \fn@notes=\box64
@@ -401,19 +401,19 @@ Package graphics Info: Driver file: xetex.def on input line 107.
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
 \multirow@colwidth=\skip81
-\multirow@cntb=\count303
+\multirow@cntb=\count304
 \multirow@dima=\skip82
 \bigstrutjot=\dimen178
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen179
 \WF@size=\dimen180
-\c@WF@wrappedlines=\count304
+\c@WF@wrappedlines=\count305
 \WF@box=\box65
 \WF@everypar=\toks25
 Package: wrapfig 2003/01/31  v 3.6
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count305
+\c@float@type=\count306
 \float@exts=\toks26
 \float@box=\box66
 \@float@everytoks=\toks27
@@ -422,7 +422,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
 \everycr=\toks28
 \minrowclearance=\skip83
-\rownum=\count306
+\rownum=\count307
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.sty
 Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
@@ -436,16 +436,16 @@ Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/varwidth/varwidth.sty
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \@vwid@box=\box68
-\sift@deathcycles=\count307
+\sift@deathcycles=\count308
 \@vwid@loff=\dimen181
 \@vwid@roff=\dimen182
 )
-\c@taburow=\count308
-\tabu@nbcols=\count309
-\tabu@cnt=\count310
-\tabu@Xcol=\count311
-\tabu@alloc=\count312
-\tabu@nested=\count313
+\c@taburow=\count309
+\tabu@nbcols=\count310
+\tabu@cnt=\count311
+\tabu@Xcol=\count312
+\tabu@alloc=\count313
+\tabu@nested=\count314
 \tabu@target=\dimen183
 \tabu@spreadtarget=\dimen184
 \tabu@naturalX=\dimen185
@@ -479,7 +479,7 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 \UL@skip=\skip86
 \UL@hook=\toks31
 \UL@height=\dimen192
-\UL@pe=\count314
+\UL@pe=\count315
 \UL@pixel=\dimen193
 \ULC@box=\box76
 Package: ulem 2019/11/18
@@ -487,12 +487,12 @@ Package: ulem 2019/11/18
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.sty
 Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \rotheadsize=\dimen195
-\c@nlinenum=\count315
+\c@nlinenum=\count316
 \TeXr@lab=\toks32
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
 Package: bookmark 2020-11-06 v1.29 PDF bookmarks (HO)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
+Package: hyperref 2023-10-21 v7.01c Hypertext links for LaTeX
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
@@ -516,7 +516,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2023-08-07 v2.53 Cross-referencing by name of section
+Package: nameref 2023-10-05 v2.54 Cross-referencing by name of section
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -524,69 +524,69 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count316
+\c@section@level=\count317
 )
 \@linkdim=\dimen196
-\Hy@linkcounter=\count317
-\Hy@pagecounter=\count318
+\Hy@linkcounter=\count318
+\Hy@pagecounter=\count319
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-10-21 v7.01c Hyperref: PDFDocEncoding definition (HO)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count319
+\Hy@SavedSpaceFactor=\count320
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-10-21 v7.01c Hyperref: PDF Unicode definition (HO)
 )
-Package hyperref Info: Option `unicode' set `true' on input line 4050.
-Package hyperref Info: Hyper figures OFF on input line 4167.
-Package hyperref Info: Link nesting OFF on input line 4172.
-Package hyperref Info: Hyper index ON on input line 4175.
-Package hyperref Info: Plain pages OFF on input line 4182.
-Package hyperref Info: Backreferencing OFF on input line 4187.
+Package hyperref Info: Option `unicode' set `true' on input line 4051.
+Package hyperref Info: Hyper figures OFF on input line 4168.
+Package hyperref Info: Link nesting OFF on input line 4173.
+Package hyperref Info: Hyper index ON on input line 4176.
+Package hyperref Info: Plain pages OFF on input line 4183.
+Package hyperref Info: Backreferencing OFF on input line 4188.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4434.
-\c@Hy@tempcnt=\count320
+Package hyperref Info: Bookmarks ON on input line 4435.
+\c@Hy@tempcnt=\count321
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip18
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4772.
+LaTeX Info: Redefining \url on input line 4773.
 \XeTeXLinkMargin=\dimen197
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count321
+\Fld@menulength=\count322
 \Field@Width=\dimen198
 \Fld@charsize=\dimen199
-Package hyperref Info: Hyper figures OFF on input line 6051.
-Package hyperref Info: Link nesting OFF on input line 6056.
-Package hyperref Info: Hyper index ON on input line 6059.
-Package hyperref Info: backreferencing OFF on input line 6066.
-Package hyperref Info: Link coloring OFF on input line 6071.
-Package hyperref Info: Link coloring with OCG OFF on input line 6076.
-Package hyperref Info: PDF/A mode OFF on input line 6081.
+Package hyperref Info: Hyper figures OFF on input line 6052.
+Package hyperref Info: Link nesting OFF on input line 6057.
+Package hyperref Info: Hyper index ON on input line 6060.
+Package hyperref Info: backreferencing OFF on input line 6067.
+Package hyperref Info: Link coloring OFF on input line 6072.
+Package hyperref Info: Link coloring with OCG OFF on input line 6077.
+Package hyperref Info: PDF/A mode OFF on input line 6082.
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count322
-\c@Item=\count323
-\c@Hfootnote=\count324
+\Hy@abspage=\count323
+\c@Item=\count324
+\c@Hfootnote=\count325
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2023-07-08 v7.01b Hyperref driver for XeTeX
+File: hxetex.def 2023-10-21 v7.01c Hyperref driver for XeTeX
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
 \pdfm@box=\box77
-\c@Hy@AnnotLevel=\count325
-\HyField@AnnotCount=\count326
-\Fld@listcount=\count327
-\c@bookmark@seq@number=\count328
+\c@Hy@AnnotLevel=\count326
+\HyField@AnnotCount=\count327
+\Fld@listcount=\count328
+\c@bookmark@seq@number=\count329
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
@@ -600,7 +600,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip87
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
 File: bkm-dvipdfm.def 2020-11-06 v1.29 bookmark driver for dvipdfm (HO)
-\BKM@id=\count329
+\BKM@id=\count330
 )) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
@@ -617,8 +617,8 @@ Package caption Info: KOMA-Script document class detected.
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption-koma.sto
 File: caption-koma.sto 2023/09/08 v2.0e Adaption of the caption package to the KOMA-Script document classes (AR)
 ))
-\c@caption@flags=\count330
-\c@continuedfloat=\count331
+\c@caption@flags=\count331
+\c@continuedfloat=\count332
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: longtable package is loaded.
@@ -632,13 +632,13 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 )
 \@float@every@codelisting=\toks33
-\c@codelisting=\count332
+\c@codelisting=\count333
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
 Package caption Info: New subtype `subfigure' on input line 238.
-\c@subfigure=\count333
+\c@subfigure=\count334
 Package caption Info: New subtype `subtable' on input line 238.
-\c@subtable=\count334
+\c@subtable=\count335
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
 Package: tcolorbox 2023/09/26 version 6.1.0 text color boxes
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
@@ -671,14 +671,14 @@ Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 \pgf@yd=\dimen277
 \w@pgf@writea=\write4
 \r@pgf@reada=\read3
-\c@pgf@counta=\count335
-\c@pgf@countb=\count336
-\c@pgf@countc=\count337
-\c@pgf@countd=\count338
+\c@pgf@counta=\count336
+\c@pgf@countb=\count337
+\c@pgf@countc=\count338
+\c@pgf@countd=\count339
 \t@pgf@toka=\toks38
 \t@pgf@tokb=\toks39
 \t@pgf@tokc=\toks40
-\pgf@sys@id@count=\count339
+\pgf@sys@id@count=\count340
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
 )
@@ -690,24 +690,24 @@ File: pgfsys-dvipdfmx.def 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
 File: pgfsys-common-pdf.def 2023-01-15 v3.1.10 (3.1.10)
 )
-\pgfsys@objnum=\count340
+\pgfsys@objnum=\count341
 ))) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfsyssoftpath@smallbuffer@items=\count341
-\pgfsyssoftpath@bigbuffer@items=\count342
+\pgfsyssoftpath@smallbuffer@items=\count342
+\pgfsyssoftpath@bigbuffer@items=\count343
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
 Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen278
-\pgfmath@count=\count343
+\pgfmath@count=\count344
 \pgfmath@box=\box79
 \pgfmath@toks=\toks41
 \pgfmath@stack@operand=\toks42
 \pgfmath@stack@operation=\toks43
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count344
+\c@pgfmathroundto@lastzeros=\count345
 )) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgf@picminx=\dimen279
@@ -737,7 +737,7 @@ File: pgfcorescopes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfpic=\box80
 \pgf@hbox=\box81
 \pgf@layerbox@main=\box82
-\pgf@picture@serial@count=\count345
+\pgf@picture@serial@count=\count346
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgflinewidth=\dimen297
@@ -758,8 +758,8 @@ File: pgfcorearrows.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgf@max=\dimen302
-\pgf@sys@shading@range@num=\count346
-\pgf@shadingcount=\count347
+\pgf@sys@shading@range@num=\count347
+\pgf@shadingcount=\count348
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
@@ -794,9 +794,9 @@ Package: verbatim 2022-07-02 v1.5u LaTeX2e package for verbatim enhancements
 \tcb@upperbox=\box86
 \tcb@lowerbox=\box87
 \tcb@phantombox=\box88
-\c@tcbbreakpart=\count348
-\c@tcblayer=\count349
-\c@tcolorbox@number=\count350
+\c@tcbbreakpart=\count349
+\c@tcblayer=\count350
+\c@tcolorbox@number=\count351
 \tcb@temp=\box89
 \tcb@temp=\box90
 \tcb@temp=\box91
@@ -813,7 +813,7 @@ Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
 Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgf@plot@mark@count=\count351
+\pgf@plot@mark@count=\count352
 \pgfplotmarksize=\dimen307
 )
 \tikz@lastx=\dimen308
@@ -828,17 +828,17 @@ File: pgflibraryplothandlers.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \tikz@figbox@bg=\box94
 \tikz@tempbox=\box95
 \tikz@tempbox@bg=\box96
-\tikztreelevel=\count352
-\tikznumberofchildren=\count353
-\tikznumberofcurrentchild=\count354
-\tikz@fig@count=\count355
+\tikztreelevel=\count353
+\tikznumberofchildren=\count354
+\tikznumberofcurrentchild=\count355
+\tikz@fig@count=\count356
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
-\pgfmatrixcurrentrow=\count356
-\pgfmatrixcurrentcolumn=\count357
-\pgf@matrix@numberofcolumns=\count358
+\pgfmatrixcurrentrow=\count357
+\pgfmatrixcurrentcolumn=\count358
+\pgf@matrix@numberofcolumns=\count359
 )
-\tikz@expandcount=\count359
+\tikz@expandcount=\count360
 (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))) (c:/Users/dlakens/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tikzfill/tikzfill.image.sty
@@ -1175,7 +1175,30 @@ No file index.toc.
 [2
 
 ]
-Overfull \hbox (127.78856pt too wide) in paragraph at lines 260--263
+Missing character: There is no 概 (U+6982) in font [lmsans10-bold]:mapping=tex-text;!
+Missing character: There is no 述 (U+8FF0) in font [lmsans10-bold]:mapping=tex-text;!
+Missing character: There is no 翻 (U+7FFB) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 译 (U+8BD1) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 人 (U+4EBA) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 员 (U+5458) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 和 (U+548C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 校 (U+6821) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 对 (U+5BF9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no ， (U+FF0C) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 您 (U+60A8) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 可 (U+53EF) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 以 (U+4EE5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 将 (U+5C06) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 此 (U+6B64) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 资 (U+8D44) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 源 (U+6E90) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 引 (U+5F15) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 用 (U+7528) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 为 (U+4E3A) in font [lmroman10-regular]:mapping=tex-text;!
+
+Overfull \hbox (127.78856pt too wide) in paragraph at lines 265--268
 []\TU/lmr/m/n/10.95 Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from https://lakens.github.io/statistical_inferences/.
  []
 
@@ -1203,7 +1226,7 @@ Class scrreprt Warning: \float@addtolists detected!
 Missing character: There is no 使 (U+4F7F) in font [lmsans10-bold]:mapping=tex-text;!
 Missing character: There is no 用 (U+7528) in font [lmsans10-bold]:mapping=tex-text;!
 LaTeX Font Info:    Font shape `TU/lmss/bx/it' in size <20.74> not available
-(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 278.
+(Font)              Font shape `TU/lmss/bx/sl' tried instead on input line 286.
 Missing character: There is no 值 (U+503C) in font [lmsans10-bold]:mapping=tex-text;!
 Missing character: There is no 进 (U+8FDB) in font [lmsans10-bold]:mapping=tex-text;!
 Missing character: There is no 行 (U+884C) in font [lmsans10-bold]:mapping=tex-text;!
@@ -1453,4 +1476,27 @@ Missing character: There is no 件 (U+4EF6) in font [lmroman10-regular]:mapping=
 Missing character: There is no 的 (U+7684) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 学 (U+5B66) in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no 生 (U+751F) in font [lmroman10-regular]:mapping=tex-text;!
-Missing character: There is no 成 (U
+Missing character: There is no 成 (U+6210) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 绩 (U+7EE9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 更 (U+66F4) in font [lmroman10-italic]:mapping=tex-text;!
+Missing character: There is no 好 (U+597D) in font [lmroman10-italic]:mapping=tex-text;!
+Missing character: There is no 。 (U+3002) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 方 (U+65B9) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 向 (U+5411) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 性 (U+6027) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 假 (U+5047) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 设 (U+8BBE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 仅 (U+4EC5) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 能 (U+80FD) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 说 (U+8BF4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 明 (U+660E) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 条 (U+6761) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 件 (U+4EF6) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 之 (U+4E4B) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 间 (U+95F4) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 存 (U+5B58) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 在 (U+5728) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 一 (U+4E00) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 定 (U+5B9A) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 差 (U+5DEE) in font [lmroman10-regular]:mapping=tex-text;!
+Missing character: There is no 异 (U+5F02) in 
