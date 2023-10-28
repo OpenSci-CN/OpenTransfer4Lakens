@@ -24,7 +24,7 @@ analysis](https://www.nejm.org/doi/suppl/10.1056/NEJMoa2034577/suppl_file/nejmoa
 
     
 ```{r interim, echo = FALSE}
-#| fig-cap: "Screenshot of the planned interim analyses examining the safety and Efficacy of the BNT162b2 mRNA Covid-19 Vaccine."
+#| fig-cap: "用于检验BNT162b2 mRNA Covid-19疫苗的安全性及效应的实现计划的序列分析截图"
 
 knitr::include_graphics("images/vaccinetrial.png")
 ```
@@ -110,7 +110,7 @@ design$stageLevels * 2
 `rpact` 可以很容易地绘制出每个观察的边界（基于临界值）。观察次数被绘制成
 \"信息率\"（Information
 Rate）的函数，信息率是指在一次观测中收集的总数据的百分比。 在图
-\@ref(fig:boundplot1)中有两次等距的观察，所以当50%的数据被收集时，信息率为0.5）；当100%的数据被收集时，信息率为1。
+\@ref(fig-boundplot1)中有两次等距的观察，所以当50%的数据被收集时，信息率为0.5）；当100%的数据被收集时，信息率为1。
 我们看到临界值（黑色实线）大于我们在5%
 的alpha水平的固定设计中使用的1.96，即*Z* =
 2.178（黑色虚线）。每当我们观察到一个测试统计量在第一或第二次观察（look）时比这些临界值更极端，我们就可以拒绝零假设。
@@ -124,7 +124,6 @@ plot(design)
 分析也可以在`rpact`[shiny
 app](https://rpact.shinyapps.io/public/)中进行，它也允许用户通过简单的菜单选项创建所有的图，并下载完整的分析报告（例如，用于预注册文件）。
 
-(ref:rpactshinylab) rpact Shiny app的截图。
 
 ```{r fig-rpactshiny, fig.margin=FALSE, echo=FALSE}
 #| fig-cap: "rpact Shiny app的截图"
@@ -424,7 +423,7 @@ designs），允许研究者根据中期分析结果增加最终的观察数量�
 @wassmer_group_2016)。
 
 另外，如果观察到的效应值比预期的要小，人们可能会因无用而停止。作为一个简单的无效性停止规则的说明，设想一个研究者，只要观察到的效应值为零，或者观察到的效应值与预测的方向相反，就会因无效而停止。在图
-\@ref(fig:futility1)中，红线表示证实效应显著的临界值。实质上，这意味着如果观察到的中期测试的*Z*分数为0或负数，数据收集将被终止。这可以通过在序列设计的设定中加入
+\@ref(fig-futility1)中，红线表示证实效应显著的临界值。实质上，这意味着如果观察到的中期测试的*Z*分数为0或负数，数据收集将被终止。这可以通过在序列设计的设定中加入
 `futilityBounds = c(0,0)`
 来指定。研究者可以事先选择在满足无效标准时停止，即有约束力的无效规则，但通常建议保留继续收集数据的可能性（即无约束力的无效规则，通过设置
 `bindingFutility = FALSE` 设定）。
