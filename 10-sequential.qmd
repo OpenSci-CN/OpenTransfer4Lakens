@@ -91,7 +91,7 @@ design <- getDesignGroupSequential(
   alpha = 0.05,
   beta = 0.1
 )
-design
+print(summary(design))
 ```
 
 输出结果告诉我们，使用Pocock支出函数设计一个具有两次观测（一个中期，一个最终）的研究。最后一行返回单侧的alpha水平。`rpact`
@@ -297,7 +297,7 @@ power_res <- getSampleSizeMeans(
   allocationRatioPlanned = 1,
   normalApproximation = FALSE)
 
-power_res
+print(power_res)
 ```
 
 我们看到每组需要 85 名被试，（或 86 名，因为样本量实际上是
@@ -324,7 +324,7 @@ power_res_seq <- getSampleSizeMeans(
   allocationRatioPlanned = 1,
   normalApproximation = FALSE)
 
-power_res_seq
+print(power_res_seq)
 ```
 
 第一次观测每个小组的样本量是 47.24
@@ -400,7 +400,7 @@ power_res_seq <- getSampleSizeMeans(
   allocationRatioPlanned = 1,
   normalApproximation = FALSE)
 
-summary(power_res_seq)
+print(summary(power_res_seq))
 ```
 
 当我们收集到 `r ceiling(power_res_seq$numberOfSubjects1[2]) * 2`
@@ -530,7 +530,7 @@ res <- getAnalysisResults(
   dataInput = dataMeans
   )
 
-res
+print(summary(res))
 ```
 
 ```{r, echo = FALSE}
@@ -559,7 +559,7 @@ res <- getAnalysisResults(
 ```
 
 ```{r, echo = FALSE}
-res
+print(summary(res))
 ```
 
 想象一下，我们进行了一项研究，计划最多对数据进行两次等距观察。在该研究中，我们进行alpha为0.05的双侧检验了，使用Pocock类型的 alpha支出函数，并在最后观察时检验两个组之间的均值差异。基于具有两个等距观察的Pocock类型的alpha支出函数，双侧*t*检验的alpha水平是 `r format(seq_design$stageLevels[1]*2, nsmall = 4, digits = 4)`, 和 `r format(seq_design$stageLevels[2]*2, nsmall = 4, digits = 4)`。因此，我们可以在两次观察后拒绝$H_0$。但我们也想报告一个效应值，并校正*p*值和置信区间。
@@ -609,7 +609,7 @@ design <- rpact::getDesignGroupSequential(
   sided = 0,
   alpha = 0.0
 )
-design
+print(summary(design))
 ```
 
 A)  研究人员可以拒绝原假设并可以终止数据收集
@@ -632,7 +632,7 @@ power_res <- rpact::getSampleSizeMeans(
   allocationRatioPlanned = 1,
   normalApproximation = FALSE)
 
-power_res
+print(power_res)
 ```
 
 A)  64个（每个独立组 32 个）
