@@ -1,0 +1,861 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+```{r, include = FALSE}
+source("D:/New_translate/statistical_inferences-master/statistical_inferences-master/include/globals.R")
+
+# add TES in metafor
+# add why multiple high p-values are surprising.
+# https://daniellakens.blogspot.com/2015/05/after-how-many-p-values-between-0025.html
+
+```
+
+
+# 5 偏倚检测
+偏倚在研究过程的各个阶段中都有可能会出现。能否预防或觉察到偏倚的发生对科学研究而言意义匪浅。一些研究者建议对科学文献当中的任何结论都应该保留怀疑态度。例如，科学哲学家Deborah Mayo[-@mayo_statistical_2018]写道："当你面对当天的统计学快讯时，你的第一个问题应该是：这些结果是否可能是选择性报告、数据挑选或者其他类似伎俩所导致的？"。当然，如果你在一次学术会议上提出这个问题，这可能会让你不那么受欢迎，但忽视研究者在研究过程中可能会或多或少在结论中有意地引入偏倚这一事实，这是非常幼稚的。
+
+在所有以往科学研究里引入偏倚的行为中,最极端的形式就是**学术不端**，其中包括伪造、更改或剔除数据，这会使得研究报告不能反映出正确的研究结果。例如，[AndrewWakefield](https://en.wikipedia.org/wiki/Andrew_Wakefield)在1998年撰写了一篇造假文章，声称麻疹、流行性腮腺炎和风疹(MMR)疫苗与自闭症有关。这篇文章在破坏了公众对疫苗的信任后，直到2010年才终于被撤稿。另一个有关的例子来自心理学领域[James Vicary](https://en.wikipedia.org/wiki/James_Vicary)进行的一项关于潜意识的研究。他声称，在电影院屏幕上以低于意识阈限的速率闪现出词语"吃爆米花"和"喝可乐"后，爆米花和可乐的销售额分别增长了57.5%、18.1%。后来因为找不到任何迹象表明这项研究确实进行过[@rogers_how_1992]，人们认为Vicary很可能进行了学术欺诈。Retraction-Watch网站维护着一个[数据库](http://retractiondatabase.org)，该数据库跟踪记录了许多学术论文被撤销的原因（其中就包括数据造假）。虽然实际生活中数据造假的发生频率未知，但正如[研究诚信](#integrity)章节中所讨论的那样，我们可以预计至少有一小部分科学家对他们的研究数据与结果进行过一次以上的捏造和篡改。
+
+《The Dropout》中，Theranos公司虚假宣传其拥有可以仅使用极少量血液进行血液检测的设备。以下场景是两名举报者被公司老板逼迫删除实验中不符合预期结果的数据，与老板进行对峙的场景。
+
+```{r outliers, echo = FALSE, fig.cap="(ref:outlierlab)"}
+
+if (knitr:::is_latex_output()) {
+  knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/dropout_outlier.png")
+} else {
+  knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/dropout_outlier_small.gif")
+}
+```
+
+另一类错误是统计报告错误，包括报告错误的自由度、将p=0.056报告为p\<0.05等[@nuijten_prevalence_2015]。虽然我们应该尽力避免错误，但每个人都会犯错，好在随着数据和代码共享变得越来越普遍，能够更容易地检测出其他研究人员工作中的错误。正如Dorothy Bishop[-@bishop_fallibility_2018]所写的："随着开放科学越来越成为常态，我们将发现每个人会犯错误。科学家的声誉将不取决于他们的研究中是否存在缺陷，而是取决于在发现这些缺陷时他们如何回应。
+
+[Statcheck](http://statcheck.io/)是一款自动从文章中提取统计数据并重新计算其p值的软件，统计数据需要按照美国心理学协会(APA)的指导方针报告。它会检查报告的统计数据内部是否一致：即检查在给定的统计数据和自由度下，报告的p值是否准确。如果准确，那么犯错的可能性就较小(但这并不适用于逻辑错误!)，如果不准确，你应该检查统计检验中的信息是否准确。Statcheck不是完美的，它会导致第一类错误，即当实际上没有错误时，它将某些内容标记为错误。但Statcheck是一个易于使用的工具，可以在投稿之前用来检查文章。
+
+有些数据的不一致性不太容易自动检测，但可以手动识别。例如，@brown_grim_2017表明，许多论文报告的均值在样本量给定的情况下不可能出现（称为[*GRIM* test](http://nickbrown.fr/GRIM)。例如，Matti Heino在一篇博客文章[blog post](https://mattiheino.com/2016/11/13/legacy-of-psychology/)中注意到，Festinger和Carlsmith的经典研究中报告的三个平均值在数学上是不可能的。对于每个条件20个观测值，观测范围是-5到5，那所有平均值应该以1/20的倍数或0.05结尾。以X.X8或X.X2结尾的三个平均值与报告的样本量和标度不一致。当然，这种不一致性可能是由于未报告某些问题的数据缺失引起的，但GRIM测试也已被用于揭示科学不端行为[scientific misconduct](https://en.wikipedia.org/wiki/GRIM_test)。
+
+
+1959年Festinger和Carlsmith所作报告中主要结果的表格截图。
+```{r festinger, echo = FALSE, fig.cap="(ref:festingerlab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/festinger_carlsmith.png")
+```
+
+
+## 5.1发表偏倚
+
+发表偏倚是科学面临的最大挑战之一。**发表偏倚**指有选择地提交和出版科学研究，通常基于结果是否"统计显著"。科学文献被这些统计显著的结果所主导。同时，我们知道，研究人员进行的许多研究并没有产生显著的结果。当科学家们只能获得显著的结果，而不能获得所有的结果时，他们就缺乏对某一假设的证据的完整概述。在极端情况下，选择性报告会导致这样一种情况：在已发表的文献中，有数百个统计显著的结果，但因为有更多非显著的研究没有被分享，学术研究没有真正的效果。这就是所谓的**文件抽屉问题**，即非显著结果被藏在文件抽屉里（或者现在是电脑上的文件夹），不为科学界所了解。每个科学家都应该努力解决发表偏倚，因为只要科学家不分享他们的所有结果，就很难了解什么是可能的事实，而且正如Greenwald[-@greenwald_consequences_1975]所指出的，这是一种违反道德的行为。
+
+
+文章Greenwald, A. G. (1975). Consequences of prejudice against the null hypothesis. Psychological Bulletin, 82(1),1–20.（对虚无假设偏见的后果）最后一句话的截图
+```{r greenwald, echo = FALSE, out.width  = '100%', fig.cap="(ref:greenwaldlab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/greenwald.png")
+```
+
+无论假设检验的*p*值是多少，只有将你的所有研究成果提供给科学家同行，才能解决发表偏倚的问题。注册报告是消除发表偏倚的一种方式，因为这种类型的科学文章在收集数据之前，会根据介绍、方法和统计分析计划进行审查[@chambers_past_2022;@nosek_registered_2014]。经过该领域专家的同行评审，他们可能会对实验设计和数据分析方法提出改进意见。文章可以获准"原则上接收"，这意味着只要遵循研究计划，无论结果如何，文章都会被发表。这应该有利于非显著性结果的发表，如图5.4所示，对首次发表的心理学注册报告的分析显示，71篇文章中的31篇(44%)观察到了显著结果，相比之下，同期发表的152篇标准科学文章中的则有146篇(96%)观察到了显著结果[@scheel_excess_2021]。
+
+标准报告和注册报告的显著结果率，误差条表示95%置信区间。
+```{r scheel, echo = FALSE, out.width  = '75%', fig.cap="(ref:scheellab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/scheel.png")
+```
+
+在过去，注册报告并不存在，科学家也不会分享所有的结果[@franco_publication_2014;@sterling_publication_1959]，因此，我们必须努力检测发表偏倚对我们准确评估文献能力的影响程度。元分析应该始终仔细检查发表偏倚对元分析效应量估计的影响--尽管在1990年至2017年间发表在Psychological Bulletin上的元分析中，估计只有57%文章说他们评估了发表偏倚[@polanin_transparency_2020]。最近发表在教育研究上的元分析中，82%使用了偏差检测测试，但所使用的方法通常与最先进的方法相差甚远[@ropovik_neglect_2021]。尽管已经有好几种检验发表偏倚的技术被大家所熟知，但新技术的开发仍然是一个非常活跃的研究领域。所有的技术都是基于特定的假设，你在应用检验方法之前应该考虑这些假设[@carter_correcting_2019]。目前并没有"妙方"：这些技术都不能修正发表偏倚。它们都不能肯定地告诉你修正了发表偏倚后真正的元分析效应量是多少。这些方法能做到最好的事情就是在特定条件下检测由特定机制引起的发表偏倚。发表偏倚可以被检测出来，但它不能被修正。
+
+在[可能性](#likelihoods)一章中，我们看到混合结果（有阴性有阳性）是可以预期的，而且可以成为备择假设的有力证据。既然混合结果可以预期，那么在统计检验力较低的情况下，居然可以完全观察到统计显著的结果，这是非常令人惊讶的。以通常使用的80%的统计检验力下限，我们可以预期在有真实效果的情况下，五项研究中会有一项是不显著的结果。一些研究人员指出，在一组研究中，*不*出现混合结果是不可能的（换言之，若全是“好”的结果是不真实的）[@francis_frequency_2014;@schimmack_ironic_2012]。由于我们一直接触到的科学文献并不反映现实情况，所以我们通常对真实的样子感觉不好。科学文献中几乎所有的多项研究论文都只呈现统计显著的结果，然而所有结果都显著的情况是不可能的。
+
+我们开发了计算二项式概率的[在线Shiny应用程序](http://shiny.ieis.tue.nl/mixed_results_likelihood/)。如果你滚动到页面底部，在"二项式概率"中找到"多项显著性发现"，给定一个关于检验力的特定假设，应用程序便可显示概率。@francis_frequency_2014使用这些二项式概率来计算2009年至2012年期间发表在Psychological Science杂志上44篇包含四个或更多研究的文章的过度显著结果[@ioannidis_exploratory_2007]。他发现，对于这些文章中的36篇，根据观察到的效应量计算的平均检验力，观察到四个显著性结果的可能性小于10%。鉴于他选择的α水平为0.10，这个二项式概率是一个假设检验，并允许声称(在10%的α水平下)，只要统计显著的结果数量的二项式概率低于10%，数据便是出乎意料的，由此我们可以拒绝"这是一组没有引入偏见的研究"这一假设。换句话说，不太可能观察到这么多显著的结果，这表明发表偏倚或其他选择效应在这些文章中发挥了作用。
+
+这44篇文章中，有一篇我也参与了共同撰写[@jostmann_weight_2009]。那时，我对统计检验力和发表偏倚知之甚少，被指责为进行不正当学术行为令我倍感压力。然而，这些指责是正确的--我们有选择地报告了结果，有选择地报告了有效的分析。由于几乎没有接受过这方面的培训，我们对自己进行了教育，并将一项未发表的研究上传到网站psychfiledrawer.org(该网站已不存在)，以分享我们的"文件抽屉"。若干年后，当ManyLabs3将我们发表的一项研究纳入他们复制的研究集时，我们提供了帮助[@ebersole_many_2016]。当观察到一个无效的结果时，我们写道："我们必须得出结论，实际上没有可靠的证据证明这种效应"[@jostmann_short_2016]。我希望这些教育材料能够避免其他人像我们一样出丑。
+
+
+## 5.2 荟萃分析中的偏差检测
+随着检测发表偏倚的新方法不断被开发出来，旧的方法则显得过时(尽管你仍然可以看到它们出现在荟萃分析中)。其中一种过时的方法被称为**故障安全N(fail-safe N)**。其原理是计算为了达到荟萃分析效应量估计值与0差异不显著时，在“文件抽屉”中所需要的不显著结果的研究个数。这种方法已[不再被推荐](https://handbook-5-1.cochrane.org/chapter_10/10_4_4_3_fail_safe_n.htm)，Becker[-@becker_failsafe_2005]写道："鉴于现在有其他处理发表偏倚的方法，应该放弃**fail-safe N**方法，而采用其他更富有信息量的分析方法。目前，**fail-safeN**的唯一用途是作为一种工具来识别那些不是最先进的荟萃分析。
+
+在我们解释第二种方法(剪补法，Trim-and-Fill)之前，有必要解释一下可视化荟萃分析的一种常见方法，即**漏斗图**。在漏斗图中，X轴用于绘制每个研究的效应量，Y轴用于绘制每个效应量的"精确度"(通常是每个效应量估计的标准误差)。一项研究中的观察数越多，效应量的估计就越精确，标准误差就越小，因此该研究在漏斗图中的位置就越高。一个无限精确的研究(标准误差为0)将位于y轴的顶端。
+
+下面的代码模拟了对`nsims`研究的元分析，并存储了偏差检测所需的所有结果。在代码的第一部分中，模拟了所需方向上具有统计显着性的结果，在第二部分中生成了空结果。如`pub.bias`所示，该代码会生成一定比例的重要结果------当设置为11时，所有结果都是重要的。 在下面的代码中，`pub.bias`设置为0.05。因为模拟中没有真正的效果(`m1`和`m2`相等，所以组间没有差异)，唯一应该预期的显著结果是5%的误报。最后，执行荟萃分析，输出结果，并创建漏斗图。
+```{r metasim, eval = FALSE}
+library(metafor)
+library(truncnorm)
+
+nsims <- 100 # number of simulated experiments
+pub.bias <- 0.05 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+for (i in 1:nsims*pub.bias) { # for each simulated experiment
+  p <- 1 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100)) # n based on truncated normal
+  while (p > 0.025) { # continue simulating as along as p is not significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) 
+    y <- rnorm(n = n, mean = m2, sd = sd2) 
+    p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+  }
+  metadata.sig[i, 1] <- mean(x)
+  metadata.sig[i, 2] <- mean(y)
+  metadata.sig[i, 3] <- sd(x)
+  metadata.sig[i, 4] <- sd(y)
+  metadata.sig[i, 5] <- n
+  metadata.sig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.sig[i, 7] <- out$p.value
+  metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+  p <- 0 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100))
+  while (p < 0.05) { # continue simulating as along as p is significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+    y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+    p <- t.test(x, y, var.equal = TRUE)$p.value
+  }
+  metadata.nonsig[i, 1] <- mean(x)
+  metadata.nonsig[i, 2] <- mean(y)
+  metadata.nonsig[i, 3] <- sd(x)
+  metadata.nonsig[i, 4] <- sd(y)
+  metadata.nonsig[i, 5] <- n
+  metadata.nonsig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.nonsig[i, 7] <- out$p.value
+  metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig, metadata.sig)
+
+# Use escalc to compute effect sizes
+metadata <- escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+  sd2i = sd2, measure = "SMD", data = metadata[complete.cases(metadata),])
+# add se for PET-PEESE analysis
+metadata$sei <- sqrt(metadata$vi)
+
+#Perform meta-analysis
+result <- metafor::rma(yi, vi, data = metadata)
+result
+
+# Print a Funnel Plot
+metafor::funnel(result, level = 0.95, refline = 0)
+abline(v = result$b[1], lty = "dashed") # vertical line at meta-analytic ES
+points(x = result$b[1], y = 0, cex = 1.5, pch = 17) # add point
+
+```
+
+让我们先看看无偏的研究是什么样子的，运行代码，保持`pub.bias`在0.05，这样只有5%的第一类错误进入科学文献。
+```{r metasim1, echo = FALSE}
+library(metafor)
+library(truncnorm)
+
+set.seed(52)
+nsims <- 100 # number of simulated experiments
+pub.bias <- 0.05 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+for (i in 1:nsims*pub.bias) { # for each simulated experiment
+  p <- 1 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100)) # n based on truncated normal
+  while (p > 0.025) { # continue simulating as along as p is not significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) 
+    y <- rnorm(n = n, mean = m2, sd = sd2) 
+    p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+  }
+  metadata.sig[i, 1] <- mean(x)
+  metadata.sig[i, 2] <- mean(y)
+  metadata.sig[i, 3] <- sd(x)
+  metadata.sig[i, 4] <- sd(y)
+  metadata.sig[i, 5] <- n
+  metadata.sig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.sig[i, 7] <- out$p.value
+  metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+  p <- 0 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100))
+  while (p < 0.05) { # continue simulating as along as p is significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) # produce simulated participants
+    y <- rnorm(n = n, mean = m2, sd = sd2) # produce simulated participants
+    p <- t.test(x, y, var.equal = TRUE)$p.value
+  }
+  metadata.nonsig[i, 1] <- mean(x)
+  metadata.nonsig[i, 2] <- mean(y)
+  metadata.nonsig[i, 3] <- sd(x)
+  metadata.nonsig[i, 4] <- sd(y)
+  metadata.nonsig[i, 5] <- n
+  metadata.nonsig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.nonsig[i, 7] <- out$p.value
+  metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig, metadata.sig)
+
+# Use escalc to compute effect sizes
+metadata <- escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+  sd2i = sd2, measure = "SMD", data = metadata[complete.cases(metadata),])
+# add se for PET-PEESE analysis
+metadata$sei <- sqrt(metadata$vi)
+
+#Perform meta-analysis
+result <- metafor::rma(yi, vi, data = metadata)
+result
+
+```
+
+当我们检查荟萃分析的结果时，我们看到被纳入荟萃分析的研究有100个(`k = 100`)，并且在统计意义上不存在异质性(*p* =`r  round(result$QEp,2)`，这并不令人惊讶，因为我们在编程时将模拟的真实效应量设定为0，并且在效应量上不存在异质性)。我们也得到了荟萃分析的结果。荟萃分析的估计值是*d*=`r round(result$b[1],3)`，非常接近于0(应该如此，因为真实的效应量确实是0)。这个估计值的标准误差是`r round(result$se,3)`。有了100项研究，我们就有了对真实效应量的非常准确的估计。对*d*=0的检验的*Z*值是`r round(result$zval,3)`，而这个检验的*p*值是`r round(result$pval,2)`。我们不能拒绝真实效应量为0的假设。效应量估计值的置信区间(`r round(result$ci.lb,3)`,`r round(result$ci.ub,3)`)包括0。
+
+如果我们检查图中的漏斗图5.5，则可以看到每项研究都用一个点来表示。样本量越大，点在图中越高，样本量越小，点在图中越低。在统计学上不显著的研究区域用白色金色她表示，在该区域内观察到的效应量(X轴)与0相差不大，以至于效应量的周围的置信区间不包含0。若要达到统计上显著，那所需标准误差应越小，置信区间应越窄，效应量应越小。同时，标准误差越小，效应量就越接近真实的效应量，所以我们就越不可能看到远离0的效应。我们看到只有少数研究(确切地说，是五项)落在图的右侧的白色金字塔之外。这些是我们在模拟中编排的5%的重要结果。请注意，这5项研究都是假阳性，因为不存在真是效应。如果存在真实效应(你可以重新运行模拟，通过将模拟中的`m1 <- 0`改为`m1<-0.5`，将*d*设置为0.5)，金字塔云的点会向右移动，并以0.5而不是0为中心。
+
+无偏见的无效结果漏斗图。
+```{r funnel1, echo = FALSE, fig.cap="(ref:funnel1lab)"}
+# Print a Funnel Plot
+par(bg = backgroundcolor)
+metafor::funnel(result, level = 0.95, refline = 0)
+abline(v = result$b[1], lty = "dashed") #  vertical line at meta-analytic ES
+points(x = result$b[1], y = 0, cex = 1.5, pch = 17) # add point
+
+```
+
+我们现在可以将上面的无偏荟萃分析与有偏差的荟萃分析进行比较。可以模拟具有极端发表偏倚的情况。[基于\@scheel](mailto:基于@scheel){.email}\_excess_2021 的估计，我们假设96% 的研究显示出阳性结果（ 在代码中设置`pub.bias <- 0.96`），我们将两个均值都保持为0，所以这没有真正的效果，但在最后一组研究中，还是会在预测方向出现一类错误。在模拟出有偏差的结果后，我们可以进行荟萃分析，看看基于荟萃分析的统计推断是否具有误导性。
+
+```{r metasim2, echo = FALSE}
+set.seed(5)
+nsims <- 100 # number of simulated experiments
+pub.bias <- 0.96 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+for (i in 1:nsims*pub.bias) { # for each simulated experiment
+  p <- 1 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100)) # n based on truncated normal
+  while (p > 0.025) { # continue simulating as along as p is not significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) 
+    y <- rnorm(n = n, mean = m2, sd = sd2) 
+    p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+  }
+  metadata.sig[i, 1] <- mean(x)
+  metadata.sig[i, 2] <- mean(y)
+  metadata.sig[i, 3] <- sd(x)
+  metadata.sig[i, 4] <- sd(y)
+  metadata.sig[i, 5] <- n
+  metadata.sig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.sig[i, 7] <- out$p.value
+  metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+  p <- 0 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100))
+  while (p < 0.05) { # continue simulating as along as p is significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+    y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+    p <- t.test(x, y, var.equal = TRUE)$p.value
+  }
+  metadata.nonsig[i, 1] <- mean(x)
+  metadata.nonsig[i, 2] <- mean(y)
+  metadata.nonsig[i, 3] <- sd(x)
+  metadata.nonsig[i, 4] <- sd(y)
+  metadata.nonsig[i, 5] <- n
+  metadata.nonsig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.nonsig[i, 7] <- out$p.value
+  metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig[complete.cases(metadata.nonsig),], metadata.sig[complete.cases(metadata.sig),])
+
+# Use escalc to compute effect sizes
+metadata <- metafor::escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+  sd2i = sd2, measure = "SMD", data = metadata)
+# add se for PET-PEESE analysis
+metadata$sei <- sqrt(metadata$vi)
+
+#Perform meta-analysis
+result.biased <- metafor::rma(yi, vi, data = metadata)
+result.biased
+
+```
+
+
+如果研究一下图中的漏斗图5.5，就会发现我们所分析的这组研究的有趣之处。这个模式非常奇特。正如我们在模拟中所设定的那样，有四项无偏倚的无效结果，另外96项研究都在统计学上显著，尽管实际上并没有效应。可以看到的是大多数研究正好落在白色金字塔的边缘。由于*p*值在空值下是均匀分布的，我们观察到的第一类错误的*p*值往往在0.02到0.05之间，这与我们在存在真实效应的情况下的预期不同。这些仅仅是有意义的*p*值刚好落在白色金字塔的外面。研究规模越大，有意义的效应量就越小。事实上，效应量并不围绕单一的真实效应量而变化(例如，*d*=0或*d*=0.5)，而是效应量随着样本量的增大(或标准误差的减小)而变小，这是一个强有力的偏差指标。图中顶部的垂直虚线和黑色三角形说明了观察到的(向上偏差的)荟萃分析效应量估计。
+
+有偏倚的无效结果漏斗图，大部分是显著的结果。
+
+```{r funnel2, echo = FALSE, fig.cap="(ref:funnel2lab)"}
+# Print a Funnel Plot
+par(bg = backgroundcolor)
+metafor::funnel(result.biased, level = 0.95, refline = 0)
+abline(v = result.biased$b[1], lty = "dashed") #  vertical line at meta-analytic ES
+points(x = result.biased$b[1], y = 0, cex = 1.5, pch = 17) # add point
+```
+
+人们可能会想，在科学研究中是否真的出现过这种极端的偏差。确实如此。图5.7中，显示的是@carter_publication_2014的漏斗图，他研究了198项测试"自我消耗"效应的已发表研究中的偏见，即自我控制依赖于有限资源的观点。你是否注意到这与我们上面模拟的极度有偏倚的荟萃分析有一些相似之处？你可能不会感到惊讶，即使在2015年之前，研究人员认为有大量可靠的文献证明了自我消耗效应，但一份预注册的复制报告得出的效果大小估计并不显著[@hagger_multilab_2016]，甚至当原始研究人员试图复制自己的结果时，他们也未能观察到自我消耗的显著效果[@vohs_multisite_2021]。想象一下，在一篇完全基于偏倚的文献上，浪费了大量的时间、精力和金钱。显然，这种研究浪费具有伦理意义，研究人员需要负起责任，防止未来出现这种浪费。
+
+Carter和McCullough(2014)的漏斗图，显示198个已发表的自我消耗效应测试中的偏差。
+```{r carterbias, echo = FALSE, fig.cap="(ref:carterbiaslab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/carterfunnel.png")
+```
+
+我们也可以在荟萃分析的森林图中看到偏倚的迹象。在图5.8中，两个森林图是并排绘制的。左边的森林图是基于无偏见的数据，右边的森林图是基于有偏倚的数据。100个研究的森林图有点大，但我们看到，在左边的森林图中，效果随机地在0附近变化，它们本该如此。在右边，在前四项研究之外，所有的置信区间神奇地排除了0的效应。
+
+无偏见元分析(左)和有偏见元分析(右)的森林图。
+```{r twoforestplot, echo = FALSE, fig.width=5, fig.height=15, fig.cap="(ref:twoforestplotlab)"}
+par(mfrow=c(1,2))
+par(mar=c(5,4,1,1))
+par(bg = backgroundcolor)
+forest(result, annotate=FALSE, cex=.8, at=seq(-2,2,1), digits=1, xlim=c(-5,2))
+par(mar=c(5,3,1,2))
+forest(result.biased, annotate=FALSE, slab=rep("",length(result$yi)), cex=.8, at=seq(-2,2,1), digits=1, xlim=c(-4,3))
+par(mfrow=c(1,1))
+```
+
+当研究人员只发表存在统计学意义的结果(*p* \<$\alpha$)而存在发表偏倚时，通过在荟萃分析中计算效应量发现，与没有发表偏倚时相比，存在发表偏倚时(研究人员只发表*p*\<$alpha$的效应)的元分析效应量估计值会**偏高**。这是因为发表偏倚过滤掉了那些不会用于计算的较小(不显著的)效应量。这导致荟萃分析效应量的估计值大于真实效应量。在存在极端发表偏倚情况下，我们知道荟萃分析效应量被夸大了，但我们不知道有多大。真正的效应量可能只是小一点，但真正的效应量也可能是0，例如在自我耗损相关文献的情况下。
+
+## 5.3 剪补法  
+
+剪补法旨在通过添加假设的“缺失”研究（可能在“文件抽屉”中）来增加数据集。该程序首先通过删除（“削减”）会对荟萃分析效应量造成偏差的小型研究，然后估计真实的效应量，并最终使用假设的缺失研究（由于发表偏倚而缺失）填充漏斗图。在图5.9中，可以看到与上述相同的漏斗图，但现在添加了假设的研究（未填充的圆点表示“插补”研究）。如果仔细观察，你会发现每个点都在荟萃分析效应量估计的相反侧具有镜像图像（这在漏斗图的下半部分最清晰）。如果我们检查包括这些插补研究的荟萃分析结果，会发现剪补法成功地预示了该荟萃分析存在偏差（如果没有，它不会添加插补研究），但它在校正效应量估计方面失败了。在漏斗图中，可以看到由三角形表示的原始（有偏）效应量估计和使用削减和填充方法调整的荟萃分析效应量估计（由黑色圆圈表示）：荟萃分析效应量估计略微降低，但考虑到模拟中真实的效应量为0，此调整显然不足。
+
+通过剪补法添加了假定缺失效果的漏斗图。
+```{r trimfill1, fig.margin = FALSE, echo = FALSE, fig.cap="(ref:trimfill1lab)"}
+
+result.trimfill <- metafor::trimfill(result.biased)
+par(bg = backgroundcolor)
+metafor::funnel(result.trimfill, refline = 0)
+abline(v = result.biased$b[1], lty = "dashed") #  vertical line at meta-analytic ES
+points(x = result.biased$b[1], y = 0, cex = 1.5, pch = 17) # add point
+abline(v = result.trimfill$b[1], lty = "dotted") #  vertical line at meta-analytic ES
+points(x = result.trimfill$b[1], y = 0, cex = 1.5, pch = 16) # add point
+```
+
+剪补法在许多实际存在发表偏倚场景下表现不佳。该方法因依赖漏斗图对称性的强假设而备受批评。当发表偏倚基于研究的*p*值时（在许多领域中可能是最重要的发表偏倚来源），剪补法不足以生成校正后接近真实效应大小的荟萃分析效应量估计[@peters_performance_2007; @terrin_adjusting_2003]。在假设成立的情况下，它可以作为**敏感性分析**的一种方法。研究人员不应将剪补法校正的效应量估计报告为无偏效应量的实际估计值。如果其他偏倚检测测试（如下文所述的*p*曲线或*z*曲线）已经指示存在偏差，则剪补法可能无法提供额外的洞见。
+
+ 
+## 5.4精度效应测试-带标准误差的精度效应估计
+
+**Meta回归**是一种解决发表偏倚的新方法，旨在通过对多个研究的数据点（而非单个研究）作图来探索发表偏倚。Meta回归和普通回归相似，其所依赖的数据越多，估计结果越精确。也就是说，在Meta回归中被选择的研究数量越多，实际效果也就越好。因此，研究者在使用Meta回归时需谨记：如果研究的案例少，那所有偏差检验方法都会失去检验力。另外，回归分析所使用的数据需要具有充分的变异，这意味着在做Meta回归时需要大样本量（即单个研究的被试在15-200之间，这在心理学研究领域可不常见）。Meta回归技术试图在理想状态下（标准差 = 0）估计总效应量。
+
+PET-PEESE是Meta回归方法中的一种，由“精度效果测试(PET)”组成。PET可以在Neyman-Pearson假设检验框架下使用，以检验Meta回归的估计值是否可以拒绝95%置信区间中效应量为0的假设，即PET估计值的截距在SE=0处。不过当观测数量少导致置信区间较宽时，该方法的检验力可能会较低，并且拒绝零效应的先验概率也会较低。PET的估计效应量计算公式为：$d=β_0+β_1SE_i+_ui$，d是估计效应量，SE是标准差，该方程使用加权最小二乘法（WLS）估计，以1/SE^2i作为权重。由于PET通常会低估真实效应的效应量，因此研究者建议在使用PET-PEESE法时，先用PET检验0是否会被拒绝。如结果显著（被拒绝），则再用PEESE（带标准差的精度效应测试）估计Meta回归的效应量。此外，@stanley_meta-regression_2014认为在运用PEESE方法时，用方差（标准差的平方）替换标准差会降低Meta回归中截距的偏差。
+
+就像所有偏倚检测法一样，PET-PEESE也存在局限。比如：当研究数量少导致Meta回归中的样本量偏小或Meta回归中的数据异质性太大时，PET-PEESE检测偏倚的效果会不理想[@stanley_finding_2017]。所以在这些情况下，PET-PEESE可能并不是一个好的偏倚检测方法。此外，在某些情境下样本量和精度相关，而在Meta回归中精度与样本量的异质性相关。例如，若不同研究存在不同的真实效应，且研究者运用预期真实效应的准确信息进行检验力分析，那么Meta回归中的获得大效应量将需要小的样本量，而获得小效应量则需要大样本量。Meta回归和普通回归一样，都只是检验相关的方法。但我们更应该思考的是相关背后的因果。
+
+PET-PEESE是如何在存在发表偏倚这一特定假设下给出无偏效应量估计的呢？再一次看到图5.10中的漏斗图，现在图中增加了两条穿过漏斗的线。其中竖线*d*=0.27即是Meta分析给出的效应量估计值。当然，由于我们只对统计上显著的研究做了平均，所以这个计算值会向上偏移。另外两条线是依据之前PET-PEESE公式计算出的Meta回归线。倾斜的直线顶端由圆圈表示的是SE为0时PET估计值（图顶部表示无限样本）。圆圈旁的点线是该估计值95%的置信区间。本案列中，95%的置信区间包含0，意味着基于PET中*d*=0.02的估计值，我们不能拒绝Meta分析效应量为0的假设。要注意的是，即使研究量为100，其95%的置信区间也会很宽。PET-PEESE的缺陷就是，研究越少精确性越低。因此Meta回归和普通回归一样，只有数据精确结果才会得到保证。如果基于PET的估计值已经拒绝了零假设，那接下来应使用PEESE估计：即菱形表示的*d*=0.17的估计值来进行偏倚矫正（当然我们也无法得知基于PEESE估计的模型是否与Meta分析中真实偏差产生机制相同，因此也无法确定Meta分析估计是否准确）。
+
+包含PETPEESE回归线的漏斗图
+```{r petpeese, echo = FALSE, fig.cap="(ref:petpeeselab)"}
+
+# PET PEESE code below is adapted from Joe Hilgard: https://github.com/Joe-Hilgard/PETPEESE/blob/master/PETPEESE_functions.R
+# PET
+PET <- metafor::rma(yi = yi, sei = sei, mods = ~sei, data = metadata, method = "FE")
+
+# PEESE
+PEESE <- metafor::rma(yi = yi, sei = sei, mods = ~I(sei^2), data = metadata, method = "FE")
+
+# Funnel Plot 
+par(bg = backgroundcolor)
+metafor::funnel(result.biased, level = 0.95, refline = 0, main = paste("FE d =", round(result.biased$b[1],2),"PET d =", round(PET$b[1],2),"PEESE d =", round(PEESE$b[1],2)))
+abline(v = result.biased$b[1], lty = "dashed") #draw vertical line at meta-analytic effect size estimate
+points(x = result.biased$b[1], y = 0, cex = 1.5, pch = 17) #draw point at meta-analytic effect size estimate
+# PET PEESE code below is adapted from Joe Hilgard: https://github.com/Joe-Hilgard/PETPEESE/blob/master/PETPEESE_functions.R
+# PEESE line and point
+sei <- (seq(0, max(sqrt(result.biased$vi)), .001))
+vi <- sei^2
+yi <- PEESE$b[1] + PEESE$b[2]*vi
+grid <- data.frame(yi, vi, sei)
+lines(x = grid$yi, y = grid$sei, typ = 'l') # add line for PEESE
+points(x = (PEESE$b[1]), y = 0, cex = 1.5, pch = 5) # add point estimate for PEESE
+# PET line and point
+abline(a = -PET$b[1]/PET$b[2], b = 1/PET$b[2]) # add line for PET
+points(x = PET$b[1], y = 0, cex = 1.5) # add point estimate for PET
+segments(x0 = PET$ci.lb[1], y0 = 0, x1 = PET$ci.ub[1], y1 = 0, lty = "dashed") #Add 95% CI around PET
+
+```
+
+ 
+## 5.5基于*P*值的元分析
+除了基于效应量的Meta分析，还有基于*p*值的，首当其冲的是[**Fisher综合概率检验**](https://en.wikipedia.org/wiki/Fisher%27s_method)。最新的偏差检验法如*p*值曲线分析[@simonsohn_p-curve_2014]和*p*值均匀分布[@aert_correcting_2018]都是基于此。这两种技术是选择模型法的例子，该方法主要是对Meta分析进行测试和调整[@iyengar_selection_1988]。即将与效应量相关的数据生成过程模型与发表偏倚如何影响效应量成为科学文献的选择模型相结合。数据生成过程指一个统计检验里的所有研究假设都成立且均有平均检验力；选择模型则是只要其统计结果均在0.05的水平上显著，该研究就可以得到发表。
+
+*P*值曲线分析运用的是选择模型。该方法假设所有结果显著的研究都已经得到发表，并对数据生成过程进行检验，查看其是否符合研究具有一定检验力时所期望的模式，或者是否符合零假设成立时所期望的模式。正如在前面章节“你期望哪些*p*值”中所讨论的那样，当零假设成立时，应该查看均匀分布的*p*值；而当备择假设成立时，应该查看更小的显著值（0.01）而非更大的显著值（0.04）。*P*值曲线分析分为两个检验。第一，检验当分析的数据存在33%的检验力时*P*值的分布是否比期望的更平坦，这个值的选取是任意可调整的。这一检验的目的是在最小统计检验力水平上拒绝可能产生当前效应的所有可能性。如果平均检验力低于33%，则确实存在相应的影响，但通过统计检验法检验当前不完美的数据并不足以让我们了解该效应。如果可以拒绝具有至少33%统计检验力的一系列*P*值，那意味着零假设为真时，该分布更符合预期。不过，即便所有单个研究都在统计上显著，研究者们也有理由怀疑Meta分析中的所有研究的有效性。
+
+第二个测试检查值*p*分布是否足够向右偏（更多的小显著*p*值而非大显著*p*值）。因为这意味着我们可以拒绝均匀的*p*值分布，即研究可能存在真实效应且具有一定的检验力。若第二个测试显著，那可以认为即使在存在发表偏倚的情况下，研究也存在真实效应。如Simonsohn和其同事的研究图3所示[-@simonsohn_p-curve_2014]，作者对《人格与社会心理学杂志》(Journal of Personality and Social Psychology)中20篇使用了协变量和20篇没有使用协变量的文章做了比较。作者怀疑由于研究者们可能在第一次分析时并没有得到显著的结果，所以在后期增加了协变量以便获得*p*小于0.05的结果。
+
+图3：Simonsohn等(2014)有偏差和无偏差的*p*值曲线
+
+```{r pcurve, fig.margin = FALSE, echo = FALSE, fig.cap="(ref:pcurvelab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/pcurve.png")
+```
+
+*p*值曲线上可观测的*p*值由蓝线上的五个点表示。由于*p*值曲线分析基于统计上显著的研究均已发表的假设，因此本研究中*p*值分布包括了所有的研究。5点分布表示的是*p*值在0到0.01，0.01到0.02，0.02到0.03，0.03到0.04和0.04到0.05之间的*p*值分布。右图中显示的是相对正常的右偏*p*值分布，即具有更多的较小*p*值和更少的较大*p*值。*p*值曲线分析显示右图中的蓝线比均匀的红线更向右偏倚（红色即指没有效应时预期的均匀分布）。Simonsohn和其同事认为这意味着这些研究具有“证据价值”，但其实这是有误导性质的解释。正确的解释是在对所有研究做*p*值曲线分析时，若零假设为真，则可以拒绝均匀的*p*值分布。当然，拒绝均匀的*p*值分布并不意味着存在理论效应的证据（比如，可能由于一些无效应和少数几个因方法混乱造成的效应引起的）。
+
+而左图中则呈现了完全相反的模式，主要是高*p*值（约0.05）且几乎没有0.01左右*p*值。由于图中的蓝线比绿线平坦，所以*p*曲线回归显示该组研究受到了选择偏差的影响且数据并不具有足够统计检验力。*p*值曲线分析是很有效的研究方法，但重要的是需要正确的解释该方法想揭示的结果。一条向右偏倚的曲线并不意味着没有偏倚产生或者理论正确。一条平坦*p*值曲线也不能证明理论不正确，但它确实表明Meta分析过研究看起来更像是在零假设成立时期望的模式，也表明存在选择偏倚。
+
+该脚本存储元分析中包含的100个模拟*t*测试的所有测试统计信息。前几行如下所示：
+```{r pcurveinput, echo = FALSE}
+cat(metadata$pcurve[1:5],sep = "\n")
+```
+
+请使用`cat(metadata$pcurve, sep = "\n")`打印出所有测试结果，并转到在线*p*值曲线应用程序<http://www.p-curve.com/app4/>。粘贴所有测试结果，然后单击“生成*p*值曲线”按钮。请注意，*p*值曲线应用程序仅在存在小于0.05的*p*值时才会产生结果，如果所有测试统计量的*p* > 0.05，则无法计算*p*值曲线，因为这些测试将被忽略。
+
+偏倚研究的*p*值曲线分析结果。
+
+```{r pcurveresult, fig.margin = FALSE, echo = FALSE, fig.cap="(ref:pcurveresultlab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/pcurveresult.png")
+```
+
+*P*值分布看起来显得均匀（事实上就是如此），统计检验也暗示可以拒绝一个与33%检验力（*p*<0.0001）生成的分布同等陡峭或更陡峭的*p*值分布。该应用程序也为那些测试方法提供平均检验力估计，这些测试生成了可观测到的正确的5%的*p*值分布。因此，我们得出如下结论，即使Meta分析中的很多研究在统计上显著，但研究本身更符合1类错误的选择性报告，而不是通过研究足够统计检验力而获得的真实效应所具有的期望*p*值分布。理论可能依然正确，但分析的数据确实不能提供支撑。
+
+另一种Meta分析方法是*p*-uniform\*，该方法与*p*-curve分析和选择偏差模型相似。不过*p*-uniform\*同时使用统计上显著和不显著的研究，也可以对偏差调整的Meta分析效应量进行估计。该方法运用随机效应模型为每一研究进行效应量估计，并且在选择模型（假设统计结果显著的研究更容易发表）的基出上进行加权平均。如下：*p*-uniform\*的结果显示偏差矫正的效应量为*d* = 0.0126，其在统计上与0差异不显著，*p*=0.3857。因此，*p*-uniform\*偏差检验法恰好证实：即使所有效应在统计上均显著，这些研究也不能为拒绝Meta分析中效应估计值为0提供支持。
+```{r}
+puniform::puniform(m1i = metadata$m1, m2i = metadata$m2, n1i = metadata$n1, 
+  n2i = metadata$n2, sd1i = metadata$sd1, sd2i = metadata$sd2, side = "right")
+```
+
+另一种对个案的*p*值进行Meta分析的方法是*z*-curve分析，其针对的是可观测检验力的Meta分析([@bartos_z-curve20_2020;@brunner_estimating_2020]; 案例见 [@sotola_garbage_2022])。与经典Meta分析一致，*z*-curve分析是将可观测的检验结果（*p*值）转换成*z*分数。在零假设为真的无偏检验中，我们观察的是$\alpha$%的显著结果。若零假设为真，则*z*分数的分布以0为中心。由于*Z*-curve分析计算的是绝对的*z*值，因此*z*分数的$\alpha$%值应比临界值大（alpha水平为5%时，临界值为1.96）。图5.13描绘的是1000个研究的*z*分数，其真实效应大小为0，观测结果在5%的水平上显著。
+
+```{r zcurveunbiasednull, echo = FALSE, cache = TRUE, fig.cap="(ref:zcurveunbiasednull)"}
+set.seed(1)
+
+nsims <- 1000 # number of simulated experiments
+pub.bias <- 0.05 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+  for (i in 1:nsims*pub.bias) { # for each simulated experiment
+    p <- 1 # reset p to 1
+    n <- 100 # n based on truncated normal
+    while (p > 0.025) { # continue simulating as along as p is not significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) 
+      y <- rnorm(n = n, mean = m2, sd = sd2) 
+      p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+    }
+    metadata.sig[i, 1] <- mean(x)
+    metadata.sig[i, 2] <- mean(y)
+    metadata.sig[i, 3] <- sd(x)
+    metadata.sig[i, 4] <- sd(y)
+    metadata.sig[i, 5] <- n
+    metadata.sig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.sig[i, 7] <- out$p.value
+    metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+  for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+    p <- 0 # reset p to 1
+    n <- 100
+    while (p < 0.05) { # continue simulating as along as p is significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+      y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+      p <- t.test(x, y, var.equal = TRUE)$p.value
+    }
+    metadata.nonsig[i, 1] <- mean(x)
+    metadata.nonsig[i, 2] <- mean(y)
+    metadata.nonsig[i, 3] <- sd(x)
+    metadata.nonsig[i, 4] <- sd(y)
+    metadata.nonsig[i, 5] <- n
+    metadata.nonsig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.nonsig[i, 7] <- out$p.value
+    metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig, metadata.sig)
+
+# Use escalc to compute effect sizes
+metadata <- escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+                   sd2i = sd2, measure = "SMD", data = metadata[complete.cases(metadata),])
+
+# Perform the z-curve analysis using the z-curve package
+z_res <- zcurve::zcurve(p = metadata$pvalues, method = "EM", bootstrap = 1000)
+par(bg = backgroundcolor)
+plot(z_res, annotation = TRUE, CI = TRUE)
+
+```
+
+若真实效应存在，*z*分数的分布会因为该测试的统计检验力作用而偏离0。统计检验力越强，*z*分数分布向右侧偏离得越远。例如，当用66%的检验力对某效应进行检验时，由可观测*p*值计算的*z*分数的无偏分布如图5.14所示。
+
+1000个研究的*Z*-curve分析：真实效应大小为*d*=0.37，无发表偏倚的独立样本*t*检验，每种条件下*n* = 100。
+```{r zcurveunbiasedalternative, echo = FALSE, cache = TRUE, fig.cap="(ref:zcurveunbiasedalternative)"}
+set.seed(5)
+
+nsims <- 1000 # number of simulated experiments
+pub.bias <- 0.66 # set percentage of significant results in the literature
+
+m1 <- 0.37 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+  for (i in 1:nsims*pub.bias) { # for each simulated experiment
+    p <- 1 # reset p to 1
+    n <- 100 # n based on truncated normal
+    while (p > 0.025) { # continue simulating as along as p is not significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) 
+      y <- rnorm(n = n, mean = m2, sd = sd2) 
+      p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+    }
+    metadata.sig[i, 1] <- mean(x)
+    metadata.sig[i, 2] <- mean(y)
+    metadata.sig[i, 3] <- sd(x)
+    metadata.sig[i, 4] <- sd(y)
+    metadata.sig[i, 5] <- n
+    metadata.sig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.sig[i, 7] <- out$p.value
+    metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+  for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+    p <- 0 # reset p to 1
+    n <- 100
+    while (p < 0.05) { # continue simulating as along as p is significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+      y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+      p <- t.test(x, y, var.equal = TRUE)$p.value
+    }
+    metadata.nonsig[i, 1] <- mean(x)
+    metadata.nonsig[i, 2] <- mean(y)
+    metadata.nonsig[i, 3] <- sd(x)
+    metadata.nonsig[i, 4] <- sd(y)
+    metadata.nonsig[i, 5] <- n
+    metadata.nonsig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.nonsig[i, 7] <- out$p.value
+    metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig, metadata.sig)
+
+# Use escalc to compute effect sizes
+metadata <- escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+                   sd2i = sd2, measure = "SMD", data = metadata[complete.cases(metadata),])
+
+# Perform the z-curve analysis using the z-curve package
+z_res <- zcurve::zcurve(p = metadata$pvalues, method = "EM", bootstrap = 1000)
+par(bg = backgroundcolor)
+plot(z_res, annotation = TRUE, CI = TRUE)
+
+```
+
+任何Meta 分析中所包含的研究的统计检验力和真实效应（由于异质性）都会存在差异。*Z*-curve曲线分析使用以0至6为中心的混合正态分布，来拟合最能代表所包括研究的观察结果的潜在效应大小的模型（有关技术细节，请参见@bartos_z-curve20_2020）。*z*-curve的主要目的是估计研究的平均检验力，以此来计算*观察发现率*（ODR：显著结果的百分比或观察到的功效）、*预期发现率*（EDR：显著性水平右侧曲线下面积的比例）和*预期复制率*（ERR：所有显著研究中成功复制显著研究的预期比例）。*z*-curve能为特定假设下的积极结果纠正选择偏差，并能在仅用显著的*p*值的情况下估计EDR和ERR。
+
+为了检验偏差的存在，即使最后只使用了显著性*p*值进行估计，也最好将非显著性和显著性*p*值一起提交到*z*值曲线分析中。然后通过比较ODR和EDR来检查发表偏倚。如果研究中显著结果的百分比（ODR）远高于预期发现率（EDR），则存在偏倚的迹象。如果我们用*z*-curve 分析对之前检测过偏倚的数据进行检验，则会发现偏倚其实是存在的。相应的*z*-curve 分析的代表如下：
+
+```{r, eval = FALSE}
+z_res <- zcurve::zcurve(p = metadata$pvalues, method = "EM", bootstrap = 1000)
+summary(z_res, all = TRUE)
+plot(z_res, annotation = TRUE, CI = TRUE)
+
+```
+
+
+```{r, cache = TRUE, echo = FALSE}
+# Perform the z-curve analysis using the z-curve package
+
+set.seed(5)
+nsims <- 100 # number of simulated experiments
+pub.bias <- 0.96 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+for (i in 1:nsims*pub.bias) { # for each simulated experiment
+  p <- 1 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100)) # n based on truncated normal
+  while (p > 0.025) { # continue simulating as along as p is not significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) 
+    y <- rnorm(n = n, mean = m2, sd = sd2) 
+    p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+  }
+  metadata.sig[i, 1] <- mean(x)
+  metadata.sig[i, 2] <- mean(y)
+  metadata.sig[i, 3] <- sd(x)
+  metadata.sig[i, 4] <- sd(y)
+  metadata.sig[i, 5] <- n
+  metadata.sig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.sig[i, 7] <- out$p.value
+  metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+  p <- 0 # reset p to 1
+  n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100))
+  while (p < 0.05) { # continue simulating as along as p is significant
+    x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+    y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+    p <- t.test(x, y, var.equal = TRUE)$p.value
+  }
+  metadata.nonsig[i, 1] <- mean(x)
+  metadata.nonsig[i, 2] <- mean(y)
+  metadata.nonsig[i, 3] <- sd(x)
+  metadata.nonsig[i, 4] <- sd(y)
+  metadata.nonsig[i, 5] <- n
+  metadata.nonsig[i, 6] <- n
+  out <- t.test(x, y, var.equal = TRUE)
+  metadata.nonsig[i, 7] <- out$p.value
+  metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+}}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig[complete.cases(metadata.nonsig),], metadata.sig[complete.cases(metadata.sig),])
+
+z_res <- zcurve::zcurve(p = metadata$pvalues, method = "EM", bootstrap = 1000)
+summary(z_res, all = TRUE)
+par(bg = backgroundcolor)
+plot(z_res, annotation = TRUE, CI = TRUE)
+```
+
+从这里我们不难发现*z*分数的分布有些奇怪：大多数预期介于0到1.96之间的*z*分数都缺失。100个研究中96个是显著的，即ODR（观测发现率）或观测检验力为0.96，95%的置信区间[0.89;0.99]。EDR（预期发现率）为`r round(z_res$coefficients[1],3)`。由于EDR的置信区间不包含0.96（ODR），说明ODR于EDR在统计上差异显著，即基于*z*-curve分析确实存在偏差。预期的复制率为`r round(z_res$coefficients[1],3)`，与预期的5%的一类错误率一致，因此模型中不存在真实效应。所以，即使存在显著的*P*值，*z*-curve分析也能正确地表明我们不应该期望这些结果的复制率高于类型 1错误率。
+
+## 5.6结论 
+
+发表偏倚是科学界的一个大问题。由于大多数研究假设显著的文章更容易被接受和发表，所以几乎所有对该类文章中进行的Meta分析都存在发表偏倚。未被进行偏差矫正的Meta分析的效应值估计会高估其真实效应，而经过偏倚矫正的值可能也并不准确。鉴于科学文献已经受到发表偏倚的影响，我们无法判断我们对文献中Meta分析效应量估计的计算是否准确。发表偏倚会增大效应量估计，而其影响程度是未知的。有证据显示研究者们已经证实了有几个案例的真实效应量实际为零。本章中提到的检验发表偏倚的方法虽不能告诉读者具体的偏倚效应值，但他们可以为存在偏倚进行预警，并且可以在发表偏倚检验模型正确的情况下，给出接近于真实的矫正后的估计值。
+
+目前学术界热衷于研究对发表偏倚的检验。检验方法有很多，研究者在使用前需对每一测试方法的前提假设充分熟悉。当存在较大的异质性时，大多检验都不太可靠，而通常无法避免出现异质性。Meta分析应该始终以是否存在发表偏倚为目的，最好可以运用多种检验法。因此不仅要编码效应量，还应编码检验的统计量或p值，这对研究非常有用。本章中所讨论的偏差检验技术并非完美，但相比于单纯地解释Meta分析中未校正的效应量估计，它们更为可靠。关于发表偏倚检验的另一个开放学习资源，请参阅[Doing Meta-Analysis inR](https://bookdown.org/MathiasHarrer/Doing_Meta_Analysis_in_R/pub-bias.html).
+
+## 5.7 考考自己吧！
+
+**Q1**: 当由于研究者只发表结果在统计上显著(*p* \< $\alpha$)的文章而出现发表偏倚时，计算出的效应量会如何？
+A) 不管是否存在发表偏倚，元分析的效应量估值都一致。
+B) 与不存在的发表偏倚的情况相比，存在发表偏倚时元分析的效应估计值更接近于真实效应。
+C) 与不存在的发表偏倚的情况相比，存在发表偏倚时元分析的效应估计值会增大。
+D) 与不存在的发表偏倚的情况相比，存在发表偏倚时元分析的效应估计值会降低。
+
+**Q2**: 以下的森林图中的奇怪之处在于？
+
+```{r metasimq2, echo = FALSE}
+set.seed(27988)
+nsims <- 10 # number of simulated experiments
+pub.bias <- 1 # set percentage of significant results in the literature
+
+m1 <- 0 # too large effects will make non-significant results extremely rare
+sd1 <- 1
+m2 <- 0
+sd2 <- 1
+metadata.sig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                           n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+metadata.nonsig <- data.frame(m1 = NA, m2 = NA, sd1 = NA, sd2 = NA, 
+                              n1 = NA, n2 = NA, pvalues = NA, pcurve = NA)
+
+# simulate significant effects in the expected direction
+if(pub.bias > 0){
+  for (i in 1:nsims*pub.bias) { # for each simulated experiment
+    p <- 1 # reset p to 1
+    n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100)) # n based on truncated normal
+    while (p > 0.025) { # continue simulating as along as p is not significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) 
+      y <- rnorm(n = n, mean = m2, sd = sd2) 
+      p <- t.test(x, y, alternative = "greater", var.equal = TRUE)$p.value
+    }
+    metadata.sig[i, 1] <- mean(x)
+    metadata.sig[i, 2] <- mean(y)
+    metadata.sig[i, 3] <- sd(x)
+    metadata.sig[i, 4] <- sd(y)
+    metadata.sig[i, 5] <- n
+    metadata.sig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.sig[i, 7] <- out$p.value
+    metadata.sig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# simulate non-significant effects (two-sided)
+if(pub.bias < 1){
+  for (i in 1:nsims*(1-pub.bias)) { # for each simulated experiment
+    p <- 0 # reset p to 1
+    n <- round(truncnorm::rtruncnorm(1, 20, 1000, 100, 100))
+    while (p < 0.05) { # continue simulating as along as p is significant
+      x <- rnorm(n = n, mean = m1, sd = sd1) # produce  simulated participants
+      y <- rnorm(n = n, mean = m2, sd = sd2) # produce  simulated participants
+      p <- t.test(x, y, var.equal = TRUE)$p.value
+    }
+    metadata.nonsig[i, 1] <- mean(x)
+    metadata.nonsig[i, 2] <- mean(y)
+    metadata.nonsig[i, 3] <- sd(x)
+    metadata.nonsig[i, 4] <- sd(y)
+    metadata.nonsig[i, 5] <- n
+    metadata.nonsig[i, 6] <- n
+    out <- t.test(x, y, var.equal = TRUE)
+    metadata.nonsig[i, 7] <- out$p.value
+    metadata.nonsig[i, 8] <- paste0("t(", out$parameter, ")=", out$statistic)
+  }}
+
+# Combine significant and non-significant effects
+metadata <- rbind(metadata.nonsig[complete.cases(metadata.nonsig),],
+                  metadata.sig[complete.cases(metadata.sig),])
+
+# Use escalc to compute effect sizes
+metadata <- metafor::escalc(n1i = n1, n2i = n2, m1i = m1, m2i = m2, sd1i = sd1, 
+                            sd2i = sd2, measure = "SMD", data = metadata)
+# add se for PET-PEESE analysis
+metadata$sei <- sqrt(metadata$vi)
+
+#Perform meta-analysis
+result.biased <- metafor::rma(yi, vi, data = metadata)
+par(bg = backgroundcolor)
+metafor::forest(result.biased)
+```
+
+A) 所有效应值都相似，仿佛样本量很大且对效应量的测量非常准确。
+B) 这些研究看起来好像是基于完美的*先验功效分析/先验样本量估算*设计的，所有结果都显著。
+C) 所有研究的置信区间恰好不包括0，即大多研究存在统计上刚好显著，意味着存在发表偏倚。
+D) 所有效应方向相同，这表明研究者只进行了单侧检验。（尽管这些检验可能没有进行预先注册）
+
+**Q3**: Which statement is true?
+以下哪个表述是正确的？
+A) 在存在严重发表偏倚的情况下，文献中所有单独的研究都显著，同时它们的标准差也非常大，这会导致荟萃分析的效应量估计值与0之间的差异不显著
+B) 在存在严重发表偏倚的情况下，文献中所有单独的研究都显著，但荟萃分析效应量估计值被严重夸大，即支持研究假设$H_1$的，而实际上真实效应可能很小，甚至可能为0。
+C) 在存在严重发表偏倚的情况下,文献中所有单独的研究都显著，但大多数统计软件包进行元分析效应量估计时会自动校正发表偏倚，因此元分析效应量估计值是可靠的。
+D) 无论是否存在发表偏倚，元分析的效应量估计都存在严重偏差，因此不能将其是为总体的可靠估计。
+
+**Q4**: 根据下面基于PET-PEESE的元回归分析图表，以下哪个陈述是正确的？
+
+针对Q2的研所绘制的PET-PEESE回归线绘制漏斗图
+```{r petpeeseq4, echo = FALSE, fig.cap="(ref:petpeeseq4lab)"}
+
+# PET
+PET <- metafor::rma(yi = yi, sei = sei, mods = ~sei, data = metadata, method = "FE")
+
+# PEESE
+PEESE <- metafor::rma(yi = yi, sei = sei, mods = ~I(sei^2), data = metadata, method = "FE")
+
+# Funnel Plot 
+par(bg = backgroundcolor)
+metafor::funnel(result.biased, level = 0.95, refline = 0, main = paste("FE d =", round(result.biased$b[1],2),"PET d =", round(PET$b[1],2),"PEESE d =", round(PEESE$b[1],2)))
+abline(v = result.biased$b[1], lty = "dashed") #draw vertical line at meta-analytic effect size estimate
+points(x = result.biased$b[1], y = 0, cex = 1.5, pch = 17) #draw point at meta-analytic effect size estimate
+# PET PEESE code below is adapted from Joe Hilgard: https://github.com/Joe-Hilgard/PETPEESE/blob/master/PETPEESE_functions.R
+# PEESE line and point
+sei <- (seq(0, max(sqrt(result.biased$vi)), .001))
+vi <- sei^2
+yi <- PEESE$b[1] + PEESE$b[2]*vi
+grid <- data.frame(yi, vi, sei)
+lines(x = grid$yi, y = grid$sei, typ = 'l') # add line for PEESE
+points(x = (PEESE$b[1]), y = 0, cex = 1.5, pch = 5) # add point estimate for PEESE
+# PET line and point
+abline(a = -PET$b[1]/PET$b[2], b = 1/PET$b[2]) # add line for PET
+points(x = PET$b[1], y = 0, cex = 1.5) # add point estimate for PET
+segments(x0 = PET$ci.lb[1], y0 = 0, x1 = PET$ci.ub[1], y1 = 0, lty = "dashed") #Add 95% CI around PET
+
+```
+
+A) 通过PET-PEESE元回归，我们可以得知真实效应大小为d=0（基于PET估计）。
+B) 通过PET-PEESE元回归，我们可以得知真实效应大小为 d =`r round(PEESE$b[1],2)` （基于PEESE估计）。
+C) 通过PET-PEESE元回归，我们可以得知真实效应大小为d=`r round(result.biased$b,2)`（基于一般的元分析效应量估计）。
+D) 由于样本量很小（10个研究），PET的统计检验力很低，无法可靠地拒绝零假设，因此它不是偏倚的可靠指标，仍有偏倚存在的风险。
+
+**Q5**: 如下是p-curve应用程序对Q2中的研究输出的图表，以下哪种解释正确？
+```{r, echo = FALSE, eval = FALSE}
+cat(metadata$pcurve,sep = "\n")
+```
+
+
+(ref:pcurveresultq5lab) 对Q2的研究做的p-curve分析结果。
+```{r pcurveresultq5, fig.margin = FALSE, echo = FALSE, fig.cap="(ref:pcurveresultq5lab)"}
+knitr::include_graphics("D:/New_translate/statistical_inferences-master/statistical_inferences-master/images/pcurveresultq5.png")
+```
+
+A) 基于对p-curve进行的连续Stouffer's检验，我们无法拒绝在H0假设下预期的p值分布，但在33%的统计检验力下，可以拒绝在H1假设为真时预期的p值分布。
+B) 基于对p-curve进行的连续Stouffer's检验，我们可以得出结论：观察到的p值分布的倾斜程度不足以解释真实效应量的大小，因此用于推断这些研究的理论是错误的。
+C) 基于对p-curve进行的连续Stouffer's检验，我们可以得出结论：观察到的p值分布倾斜程度足以解释为H1为真且研究统计检验力为33%时预期的p值分布。
+D) 基于对p-curve进行的连续Stouffer's检验，我们可以得出结论：观察到的p值分布比研究统计检验力为33%时预期的p值分布更平坦，因此可以推测这些研究伪造了数据。
+
+**Q6**: 对Q2研究进行模型，发现真实效应值为0，即不存在真实效应。以下哪项关于*z*-curve的分析正确？
+
+```{r zcurveq6, cache = TRUE, echo = FALSE}
+# Perform the z-curve analysis using the z-curve package
+z_res <- zcurve::zcurve(p = metadata$pvalues, method = "EM", bootstrap = 1000)
+par(bg = backgroundcolor)
+plot(z_res, annotation = TRUE, CI = TRUE)
+```
+
+A) 预期的发现率和可重复率都具有统计显著性，因此可以预计这些观测到的效应能够在未来的研究中成功复制。
+B) 尽管观测到的平均功效（观测到的发现率）为100％，但z-curve正确预测了预期的可重复率（仅为5%，只有当研究发生第一类错误时，结果才会在统计学上显著）。
+C) 由于预期的发现率和可重复率在统计上没有显著差异，因此Z-curve无法识别偏差。
+D) 虽然观测的发现率为1（表示观测到的功效为100%），但置信区间范围为0.66-1，这表明这些研究实际上的功效更低，100%的结果显著可能只是偶然。
+
+**Q7**: 我们尚未对数据进行剪补法分析，鉴于上述分析（例如z-curve分析），以下哪个陈述是正确的？
+A) 剪补法不会指出哪些是需要"填补"的缺失研究。
+B) 剪补法检测偏倚的功效较弱，而且可能与上面提到的z-curve或p-curve分析相矛盾。
+C) 和p-curve和z-curve分析一样，剪补法也可以检测偏倚。但剪补法分析校正后的效应量估计并不能充分纠正偏倚，因此这个分析没有任何作用。
+D) 剪补法可以对真实效应量进行可靠估计，而上述的其他方法都做不到，因此应该将其与其他的偏倚检验一起报告。
+
+**Q8**:发表偏倚被定义为选择性提交和发表科学研究。在本章中，我们关注的是选择性提交显著结果。你能想到某个研究领域或研究问题，其研究人员更喜欢选择性地发表不显著的结果吗？
+
+
+### 5.7.1课后习题
+
+1. GRIM测试背后的依据是什么？
+2. 什么是发表偏倚？
+3. 什么是“文件抽屉问题”？
+4. 在以0为中心的漏斗图中，落在漏斗中间的研究表明什么？
+5. 剪补法是否真有能力探测和校正效应量估计值？
+6. 当Meta分析中研究案例较少时，运用PET-PEESE法需要重点考虑什么？
+7. 根据p曲线分析的两个测试,我们应该得出什么结论？
