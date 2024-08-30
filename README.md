@@ -133,3 +133,9 @@ tips\
 | chapter 10 | Mengmeng LYU, Qiushan Liu | 校对完成，rmd整合完成 |
 | chapter 12 | Hang Yu, Weijing Yang     | 校对完成，rmd整合完成 |
 | chapter 15 | Xinquan Lu, Chi Zhang     | 校对完成，rmd整合完成 |
+
+# 最终结果
+
+- Daniel电子书的部分章节已经上线：https://lakens.github.io/statistical_inferences_chinese/
+
+- Daniel《[Sample Size Justification](https://doi.org/10.1525/collabra.33267)》翻译的中文版：https://mp.weixin.qq.com/s/RBXptSamb3V9ZVF2vaijdQ
