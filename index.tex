@@ -239,7 +239,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden, interior hidden, boxrule=0pt, breakable, sharp corners]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, boxrule=0pt, borderline west={3pt}{0pt}{shadecolor}, sharp corners, breakable, enhanced, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -249,25 +249,33 @@
 }
 \bookmarksetup{startatroot}
 
-\hypertarget{ux6982ux8ff0}{%
-\chapter*{概述}\label{ux6982ux8ff0}}
-\addcontentsline{toc}{chapter}{概述}
+\hypertarget{ux524dux8a00}{%
+\chapter*{前言}\label{ux524dux8a00}}
+\addcontentsline{toc}{chapter}{前言}
 
-\markboth{概述}{概述}
+\markboth{前言}{前言}
 
-翻译人员和校对: Yiwen Zhang，Chuxian Xu, Lan Zhou, Yuanrui Zheng，
-Mengmeng Lyu, Yang Xu, Yuhang Zhu，Bowen Wu, Jing Lin, Xinyu Wang,
+翻译以及校对人员: Yiwen Zhang, Chuxian Xu, Lan Zhou, Yuanrui Zheng,
+Mengmeng Lyu, Yang Xu, Yuhang Zhu, Bowen Wu, Jing Lin, Xinyu Wang,
 Xinquan Lu, Jing An, Bolin Cao, Chi Zhang, Weijing Yang, Hang Yu,
-Qiushan Liu, Dongyu Liu, Ye Lin, Qin Hao.
+Qiushan Liu, Dongyu Liu, Ye Lin, Hao Qin.
+
+我们很高兴能够向各位读者呈现《Improving Your Statistical
+Inferences》这本电子书的中文版，Daniël
+Lakens教授写这本书的初衷是帮助各位研究者用于设计更好的实验、改进统计推断以及更透明地报告研究信息。我们翻译的初心也是希望更多的中国学者了解到这本书，了解Daniël教授的思想以及理念。
+
+本翻译工作由中国``开放科学中文社区(COSN)''的OpenTransfer小组倾力完成。COSN是一个公益的在线草根社区(https://open-sci.cn/)，以推广基础研究领域的开放、透明和可重复的研究实践为理念。因此，特别感谢OpenTransfer翻译小组及其众多热情的小伙伴，这个项目于2022年初启动，经过了近两年的持续努力，终于在2023年完成。在这个过程中，不断有新的小伙伴加入到群体当中，积极参与翻译和校对工作。这本书的翻译工作是我们通力协作不断打磨的成果，它代表了众多译者的辛勤努力。我们希望，这本书能为您带来有益的信息，启发您思考，并扩展您的视野。
 
 您可以将此资源引用为:
 
 Lakens, D. (2022). Improving Your Statistical Inferences. Retrieved from
-https://lakens.github.io/statistical\_inferences/.
+https://lakens.github.io/statistical\_inferences\_chinese/.
 https://doi.org/10.5281/zenodo.6409077
 
 The full English version is available at:
-https://lakens.github.io/statistical\_inferences/
+https://lakens.github.io/statistical\_inferences/. This work and
+translation were made possible by VIDI Grant 452-17-013 from the
+Netherlands Organisation for Scientific Research.
 
 \begin{figure}
 
@@ -278,6 +286,17 @@ https://lakens.github.io/statistical\_inferences/
 Daniël Lakens
 
 Eindhoven University of Technology
+
+\begin{figure}
+
+\includegraphics[width=1.5625in,height=\textheight]{images/cos_qr.png} \hfill{}
+
+\end{figure}
+
+Chinese Open Science Network, a network for Transparent, Open, \&
+Reproducible Science.
+
+开放科学中文社区，传播透明、开放和可重复的基础研究理念和实践。
 
 \bookmarksetup{startatroot}
 
@@ -323,7 +342,9 @@ Fisher关于P值的见解的基础上，发展了一种叫做统计假设检验�
 (2008) 的说法，Neyman-Pearson的理论方法是
 ``你在心理学学术期刊中看到的所有数据统计的基础逻辑''。
 
-当进行Neyman-Pearson假设检验时，所得\emph{p}值只是用于对比是否小于所选的\(\alpha\)水平，但它小多少并不重要。例如，如果使用0.01的\(\alpha\)水平，\emph{p}=0.006和\emph{p}=0.000001都会使研究者迅速做出论断，仿佛世界的真理就是备择假设所描述的。这与Fisherian的p值方法不同，Fisherian的\emph{p}值越低，研究者在心理上更加容易拒绝他们所检验的零假设。Neyman-Pearson的假设检验不认为推论的目标是量化兼容性或依据的一种连续测量。相反，正如Neyman
+当进行Neyman-Pearson假设检验时，所得\emph{p}值只是用于对比是否小于所选的
+\(\alpha\) 水平，但它小多少并不重要。例如，如果使用0.01的 \(\alpha\)
+水平，\emph{p}=0.006和\emph{p}=0.000001都会使研究者迅速做出论断，仿佛世界的真理就是备择假设所描述的。这与Fisherian的p值方法不同，Fisherian的\emph{p}值越低，研究者在心理上更加容易拒绝他们所检验的零假设。Neyman-Pearson的假设检验不认为推论的目标是量化兼容性或依据的一种连续测量。相反，正如Neyman
 (1957) 所写的：
 
 \begin{quote}
@@ -3044,12 +3065,18 @@ conversion failure on 'p值的数量' in 'mbcsToSbcs': dot substituted for <8f>
 
 \end{figure}
 
-我们可以看到x轴是20个条形柱分别代表着从0到1的\emph{p}值，Y轴则是这些\emph{p}值的频率。水平的红色虚线表示5\%的\(\alpha\)（位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设\(\alpha\)为0.05时）：
-这项研究有50\%的功效。
+我们可以看到x轴是20个条形柱分别代表着从0到1的\emph{p}值，Y轴则是这些\emph{p}值的频率。水平的红色虚线表示5\%的
+\(\alpha\)
+（位于100.000*0.05=5000的频率），但你现在可以忽略这条线。图表的标题给出了模拟研究的统计功效（假设
+\(\alpha\) 为0.05时）： 这项研究有50\%的功效。
 
-模拟的结果描绘了\emph{p}值的\emph{概率密度函数}。概率密度函数给出了在\emph{t}分布中，某个特定值(比如如图@fig-tdist那样)的随机变量的概率。因为\emph{p}值是一个随机变量，我们可以用它的概率密度函数来绘制\emph{p}值分布图(Hung
-et al., 1997; Ulrich \& Miller,
-2018)，如图@fig-pdft。在\href{http://shiny.ieis.tue.nl/d_p_power/}{线上的Shiny应用程序}中，你可以改变样本大小、效应量大小和\(\alpha\)水平，以便观察他们对\emph{p}值分布的影响。增加样本量或效应量大小将增加\emph{p}值分布的陡峭程度，这意味着观察到小\emph{p}值的概率增加。\emph{p}值分布是检验的统计功效的函数。
+模拟的结果描绘了\emph{p}值的\emph{概率密度函数}。概率密度函数给出了在\emph{t}分布中，某个特定值(比如如图
+Figure~\ref{fig-tdist}
+那样)的随机变量的概率。因为\emph{p}值是一个随机变量，我们可以用它的概率密度函数来绘制\emph{p}值分布图(Hung
+et al., 1997; Ulrich \& Miller, 2018)，如图
+Figure~\ref{fig-pdft}。在\href{http://shiny.ieis.tue.nl/d_p_power/}{线上的Shiny应用程序}中，你可以改变样本大小、效应量大小和
+\(\alpha\)
+水平，以便观察他们对\emph{p}值分布的影响。增加样本量或效应量大小将增加\emph{p}值分布的陡峭程度，这意味着观察到小\emph{p}值的概率增加。\emph{p}值分布是检验的统计功效的函数。
 
 \begin{verbatim}
 Warning in title(...): conversion failure on 'p值分布' in 'mbcsToSbcs': dot
@@ -3181,7 +3208,11 @@ substituted for <a6>
 
 \end{figure}
 
-当效应不存在时，\emph{p}值是\textbf{均匀分布}的。这意味着，当零假设为真时，每一个\emph{p}值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的\emph{p}值和0.98的\emph{p}值含义一样。我记得当我第一次了解到均匀的\emph{p}值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，\emph{p}值永远大于我们所设定的\(\alpha\)水平时，那么\emph{p}值为均匀分布似乎又是合理的。如果我们把\(\alpha\)水平设为0.01，1\%的概率观察到的\emph{p}值小于0.01，如果我们把\(\alpha\)水平设置为0.12，12\%的概率观察到\emph{p}值小于0.12。但是，这只有在零假设（\(H_0\)）为真时，\emph{p}值是均匀分布的情况下才会发生这种情况。
+当效应不存在时，\emph{p}值是\textbf{均匀分布}的。这意味着，当零假设为真时，每一个\emph{p}值都有同样的可能性被观察到。换句话说，当不存在真正的效应时，0.08的\emph{p}值和0.98的\emph{p}值含义一样。我记得当我第一次了解到均匀的\emph{p}值分布时，我觉得这非常反常（远在完成我的博士学位之上）。但是如果保证零假设为真，\emph{p}值永远大于我们所设定的
+\(\alpha\) 水平时，那么\emph{p}值为均匀分布似乎又是合理的。如果我们把
+\(\alpha\) 水平设为0.01，1\%的概率观察到的\emph{p}值小于0.01，如果我们把
+\(\alpha\)
+水平设置为0.12，12\%的概率观察到\emph{p}值小于0.12。但是，这只有在零假设（\(H_0\)）为真时，\emph{p}值是均匀分布的情况下才会发生这种情况。
 
 \begin{verbatim}
 Warning in title(main = main, sub = sub, xlab = xlab, ylab = ylab, ...):
@@ -3472,9 +3503,14 @@ conversion failure on 'p值的数量' in 'mbcsToSbcs': dot substituted for <8f>
 随着统计功效的提高，一些稍微低于0.05的\emph{p}值（如\emph{p}=0.04），相比于\emph{有}效应，它更可能在\emph{没有}效应时出现。这就是著名的林德利悖论
 (Lindley, 1957)，或称杰弗里-林德利悖论 (Spanos,
 2013)。因为\emph{p}值的分布是统计功效的函数 (Cumming,
-2008)，功效越高，\emph{p}值的分布就越右偏（即越有可能观察到小的\emph{p}值）。当不存在真实的效应时，\emph{p}值是均匀分布的，1\%的概率可以观察到\emph{p}值在0.04和0.05之间。当统计功效极高时，不仅大多数\emph{p}值会低于0.05，甚至会低于0.01。通过图@fig-paradox我们可以看到，在高功效下，当效应\emph{真实存在}时，非常小的\emph{p}值（例如0.001）就比\emph{无}效应时更容易被观察到（例如，当P值为0.01时，代表99\%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时\emph{p}值的均匀分布）。
+2008)，功效越高，\emph{p}值的分布就越右偏（即越有可能观察到小的\emph{p}值）。当不存在真实的效应时，\emph{p}值是均匀分布的，1\%的概率可以观察到\emph{p}值在0.04和0.05之间。当统计功效极高时，不仅大多数\emph{p}值会低于0.05，甚至会低于0.01。通过图
+Figure~\ref{fig-paradox}
+我们可以看到，在高功效下，当效应\emph{真实存在}时，非常小的\emph{p}值（例如0.001）就比\emph{无}效应时更容易被观察到（例如，当P值为0.01时，代表99\%功效的黑色虚线落在灰色水平线之上，这时灰色曲线代表着零假设为真时\emph{p}值的均匀分布）。
 
-然而令人迷惑的是，当\emph{p}值为0.04时，则更可能是没有效应，即零假设（\(H_0\)）为真时，我们任然可以有非常高的功效，例如在图@fig-paradox中所示，当\emph{p}等于0.04时，零假设为真时的\emph{p}值分布的密度要比99\%功效时要高。所以，林德利悖论说明，0.04的\emph{p}值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5\%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么\emph{p}值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据\emph{p}\textless0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低\(\alpha\)水平作一个样本量的函数来实现Good
+然而令人迷惑的是，当\emph{p}值为0.04时，则更可能是没有效应，即零假设（\(H_0\)）为真时，我们任然可以有非常高的功效，例如在图
+Figure~\ref{fig-paradox}
+中所示，当\emph{p}等于0.04时，零假设为真时的\emph{p}值分布的密度要比99\%功效时要高。所以，林德利悖论说明，0.04的\emph{p}值可能在统计学上是显著的，但同时也为零假设提供了一定证据。从Neyman-Pearson的方法来看，我们将提出一个最大错误率为5\%的概念，但从似然比或贝叶斯的方法来看，我们可以得出某种结论是：相对于备择假设，我们的数据信息提供了有利于零假设的证据。林德利悖论说明了不同的统计学派何时会得出不同的结论，以及在不考虑检验统计功效的情况下，为什么\emph{p}值不能直接被解释为结论的衡量标准。虽然可能没有必要，但研究者可能希望避免下述情况：那就是频率学派的学者们会根据\emph{p}\textless0.05拒绝零假设，但是当前检验的实验数据倾向于零假设而不是备择假设。这可以通过降低
+\(\alpha\) 水平作一个样本量的函数来实现Good
 (1992)，这一点将在``\protect\hyperlink{errorcontrol}{误差的控制}''一章节进行解释。
 
 \begin{verbatim}
@@ -3715,18 +3751,22 @@ substituted for <a6>
 \hypertarget{sec-correctlyinterpreting}{%
 \section{\texorpdfstring{正确地解释和报告\emph{p}值}{正确地解释和报告p值}}\label{sec-correctlyinterpreting}}
 
-虽然从严格的Neyman-Pearson方法的角度来看，报告\emph{p}\textless{}\(\alpha\)或\emph{p}\textgreater{}\(\alpha\)就足够了，但研究者还是应当报告确切的\emph{p}值。这便于后续再次分析结果时使用
-(Appelbaum et al.,
-2018)，也便于并其他研究者将\emph{p}值与他们希望使用的\(\alpha\)水平进行比较
-(Lehmann \& Romano,
-2005)。因为所发表的结论是使用已知最大误差率的方式进行的，\emph{p}值永远不允许你肯定地陈述任何事情。即便我们把\(\alpha\)水平设定为0.000001，但任何一个结论都可能是错误的，Fisher
+虽然从严格的Neyman-Pearson方法的角度来看，报告\emph{p}\textless{}
+\(\alpha\) 或\emph{p}\textgreater{} \(\alpha\)
+就足够了，但研究者还是应当报告确切的\emph{p}值。这便于后续再次分析结果时使用
+(Appelbaum et al., 2018)，也便于并其他研究者将\emph{p}值与他们希望使用的
+\(\alpha\) 水平进行比较 (Lehmann \& Romano,
+2005)。因为所发表的结论是使用已知最大误差率的方式进行的，\emph{p}值永远不允许你肯定地陈述任何事情。即便我们把
+\(\alpha\) 水平设定为0.000001，但任何一个结论都可能是错误的，Fisher
 (1935)
 提醒我们，即使是''百万分之一的几率''仍旧会发生，既不低于也不高于其某个恰当的概率，但只要发生在我们身上就是0和1的概率，纵使我们会非常惊讶为什么如此小的概率仍会发生在\emph{我们}身上''。这就是\textbf{重复研究}在科学领域很重要的原因。任何单一的发现都可能是一种侥幸，但如果几个重复的研究都能得到相同的结果，那么这种概率很快就会变得非常小。这种不确定性可能并没有反映在学术写作中，因为可以看到研究者会使用
 ``证明''、``显示''或
 ``已知''等字眼。在做完假设检验之后，有个稍长但更准确的说法是：
 
 \begin{quote}
-我们宣称了一个有或没有意义的效应，但也同时承认，如果学者们使用这种方法论提出结论，从长远来看，他们最多只有在\(\alpha\)\%或\(\beta\)\%上被误导，我们认为这是可以接受的。在不久的将来，除非出现新的数据或信息证明我们是错的，否则我们将假定这一结论是正确的。
+我们宣称了一个有或没有意义的效应，但也同时承认，如果学者们使用这种方法论提出结论，从长远来看，他们最多只有在
+\(\alpha\)
+\%或\(\beta\)\%上被误导，我们认为这是可以接受的。在不久的将来，除非出现新的数据或信息证明我们是错的，否则我们将假定这一结论是正确的。
 \end{quote}
 
 请记住，在Neyman-Pearson的理论框架下，研究者提出某种说法，但是这些说法\emph{不一定是真实的}。例如，OPERA合作组织在2011年报告说，他们所得到的观测数据似乎揭示了中微子的速度超过了光速。这一说法的第一错误率是百万分之0.2，\emph{假定错误纯粹是由随机误差造成的}。然而，实际上并没有研究者相信这一说法是真的，因为理论上中微子的运动速度不可能超过光速。事实上，后来发现是由于设备故障所导致的数据异常：一根光纤的连接不当，还有一个时钟振荡器的走的过快。然而，在提出这一说法的同时也公开邀请学界提供新的数据或信息，来证明这一说法有误。
@@ -3735,7 +3775,9 @@ substituted for <a6>
 
 也就是说当下的某种声明与我们已经观测到的数据相关，但与我们用于预测的理论无关。某个声明与观测数据相关，因为它是一种统计推断，但它与理论无关，因为理论需要理论推断。数据永远无法``证明``一个理论是对还是错。一个基本声明可以\textbf{证实}一个从理论推导出来的预测，也可能无法证实。如果从一个理论中推导出的许多预测都得到了证实，我们就会越来越相信这个理论是接近真理的。这种理论的``接近真理性''叫做\textbf{逼真性}
 (Niiniluoto, 1998; Popper,
-2002)。报告假设检验时会出现的一个更短的声明是``p=.xx，即我们的预测在y\%的α水平下得到证实，或者``p=.xx，即我们所关注的效应量在对应的统计检验力下，预测没有被证实''。\(\alpha\)水平或者统计检验力往往只在文章的实验设计部分被提及，但是在结果部分重复他们能够提醒读者注意与你的声明相关的错误率。
+2002)。报告假设检验时会出现的一个更短的声明是``p=.xx，即我们的预测在y\%的α水平下得到证实，或者``p=.xx，即我们所关注的效应量在对应的统计检验力下，预测没有被证实''。
+\(\alpha\)
+水平或者统计检验力往往只在文章的实验设计部分被提及，但是在结果部分重复他们能够提醒读者注意与你的声明相关的错误率。
 
 甚至当我们做出正确的声明时，它的底层理论也可能是错误的。Popper (2002)
 提醒我们``客观科学的实证基础并不是绝对的''。他争辩科学并不建立在坚固的基石之上，而是在沼泽中打下的木桩上，并指出``所以就目前而言，当确信桩的牢固程度足以承载结构后，我们就会停下来''。如Hacking
@@ -5470,7 +5512,8 @@ Neyman-Pearson 方法中提出最多 5\% Type 1
 \hypertarget{ux9488ux5bf9pux503cux6982ux5ff5ux7684ux8befux89e3}{%
 \subsection{针对p值概念的误解}\label{ux9488ux5bf9pux503cux6982ux5ff5ux7684ux8befux89e3}}
 
-\textbf{问题1}：当独立t检验中每组的样本量为50个观察值时（见图@fig-fig131），下面哪种说法是正确的？
+\textbf{问题1}：当独立t检验中每组的样本量为50个观察值时（见图
+Figure~\ref{fig-fig131}），下面哪种说法是正确的？
 
 \begin{enumerate}
 \def\labelenumi{\Alph{enumi})}
@@ -5983,7 +6026,7 @@ I
 
 }
 
-\caption{\label{fig-power-2}效应 d = 0.5, \(lpha\) = 0.05 的独立 t
+\caption{\label{fig-power-2}效应 d = 0.5, \(\alpha\) = 0.05 的独立 t
 检验的统计检验力曲线与样本量的关系}
 
 \end{figure}
@@ -8841,66 +8884,48 @@ Pocock校正是这样被建立的：每次观察数据时的alpha水平相同，
   \AttributeTok{alpha =} \FloatTok{0.05}\NormalTok{,}
   \AttributeTok{beta =} \FloatTok{0.1}
 \NormalTok{)}
-\NormalTok{design}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(design))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{design-parameters-and-output-of-group-sequential-design}{%
-\section{Design parameters and output of group sequential
-design}\label{design-parameters-and-output-of-group-sequential-design}}
+\begin{verbatim}
+Sequential analysis with a maximum of 2 looks (group sequential design)
 
-\hypertarget{user-defined-parameters}{%
-\subsection{User defined parameters}\label{user-defined-parameters}}
+Pocock design, two-sided overall significance level 5%, power 90%, 
+undefined endpoint, inflation factor 1.1001, ASN H1 0.7759, ASN H01 1.0094, 
+ASN H0 1.0839.
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Type of design}: Pocock
-\item
-  \emph{Maximum number of stages}: 2
-\item
-  \emph{Stages}: 1, 2
-\item
-  \emph{Significance level}: 0.0500
-\item
-  \emph{Type II error rate}: 0.1000
-\item
-  \emph{Test}: two-sided
-\end{itemize}
+Stage                                  1      2 
+Information rate                     50%   100% 
+Efficacy boundary (z-value scale)  2.178  2.178 
+Stage levels (one-sided)          0.0147 0.0147 
+Cumulative alpha spent            0.0294 0.0500 
+Overall power                     0.5893 0.9000 
 
-\hypertarget{derived-from-user-defined-parameters}{%
-\subsection{Derived from user defined
-parameters}\label{derived-from-user-defined-parameters}}
+-----
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Information rates}: 0.500, 1.000
-\end{itemize}
+Design parameters and output of group sequential design:
 
-\hypertarget{default-parameters}{%
-\subsection{Default parameters}\label{default-parameters}}
+User defined parameters:
+  Type of design                               : Pocock 
+  Maximum number of stages                     : 2 
+  Stages                                       : 1, 2 
+  Information rates                            : 0.500, 1.000 
+  Significance level                           : 0.0500 
+  Type II error rate                           : 0.1000 
+  Test                                         : two-sided 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Two-sided power}: FALSE
-\item
-  \emph{Tolerance}: 0.00000001
-\end{itemize}
+Derived from user defined parameters: not available
 
-\hypertarget{output}{%
-\subsection{Output}\label{output}}
+Default parameters:
+  Two-sided power                              : FALSE 
+  Tolerance                                    : 0.00000001 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Cumulative alpha spending}: 0.02939, 0.05000
-\item
-  \emph{Critical values}: 2.178, 2.178
-\item
-  \emph{Stage levels (one-sided)}: 0.01469, 0.01469
-\end{itemize}
+Output:
+  Cumulative alpha spending                    : 0.02939, 0.05000 
+  Critical values                              : 2.178, 2.178 
+  Stage levels (one-sided)                     : 0.01469, 0.01469 
+\end{verbatim}
 
 输出结果告诉我们，使用Pocock支出函数设计一个具有两次观测（一个中期，一个最终）的研究。最后一行返回单侧的alpha水平。\texttt{rpact}
 包主要应用于验证适应性临床试验设计和分析（Confirmatory Adaptive Clinical
@@ -9000,7 +9025,8 @@ decision boundaries）的方法有一个重大的局限性 （Proschan et al.,
 (1983)
 对序列检验相关文献做出了重要贡献，他们引入了alpha支出函数来校正alpha水平。在这种方法中，通过一个函数（\emph{alpha支出函数}（alpha
 spending
-function））预先指定了整个观察累积的一类错误率，以控制总体显著性水平\(\alpha\)。
+function））预先指定了整个观察累积的一类错误率，以控制总体显著性水平
+\(\alpha\) 。
 
 这些alpha支出函数的主要好处是可以控制中期分析的错误率，同时既不需要事先指定观察的次数也不需要指定时间。这使得alpha支出方法比早期的控制组序列设计中第一类错误的方法要灵活得多。使用alpha支出函数时，重要的是执行中期分析的决定不是基于收集的数据，因为这仍然会增加一类错误率。只要满足这个假设，就有可能在研究期间每次观察时更新alpha水平。
 
@@ -9126,86 +9152,42 @@ alpha spent），看看到目前为止我们支出了多少一类错误率：
   \AttributeTok{allocationRatioPlanned =} \DecValTok{1}\NormalTok{,}
   \AttributeTok{normalApproximation =} \ConstantTok{FALSE}\NormalTok{)}
 
-\NormalTok{power\_res}
+\FunctionTok{print}\NormalTok{(power\_res)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{design-plan-parameters-and-output-for-means}{%
-\section{Design plan parameters and output for
-means}\label{design-plan-parameters-and-output-for-means}}
+\begin{verbatim}
+Design plan parameters and output for means:
 
-\hypertarget{design-parameters}{%
-\subsection{Design parameters}\label{design-parameters}}
+Design parameters:
+  Critical values                              : 1.96 
+  Two-sided power                              : FALSE 
+  Significance level                           : 0.0500 
+  Type II error rate                           : 0.1000 
+  Test                                         : two-sided 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Critical values}: 1.96
-\item
-  \emph{Two-sided power}: FALSE
-\item
-  \emph{Significance level}: 0.0500
-\item
-  \emph{Type II error rate}: 0.1000
-\item
-  \emph{Test}: two-sided
-\end{itemize}
+User defined parameters:
+  Alternatives                                 : 0.5 
 
-\hypertarget{user-defined-parameters-1}{%
-\subsection{User defined parameters}\label{user-defined-parameters-1}}
+Default parameters:
+  Mean ratio                                   : FALSE 
+  Theta H0                                     : 0 
+  Normal approximation                         : FALSE 
+  Standard deviation                           : 1 
+  Treatment groups                             : 2 
+  Planned allocation ratio                     : 1 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Alternatives}: 0.5
-\end{itemize}
+Sample size and output:
+  Number of subjects fixed                     : 170.1 
+  Number of subjects fixed (1)                 : 85 
+  Number of subjects fixed (2)                 : 85 
+  Lower critical values (treatment effect scale) : -0.303 
+  Upper critical values (treatment effect scale) : 0.303 
+  Local two-sided significance levels          : 0.0500 
 
-\hypertarget{default-parameters-1}{%
-\subsection{Default parameters}\label{default-parameters-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Mean ratio}: FALSE
-\item
-  \emph{Theta H0}: 0
-\item
-  \emph{Normal approximation}: FALSE
-\item
-  \emph{Standard deviation}: 1
-\item
-  \emph{Treatment groups}: 2
-\item
-  \emph{Planned allocation ratio}: 1
-\end{itemize}
-
-\hypertarget{sample-size-and-output}{%
-\subsection{Sample size and output}\label{sample-size-and-output}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Number of subjects fixed}: 170.1
-\item
-  \emph{Number of subjects fixed (1)}: 85
-\item
-  \emph{Number of subjects fixed (2)}: 85
-\item
-  \emph{Lower critical values (treatment effect scale)}: -0.303
-\item
-  \emph{Upper critical values (treatment effect scale)}: 0.303
-\item
-  \emph{Local two-sided significance levels}: 0.0500
-\end{itemize}
-
-\hypertarget{legend}{%
-\subsection{Legend}\label{legend}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{(i)}: values of treatment arm i
-\end{itemize}
+Legend:
+  (i): values of treatment arm i
+\end{verbatim}
 
 我们看到每组需要 85 名被试，（或 86 名，因为样本量实际上是 85.03
 ，所需的观察值是四舍五入取整的，所以我们总共需要 172
@@ -9230,118 +9212,58 @@ means}\label{design-plan-parameters-and-output-for-means}}
   \AttributeTok{allocationRatioPlanned =} \DecValTok{1}\NormalTok{,}
   \AttributeTok{normalApproximation =} \ConstantTok{FALSE}\NormalTok{)}
 
-\NormalTok{power\_res\_seq}
+\FunctionTok{print}\NormalTok{(power\_res\_seq)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{design-plan-parameters-and-output-for-means-1}{%
-\section{Design plan parameters and output for
-means}\label{design-plan-parameters-and-output-for-means-1}}
+\begin{verbatim}
+Design plan parameters and output for means:
 
-\hypertarget{design-parameters-1}{%
-\subsection{Design parameters}\label{design-parameters-1}}
+Design parameters:
+  Information rates                            : 0.500, 1.000 
+  Critical values                              : 2.157, 2.201 
+  Futility bounds (non-binding)                : -Inf 
+  Cumulative alpha spending                    : 0.03101, 0.05000 
+  Local one-sided significance levels          : 0.01550, 0.01387 
+  Two-sided power                              : FALSE 
+  Significance level                           : 0.0500 
+  Type II error rate                           : 0.1000 
+  Test                                         : two-sided 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Information rates}: 0.500, 1.000
-\item
-  \emph{Critical values}: 2.157, 2.201
-\item
-  \emph{Futility bounds (non-binding)}: -Inf
-\item
-  \emph{Cumulative alpha spending}: 0.03101, 0.05000
-\item
-  \emph{Local one-sided significance levels}: 0.01550, 0.01387
-\item
-  \emph{Two-sided power}: FALSE
-\item
-  \emph{Significance level}: 0.0500
-\item
-  \emph{Type II error rate}: 0.1000
-\item
-  \emph{Test}: two-sided
-\end{itemize}
+User defined parameters:
+  Alternatives                                 : 0.5 
 
-\hypertarget{user-defined-parameters-2}{%
-\subsection{User defined parameters}\label{user-defined-parameters-2}}
+Default parameters:
+  Mean ratio                                   : FALSE 
+  Theta H0                                     : 0 
+  Normal approximation                         : FALSE 
+  Standard deviation                           : 1 
+  Treatment groups                             : 2 
+  Planned allocation ratio                     : 1 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Alternatives}: 0.5
-\end{itemize}
+Sample size and output:
+  Reject per stage [1]                         : 0.6022 
+  Reject per stage [2]                         : 0.2978 
+  Early stop                                   : 0.6022 
+  Maximum number of subjects                   : 188.9 
+  Maximum number of subjects (1)               : 94.5 
+  Maximum number of subjects (2)               : 94.5 
+  Number of subjects [1]                       : 94.5 
+  Number of subjects [2]                       : 188.9 
+  Expected number of subjects under H0         : 186 
+  Expected number of subjects under H0/H1      : 172.7 
+  Expected number of subjects under H1         : 132.1 
+  Lower critical values (treatment effect scale) [1] : -0.451 
+  Lower critical values (treatment effect scale) [2] : -0.323 
+  Upper critical values (treatment effect scale) [1] : 0.451 
+  Upper critical values (treatment effect scale) [2] : 0.323 
+  Local two-sided significance levels [1]      : 0.03101 
+  Local two-sided significance levels [2]      : 0.02774 
 
-\hypertarget{default-parameters-2}{%
-\subsection{Default parameters}\label{default-parameters-2}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Mean ratio}: FALSE
-\item
-  \emph{Theta H0}: 0
-\item
-  \emph{Normal approximation}: FALSE
-\item
-  \emph{Standard deviation}: 1
-\item
-  \emph{Treatment groups}: 2
-\item
-  \emph{Planned allocation ratio}: 1
-\end{itemize}
-
-\hypertarget{sample-size-and-output-1}{%
-\subsection{Sample size and output}\label{sample-size-and-output-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Reject per stage {[}1{]}}: 0.6022
-\item
-  \emph{Reject per stage {[}2{]}}: 0.2978
-\item
-  \emph{Early stop}: 0.6022
-\item
-  \emph{Maximum number of subjects}: 188.9
-\item
-  \emph{Maximum number of subjects (1)}: 94.5
-\item
-  \emph{Maximum number of subjects (2)}: 94.5
-\item
-  \emph{Number of subjects {[}1{]}}: 94.5
-\item
-  \emph{Number of subjects {[}2{]}}: 188.9
-\item
-  \emph{Expected number of subjects under H0}: 186
-\item
-  \emph{Expected number of subjects under H0/H1}: 172.7
-\item
-  \emph{Expected number of subjects under H1}: 132.1
-\item
-  \emph{Lower critical values (treatment effect scale) {[}1{]}}: -0.451
-\item
-  \emph{Lower critical values (treatment effect scale) {[}2{]}}: -0.323
-\item
-  \emph{Upper critical values (treatment effect scale) {[}1{]}}: 0.451
-\item
-  \emph{Upper critical values (treatment effect scale) {[}2{]}}: 0.323
-\item
-  \emph{Local two-sided significance levels {[}1{]}}: 0.03101
-\item
-  \emph{Local two-sided significance levels {[}2{]}}: 0.02774
-\end{itemize}
-
-\hypertarget{legend-1}{%
-\subsection{Legend}\label{legend-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{(i)}: values of treatment arm i
-\item
-  \emph{{[}k{]}}: values at stage k
-\end{itemize}
+Legend:
+  (i): values of treatment arm i
+  [k]: values at stage k
+\end{verbatim}
 
 第一次观测每个小组的样本量是 47.24 47.24，第二次观测是 94.47
 94.47，这意味着我们现在收集了 190 而不是 172
@@ -9417,157 +9339,84 @@ Pocock
   \AttributeTok{allocationRatioPlanned =} \DecValTok{1}\NormalTok{,}
   \AttributeTok{normalApproximation =} \ConstantTok{FALSE}\NormalTok{)}
 
-\FunctionTok{summary}\NormalTok{(power\_res\_seq)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(power\_res\_seq))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{sample-size-calculation-for-a-continuous-endpoint}{%
-\section{Sample size calculation for a continuous
-endpoint}\label{sample-size-calculation-for-a-continuous-endpoint}}
+\begin{verbatim}
+Sample size calculation for a continuous endpoint
 
-Sequential analysis with a maximum of 2 looks (group sequential design),
-overall significance level 5\% (two-sided). The sample size was
-calculated for a two-sample t-test, H0: mu(1) - mu(2) = 0, H1: effect =
-0.5, standard deviation = 1, power 90\%.
+Sequential analysis with a maximum of 2 looks (group sequential design), overall 
+significance level 5% (two-sided).
+The sample size was calculated for a two-sample t-test, H0: mu(1) - mu(2) = 0, 
+H1: effect = 0.5, standard deviation = 1, power 90%.
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule\noalign{}
-Stage & 1 & 2 \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Information rate & 50\% & 100\% \\
-Efficacy boundary (z-value scale) & 2.963 & 1.969 \\
-Overall power & 0.2525 & 0.9000 \\
-Expected number of subjects & 149.1 & \\
-Number of subjects & 85.3 & 170.6 \\
-Cumulative alpha spent & 0.0031 & 0.0500 \\
-Two-sided local significance level & 0.0031 & 0.0490 \\
-Lower efficacy boundary (t) & -0.661 & -0.304 \\
-Upper efficacy boundary (t) & 0.661 & 0.304 \\
-Exit probability for efficacy (under H0) & 0.0031 & \\
-Exit probability for efficacy (under H1) & 0.2525 & \\
-\end{longtable}
+Stage                                         1      2 
+Information rate                            50%   100% 
+Efficacy boundary (z-value scale)         2.963  1.969 
+Overall power                            0.2525 0.9000 
+Expected number of subjects               149.1 
+Number of subjects                         85.3  170.6 
+Cumulative alpha spent                   0.0031 0.0500 
+Two-sided local significance level       0.0031 0.0490 
+Lower efficacy boundary (t)              -0.661 -0.304 
+Upper efficacy boundary (t)               0.661  0.304 
+Exit probability for efficacy (under H0) 0.0031 
+Exit probability for efficacy (under H1) 0.2525 
 
 Legend:
+  (t): treatment effect scale
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{(t)}: treatment effect scale
-\end{itemize}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+-----
 
-\hypertarget{design-plan-parameters-and-output-for-means-2}{%
-\section{Design plan parameters and output for
-means}\label{design-plan-parameters-and-output-for-means-2}}
+Design plan parameters and output for means:
 
-\hypertarget{design-parameters-2}{%
-\subsection{Design parameters}\label{design-parameters-2}}
+Design parameters:
+  Information rates                            : 0.500, 1.000 
+  Critical values                              : 2.963, 1.969 
+  Futility bounds (non-binding)                : -Inf 
+  Cumulative alpha spending                    : 0.003051, 0.050000 
+  Local one-sided significance levels          : 0.001525, 0.024500 
+  Two-sided power                              : FALSE 
+  Significance level                           : 0.0500 
+  Type II error rate                           : 0.1000 
+  Test                                         : two-sided 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Information rates}: 0.500, 1.000
-\item
-  \emph{Critical values}: 2.963, 1.969
-\item
-  \emph{Futility bounds (non-binding)}: -Inf
-\item
-  \emph{Cumulative alpha spending}: 0.003051, 0.050000
-\item
-  \emph{Local one-sided significance levels}: 0.001525, 0.024500
-\item
-  \emph{Two-sided power}: FALSE
-\item
-  \emph{Significance level}: 0.0500
-\item
-  \emph{Type II error rate}: 0.1000
-\item
-  \emph{Test}: two-sided
-\end{itemize}
+User defined parameters:
+  Alternatives                                 : 0.5 
 
-\hypertarget{user-defined-parameters-3}{%
-\subsection{User defined parameters}\label{user-defined-parameters-3}}
+Default parameters:
+  Mean ratio                                   : FALSE 
+  Theta H0                                     : 0 
+  Normal approximation                         : FALSE 
+  Standard deviation                           : 1 
+  Treatment groups                             : 2 
+  Planned allocation ratio                     : 1 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Alternatives}: 0.5
-\end{itemize}
+Sample size and output:
+  Reject per stage [1]                         : 0.2525 
+  Reject per stage [2]                         : 0.6475 
+  Early stop                                   : 0.2525 
+  Maximum number of subjects                   : 170.6 
+  Maximum number of subjects (1)               : 85.3 
+  Maximum number of subjects (2)               : 85.3 
+  Number of subjects [1]                       : 85.3 
+  Number of subjects [2]                       : 170.6 
+  Expected number of subjects under H0         : 170.4 
+  Expected number of subjects under H0/H1      : 167.7 
+  Expected number of subjects under H1         : 149.1 
+  Lower critical values (treatment effect scale) [1] : -0.661 
+  Lower critical values (treatment effect scale) [2] : -0.304 
+  Upper critical values (treatment effect scale) [1] : 0.661 
+  Upper critical values (treatment effect scale) [2] : 0.304 
+  Local two-sided significance levels [1]      : 0.003051 
+  Local two-sided significance levels [2]      : 0.049000 
 
-\hypertarget{default-parameters-3}{%
-\subsection{Default parameters}\label{default-parameters-3}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Mean ratio}: FALSE
-\item
-  \emph{Theta H0}: 0
-\item
-  \emph{Normal approximation}: FALSE
-\item
-  \emph{Standard deviation}: 1
-\item
-  \emph{Treatment groups}: 2
-\item
-  \emph{Planned allocation ratio}: 1
-\end{itemize}
-
-\hypertarget{sample-size-and-output-2}{%
-\subsection{Sample size and output}\label{sample-size-and-output-2}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{Reject per stage {[}1{]}}: 0.2525
-\item
-  \emph{Reject per stage {[}2{]}}: 0.6475
-\item
-  \emph{Early stop}: 0.2525
-\item
-  \emph{Maximum number of subjects}: 170.6
-\item
-  \emph{Maximum number of subjects (1)}: 85.3
-\item
-  \emph{Maximum number of subjects (2)}: 85.3
-\item
-  \emph{Number of subjects {[}1{]}}: 85.3
-\item
-  \emph{Number of subjects {[}2{]}}: 170.6
-\item
-  \emph{Expected number of subjects under H0}: 170.4
-\item
-  \emph{Expected number of subjects under H0/H1}: 167.7
-\item
-  \emph{Expected number of subjects under H1}: 149.1
-\item
-  \emph{Lower critical values (treatment effect scale) {[}1{]}}: -0.661
-\item
-  \emph{Lower critical values (treatment effect scale) {[}2{]}}: -0.304
-\item
-  \emph{Upper critical values (treatment effect scale) {[}1{]}}: 0.661
-\item
-  \emph{Upper critical values (treatment effect scale) {[}2{]}}: 0.304
-\item
-  \emph{Local two-sided significance levels {[}1{]}}: 0.003051
-\item
-  \emph{Local two-sided significance levels {[}2{]}}: 0.049000
-\end{itemize}
-
-\hypertarget{legend-2}{%
-\subsection{Legend}\label{legend-2}}
-
-\begin{itemize}
-\tightlist
-\item
-  \emph{(i)}: values of treatment arm i
-\item
-  \emph{{[}k{]}}: values at stage k
-\end{itemize}
+Legend:
+  (i): values of treatment arm i
+  [k]: values at stage k
+\end{verbatim}
 
 当我们收集到 172
 名被试时这种设计就达到了预期的检验力--与我们\emph{不}观察数据时的人数完全一致。
@@ -9584,8 +9433,8 @@ analysis），或对目标最小效应量进行先验统计检验效力分析时
 \protect\hyperlink{equivalencetest}{等价性检验}一章中所讨论的。在序列分析文献中，为拒绝目标最小效应值的存在而停止的做法，被称为\textbf{停止无效}
 （stopping for
 futility）。在最极端的情况下，在中期分析之后，也许不可能在最终分析时产生统计学上的显著结果。为了在一个假设的情况下说明这一点，设想在收集了192个观察值中的182个后，观察到的两个独立组别之间的平均差值是0.1，而研究的设计理念是认为值得的最小效应是0.5的平均差值。如果主要因变量是用7分的李克特量表测量的，那么即使对照组下剩下的5个被试都回答1，而实验组下剩下的被试都回答7，192次观察后的效应量也不会产生
-\emph{p} \textless{}
-\(\alpha\)。如果你的研究目标是检测是否存在至少0.5的平均差值的影响，此时研究人员知道该目标将无法实现。由于最终结果无法产生显着影响，而在中期分析时停止研究称为\emph{非随机缩减}
+\emph{p} \textless{} \(\alpha\)
+。如果你的研究目标是检测是否存在至少0.5的平均差值的影响，此时研究人员知道该目标将无法实现。由于最终结果无法产生显着影响，而在中期分析时停止研究称为\emph{非随机缩减}
 （non-stochastic curtailment）。
 
 在不太极端但更普遍的情况下，研究仍有可能观察到显著效应，但概率可能非常小。考虑到已经观察到的到中期分析的数据，找到一个显著结果的概率被称为\textbf{条件功效}（conditional
@@ -9745,113 +9594,92 @@ analysis）。
   \AttributeTok{dataInput =}\NormalTok{ dataMeans}
 \NormalTok{  )}
 
-\NormalTok{res}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(res))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-[PROGRESS] Stage results calculated [0.0449 secs] 
-[PROGRESS] Conditional power calculated [0.0997 secs] 
-[PROGRESS] Conditional rejection probabilities (CRP) calculated [0.0018 secs] 
-[PROGRESS] Repeated confidence interval of stage 1 calculated [0.8473 secs] 
-[PROGRESS] Repeated confidence interval of stage 2 calculated [0.7409 secs] 
-[PROGRESS] Repeated confidence interval calculated [1.59 secs] 
-[PROGRESS] Repeated p-values of stage 1 calculated [0.3088 secs] 
-[PROGRESS] Repeated p-values of stage 2 calculated [0.4101 secs] 
-[PROGRESS] Repeated p-values calculated [0.7204 secs] 
-[PROGRESS] Final p-value calculated [0.0025 secs] 
-[PROGRESS] Final confidence interval calculated [0.1214 secs] 
+[PROGRESS] Stage results calculated [0.0351 secs] 
+[PROGRESS] Conditional power calculated [0.0287 secs] 
+[PROGRESS] Conditional rejection probabilities (CRP) calculated [0.001 secs] 
+[PROGRESS] Repeated confidence interval of stage 1 calculated [0.6233 secs] 
+[PROGRESS] Repeated confidence interval of stage 2 calculated [0.6745 secs] 
+[PROGRESS] Repeated confidence interval calculated [1.3 secs] 
+[PROGRESS] Repeated p-values of stage 1 calculated [0.2637 secs] 
+[PROGRESS] Repeated p-values of stage 2 calculated [0.274 secs] 
+[PROGRESS] Repeated p-values calculated [0.539 secs] 
+[PROGRESS] Final p-value calculated [0.0018 secs] 
+[PROGRESS] Final confidence interval calculated [0.0742 secs] 
 \end{verbatim}
 
-\hypertarget{analysis-results-means-of-2-groups-group-sequential-design}{%
-\section{Analysis results (means of 2 groups, group sequential
-design)}\label{analysis-results-means-of-2-groups-group-sequential-design}}
+\begin{verbatim}
+Analysis results for a continuous endpoint
 
-\hypertarget{design-parameters-3}{%
-\subsection{Design parameters}\label{design-parameters-3}}
+Sequential analysis with 2 looks (group sequential design).
+The results were calculated using a two-sample t-test (two-sided, alpha = 0.05), 
+equal variances option.
+H0: mu(1) - mu(2) = 0 against H1: mu(1) - mu(2) != 0.
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Information rates}: 0.500, 1.000
-\item
-  \emph{Critical values}: 2.157, 2.201
-\item
-  \emph{Futility bounds (non-binding)}: -Inf
-\item
-  \emph{Cumulative alpha spending}: 0.03101, 0.05000
-\item
-  \emph{Local one-sided significance levels}: 0.01550, 0.01387
-\item
-  \emph{Significance level}: 0.0500
-\item
-  \emph{Test}: two-sided
-\end{itemize}
+Stage                                                1               2 
+Fixed weight                                       0.5               1 
+Efficacy boundary (z-value scale)                2.157           2.201 
+Cumulative alpha spent                          0.0310          0.0500 
+Stage level                                     0.0155          0.0139 
+Cumulative effect size                           0.090           0.293 
+Cumulative (pooled) standard deviation           1.021           1.013 
+Overall test statistic                           0.432           1.993 
+Overall p-value                                 0.3334          0.0238 
+Test action                                   continue          accept 
+Conditional rejection probability               0.0073                 
+95% repeated confidence interval        [-0.366; 0.546] [-0.033; 0.619]
+Repeated p-value                                  >0.5          0.0819 
+Final p-value                                                   0.0666 
+Final confidence interval                               [-0.020; 0.573]
+Median unbiased estimate                                         0.281 
 
-\hypertarget{default-parameters-4}{%
-\subsection{Default parameters}\label{default-parameters-4}}
+-----
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Normal approximation}: FALSE
-\item
-  \emph{Direction upper}: TRUE
-\item
-  \emph{Theta H0}: 0
-\item
-  \emph{Equal variances}: TRUE
-\end{itemize}
+Analysis results (means of 2 groups, group sequential design):
 
-\hypertarget{stage-results}{%
-\subsection{Stage results}\label{stage-results}}
+Design parameters:
+  Information rates                            : 0.500, 1.000 
+  Critical values                              : 2.157, 2.201 
+  Futility bounds (non-binding)                : -Inf 
+  Cumulative alpha spending                    : 0.03101, 0.05000 
+  Local one-sided significance levels          : 0.01550, 0.01387 
+  Significance level                           : 0.0500 
+  Test                                         : two-sided 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Cumulative effect sizes}: 0.0900, 0.2928
-\item
-  \emph{Cumulative (pooled) standard deviations}: 1.021, 1.013
-\item
-  \emph{Stage-wise test statistics}: 0.432, 2.435
-\item
-  \emph{Stage-wise p-values}: 0.333390, 0.008421
-\item
-  \emph{Overall test statistics}: 0.432, 1.993
-\item
-  \emph{Overall p-values}: 0.33339, 0.02384
-\end{itemize}
+User defined parameters: not available
 
-\hypertarget{analysis-results}{%
-\subsection{Analysis results}\label{analysis-results}}
+Default parameters:
+  Normal approximation                         : FALSE 
+  Direction upper                              : TRUE 
+  Theta H0                                     : 0 
+  Equal variances                              : TRUE 
 
-\begin{itemize}
-\tightlist
-\item
-  \emph{Assumed standard deviation}: 1.013
-\item
-  \emph{Actions}: continue, accept
-\item
-  \emph{Conditional rejection probability}: 0.007317, NA
-\item
-  \emph{Conditional power}: NA, NA
-\item
-  \emph{Repeated confidence intervals (lower)}: -0.36630, -0.03306
-\item
-  \emph{Repeated confidence intervals (upper)}: 0.5463, 0.6187
-\item
-  \emph{Repeated p-values}: \textgreater0.5, 0.08195
-\item
-  \emph{Final stage}: 2
-\item
-  \emph{Final p-value}: NA, 0.06662
-\item
-  \emph{Final CIs (lower)}: NA, -0.02007
-\item
-  \emph{Final CIs (upper)}: NA, 0.5734
-\item
-  \emph{Median unbiased estimate}: NA, 0.2814
-\end{itemize}
+Stage results:
+  Cumulative effect sizes                      : 0.0900, 0.2928 
+  Cumulative (pooled) standard deviations      : 1.021, 1.013 
+  Stage-wise test statistics                   : 0.432, 2.435 
+  Stage-wise p-values                          : 0.333390, 0.008421 
+  Overall test statistics                      : 0.432, 1.993 
+  Overall p-values                             : 0.33339, 0.02384 
+
+Analysis results:
+  Assumed standard deviation                   : 1.013 
+  Actions                                      : continue, accept 
+  Conditional rejection probability            : 0.007317, NA 
+  Conditional power                            : NA, NA 
+  Repeated confidence intervals (lower)        : -0.36630, -0.03306 
+  Repeated confidence intervals (upper)        : 0.5463, 0.6187 
+  Repeated p-values                            : >0.5, 0.08195 
+  Final stage                                  : 2 
+  Final p-value                                : NA, 0.06662 
+  Final CIs (lower)                            : NA, -0.02007 
+  Final CIs (upper)                            : NA, 0.5734 
+  Median unbiased estimate                     : NA, 0.2814 
+\end{verbatim}
 
 想象一下，我们进行了一项研究，计划最多对数据进行两次等距观察。在该研究中，我们进行alpha为0.05的双侧检验了，使用Pocock类型的
 alpha支出函数，并在最后观察时检验两个组之间的均值差异。基于具有两个等距观察的Pocock类型的alpha支出函数，双侧\emph{t}检验的alpha水平是
@@ -9945,7 +9773,7 @@ typeOfDesign 来使用以下代码：
   \AttributeTok{sided =} \DecValTok{0}\NormalTok{,}
   \AttributeTok{alpha =} \FloatTok{0.0}
 \NormalTok{)}
-\NormalTok{design}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(design))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -9986,7 +9814,7 @@ typeOfDesign 来使用以下代码：
   \AttributeTok{allocationRatioPlanned =} \DecValTok{1}\NormalTok{,}
   \AttributeTok{normalApproximation =} \ConstantTok{FALSE}\NormalTok{)}
 
-\NormalTok{power\_res}
+\FunctionTok{print}\NormalTok{(power\_res)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -10482,8 +10310,8 @@ Figure~\ref{fig-twoforestplot}
 
 \end{figure}
 
-当研究人员只发表有统计学意义的结果(\emph{p} \textless{}
-\(\alpha\))而存在发表偏差时，你在元分析中计算效应量，与没有发表偏差时相比，存在发表偏差时(研究人员只发表\emph{p}\textless{}
+当研究人员只发表有统计学意义的结果(\emph{p} \textless{} \(\alpha\)
+)而存在发表偏差时，你在元分析中计算效应量，与没有发表偏差时相比，存在发表偏差时(研究人员只发表\emph{p}\textless{}
 \(alpha\)的效应)的元分析效应量估计值会\textbf{偏高}。这是因为出版偏差过滤掉了较小的(不显著的)效应量，然后不包括在元分析效应量的计算中。这导致元分析效应量的估计值大于真实效应量。在强烈的发表偏差下，我们知道元分析效应量被夸大了，但我们不知道有多大。真正的效应量可能只是小一点，但真正的效应量也可能是0，例如在自我耗损相关文献的情况下。
 
 \hypertarget{ux524aux51cfux548cux586bux5145}{%
@@ -10642,7 +10470,10 @@ Fixed-effect meta-analysis
 一个也对个体的研究中的\emph{p}值进行元分析的替代技术是\emph{z}值曲线分析，它是观察功效的元分析
 (Bartoš \& Schimmack, 2020; Brunner \& Schimmack,
 2020)（一个例子请参见(Sotola,
-2022)）。与传统的元分析类似，\emph{z}值曲线分析将观察到的检验结果（\emph{p}值）转化为\emph{z}分数。在一个无偏的文献中，如果零假设成立，我们应该观察到大约\(\alpha\)\%的显著结果。如果零假设成立，则\emph{z}分数的分布以0为中心。\emph{Z}值曲线分析计算绝对值的\emph{z}值，因此应有\(\alpha\)\%的\emph{z}分数大于临界值（5\%的显著性水平下为1.96）。在图
+2022)）。与传统的元分析类似，\emph{z}值曲线分析将观察到的检验结果（\emph{p}值）转化为\emph{z}分数。在一个无偏的文献中，如果零假设成立，我们应该观察到大约
+\(\alpha\)
+\%的显著结果。如果零假设成立，则\emph{z}分数的分布以0为中心。\emph{Z}值曲线分析计算绝对值的\emph{z}值，因此应有
+\(\alpha\) \%的\emph{z}分数大于临界值（5\%的显著性水平下为1.96）。在图
 Figure~\ref{fig-zcurveunbiasednull}
 中，绘制了1000个研究的\emph{z}分数，真实效应大小为0，观察到的结果中恰好有5\%是统计显著的。
 
@@ -10730,7 +10561,9 @@ Meta-Analysis in R}.
 \hypertarget{ux81eaux6211ux6d4bux9a8c-1}{%
 \section{自我测验}\label{ux81eaux6211ux6d4bux9a8c-1}}
 
-\textbf{Q1}:当出现由于研究人员只发表具有统计显著性(\emph{p}\&nbsp\textless\&nbsp\(\alpha\))的结果而导致的发表偏倚时，计算元分析中的效应量会出现什么情况？
+\textbf{Q1}:当出现由于研究人员只发表具有统计显著性(\emph{p}\&nbsp\textless\&nbsp
+\(\alpha\)
+)的结果而导致的发表偏倚时，计算元分析中的效应量会出现什么情况？
 
 \begin{enumerate}
 \def\labelenumi{\Alph{enumi})}

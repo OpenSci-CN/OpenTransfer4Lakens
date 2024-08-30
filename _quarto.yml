@@ -24,7 +24,7 @@ book:
   repo-url: https://github.com/Lakens/statistical_inferences_chinese
   repo-branch: master
   repo-actions: [edit, issue, source]
-  downloads: [pdf, epub]
+  #downloads: [pdf, epub]
   sharing: [twitter]
   # sidebar:
   #   style: docked
